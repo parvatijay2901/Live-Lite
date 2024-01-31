@@ -9,7 +9,8 @@
 4. Are there predictors for obesity?
 
 ### Tool Questions
-1. 
+1. How can we recommend a diet and physical activity based off of user input of:
+   - BMI (Height, Weight), Estimated Daily Calorie Intake, Estimated level of physical activity, demographics.
 
 
 ## Goal
@@ -20,4 +21,5 @@
 
 
 ## Data Sources
+- [National Health and Nutrition Examination Survey (NHANES)](https://wwwn.cdc.gov/nchs/nhanes/Default.aspx)
 
