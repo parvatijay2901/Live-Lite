@@ -10,24 +10,33 @@
 3. Has there been an observable change the in physical activity levels within the US population over time?
 4. How do dietary choices, particularly those related to the consumption of fruits and vegetables, correlate with obesity levels?
 5. What other lifestyle factors significantly contribute to obesity/high BMI?
-   - For example, does income status influence obesity rates?
+For example,
+   -  does income status influence obesity rates?
+   - do habits like smoking, drinking lead to obesity?
 
-### Tool 
-1. How can we offer personalized recommendations for diet and physical activity by considering the user input, for example:
-   - BMI (Height, Weight)
-   - Demographic information (Sex at Birth, Age)
-   - Dietary choices
-   - Physical activity levels
-   - Other lifestyle factors
-2. In what ways can the tool account for individual preferences in dietary and physical activity recommendations?
-   - How can the tool accommodate users with different dietary preferences, such as vegetarianism or specific medical conditions like diabetes?
-   - How can the tool accommodate users with different preferences in physical activity levels, considering factors such as varying fitness levels or specific medical conditions and physical limits?
-3. Can the tool suggest additional lifestyle recommendations based on the findings from the research?
 
 ## Project Outcome
 1. Conduct a comprehensive analysis to understand how obesity levels and lifestyle factors (particularly physical activity levels and dietary choices) have evolved over time and across diverse demographics.
 2. Explore potential associations and correlations between physical activities, dietary habits, and obesity levels to gain a better understanding of these contributing factors.
 3. Create a tool that provides personalized lifestyle suggestions (particularly diet and physical activity) for individuals with obesity/high BMI levels.
+
+### Tool Features
+1. Tool will show case the visualizations asnwering our resrearch questions, to educate users about obesity.
+2. Tool will let users input their personal data, for example:
+   - BMI (Height, Weight)
+   - Demographic information (Sex at Birth, Age)
+   - Dietary choices
+   - Physical activity levels
+   - Other lifestyle factors (for example, sleeping habits)
+3. Based on the input, and the model built, tool will predict the obesity risk, and make recommendations for healthy lifetsyle. The recommendations inlcude
+   - Expected calorie intake
+   - Right food choices
+   - Physical activities (running, swimming etc)
+4. Extended features (These features are nice to have and will be delivered based on time & resource availability)
+   - Along with food choices, recommend healthy recipes that includes the raw ingredient. 
+   - Consider other health factors about users such as known conditions like pregnancy, diabetes, physical disbaility etc.
+
+
 
 ## Data Sources
 - [National Health and Nutrition Examination Survey (NHANES)](https://wwwn.cdc.gov/nchs/nhanes/Default.aspx)
@@ -36,3 +45,5 @@
 - [Nutritional value in Food ingredients_A](https://fdc.nal.usda.gov/download-datasets.html)
 - [Nutritional value in Food ingredients_B](https://www.kaggle.com/datasets/shrutisaxena/food-nutrition-dataset)
 - [Ingredients to Recipes mapping](https://www.kaggle.com/datasets/shuyangli94/food-com-recipes-and-user-interactions)
+- [Calories Burned With Exercise](https://www.kaggle.com/datasets/aadhavvignesh/calories-burned-during-exercise-and-activities)
+- [Expected Calorie Intake](https://www.medicalnewstoday.com/articles/calorie-deficit#calculating-calorie-needs)
