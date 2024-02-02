@@ -62,8 +62,28 @@ __Assumptions__: Data is NOT cleaned - needs to be checked for NaNs, bad data.
 ### Physical Activity
 
 
-## UI
-### Field Validation
+## User Interface
 
+**Name:** Landing page
+- **What is does:** Provide a brief introduction to the website and guide users to navigate to their specific requests.
+    - Welcome message or brief description.
+    - Navigation links or buttons leading to the Research/Data Analysis
+    - Tab and Tool (User Input) Tab.
+    - Maybe an overview of the website's mission or key features.
 
+**Name:** Research/Data analysis Tab
+- **What is does:** Briefly explain about obesity, its trends over time, and its connections to various lifestyle factors through visualizations  to users.
+- **Inputs:** 
+    - Options for users to limit visualization options (e.g., time range, specific factors).
+    - Zoom and filter options for interactive exploration.
+- **Outputs:** Talk users through the visualizations and explaining their significance.
 
+**Name:** Tool (user input) Tab
+- **What is does:** Allow users to input their data for risk prediction and receive personalized recommendations related to diet and physical activity.
+- **Inputs:** 
+    - Input form for basic user information (age, weight, height, etc.).
+    - Perform Field validation checks to handle potential incorrect inputs.
+    - Integrate with risk prediction and recommendation system functions.
+- **Outputs:** Rendered webpage that shows the tool output: 
+    - Obesity risk level (Hazard ratio)
+    - Standard and personalized recommendations.
