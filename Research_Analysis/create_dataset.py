@@ -9,7 +9,7 @@ if __name__ == '__main__':
     paq = pd.read_sas('./data/PAQ/PAQ_J.XPT')
     bmx = pd.read_sas('./data/BMX/BMX_J.XPT')
 
-    demo = demo[['SEQN', 'RIDAGEYR', 'RIDRETH1', 'RIDRETH3', 'INDHHIN2']]
+    demo = demo[['SEQN', 'RIDAGEYR', 'RIDRETH1', 'RIDRETH3', 'INDFMPIR']]
     dpq = dpq[['SEQN', 'DPQ020', 'DPQ050']]
     smq = smq[['SEQN', 'SMQ040']]
     slq = slq[['SEQN', 'SLD012']]
