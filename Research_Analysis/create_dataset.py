@@ -7,6 +7,7 @@ if __name__ == '__main__':
     slq = pd.read_sas('./data/SLQ/SLQ_J.XPT')
     hiq = pd.read_sas('./data/HIQ/HIQ_J.XPT')
     paq = pd.read_sas('./data/PAQ/PAQ_J.XPT')
+    bmx = pd.read_sas('./data/BMX/BMX_J.XPT')
 
     demo = demo[['SEQN', 'RIDAGEYR', 'RIDRETH1', 'RIDRETH3', 'INDHHIN2']]
     dpq = dpq[['SEQN', 'DPQ020', 'DPQ050']]
@@ -14,8 +15,9 @@ if __name__ == '__main__':
     slq = slq[['SEQN', 'SLD012']]
     hiq = hiq[['SEQN', 'HIQ011']]
     paq = paq[['SEQN', 'PAQ670']]
+    bmx = bmx[['SEQN', 'BMXWT', 'BMXWT']]
 
-    df_list = [demo, dpq, smq, slq, hiq, paq]
+    df_list = [demo, dpq, smq, slq, hiq, paq, bmx]
 
     merge_df = pd.DataFrame(columns=['SEQN'])
     for x in df_list:
