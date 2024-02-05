@@ -17,7 +17,7 @@ if __name__ == '__main__':
     slq = slq[['SEQN', 'SLD012']]
     hiq = hiq[['SEQN', 'HIQ011']]
     paq = paq[['SEQN', 'PAQ670']]
-    bmx = bmx[['SEQN', 'BMXWT', 'BMXWT']]
+    bmx = bmx[['SEQN', 'BMXWT', 'BMXHT']]
     huq = huq[['SEQN', 'HUQ030', 'HUQ010']]
     dbq = dbq[['SEQN', 'DBQ700']]
 
