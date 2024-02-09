@@ -57,4 +57,4 @@ if __name__ == '__main__':
 
     today = date.today()
 
-    final_df.to_csv(f'./outputs/NHANES_dataset_{today}', index=False)
+    final_df.to_csv(f'./outputs/NHANES_dataset_{today}.csv', index=False)
