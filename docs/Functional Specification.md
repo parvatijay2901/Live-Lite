@@ -1,5 +1,11 @@
-# User Stories
-## Story 1:
+# Functional Specification
+
+## Background
+In today's world, obesity is becoming increasingly prevalent, raising serious concerns, especially in the US. **Live Lite** is a promising solution, aiming to revolutionize how we tackle obesity. Our project combines research and practical personalized recommendations to explore the many factors that affect weight management. Our goal is to explore valuable insights and offer practical advice to individuals looking to improve their health.
+
+## User Stories
+
+### Story 1:
 **Who:** Dietitians
 
 **Wants:** Will want to know the historical background of obesity based on demographics - 
@@ -12,7 +18,7 @@ to assist in recommending proper diet that fits the individual's culture.
 **Skills**: Basic web browsing skills, Understands how to fill prompts and how to interpret 
 the visualizations.
 
-## Story 2:
+### Story 2:
 **Who:** Researchers
 
 **Wants:** Learn additional insights about obesity - Specifically, predictors, demographics at risk, 
@@ -25,7 +31,7 @@ age risk, etc.
 **Skills**: Basic web browsing skills, Understands how to fill prompts and how to interpret
 the visualizations.
 
-## Story 3:
+### Story 3:
 **Who:** Individuals wanting to get into a healthy range
 
 **Wants:** To become informed about obesity and its risk factors, Predict if the individual is at risk, Personalized recommendations on diet and physical activities
@@ -37,8 +43,7 @@ the visualizations.
 **Skills**: Basic web browsing skills, Understands how to fill prompts and how to interpret
 the visualizations.
 
-
-## Story 4:
+### Story 4:
 **Who**: Technicians
 
 **Wants:** Create prediction model to provide users with personalized recommendations. Train and update models with new 
@@ -50,30 +55,27 @@ data.
 
 **Skills**: Programming, Data Analysis, Machine learning, and basic devops skills to deploy.
 
-#
-#
-# Use Cases
-## Use Case 1:
 
-Objective: View obesity data to understand obesity.
+## Use Cases
+### Use Case 1:
 
-Steps:
+**Objective:** View obesity data to understand obesity.
+
+**Steps:**
 
 1. User will access the webpage and arrive at landing page with provide background information and
 historical analysis on obesity.
 
 2. The users will have options to filter and choose between visualizations and the type.
 
-Implicit Case:
-
+**Implicit Case:**
 - Need default visualization at startup.
 
+### Use Case 2:
 
-## Use Case 2:
+**Objective:** Get risk of obesity and recommendation to stay fit or become fit.
 
-Objective: Get risk of obesity and recommendation to stay fit or become fit.
-
-Steps:
+**Steps:**
 1. User will access the webpage and arrive at landing page.
 2. User link/tab to open a form to input personal data (weight, height, age, lifestyle, etc.)
    - Implicit case: 
@@ -86,16 +88,14 @@ Steps:
    - Expected calorie intake for age and lifestyle
    - Recommendation on food and physical activity
 
-Edge Cases:
+**Edge Cases:**
 - Impossible parameters (BMI = 0 or BMI = 100)
 - Impossible age (age < 0, age > 120)
 
+### Use Case 3:
+**Objective:** Train, update, and deploy the predictive model.
 
-## Use Case 3:
-
-Objective: Train, update, and deploy the predictive model.
-
-Steps:
+**Steps:**
 1. Data collection from new users
 2. Update the scripts
 3. Push to git / repo
