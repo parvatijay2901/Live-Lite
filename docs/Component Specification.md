@@ -42,34 +42,18 @@ __Inputs__: List - user data such as age, height, weight and activity levels.
 __Outputs__: List - exercise name, duration and expected calorie burn.  
 __Assumptions__: The calorie burn does not vary from person to person based on health conditions, standardized for the given inputs.
 
-## Gather Necessary input data
-- User Height/weight/gender/dietry preference/ Obesity risk/ amount of physical activity/ calory intake.
+## Dietary recommendation:
+__Name__: Food portion recommendation.  
+__What It Does__: Displays the amount of each food groups that should be consumed by the user in a day.  
+__Inputs__: List - user data such as age, gender, food preference.   
+__Outputs__: tuple - minimum and maximum quantitiy of each food group 
+__Assumptions__: The quantities are referred from USDA website. 
 
-### Dietary recommendation:
-#### Pre-process food data and add labels:
-- Transform primary food data.
-- Add labels and derive categories. 
-- Labels:
-    1. High calorie
-    2. Low calorie
-    3. High Sugar
-    4. Low sugar
-    5. High Fibre 
-    6. High protein
-    7. Low protein 
-    8. Medium protein 
-    9. Vegan 
-    10. Vegetarian
-    11. Non vegetarian 
-    12. Allergy foods 
-    13. weight loss/weight gain 
-
-#### Output: 
-- Food groups the user should focus on.
-- Build recommendation logic - from research studies on food consumption.
-
-### Physical Activity
-
+__Name__: Food choices recommendation.  
+__What It Does__: Displays the list of food in a given food group with calorie/fat/protein levels based on user input.  
+__Inputs__: List - user data such as age, gender, food preference, goal(weight loss/gain).   
+__Outputs__: List - Output a list of primary food varieties. 
+__Assumptions__: The food list and the calorie content are referred from USDA website.
 
 ## User Interface
 __Name__: Landing page  
