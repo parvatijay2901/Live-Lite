@@ -27,12 +27,11 @@ def calculate_calorie_burn(weight_lbs, intensity="moderate", preferred_activity=
             raise ValueError("Invalid intensity level")
 
         print("Chosen calorie:")
-        print(chosen_calorie)
+        #print(chosen_calorie)
 
         # Calculate estimated calorie burn for the given weight input
         estimated_burn = chosen_calorie['cal_per_lb_avg'] * weight_lbs
-        print("Estimated burn:")
-        print(estimated_burn)
+        #print(estimated_burn)
 
         # Create list of tuples with activity type, activity, duration, and estimated burn calories
         for idx, row in chosen_calorie.iterrows():
@@ -51,8 +50,8 @@ def calculate_calorie_burn(weight_lbs, intensity="moderate", preferred_activity=
 
     else:
         chosen_record = df[df['Activity'].str.lower().str.contains(preferred_activity.lower())]
-        print("Chosen record:")
-        print(chosen_record)
+        #print("Chosen record:")
+        #print(chosen_record)
         for idx, row in chosen_record.iterrows():
             activity_type = row['Activity Type']
             activity = row['Activity']
