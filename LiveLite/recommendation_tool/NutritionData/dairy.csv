@@ -1,0 +1,11 @@
+category,name,cup,calorie, protein
+Milk ,milk,1,103,8
+Milk,soy-milk,1, 131,8
+Milk,almond-milk,1,39,1
+Yogurt,yogurt-plain,1,100,17
+Cheese,	cheddar,0.3,150,9.29
+Cheese,	mozzarella,0.3, 113,9.68
+Cheese,	swiss,0.3, 106, 7.54
+Cheese,	parmesan,0.3,142, 12.69
+Cheese,	cheddar,0.3, 150,9.29
+Cheese, cottage, 1, 216,26.23
