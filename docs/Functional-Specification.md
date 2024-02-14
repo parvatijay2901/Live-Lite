@@ -4,30 +4,7 @@
 In today's world, obesity is becoming increasingly prevalent, raising serious concerns, especially in the US. **Live Lite** is a promising solution, aiming to revolutionize how we tackle obesity. Our project combines research and practical personalized recommendations to explore the many factors that affect weight management. Our goal is to explore valuable insights and offer practical advice to individuals looking to improve their health.
 
 
-## Data Source:
-The data we will be using to train our obesity prediction model will be data from the National Health and Nutrition Examination Survey - also known as the NHANES dataset.
-This data is a comprehensive survey of random individuals in each 2 year intervals starting from 1999.
-
-The data's variables can be divided into six larger categories:
-1. Demographics
-2. Dietary Data
-3. Examination Data
-4. Laboratory Data
-5. Questionnaire Data
-6. Limited Access Data
-
-The only data unavailable to us is the Limited Access Data.
-
-For our model we will be utilizing data from the remaining five sections. The data comes in an XPT file format which can be read into Python through pandas as a dataframe.
-Each column in the file represents a question and/or measurement. For example, Gender is under column "RIAGENDR" with values 1=Male, 2=Female, and .=Missing.
-
-How each variable is coded can be found on the [NHANES website](https://wwwn.cdc.gov/nchs/nhanes/Default.aspx)
-
-The columns provide the unique identifier 'SEQN' as a way to tie together different responses across the various XPT files that are available from the NHANES dataset.
-
-
-## User Stories
-
+## User Profile/Stories
 ### Story 1:
 **Who:** Dietitians
 
@@ -77,6 +54,27 @@ data.
 **Needs:** Good data to build a prediction model.
 
 **Skills**: Programming, Data Analysis, Machine learning, and basic devops skills to deploy.
+
+## Data Source
+The data we will be using to train our obesity prediction model will be data from the National Health and Nutrition Examination Survey - also known as the NHANES dataset.
+This data is a comprehensive survey of random individuals in each 2 year intervals starting from 1999.
+
+The data's variables can be divided into six larger categories:
+1. Demographics
+2. Dietary Data
+3. Examination Data
+4. Laboratory Data
+5. Questionnaire Data
+6. Limited Access Data
+
+The only data unavailable to us is the Limited Access Data.
+
+For our model we will be utilizing data from the remaining five sections. The data comes in an XPT file format which can be read into Python through pandas as a dataframe.
+Each column in the file represents a question and/or measurement. For example, Gender is under column "RIAGENDR" with values 1=Male, 2=Female, and .=Missing.
+
+How each variable is coded can be found on the [NHANES website](https://wwwn.cdc.gov/nchs/nhanes/Default.aspx)
+
+The columns provide the unique identifier 'SEQN' as a way to tie together different responses across the various XPT files that are available from the NHANES dataset.
 
 
 ## Use Cases
