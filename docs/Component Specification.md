@@ -4,14 +4,15 @@
 __Name__: Violin Plot Manager  
 __What It Does__: Reads NHANES data into a dataframe, process it, and then plot the distribution with
 violin plots.
-__Inputs__: String: Type of data to visualize - e.g. Weight, BMI, Physical Activity, etc.  
+__Inputs__: String: Type of data to visualize - e.g. Weight, BMI, Physical Activity, etc.   
+__Inputs__: List: List of years to visualize.   
 __Outputs__: Object: Violin plot  
 __Assumptions__: Data is NOT cleaned - needs to be checked for NaNs, bad data.
 
 __Name__: Background Information  
 __What It Does__: Reads NHANES data into a dataframe. Generates plots visualizing background information
 such as: Prevalence of obesity by Sex, Race, Age.  
-__Inputs__: Int: Year of data to visualize.
+__Inputs__: List: Years of data to visualize.
 __Outputs__: Object: Bar plots showing prevalence of obesity of sex, race, age.  
 __Assumptions__: Data is NOT cleaned - needs to be checked for NaNs, bad data.
 
