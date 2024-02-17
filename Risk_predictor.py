@@ -3,16 +3,16 @@ import joblib
 
 ### TO BE DELETED AFTER TETSING ##
 test_data = {
-    'DPQ020': [0], 
-    'DPQ050': [0], 
-    'PAQ670': [5], 
-    'DBQ700': [1], 
-    'HUQ010': [1], 
+    'DPQ020': [3], 
+    'DPQ050': [3], 
+    'PAQ670': [1], 
+    'DBQ700': [5], 
+    'HUQ010': [5], 
     'RIAGENDR': [0], 
     'RIDAGEYR': [60],
-    'RIDRETH3': [1], 
-    'SMQ040': [0],
-    'SLD012': [3]
+    'RIDRETH3': [3], 
+    'SMQ040': [1],
+    'SLD012': [2]
 }
 
 # Call this function with dictionary of user input to preidct risk
