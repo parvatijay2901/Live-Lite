@@ -48,9 +48,36 @@ who are obese versus non-obese. For example, adult obesity patients were found t
 of being hospitalized for asthma exacerbations compared to their non-obese counterparts (Holguin et al., 2011), (Mosen et al., 2008).
 
 
+## Trends
+According to data published by the Institute for Health Metrics and Evaluation (IHME), obesity is a major risk factor for
+mortality in not just the United States but globally as well.
+
+Figure 1: (insert background_information_ihme(years=[1990, 2019]))
+
+From Figure 1, we can observe that Deaths attributed to high body-mass index (BMI) has rapidly increased since 1990 - 
+going from around 4.3 million to around 10 million.
+
+Figure 2: (insert background_information_nhanes())
+
+From Figure 2, we can observe that, in the United States alone, the proportion of overweight (including obese) and obese
+individuals has rapidly increased since 1999.
+
+Figure 3: (insert obesity_trends())
+
+From Figure 3, we can observe that for both males and females, obesity has only increased since 1999.
+
+Figure 4: (insert violin_plot_manager(years=[1999, 2017]))
+
+Figure 4 displays the overall distribution of BMI in the NHANES data set between 1999 and 2017. The mean BMI in 1999
+was 24.89. The mean BMI in 2017 was 26.58. From 1999 to 2017, there was a 6.76% increase in overall BMI in the United States.
+In addition, in 1999, the average BMI was still under the category of "Healthy Weight". However, in 2017 with the increase
+in BMI to 26.58, the average BMI is no longer considered "Healthy" and is now firmly in the "Overweight" category.
 
 
-Sources:  
+
+
+
+# Sources:  
 Anderson, M. R., Geleris, J., Anderson, D. R., Zucker, J., Nobel, Y. R., Freedberg, D., Small-Saunders, J., Rajagopalan, K. N., Greendyk, R., Chae, S.-R., Natarajan, K., Roh, D., Edwin, E., Gallagher, D., Podolanczuk, A., Barr, R. G., Ferrante, A. W., & Baldwin, M. R. (2020). Body Mass Index and Risk for Intubation or Death in SARS-CoV-2 Infection: A Retrospective Cohort Study. Annals of Internal Medicine, 173(10), 782–790. https://doi.org/10.7326/M20-3214
 
 Aune, D., Sen, A., Norat, T., Janszky, I., Romundstad, P., Tonstad, S., & Vatten, L. J. (2016). Body Mass Index, Abdominal Fatness, and Heart Failure Incidence and Mortality: A Systematic Review and Dose-Response Meta-Analysis of Prospective Studies. Circulation, 133(7), 639–649. https://doi.org/10.1161/CIRCULATIONAHA.115.016801

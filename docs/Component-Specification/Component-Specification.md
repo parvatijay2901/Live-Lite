@@ -10,17 +10,23 @@ __Inputs__: List: List of years to visualize.
 __Outputs__: Object: Violin plot  
 __Assumptions__: Data is NOT cleaned - needs to be checked for NaNs, bad data.
 
-__Name__: Background Information  
-__What It Does__: Reads NHANES data into a dataframe. Generates plots visualizing background information
-such as: Prevalence of obesity by Sex, Race, Age.  
+__Name__: Background Information NHANES  
+__What It Does__: Reads NHANES data into a dataframe. Visualizes proportion of overweight and obesity in United States over time.
 __Inputs__: List: Years of data to visualize.
 __Outputs__: Object: Bar plots showing prevalence of obesity of sex, race, age.  
 __Assumptions__: Data is NOT cleaned - needs to be checked for NaNs, bad data.
 
+__Name__: Background Information IHME
+__What It Does__: Reads IHME data into a dataframe. Generates plots visualizing data on risk factors of death - particularly
+highlighting obesity in the rankings.
+__Inputs__: List: List of years to visualize.
+__Outputs__: Object: Bar plot.
+__Assumptions__: Data is not cleaned - neds to be checked for NaNs, bad data.
+
 __Name__: Obesity Trends  
-__What It Does__: Reads NHANES data into a dataframe. Generates a line plot comparing obesity and severity
-obesity overtime.  
-__Inputs__: None  
+__What It Does__: Reads NHANES BMI and Demographic information. Visualizes obesity trends in groups 
+such as:  Sex, Race, Age.
+__Inputs__: List: List of years to visualize.  
 __Outputs__: Object: Line plot displaying a obesity trend over time.  
 __Assumptions__: Data is NOT cleaned - needs to be checked for NaNs, bad data.
 
