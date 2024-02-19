@@ -1,0 +1,99 @@
+Activity Type,Activity,Calories (125 lbs),Calories (155 lbs),Calories (185 lbs),cal_per_lb_avg
+Gym Activities,Weight Lifting: general,90,108,126,0.699285091543156
+Gym Activities,Aerobics: water,120,144,168,0.9323801220575415
+Gym Activities,"Stretching, Hatha Yoga",120,144,168,0.9323801220575415
+Gym Activities,Calisthenics: moderate,135,162,189,1.048927637314734
+Gym Activities,Aerobics: low impact,165,198,231,1.2820226678291196
+Gym Activities,Stair Step Machine: general,180,216,252,1.398570183086312
+Gym Activities,Weight Lifting: vigorous,180,216,252,1.398570183086312
+Gym Activities,"Aerobics, Step: low impact",210,252,294,1.6316652136006973
+Gym Activities,Aerobics: high impact,210,252,294,1.6316652136006973
+Gym Activities,"Bicycling, Stationary: moderate",210,252,294,1.6316652136006973
+Gym Activities,"Rowing, Stationary: moderate",210,252,294,1.6316652136006973
+Gym Activities,Calisthenics: vigorous,240,306,336,1.9034699215344375
+Gym Activities,Circuit Training: general,240,0,0,0.64
+Gym Activities,"Rowing, Stationary: vigorous",255,369,440,2.266341179889567
+Gym Activities,Elliptical Trainer: general,270,324,378,2.097855274629468
+Gym Activities,Ski Machine: general,285,342,399,2.2144027898866607
+Gym Activities,"Aerobics, Step: high impact",300,360,420,2.3309503051438534
+Gym Activities,"Bicycling, Stationary: vigorous",315,278,441,2.232444056960186
+Training and Sports Activities,Bowling,90,108,0,0.472258064516129
+Training and Sports Activities,"Dancing: slow, waltz, foxtrot",90,108,125,0.6974832897413542
+Training and Sports Activities,Frisbee,85,105,125,0.6776983435047951
+Training and Sports Activities,"Volleyball: non-competitive, general play",90,108,126,0.699285091543156
+Training and Sports Activities,Water Volleyball,90,108,126,0.699285091543156
+Training and Sports Activities,Golf: using cart,105,126,147,0.8158326068003486
+Training and Sports Activities,Gymnastics: general,120,144,168,0.9323801220575415
+Training and Sports Activities,Horseback Riding: general,57,70,84,0.4538889857599535
+Training and Sports Activities,Tai Chi,120,144,168,0.9323801220575415
+Training and Sports Activities,"Volleyball: competitive, gymnasium play",226,281,335,1.8105713455390875
+Training and Sports Activities,Walking: 3.5 mph (17 min/mi),107,133,159,0.8578413251961639
+Training and Sports Activities,Badminton: general,114,141,168,0.9099285091543156
+Training and Sports Activities,Walking: 4 mph (15 min/mi),135,175,189,1.0768846265620458
+Training and Sports Activities,Kayaking,150,180,210,1.1654751525719267
+Training and Sports Activities,Skateboarding,150,180,210,1.1654751525719267
+Training and Sports Activities,Softball: general play,141,180,210,1.1414751525719267
+Training and Sports Activities,"Whitewater: rafting, kayaking",150,180,210,1.1654751525719267
+Training and Sports Activities,"Dancing: disco, ballroom, square",165,198,231,1.2820226678291196
+Training and Sports Activities,Golf: carrying clubs,165,198,231,1.2820226678291196
+Training and Sports Activities,"Dancing: Fast, ballet, twist",180,216,252,1.398570183086312
+Training and Sports Activities,Hiking: cross-country,170,216,252,1.3719035164196456
+Training and Sports Activities,Skiing: downhill,180,216,252,1.398570183086312
+Training and Sports Activities,Swimming: general,180,216,252,1.398570183086312
+Training and Sports Activities,Walk/Jog: jog <10 min.,180,216,252,1.398570183086312
+Training and Sports Activities,Water Skiing,180,216,252,1.398570183086312
+Training and Sports Activities,Wrestling,180,216,252,1.398570183086312
+Training and Sports Activities,Basketball: wheelchair,195,234,273,1.5151176983435048
+Training and Sports Activities,Ice Skating: general,210,252,294,1.6316652136006973
+Training and Sports Activities,"Racquetball: casual, general",210,252,293,1.6298634117988957
+Training and Sports Activities,Rollerblading/skating (Casual),311,386,461,2.490071490845684
+Training and Sports Activities,Rollerblading/skating (Fast),340,421,503,2.7183493170589945
+Training and Sports Activities,Scuba or skin diving,210,252,294,1.6316652136006973
+Training and Sports Activities,"Sledding, luge, toboggan",199,247,294,1.591579192095321
+Training and Sports Activities,Soccer: general,210,252,294,1.6316652136006973
+Training and Sports Activities,Tennis: general,210,252,294,1.6316652136006973
+Training and Sports Activities,Basketball: playing a game,240,288,336,1.864760244115083
+Training and Sports Activities,Bicycling: 12-13.9 mph,240,288,336,1.864760244115083
+Training and Sports Activities,"Football: touch, flag, general",240,288,336,1.864760244115083
+Training and Sports Activities,Hockey: field & ice,240,288,336,1.864760244115083
+Training and Sports Activities,Rock Climbing: rappelling,227,282,336,1.8171903516419645
+Training and Sports Activities,Running: 5 mph (12 min/mile),240,288,336,1.864760244115083
+Training and Sports Activities,Skiing: cross-country,198,246,293,1.5849601859924443
+Training and Sports Activities,Snow Shoeing,240,288,336,1.864760244115083
+Training and Sports Activities,Volleyball: beach,240,288,336,1.864760244115083
+Training and Sports Activities,Bicycling: BMX or mountain,255,306,357,1.9813077593722754
+Training and Sports Activities,Boxing: sparring,270,324,378,2.097855274629468
+Training and Sports Activities,Football: competitive,270,324,378,2.097855274629468
+Training and Sports Activities,Running: cross-country,255,316,377,2.0388491717523975
+Training and Sports Activities,Bicycling: 14-15.9 mph,300,360,420,2.3309503051438534
+Training and Sports Activities,"Martial Arts: judo, karate, kickbox",300,360,420,2.3309503051438534
+Training and Sports Activities,Racquetball: competitive,300,360,420,2.3309503051438534
+Training and Sports Activities,Rope Jumping (Fast),340,421,503,2.7183493170589945
+Training and Sports Activities,Rope Jumping (Slow),226,281,335,1.8105713455390875
+Training and Sports Activities,Running: 6 mph (10 min/mile),495,360,420,2.850950305143854
+Training and Sports Activities,"Swimming: laps, vigorous",300,360,420,2.3309503051438534
+Training and Sports Activities,Water Polo,300,360,420,2.3309503051438534
+Training and Sports Activities,Rock Climbing: ascending,226,281,335,1.8105713455390875
+Training and Sports Activities,Bicycling: 16-19 mph,360,432,504,2.797140366172624
+Training and Sports Activities,Handball: general,360,432,504,2.797140366172624
+Training and Sports Activities,Running: 7.5 mph (8 min/mile),375,450,525,2.913687881429817
+Training and Sports Activities,Bicycling: > 20 mph,495,594,693,3.8460680034873582
+Training and Sports Activities,Running: 10 mph (6 min/mile),453,562,671,3.6256111595466436
+Outdoor Activities,Raking lawn,120,144,168,0.9323801220575415
+Outdoor Activities,Gardening: general,135,162,189,1.048927637314734
+Outdoor Activities,"Mowing lawn: push, power",135,162,189,1.048927637314734
+Outdoor Activities,Operate Snow Blower: walking,135,162,189,1.048927637314734
+Outdoor Activities,Carrying & stacking wood,142,176,210,1.135539668700959
+Outdoor Activities,"Mowing Lawn: push, hand",165,198,231,1.2820226678291196
+Outdoor Activities,Chopping & splitting wood,180,216,252,1.398570183086312
+Outdoor Activities,Shoveling Snow: by hand,180,216,252,1.398570183086312
+Home & Daily Life Activities,Sleeping,19,22,26,0.14482534147050277
+Home & Daily Life Activities,Reading: sitting,34,40,47,0.26137285672769545
+Home & Daily Life Activities,Standing in line,28,35,41,0.2238093577448416
+Home & Daily Life Activities,Cooking,57,70,84,0.4538889857599535
+Home & Daily Life Activities,Food Shopping: with cart,85,106,126,0.6816506829410055
+Home & Daily Life Activities,Playing w/kids: moderate effort,114,141,168,0.9099285091543156
+Home & Daily Life Activities,"Heavy Cleaning: wash car, windows",135,162,189,1.048927637314734
+Home & Daily Life Activities,"Paint, paper, remodel: inside",142,176,210,1.135539668700959
+Home & Daily Life Activities,Moving: household furniture,170,211,252,1.3611508282476026
+Home & Daily Life Activities,Moving: carrying boxes,210,252,294,1.6316652136006973
