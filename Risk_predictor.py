@@ -1,19 +1,19 @@
 import pandas as pd
 import joblib  
 
-### TO BE DELETED AFTER TETSING ##
-test_data = {
-    'DPQ020': [3], 
-    'DPQ050': [3], 
-    'PAQ670': [1], 
-    'DBQ700': [5], 
-    'HUQ010': [5], 
-    'RIAGENDR': [0], 
-    'RIDAGEYR': [60],
-    'RIDRETH3': [3], 
-    'SMQ040': [1],
-    'SLD012': [2]
-}
+# ### TO BE DELETED AFTER TETSING ##
+# test_data = {
+#     'DPQ020': [3], 
+#     'DPQ050': [3], 
+#     'PAQ670': [1], 
+#     'DBQ700': [5], 
+#     'HUQ010': [5], 
+#     'RIAGENDR': [0], 
+#     'RIDAGEYR': [60],
+#     'RIDRETH3': [3], 
+#     'SMQ040': [1],
+#     'SLD012': [2]
+# }
 
 # Call this function with dictionary of user input to preidct risk
 def risk_predict(Inputlist):
