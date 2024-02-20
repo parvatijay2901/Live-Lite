@@ -45,7 +45,7 @@ def calculate_calorie_intake(weight, height, age, sex, activity_level):
     }
     
     if activity_level not in activity_multiplier:
-        raise ValueError("Invalid value for activity level. Please choose from: sedentary, minimally active, moderately active, very active, extra active.")
+        raise ValueError("Invalid value for activity level")
     
     calorie_intake = bmr * activity_multiplier[activity_level]
     return calorie_intake
