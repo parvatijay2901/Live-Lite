@@ -51,7 +51,7 @@ def calculate_calorie_intake(weight, height, age, sex, activity_level):
     return calorie_intake
 
 
-# Example usage : To be removed in final version of the code. Uncomment for test run
+# # Example usage : To be removed in final version of the code. Uncomment for test run
   
 # weight = float(input("Enter weight in kg: "))
 # height = float(input("Enter height in cm: "))
@@ -59,8 +59,8 @@ def calculate_calorie_intake(weight, height, age, sex, activity_level):
 # sex = input("Enter sex (male/female): ")
 # activity_level = input("Enter activity level: ")
     
-# This call must be made from streamlit & output has to be rendered appropriately. 
-calorie_intake = calculate_calorie_intake (float(56), float(150), int(30), 0, int(2))
-print("Estimated calorie intake:", calorie_intake, "kcal")
+# # This call must be made from streamlit & output has to be rendered appropriately. 
+# calorie_intake = calculate_calorie_intake (float(56), float(150), int(30), 0, int(2))
+# print("Estimated calorie intake:", calorie_intake, "kcal")
 
 
