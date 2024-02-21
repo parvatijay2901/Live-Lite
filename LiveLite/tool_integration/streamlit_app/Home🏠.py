@@ -26,7 +26,7 @@ with col1:
          switch_page("Your Risk Insights🌿🏃🏼")
 with col2:
    st.markdown("""<style>.centered-image {display: flex;justify-content: center;height: 100%;}</style>""",unsafe_allow_html=True)
-   st.image("LiveLite/tool_integration/logo.png", width=300)
+   st.image("tool_integration/streamlit_app/logo.png", width=300)
 
 for _ in range(8):   
    st.write('\n')

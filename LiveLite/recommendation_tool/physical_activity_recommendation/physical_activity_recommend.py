@@ -1,8 +1,5 @@
 import pandas as pd
 
-# Read data from the CSV file into a dataframe
-df = pd.read_csv("calories_burned_30_minutes.csv")
-
 # Custom function to choose a moderate calorie burn va;oe
 def custom_median(series):
     sorted_values = series.sort_values()
@@ -12,8 +9,11 @@ def custom_median(series):
     else:
         return sorted_values.iloc[length // 2]
 
-def calculate_calorie_burn(weight_lbs, intensity="moderate", preferred_activity=None):
+def calculate_calorie_burn(weight_lbs, filename, intensity="moderate", preferred_activity=None):
     result = []
+    
+    # Read data from the CSV file into a dataframe
+    df = pd.read_csv(filename)
 
     if preferred_activity is None:
         # Choose the calorie based on the type of measure of intensity.
@@ -26,7 +26,7 @@ def calculate_calorie_burn(weight_lbs, intensity="moderate", preferred_activity=
         else:
             raise ValueError("Invalid intensity level")
 
-        print("Chosen calorie:")
+        # print("Chosen calorie:")
         #print(chosen_calorie)
 
         # Calculate estimated calorie burn for the given weight input
@@ -62,5 +62,5 @@ def calculate_calorie_burn(weight_lbs, intensity="moderate", preferred_activity=
     return result
 
 # Example usage:
-output_list = calculate_calorie_burn(150)
-print(output_list)
+# output_list = calculate_calorie_burn(150)
+# print(output_list)
