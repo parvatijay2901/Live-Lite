@@ -22,13 +22,13 @@ def recommendedProtein(age_in,gender_in):
         (pro_data["min_age"]<= age_in) & (age_in <= pro_data["max_age"])
     ]
     #print(filtered_data)
-    min = filtered_data.iloc[0]['min_ounce']
-    max = filtered_data.iloc[0]['max_ounce']
+    min = round(filtered_data.iloc[0]['min_ounce']*28.3495)
+    max = round(filtered_data.iloc[0]['max_ounce']*28.3495)
     
     #print(min)
     #print(max)
 
-    return(min, max, "ounce")
+    return(min, max, "grams")
 
 def recommendedGrains(age_in,gender_in):
     if (age_in<9) & (age_in>100):
@@ -45,18 +45,18 @@ def recommendedGrains(age_in,gender_in):
         (grain_data["min_age"]<= age_in) & (age_in <= grain_data["max_age"])
     ]
     #print(filtered_data)
-    min_g = filtered_data.iloc[0]['min_grains']
-    max_g = filtered_data.iloc[0]['max_grains']
-    min_wg = filtered_data.iloc[0]['min_whole-grains']
-    max_wg = filtered_data.iloc[0]['max_whole-grains']
+    min_g = round(filtered_data.iloc[0]['min_grains']*28.3495)
+    max_g = round(filtered_data.iloc[0]['max_grains']*28.3495)
+    min_wg = round(filtered_data.iloc[0]['min_whole-grains']*28.3495)
+    max_wg = round(filtered_data.iloc[0]['max_whole-grains']*28.3495)
     
     #print(min)
     #print(max)
 
-    return(min_g, max_g, min_wg, max_wg, "ounce") 
+    return(min_g, max_g, min_wg, max_wg, "grams") 
 
 def recommendedDairy():
-    return(3,"cups")  
+    return(2,3,"cups")  
 
 def recommendedFruits(gender_in):
     if gender_in == "f":
@@ -88,11 +88,12 @@ def recommendedVegetables(age_in,gender_in):
     return(min, max, "cups")   
     
 '''
-sample tests
+#sample tests
 print(recommendedProtein(23,"m"))
 print(recommendedProtein(1,"d"))
 print(recommendedProtein(100,"m"))
 print(recommendedProtein(23,"h"))
+
 print("***")
 print(recommendedGrains(23,"m"))
 print(recommendedGrains(1,"d"))
@@ -107,3 +108,5 @@ print(recommendedVegetables(23,"m"))
 print(recommendedVegetables(23,"f"))
 print(recommendedVegetables(2,"h"))
 '''
+
+
