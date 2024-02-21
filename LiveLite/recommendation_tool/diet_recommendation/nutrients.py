@@ -13,7 +13,7 @@ def dairy_protein_food(data):
 
     return(out)
 
-print(dairy_protein_food(filter_data).head())
+#print(dairy_protein_food(filter_data).head())
 
 def egg_protein_food(data):
     out = data[(data["FoodGroup"]=="Dairy and Egg Products") & (data["Descrip"].str.contains('Egg')) & (data["Protein_g"]>0)]
@@ -21,7 +21,7 @@ def egg_protein_food(data):
 
     return(out)
 
-print(egg_protein_food(filter_data).head())
+#print(egg_protein_food(filter_data).head())
 
 def seafood_protein(data):
     out = data[(data["FoodGroup"]=="Finfish and Shellfish Products") & (data["Protein_g"]>0)]
@@ -29,7 +29,7 @@ def seafood_protein(data):
 
     return(out)
 
-print(seafood_protein(filter_data).head())
+#print(seafood_protein(filter_data).head())
 
 def poultry_meat_protein(data):
     out = data[(data["FoodGroup"]=="Poultry Products") & (data["Protein_g"]>0)]
@@ -37,7 +37,7 @@ def poultry_meat_protein(data):
 
     return(out)
 
-print(poultry_meat_protein(filter_data).head())
+#print(poultry_meat_protein(filter_data).head())
 
 def sausage_luncheon_meat(data):
     out = data[(data["FoodGroup"]=="Sausages and Luncheon Meats") & (data["Protein_g"]>0)]
@@ -45,7 +45,7 @@ def sausage_luncheon_meat(data):
 
     return(out)
 
-print(sausage_luncheon_meat(filter_data).head())
+#print(sausage_luncheon_meat(filter_data).head())
 
 def vegan_protein(data):
     out = data[(data["FoodGroup"]=="Legumes and Legume Products") & (data["Protein_g"]>0)]
@@ -53,7 +53,7 @@ def vegan_protein(data):
 
     return(out)
 
-print(vegan_protein(filter_data).head())
+#print(vegan_protein(filter_data).head())
 
 def carbs(data):
     out = data[(data["FoodGroup"]=="Cereal Grains and Pasta")]
@@ -61,7 +61,7 @@ def carbs(data):
 
     return(out)
 
-print(carbs(filter_data).head())
+#print(carbs(filter_data).head())
 
 def fruits(data):
     out = data[(data["FoodGroup"]=="Fruits and Fruit Juices")]
@@ -69,7 +69,7 @@ def fruits(data):
 
     return(out)
 
-print(fruits(filter_data).head())
+#print(fruits(filter_data).head())
 
 def vegetables(data):
     out = data[(data["FoodGroup"]=="Vegetables and Vegetable Products")]
@@ -77,7 +77,7 @@ def vegetables(data):
 
     return(out)
 
-print(vegetables(filter_data).head())
+#print(vegetables(filter_data).head())
 
 def search_food(food_item, data):
     if food_item == "":
@@ -87,5 +87,5 @@ def search_food(food_item, data):
 
     return(out)
 
-print(search_food("milk",filter_data))
+#print(search_food("milk",filter_data))
 
