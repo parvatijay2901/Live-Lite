@@ -4,7 +4,7 @@ from streamlit_extras.switch_page_button import switch_page
 import sys,os
 path = '././.'
 sys.path.append(os.path.abspath(path))
-from tool_integration.src.get_user_inputs import get_user_inputs
+from recommendation_tool.handle_user_input.get_user_inputs import get_user_inputs
 
 st.set_page_config(layout="wide", initial_sidebar_state="collapsed")
 

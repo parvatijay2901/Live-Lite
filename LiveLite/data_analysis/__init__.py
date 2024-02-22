@@ -1,1 +1,0 @@
-from data_analysis.research_analysis import background_information_ihme

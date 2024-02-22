@@ -161,10 +161,9 @@ def background_information_ihme(years=None):
     # Create Figure on Death by Risk Factor (Global)
     ihme = pd.read_csv('./data/files/IHME/number-of-deaths-by-risk-factor.csv')
     ihme = ihme[~ihme['Code'].isna()]
-    ihme_long = pd.melt(ihme, id_vars=['Entity', 'Code', 'Year'], var_name='Risk Factor', value_name='Deaths')
-
     ihme.columns = [rename_column_ihme(col) for col in ihme.columns]
-
+    ihme_long = pd.melt(ihme, id_vars=['Entity', 'Code', 'Year'], var_name='Risk Factor', value_name='Deaths')
+    
     data_filtered_years = ihme_long[ihme_long['Year'].isin(years)]
 
     data_summary = data_filtered_years.groupby(['Risk Factor', 'Year'])['Deaths'].sum().reset_index()
