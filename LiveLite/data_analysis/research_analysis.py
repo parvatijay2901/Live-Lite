@@ -143,6 +143,17 @@ def background_information_nhanes(years=None):
     return fig
 
 
+def rename_column_ihme(column_name):
+    start_keyword = "attributed to "
+    end_keyword = ", in both sexes"
+    if start_keyword in column_name and end_keyword in column_name:
+        start_index = column_name.find(start_keyword) + len(start_keyword)
+        end_index = column_name.find(end_keyword)
+        return column_name[start_index:end_index]
+    else:
+        return column_name
+
+
 def background_information_ihme(years=None):
     if years is None:
         years = [1990, 2017]
@@ -152,6 +163,8 @@ def background_information_ihme(years=None):
     ihme = ihme[~ihme['Code'].isna()]
     ihme_long = pd.melt(ihme, id_vars=['Entity', 'Code', 'Year'], var_name='Risk Factor', value_name='Deaths')
 
+    ihme.columns = [rename_column_ihme(col) for col in ihme.columns]
+
     data_filtered_years = ihme_long[ihme_long['Year'].isin(years)]
 
     data_summary = data_filtered_years.groupby(['Risk Factor', 'Year'])['Deaths'].sum().reset_index()
@@ -159,11 +172,13 @@ def background_information_ihme(years=None):
     # Create figure with subplots
     fig = make_subplots(rows=1, cols=len(years), subplot_titles=[f'Deaths by Risk Factor in {year}' for year in years], shared_yaxes=True)
 
+    highlighted_risk_factor = "high body-mass index"
+
     for i, year in enumerate(years, 1):
         data_year = data_summary[data_summary['Year'] == year].sort_values(by='Deaths', ascending=True)
 
         # Define colors for each bar based on the risk factor  
-        colors = ['#3498db' if y == year else '#95a5a6' for y in data_year['Year']]
+        colors = ['#ff6347' if risk == highlighted_risk_factor else '#95a5a6' for risk in data_year['Risk Factor']]
 
         # Add bar trace for each risk factor
         fig.add_trace(go.Bar(
@@ -171,7 +186,7 @@ def background_information_ihme(years=None):
             x=data_year['Deaths'],
             orientation='h',
             marker=dict(color=colors),
-            name='',
+            name=f'{year}',
             text=data_year['Deaths'].apply(lambda x: f'{x:,.0f}'),
             textposition='auto'
         ), row=1, col=i)
@@ -188,6 +203,7 @@ def background_information_ihme(years=None):
         showlegend=False,
         margin=dict(l=50, r=50, t=100, b=50)  # Add margin for better display of title
     )
+    fig.update_yaxes(title_text="Risk Factor", row=1, col=1)  # Only need to set this once for shared Y axes
 
     return fig
 
