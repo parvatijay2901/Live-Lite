@@ -20,8 +20,16 @@ def violin_plot_manager(data, plot_type='BMI', years=None):
     :param years: List of years to plot.
     :return: Figure object.
     """
-    if years is None:
-        years = [1999, 2001, 2003, 2005, 2007, 2009, 2011, 2013, 2015, 2017]
+
+    years_default = [1999, 2001, 2003, 2005, 2007, 2009, 2011, 2013, 2015, 2017]
+
+    if years is not None:
+        years = years_default
+    else:
+        years = years_default
+
+    if list(set(years).difference(years_default)):
+        raise ValueError("Years contains non-valid years. Valid years start from 1999 and increment by 2 years.")
 
     if not isinstance(plot_type, str):
         raise ValueError("Plot Type Argument must be a string.")
@@ -56,8 +64,15 @@ def background_information_nhanes(data, years=None):
     :param years: List of years.
     :return: Figure object.
     """
-    if years is None:
-        years = [1999, 2001, 2003, 2005, 2007, 2009, 2011, 2013, 2015, 2017]
+    years_default = [1999, 2001, 2003, 2005, 2007, 2009, 2011, 2013, 2015, 2017]
+
+    if years is not None:
+        years = years_default
+    else:
+        years = years_default
+
+    if list(set(years).difference(years_default)):
+        raise ValueError("Years contains non-valid years. Valid years start from 1999 and increment by 2 years.")
 
     data = data[data['Year'].isin(years)]
 
@@ -104,7 +119,7 @@ def rename_column_ihme(column_name):
     return column_name
 
 
-def background_information_ihme(years=None):
+def background_information_ihme(data, years=None):
     """
     Generates a bar plot comparing death by risk factor using IHME data.
     :param years: List of years to compare.
@@ -114,8 +129,8 @@ def background_information_ihme(years=None):
         years = [1990, 2017]
 
     # Create Figure on Death by Risk Factor (Global)
-    ihme = pd.read_csv('./data/files/IHME/number-of-deaths-by-risk-factor.csv')
-    ihme = ihme[~ihme['Code'].isna()]
+    # ihme = pd.read_csv('../../data/files/IHME/number-of-deaths-by-risk-factor.csv')
+    ihme = data[~data['Code'].isna()].copy()
     ihme.columns = [rename_column_ihme(col) for col in ihme.columns]
     ihme_long = pd.melt(ihme, id_vars=['Entity', 'Code', 'Year'],
                         var_name='Risk Factor', value_name='Deaths')
@@ -175,8 +190,15 @@ def obesity_trends(data, years=None):
     :param years: List of years to plot.
     :return: Figure object.
     """
-    if years is None:
-        years = [1999, 2001, 2003, 2005, 2007, 2009, 2011, 2013, 2015, 2017]
+    years_default = [1999, 2001, 2003, 2005, 2007, 2009, 2011, 2013, 2015, 2017]
+
+    if years is not None:
+        years = years_default
+    else:
+        years = years_default
+
+    if list(set(years).difference(years_default)):
+        raise ValueError("Years contains non-valid years. Valid years start from 1999 and increment by 2 years.")
 
 
     data = data[data['Year'].isin(years)]
