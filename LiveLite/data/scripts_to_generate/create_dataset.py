@@ -2,27 +2,94 @@ import pandas as pd
 import os
 from datetime import date
 
-if __name__ == '__main__':
-    # demo = pd.read_sas('./data/DEMO/DEMO_J.XPT')
-    # dpq = pd.read_sas('./data/DPQ/DPQ_J.XPT')
-    # smq = pd.read_sas('./data/SMQ/SMQ_J.XPT')
-    # slq = pd.read_sas('./data/SLQ/SLQ_J.XPT')
-    # hiq = pd.read_sas('./data/HIQ/HIQ_J.XPT')
-    # paq = pd.read_sas('./data/PAQ/PAQ_J.XPT')
-    # bmx = pd.read_sas('./data/BMX/BMX_J.XPT')
-    # huq = pd.read_sas('./data/HUQ/HUQ_J.XPT')
-    # dbq = pd.read_sas('./data/DBQ/DBQ_J.XPT')
-    #
-    # demo = demo[['SEQN', 'RIDAGEYR', 'RIDRETH1', 'RIDRETH3', 'INDFMPIR']]
-    # dpq = dpq[['SEQN', 'DPQ020', 'DPQ050']]
-    # smq = smq[['SEQN', 'SMQ040']]
-    # slq = slq[['SEQN', 'SLD012']]
-    # hiq = hiq[['SEQN', 'HIQ011']]
-    # paq = paq[['SEQN', 'PAQ670']]
-    # bmx = bmx[['SEQN', 'BMXWT', 'BMXHT']]
-    # huq = huq[['SEQN', 'HUQ030', 'HUQ010']]
-    # dbq = dbq[['SEQN', 'DBQ700']]
 
+def create_nhanes():
+    suffix = {'': 1999, 'B': 2001, 'C': 2003, 'D': 2005, 'E': 2007, 'F': 2009, 'G': 2011, 'H': 2013, 'I': 2015, 'J': 2017}
+
+    df_list = []
+    path = '../files/NHANES/BMX/'
+    path2 = '../files/NHANES/PAQ/'
+    path3 = '../files/NHANES/DEMO/'
+
+
+
+    for file in os.listdir(path=path):
+        if file.endswith('.XPT'):
+            file_path = os.path.join(path, file)
+
+            # Load the XPT file
+            df = pd.read_sas(file_path)
+            df = df[~df['BMXWT'].isna()]
+            df = df[~df['BMXHT'].isna()]
+            df['BMI'] = df['BMXWT'] / ((df['BMXHT'] / 100) ** 2)
+
+            df['Overweight (including obesity)'] = df['BMI'] >= 25
+            df['Obese'] = df['BMI'] >= 30
+
+            suffix_split = file.split('_')
+            try:
+                suffix_split = suffix_split[1].split('.')
+                suffix_split = suffix_split[0]
+            except IndexError:
+                suffix_split = ''
+            df['Year'] = suffix[suffix_split]
+
+            df_list.append(df)
+        else:
+            pass
+
+    combined_df = pd.concat(df_list)
+
+    df_list = []
+    # Hack fix, just redo the whole thing for the physical activity file.
+    for file in os.listdir(path=path2):
+        if file.endswith('.XPT'):
+            file_path = os.path.join(path2, file)
+
+            df = pd.read_sas(file_path)
+            try:
+                df = df[~df['PAQ670'].isna()]
+            except KeyError:
+                df = df[~df['PAD320'].isna()]
+
+            suffix_split = file.split('_')
+            try:
+                suffix_split = suffix_split[1].split('.')
+                suffix_split = suffix_split[0]
+            except IndexError:
+                suffix_split = ''
+            df['Year'] = suffix[suffix_split]
+
+            df_list.append(df)
+
+    combined_df2 = pd.concat(df_list)
+
+    demo_list = []
+    for file in os.listdir(path=path3):
+        if file.endswith('.XPT'):
+            file_path = os.path.join(path3, file)
+
+            # Load the XPT file
+            df = pd.read_sas(file_path)
+
+            suffix_split = file.split('_')
+            try:
+                suffix_split = suffix_split[1].split('.')
+                suffix_split = suffix_split[0]
+            except IndexError:
+                suffix_split = ''
+            df['Year'] = suffix[suffix_split]
+            demo_list.append(df)
+
+    demo_df = pd.concat(demo_list)
+
+    merge = pd.merge(combined_df, combined_df2, on=['SEQN'], how='outer')
+    merge = pd.merge(merge, demo_df, on=['SEQN'], how='left')
+    merge = merge.set_index('SEQN')
+    merge.to_csv('../files/NHANES_Background.csv')
+
+
+def create_temp_data():
     suffix = {
         '': 1999, 'B': 2001, 'C': 2003, 'D': 2005, 'E': 2007, 'F': 2009, 'G': 2011, 'H': 2013,
         'I': 2015, 'J': 2017
@@ -58,3 +125,6 @@ if __name__ == '__main__':
     today = date.today()
 
     final_df.to_csv(f'./outputs/NHANES_dataset_{today}.csv', index=False)
+
+if __name__ == '__main__':
+    create_nhanes()

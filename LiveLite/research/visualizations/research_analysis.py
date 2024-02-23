@@ -7,60 +7,20 @@ from plotly.subplots import make_subplots
 import os
 
 
-def violin_plot_manager(plot_type='BMI', years=None):
+def violin_plot_manager(data, plot_type='BMI', years=None):
     if years is None:
         years = [1999, 2001, 2003, 2005, 2007, 2009, 2011, 2013, 2015, 2017]
     
     if not isinstance(plot_type, str):
         raise ValueError("Plot Type Argument must be a string.")
 
-    # Load Data
-    if plot_type == 'BMI' or plot_type == 'Weight':
-        path = './data/files/NHANES/BMX/'
-    elif plot_type == 'Activity':
-        path = './data/files/NHANES/PAQ/'
-    else:
-        raise ValueError("Not valid plot_type.")
     
     suffix = {'': 1999, 'B': 2001, 'C': 2003, 'D': 2005, 'E': 2007, 'F': 2009, 'G': 2011, 'H': 2013, 'I': 2015, 'J': 2017}
 
-    df_list = []
-    for file in os.listdir(path=path):
-        if file.endswith('.XPT'):
-            file_path = os.path.join(path, file)
-
-            # Load the XPT file
-            df = pd.read_sas(file_path)
-
-            if plot_type == 'BMI':
-                df = df[~df['BMXWT'].isna()]
-                df = df[~df['BMXHT'].isna()]
-                df['BMI'] = df['BMXWT'] / ((df['BMXHT'] / 100) ** 2)
-            elif plot_type == 'Weight':
-                df = df[~df['BMXWT'].isna()]
-            elif plot_type == 'Activity':
-                df = df[~df['PAQ670'].isna()]
-                df = df[~df['PAQ670'].isin([77, 99, '.'])]
-            else:
-                pass
-
-            suffix_split = file.split('_')
-            try:
-                suffix_split = suffix_split[1].split('.')
-                suffix_split = suffix_split[0]
-            except IndexError:
-                suffix_split = ''
-            df['Year'] = suffix[suffix_split]
-
-            df_list.append(df)
-        else:
-            pass
-
-    combined_df = pd.concat(df_list)
-    combined_df = combined_df[combined_df['Year'].isin(years)]
+    data = data[data['Year'].isin(years)]
 
     # Create Figure
-    fig = px.violin(combined_df, x='Year', y=plot_type, box=True, points=False)
+    fig = px.violin(data, x='Year', y=plot_type, box=True, points=False)
 
     # Customize axis labels and titles based on plot type
     if plot_type == 'BMI':
@@ -79,60 +39,31 @@ def violin_plot_manager(plot_type='BMI', years=None):
     return fig
 
 
-def background_information_nhanes(years=None):
+def background_information_nhanes(data, years=None):
     if years is None:
         years = [1999, 2001, 2003, 2005, 2007, 2009, 2011, 2013, 2015, 2017]
 
     suffix = {'': 1999, 'B': 2001, 'C': 2003, 'D': 2005, 'E': 2007, 'F': 2009, 'G': 2011, 'H': 2013, 'I': 2015, 'J': 2017}
 
-    path = './data/files/NHANES/BMX/'
-    df_list = []
-    for file in os.listdir(path=path):
-        if file.endswith('.XPT'):
-            file_path = os.path.join(path, file)
-
-            # Load the XPT file
-            df = pd.read_sas(file_path)
-
-            df = df[~df['BMXWT'].isna()]
-            df = df[~df['BMXHT'].isna()]
-
-            suffix_split = file.split('_')
-            try:
-                suffix_split = suffix_split[1].split('.')
-                suffix_split = suffix_split[0]
-            except IndexError:
-                suffix_split = ''
-
-            df['Year'] = suffix[suffix_split]
-            df['BMI'] = df['BMXWT'] / ((df['BMXHT'] / 100) ** 2)
-            df['Overweight (including obesity)'] = df['BMI'] >= 25
-            df['Obese'] = df['BMI'] >= 30
-
-            df_list.append(df)
-        else:
-            pass
-
-    combined_df = pd.concat(df_list)
-    combined_df = combined_df[combined_df['Year'].isin(years)]
+    data = data[data['Year'].isin(years)]
     
     # Create subplots with two plots side by side
     fig, ax = plt.subplots(1, 2, figsize=(15, 6))
 
     # Plot proportion of individuals who are obese
-    sns.lineplot(data=combined_df, x='Year', y='Obese', ax=ax[0])
+    sns.lineplot(data=data, x='Year', y='Obese', ax=ax[0])
     ax[0].set_title('Proportion of Individuals Obese by Year')
     ax[0].set_xlabel('Year')
     ax[0].set_ylabel('Proportion Obese')
 
     # Plot proportion of individuals who are overweight (including obesity)
-    sns.lineplot(data=combined_df, x='Year', y='Overweight (including obesity)', ax=ax[1])
+    sns.lineplot(data=data, x='Year', y='Overweight (including obesity)', ax=ax[1])
     ax[1].set_title('Proportion of Individuals Overweight (including obesity) by Year')
     ax[1].set_xlabel('Year')
     ax[1].set_ylabel('Proportion Overweight (including obesity)')
 
     # Customize x-axis 
-    unique_years = sorted(combined_df['Year'].unique())
+    unique_years = sorted(data['Year'].unique())
     for axis in ax:
         axis.set_xticks(unique_years)
         axis.set_xticklabels(unique_years, rotation=45)
@@ -207,7 +138,7 @@ def background_information_ihme(years=None):
     return fig
 
 
-def obesity_trends(years=None):
+def obesity_trends(data, years=None):
     """
     Returns a line plot which visualizes obesity
     :param years:
@@ -221,74 +152,19 @@ def obesity_trends(years=None):
         'I': 2015, 'J': 2017
     }
 
-    path = './data/files/NHANES/BMX/'
-    df_list = []
-    for file in os.listdir(path=path):
-        if file.endswith('.XPT'):
-            file_path = os.path.join(path, file)
-
-            # Load the XPT file
-            df = pd.read_sas(file_path)
-
-            df = df[~df['BMXWT'].isna()]
-            df = df[~df['BMXHT'].isna()]
-
-            suffix_split = file.split('_')
-            try:
-                suffix_split = suffix_split[1].split('.')
-                suffix_split = suffix_split[0]
-            except IndexError:
-                suffix_split = ''
-
-            df['Year'] = suffix[suffix_split]
-            df['BMI'] = df['BMXWT'] / ((df['BMXHT'] / 100) ** 2)
-            df['Overweight (including obesity)'] = df['BMI'] >= 25
-            df['Obese'] = df['BMI'] >= 30
-
-            df_list.append(df)
-        else:
-            pass
-
-    combined_df = pd.concat(df_list)
-    combined_df = combined_df[combined_df['Year'].isin(years)]
-
-    # Import Demographics
-    path = './data/files/NHANES/DEMO/'
-    demo_list = []
-    for file in os.listdir(path=path):
-        if file.endswith('.XPT'):
-            file_path = os.path.join(path, file)
-
-            # Load the XPT file
-            df = pd.read_sas(file_path)
-
-            suffix_split = file.split('_')
-            try:
-                suffix_split = suffix_split[1].split('.')
-                suffix_split = suffix_split[0]
-            except IndexError:
-                suffix_split = ''
-            df['Year'] = suffix[suffix_split]
-            demo_list.append(df)
-        else:
-            pass
-
-    demo_df = pd.concat(demo_list)
-    demo_df = demo_df[demo_df['Year'].isin(years)]
-
-    combined_df = pd.merge(combined_df, demo_df, on=['SEQN', 'Year'], how='outer')
+    data = data[data['Year'].isin(years)]
 
     # Create Figure of Prop Obese
     fig = plt.figure(figsize=(10, 6))
     
-    sns.lineplot(data=combined_df, x='Year', y='BMI', hue='RIAGENDR', palette='viridis')
+    sns.lineplot(data=data, x='Year', y='BMI', hue='RIAGENDR', palette='viridis')
     plt.xlabel('Year')
     plt.ylabel('Proportion Obese')
     plt.title('Comparison of Proportion of Individuals Obese by Year')
 
     # Adjust x-axis to show only discrete years
     # Get unique sorted years from the dataframe
-    unique_years = sorted(combined_df['Year'].unique())
+    unique_years = sorted(data['Year'].unique())
     # Set x ticks and labels to the unique years
     plt.xticks(unique_years, rotation=45)
 
