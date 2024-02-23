@@ -114,8 +114,8 @@ def user_input_mapping(user_data_dict):
 # data = {
 #         'age': 25,
 #         'sex': 'Male',
-#         'height': 175.5,
-#         'weight': 70.3,
+#         'height': 70.5,
+#         'weight': 100,
 #         'ethnicity': 'Hispanic',
 #         'activity_level': 'Moderately Active',
 #         'dietary_preference': 'Non Vegetarian',
