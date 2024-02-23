@@ -95,8 +95,8 @@ def user_input_mapping(user_data_dict):
 
     converted_data['internal_age'] = convert_age(user_data_dict['age'])
     converted_data['internal_sex'] = convert_sex(user_data_dict['sex'])
-    converted_data['internal_height'] = float(user_data_dict['height'])
-    converted_data['internal_weight'] = float(user_data_dict['weight'])
+    converted_data['internal_height'] = float(user_data_dict['height']*2.54)
+    converted_data['internal_weight'] = float(user_data_dict['weight']*0.45359237)
     converted_data['internal_ethnicity'] = convert_ethnicity(user_data_dict['ethnicity'])
     converted_data['internal_activity_level'] = convert_activity_level(user_data_dict['activity_level'])
     converted_data['internal_dietary_preference'] = convert_dietary_preference(user_data_dict['dietary_preference'])
