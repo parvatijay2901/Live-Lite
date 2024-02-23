@@ -54,7 +54,7 @@ def user_input_mapping(user_data_dict):
         }
         dietary_lower = dietary_preference.lower()
         if dietary_lower in dietary_map:
-            return dietary_map[dietary_lower]
+            return int(dietary_map[dietary_lower])
         else:
             raise ValueError("Invalid value for dietary preference")
 
@@ -76,7 +76,7 @@ def user_input_mapping(user_data_dict):
         }
         health_lower = health_condition.lower()
         if health_lower in health_map:
-            return health_map[health_lower]
+            return int(health_map[health_lower])
         else:
             raise ValueError("Invalid value for health condition")
 
@@ -89,30 +89,29 @@ def user_input_mapping(user_data_dict):
         }
         mental_lower = mental_health.lower()
         if mental_lower in mental_map:
-            return mental_map[mental_lower]
+            return int(mental_map[mental_lower])
         else:
             raise ValueError("Invalid value for mental health")
 
-    converted_data['internal_age'] = convert_age(data['age'])
-    converted_data['internal_sex'] = convert_sex(data['sex'])
-    converted_data['internal_height'] = float(data['height'])
-    converted_data['internal_weight'] = float(data['weight'])
-    converted_data['internal_ethnicity'] = convert_ethnicity(data['ethnicity'])
-    converted_data['internal_activity_level'] = convert_activity_level(data['activity_level'])
-    converted_data['internal_dietary_preference'] = convert_dietary_preference(data['dietary_preference'])
-    converted_data['internal_smoke_cig'] = int(data['smoke_cig'].lower() == 'yes')
-    converted_data['internal_mental_health'] = convert_mental_health(data['mental_health'])
-    converted_data['internal_sleep_hrs'] = convert_sleep_hours(float(data['sleep_hrs']))
-    converted_data['internal_health_condition'] = convert_health_condition(data['health_condition'])
-    converted_data['internal_diet_condition'] = convert_health_condition(data['diet_condition'])
-    converted_data['internal_Poor_apetitte_overeating'] = convert_mental_health(data['Poor_apetitte_overeating'])
+    converted_data['internal_age'] = convert_age(user_data_dict['age'])
+    converted_data['internal_sex'] = convert_sex(user_data_dict['sex'])
+    converted_data['internal_height'] = float(user_data_dict['height'])
+    converted_data['internal_weight'] = float(user_data_dict['weight'])
+    converted_data['internal_ethnicity'] = convert_ethnicity(user_data_dict['ethnicity'])
+    converted_data['internal_activity_level'] = convert_activity_level(user_data_dict['activity_level'])
+    converted_data['internal_dietary_preference'] = convert_dietary_preference(user_data_dict['dietary_preference'])
+    converted_data['internal_smoke_cig'] = int(user_data_dict['smoke_cig'].lower() == 'yes')
+    converted_data['internal_mental_health'] = convert_mental_health(user_data_dict['mental_health'])
+    converted_data['internal_sleep_hrs'] = convert_sleep_hours(float(user_data_dict['sleep_hrs']))
+    converted_data['internal_health_condition'] = convert_health_condition(user_data_dict['health_condition'])
+    converted_data['internal_diet_condition'] = convert_health_condition(user_data_dict['diet_condition'])
+    converted_data['internal_Poor_apetitte_overeating'] = convert_mental_health(user_data_dict['Poor_apetitte_overeating'])
 
     return converted_data
 
 
 # # Example usage
-# if __name__ == "__main__":
-#     data = {
+# data = {
 #         'age': 25,
 #         'sex': 'Male',
 #         'height': 175.5,
@@ -128,5 +127,5 @@ def user_input_mapping(user_data_dict):
 #         'Poor_apetitte_overeating': 'Not at all'
 #     }
 
-#     converted_data = user_input_mapping(data)
-#     print(converted_data)
+# converted_data = user_input_mapping(data)
+# print(converted_data)
