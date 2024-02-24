@@ -21,22 +21,20 @@ For example,
 3. Create a tool that provides personalized lifestyle suggestions (particularly diet and physical activity) for individuals with obesity/high BMI levels.
 
 ### Tool Features
-1. Tool will show case the visualizations asnwering our resrearch questions, to educate users about obesity.
+1. Tool will show case the visualizations answering our research questions, to educate users about obesity.
 2. Tool will let users input their personal data, for example:
    - BMI (Height, Weight)
    - Demographic information (Sex at Birth, Age)
    - Dietary choices
    - Physical activity levels
    - Other lifestyle factors (for example, sleeping habits)
-3. Based on the input, and the model built, tool will predict the obesity risk, and make recommendations for healthy lifetsyle. The recommendations inlcude
+3. Based on the input, and the model built, tool will predict the obesity risk, and make recommendations for healthy lifestyle. The recommendations include
    - Expected calorie intake
    - Right food choices
    - Physical activities (running, swimming etc)
 4. Extended features (These features are nice to have and will be delivered based on time & resource availability)
    - Along with food choices, recommend healthy recipes that includes the raw ingredient. 
-   - Consider other health factors about users such as known conditions like pregnancy, diabetes, physical disbaility etc.
-
-
+   - Consider other health factors about users such as known conditions like pregnancy, diabetes, physical disability etc.
 
 ## Data Sources
 - [National Health and Nutrition Examination Survey (NHANES)](https://wwwn.cdc.gov/nchs/nhanes/Default.aspx)
