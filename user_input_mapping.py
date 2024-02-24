@@ -1,22 +1,52 @@
+"""_summary_
+"""
 def user_input_mapping(user_data_dict):
     converted_data = {}
 
     def convert_age(age):
-        if age >= 80:
+        """_summary_
+
+        Args:
+            age (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """    
+        if age > 80:
             return 80
-        else:
-            return int(age)
+        return int(age)
 
     def convert_sex(sex):
+        """_summary_
+
+        Args:
+            sex (_type_): _description_
+
+        Raises:
+            ValueError: _description_
+
+        Returns:
+            _type_: _description_
+        """    
         if sex.lower() == 'male':
             return 1
         elif sex.lower() == 'female':
             return 0
-        else:
-            raise ValueError("Invalid value for sex")
+        raise ValueError("Invalid value for sex")
 
 
     def convert_ethnicity(ethnicity):
+        """_summary_
+
+        Args:
+            ethnicity (_type_): _description_
+
+        Raises:
+            ValueError: _description_
+
+        Returns:
+            _type_: _description_
+        """    
         ethnicity_map = {
             'mexican american': 1,
             'hispanic': 2,
@@ -29,10 +59,20 @@ def user_input_mapping(user_data_dict):
         ethnicity_lower = ethnicity.lower()
         if ethnicity_lower in ethnicity_map:
             return int(ethnicity_map[ethnicity_lower])
-        else:
-            raise ValueError("Invalid value for ethnicity")
+        raise ValueError("Invalid value for ethnicity")
 
     def convert_activity_level(activity_level):
+        """_summary_
+
+        Args:
+            activity_level (_type_): _description_
+
+        Raises:
+            ValueError: _description_
+
+        Returns:
+            _type_: _description_
+        """    
         activity_map = {
             'sedentary': 1,
             'minimally active': 2,
@@ -47,6 +87,17 @@ def user_input_mapping(user_data_dict):
             raise ValueError("Invalid value for activity level")
 
     def convert_dietary_preference(dietary_preference):
+        """_summary_
+
+        Args:
+            dietary_preference (_type_): _description_
+
+        Raises:
+            ValueError: _description_
+
+        Returns:
+            _type_: _description_
+        """    
         dietary_map = {
             'vegan': 1,
             'vegeterian': 2,
@@ -59,6 +110,14 @@ def user_input_mapping(user_data_dict):
             raise ValueError("Invalid value for dietary preference")
 
     def convert_sleep_hours(sleep_hours):
+        """_summary_
+
+        Args:
+            sleep_hours (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """    
         if sleep_hours < 2:
             return 2
         elif sleep_hours > 14:
@@ -67,6 +126,17 @@ def user_input_mapping(user_data_dict):
             return int(sleep_hours)
 
     def convert_health_condition(health_condition):
+        """_summary_
+
+        Args:
+            health_condition (_type_): _description_
+
+        Raises:
+            ValueError: _description_
+
+        Returns:
+            _type_: _description_
+        """    
         health_map = {
             'excellent': 1,
             'very good': 2,
@@ -81,6 +151,27 @@ def user_input_mapping(user_data_dict):
             raise ValueError("Invalid value for health condition")
 
     def convert_mental_health(mental_health):
+        """_summary_
+
+        Args:
+            mental_health (_type_): _description_
+
+        Raises:
+            ValueError: _description_
+
+        Returns:
+            _type_: _description_
+        """        """_summary_
+
+        Args:
+            mental_health (_type_): _description_
+
+        Raises:
+            ValueError: _description_
+
+        Returns:
+            _type_: _description_
+        """    
         mental_map = {
             'not at all': 0,
             'several days': 1,
@@ -108,24 +199,3 @@ def user_input_mapping(user_data_dict):
     converted_data['internal_Poor_apetitte_overeating'] = convert_mental_health(user_data_dict['Poor_apetitte_overeating'])
 
     return converted_data
-
-
-# # Example usage
-# data = {
-#         'age': 25,
-#         'sex': 'Male',
-#         'height': 70.5,
-#         'weight': 100,
-#         'ethnicity': 'Hispanic',
-#         'activity_level': 'Moderately Active',
-#         'dietary_preference': 'Non Vegetarian',
-#         'smoke_cig': 'No',
-#         'mental_health': 'Several days',
-#         'sleep_hrs': 7,
-#         'health_condition': 'Good',
-#         'diet_condition': 'Good',
-#         'Poor_apetitte_overeating': 'Not at all'
-#     }
-
-# converted_data = user_input_mapping(data)
-# print(converted_data)
