@@ -86,6 +86,7 @@ def create_nhanes():
     merge = pd.merge(combined_df, combined_df2, on=['SEQN'], how='outer')
     merge = pd.merge(merge, demo_df, on=['SEQN'], how='left')
     merge = merge.set_index('SEQN')
+    merge.to_parquet('../files/NHANES_Background.parquet')
     merge.to_csv('../files/NHANES_Background.csv')
 
 
