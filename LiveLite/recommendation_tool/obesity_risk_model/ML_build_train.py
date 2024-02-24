@@ -10,7 +10,7 @@ from sklearn.utils import class_weight
 import joblib
 
 # Load data
-data = pd.read_csv('ML_input.csv')
+data = pd.read_csv('ml_input.csv')
 X = data.drop(['SEQN', 'BMXHT', 'BMXWT','IsObese'], axis=1)
 y = data['IsObese']
 
