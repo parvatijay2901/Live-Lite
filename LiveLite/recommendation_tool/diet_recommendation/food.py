@@ -7,12 +7,12 @@ import numpy as np
 def recommendedProtein(age_in,gender_in):
     if (age_in<9) & (age_in>100):
         return None
-    if (gender_in != "m") & (gender_in != "f"):
+    if (gender_in != 0) & (gender_in != 1):
         return None
     min = 0
     max = 0
 
-    if gender_in =="f":
+    if gender_in ==0:
         if 9 <= age_in <= 13:
             min =4
             max =6
@@ -23,7 +23,7 @@ def recommendedProtein(age_in,gender_in):
             min =5
             max =6
 
-    if gender_in =="m":
+    if gender_in ==1:
         if 9 <= age_in <= 13:
             min = 5
             max = 6.5
@@ -42,19 +42,19 @@ def recommendedProtein(age_in,gender_in):
 
     return(round(min*28.34), round(max*28.34), "grams")
 
-print(recommendedProtein(23,"m"))
+#print(recommendedProtein(23,1))
 
 def recommendedGrains(age_in,gender_in):
     if (age_in<9) & (age_in>100):
         return None
-    if (gender_in != "m") & (gender_in != "f"):
+    if (gender_in != 1) & (gender_in != 0):
         return None
     min_g = 0
     min_wg =0 
     max_g = 0
     max_wg = 0
 
-    if gender_in =="f":
+    if gender_in ==0:
         if 9 < age_in <= 13:
             min_g = 5
             min_wg =2.5
@@ -73,7 +73,7 @@ def recommendedGrains(age_in,gender_in):
             max_g = 7
             max_wg = 3.5
 
-    if gender_in =="m":
+    if gender_in ==1:
         if 9 < age_in <= 13:
             min_g = 5
             min_wg =3
@@ -123,9 +123,9 @@ def recommendedDairy():
     return(2,3,"cups")  
 
 def recommendedFruits(gender_in):
-    if gender_in == "f":
+    if gender_in == 0:
         return(1.5,2,"cups")
-    if gender_in =="m":
+    if gender_in ==1:
         return(2,2.5,"cups")
     else:
         return None
@@ -133,12 +133,12 @@ def recommendedFruits(gender_in):
 def recommendedVegetables(age_in,gender_in):
     if (age_in<9) & (age_in>100):
         return None
-    if (gender_in != "m") & (gender_in != "f"):
+    if (gender_in != 0) & (gender_in != 1):
         return None
     min = 0
     max = 0
 
-    if gender_in =="m":
+    if gender_in ==1:
         if 18<= age_in <= 60:
             min = 3
             max = 4
@@ -146,7 +146,7 @@ def recommendedVegetables(age_in,gender_in):
         if age_in > 60:
             min = 2.5
             max = 3.5
-    if gender_in == "f":
+    if gender_in == 0:
         if 18<= age_in <= 30:
             min = 2.5
             max = 3
@@ -208,8 +208,8 @@ def micro_nutrients(age, gender):
     return df
 
 
-#print(macro_nutrients_data(24,"f", 2400))
-#print(micro_nutrients(24, "f"))
+#print(macro_nutrients_data(24,0, 2400))
+#print(micro_nutrients(24, 0))
 '''
 
 #sample tests

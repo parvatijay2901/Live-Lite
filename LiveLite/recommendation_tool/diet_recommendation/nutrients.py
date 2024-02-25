@@ -13,7 +13,7 @@ def dairy_protein_food(data):
 
     return(out)
 
-#print(dairy_protein_food(filter_data).head())
+print(dairy_protein_food(filter_data).head())
 
 def egg_protein_food(data):
     out = data[(data["FoodGroup"]=="Dairy and Egg Products") & (data["Descrip"].str.contains('Egg')) & (data["Protein_g"]>0)]
