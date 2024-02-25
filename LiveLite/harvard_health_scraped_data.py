@@ -66,15 +66,38 @@ all_data_processed = []
 for data in all_data:
     activity_type, activity, cal_125lbs, cal_155lbs, cal_185lbs = data
     
-    # Calculate calories per pound using average weight
-    cal_per_lb_avg = ((data[2]/125) + (data[3]/155) + (data[4]/185)) / 3 
-    cal_per_kg_avg = cal_per_lb_avg/0.453592
+    # Initialize variables to store sum and count of non-zero values
+    sum_cal_per_lb = 0
+    count_nonzero = 0
+
+    # Calculate calories per pound using average weight, excluding 0 values
+    if cal_125lbs != 0:
+        sum_cal_per_lb += cal_125lbs / 125
+        count_nonzero += 1
+    if cal_155lbs != 0:
+        sum_cal_per_lb += cal_155lbs / 155
+        count_nonzero += 1
+    if cal_185lbs != 0:
+        sum_cal_per_lb += cal_185lbs / 185
+        count_nonzero += 1
+    
+    # Calculate average calories per pound
+    if count_nonzero != 0:
+        cal_per_lb_avg = sum_cal_per_lb / count_nonzero
+        cal_per_kg_avg = cal_per_lb_avg / 0.453592
+    else:
+        # If all values are zero, set averages to 0
+        cal_per_lb_avg = 0
+        cal_per_kg_avg = 0
+
     all_data_processed.append((activity_type, activity, cal_125lbs, cal_155lbs, cal_185lbs, cal_per_lb_avg, cal_per_kg_avg))
 
-
+# Remove records with 0 cal
 for data in all_data_processed:
     if data[-1]==0:
-        all_data_processed.remove(data)   
+        all_data_processed.remove(data)
+    if data[1]== "Sleeping":
+        all_data_processed.remove(data)
 
 # Write the data into a CSV file
 with open("calories_burned_30_minutes.csv", "w", newline="") as csvfile:
