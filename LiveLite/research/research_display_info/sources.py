@@ -14,10 +14,16 @@ def display_sources():
                 Years of life lost and healthy life-years lost from diabetes and cardiovascular disease in overweight and 
                 obese people: A modelling study. The Lancet. Diabetes & Endocrinology, 3(2), 114–122. 
                 [https://doi.org/10.1016/S2213-8587(14)70229-3](https://doi.org/10.1016/S2213-8587(14)70229-3)""")
+    st.markdown("""Klein, S., Fontana, L., Young, V. L., Coggan, A. R., Kilo, C., Patterson, B. W., & Mohammed, B. S. (2004). 
+                    Absence of an effect of liposuction on insulin action and risk factors for coronary heart disease. 
+                    The New England Journal of Medicine, 350(25), 2549–2557. https://doi.org/10.1056/NEJMoa033179""")
     st.markdown("""Popkin, B. M., Du, S., Green, W. D., Beck, M. A., Algaith, T., Herbst, C. H., Alsukait, R. F., Alluhidan, 
                 M., Alazemi, N., & Shekar, M. (2020). Individuals with obesity and COVID-19: A global perspective on the 
                 epidemiology and biological relationships. Obesity Reviews: An Official Journal of the International Association 
                 for the Study of Obesity, 21(11), e13128. [https://doi.org/10.1111/obr.13128](https://doi.org/10.1111/obr.13128)""")
+    st.markdown("""Piercy, K. L., Troiano, R. P., Ballard, R. M., Carlson, S. A., Fulton, J. E., Galuska, D. A., George,
+                 S. M., & Olson, R. D. (2018). The Physical Activity Guidelines for Americans. JAMA, 320(19), 
+                 2020–2028. https://doi.org/10.1001/jama.2018.14854""")
     st.markdown("""Prospective Studies Collaboration. (2009). Body-mass index and cause-specific mortality in 900 000 adults: 
                 Collaborative analyses of 57 prospective studies. Lancet, 373(9669), 1083–1096.
                 [https://doi.org/10.1016/S0140-6736(09)60318-4](https://doi.org/10.1016/S0140-6736(09)60318-4)""")
