@@ -10,13 +10,13 @@ def display_ihme_data_analysis(data, years):
     
 def display_nhanes_obesity_overweight_analysis(data):
     fig = research.plot_obesity_overweight_trends(data) 
-    st.pyplot(fig) # Seaborn -> plotly
+    st.plotly_chart(fig) # Seaborn -> plotly
     st.markdown("""In the figure above, we can observe that, in the United States alone, the proportion of 
                 overweight (including obese) and obese individuals has rapidly increased since 1999.""")
     
 def display_obesity_trends(data):
     fig = research.plot_obesity_trends(data)
-    st.pyplot(fig) # Seaborn -> plotly
+    st.plotly_chart(fig) # Seaborn -> plotly
     st.markdown("From the figure above, we can observe that for both males and females, obesity has only increased since 1999.")    
 
 def display_trends_over_time(data, years):
