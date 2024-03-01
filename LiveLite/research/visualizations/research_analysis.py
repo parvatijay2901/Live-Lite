@@ -1,6 +1,13 @@
 """
 research_analysis
 
+Is an aggregated python file that contains the identical functions
+seen in:
+    - compare_trends_over_time.py
+    - ihme_data_analysis.py
+    - nhanes_obesity_overweight_analysis.py
+    - obesity_trends_analysis.py
+
 Provides:
    1. Functions that generate informative plots for the information page.
 """

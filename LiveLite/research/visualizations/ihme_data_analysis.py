@@ -63,12 +63,30 @@ def process_ihme_data(ihme, years=None, highlighted_risk_factor="high body-mass 
 def plot_ihme_data(data, years, highlighted_risk_factor="high body-mass index"):
     """
     Plots the ihme data for the given years and highlights the designated risk factor.
+    Raises Type errors if:
+    - data is not a dataframe.
+    - years is not a list.
+    - highlighted_risk_factor is not a str.
     :param data: Dataframe of data to plot.
     :param years: List of years to plot.
     :param highlighted_risk_factor: Default=high body-mass index. Designates which factor to
     highlight in the plot.
     :return: Figure object.
     """
+
+    if not isinstance(data, pd.DataFrame):
+        raise TypeError(
+            "Data should be a dataframe."
+        )
+    if not isinstance(years, list):
+        raise TypeError(
+            "Years should be a list."
+        )
+    if not isinstance(highlighted_risk_factor, str):
+        raise TypeError(
+            "Highlighted risk factor should be str."
+        )
+
     data_summary, years, highlighted_risk_factor = process_ihme_data(data, years)
 
     fig = make_subplots(

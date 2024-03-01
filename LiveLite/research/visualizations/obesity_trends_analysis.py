@@ -10,6 +10,8 @@ import plotly.express as px
 def plot_obesity_trends(data, years=None):
     """
     Returns a line plot which visualizes obesity trends over time using NHANES data with Plotly.
+    Raises value error if:
+    - The years are not valid years defined in NHANES.
     :param data: DataFrame containing the data.
     :param years: Optional; List of years to plot.
     :return: Plotly Figure object.

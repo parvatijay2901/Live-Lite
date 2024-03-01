@@ -4,11 +4,12 @@ NHANES Obesity Overweight Analysis
 Provides:
     1. Function that plots NHANES proportion of obese and overweight over time.
 """
+import pandas as pd
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 
-def background_information_nhanes(data, years=None):
+def plot_obesity_overweight_trends(data, years=None):
     """
     Generates a line plot comparing the proportion of obese
      and overweight individuals over specified years.
@@ -20,8 +21,17 @@ def background_information_nhanes(data, years=None):
 
     if years is not None:
         years = years_default
+    elif isinstance(years, list):
+        raise TypeError(
+            "Years must be a list."
+        )
     else:
         years = years_default
+
+    if not isinstance(data, pd.DataFrame):
+        raise TypeError(
+            "Data must be a dataframe."
+        )
 
     if list(set(years).difference(years_default)):
         raise ValueError("Valid years start from 1999 and increment by 2 years.")
