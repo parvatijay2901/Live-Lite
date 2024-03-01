@@ -5,8 +5,6 @@ Provides:
    1. Functions that generate informative plots for the information page.
 """
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
@@ -14,7 +12,8 @@ from plotly.subplots import make_subplots
 
 def violin_plot_manager(data, plot_type='BMI', years=None):
     """
-    Creates a violin plot which plots the distribution of the variable specified by plot_type of specified years.
+    Creates a violin plot which plots the distribution of the variable
+     specified by plot_type of specified years.
     :param data: Combined processed NHANES data.
     :param plot_type: String specifying the variable to plot.
     :param years: List of years to plot.
@@ -29,7 +28,7 @@ def violin_plot_manager(data, plot_type='BMI', years=None):
         years = years_default
 
     if list(set(years).difference(years_default)):
-        raise ValueError("Years contains non-valid years. Valid years start from 1999 and increment by 2 years.")
+        raise ValueError("Valid years start from 1999 and increment by 2 years.")
 
     if not isinstance(plot_type, str):
         raise ValueError("Plot Type Argument must be a string.")
@@ -59,7 +58,8 @@ def violin_plot_manager(data, plot_type='BMI', years=None):
 
 def background_information_nhanes(data, years=None):
     """
-    Generates a line plot comparing the proportion of obese and overweight individuals over specified years.
+    Generates a line plot comparing the proportion of obese
+     and overweight individuals over specified years.
     :param data: Combined processed NHANES dataframe.
     :param years: List of years.
     :return: Figure object.
@@ -72,34 +72,56 @@ def background_information_nhanes(data, years=None):
         years = years_default
 
     if list(set(years).difference(years_default)):
-        raise ValueError("Years contains non-valid years. Valid years start from 1999 and increment by 2 years.")
+        raise ValueError("Valid years start from 1999 and increment by 2 years.")
 
     data = data[data['Year'].isin(years)]
 
     # Create subplots with two plots side by side
-    fig, ax = plt.subplots(1, 2, figsize=(15, 6))
+    fig = make_subplots(
+        rows=1, cols=2,
+        subplot_titles=(
+            'Proportion of Individuals Obese by Year',
+            'Proportion of Individuals Overweight (including obesity) by Year'
+        )
+    )
 
     # Plot proportion of individuals who are obese
-    sns.lineplot(data=data, x='Year', y='Obese', ax=ax[0])
-    ax[0].set_title('Proportion of Individuals Obese by Year')
-    ax[0].set_xlabel('Year')
-    ax[0].set_ylabel('Proportion Obese')
+    fig.add_trace(
+        go.Scatter(
+            x=data['Year'], y=data['Obese'], mode='lines', name='Obese'
+        ),
+        row=1,
+        col=1
+    )
 
     # Plot proportion of individuals who are overweight (including obesity)
-    sns.lineplot(data=data, x='Year', y='Overweight (including obesity)', ax=ax[1])
-    ax[1].set_title('Proportion of Individuals Overweight (including obesity) by Year')
-    ax[1].set_xlabel('Year')
-    ax[1].set_ylabel('Proportion Overweight (including obesity)')
+    fig.add_trace(
+        go.Scatter(
+            x=data['Year'], y=data['Overweight (including obesity)'],
+            mode='lines',
+            name='Overweight (including obesity)'
+        ),
+        row=1,
+        col=2
+    )
 
-    # Customize x-axis
-    unique_years = sorted(data['Year'].unique())
-    for axis in ax:
-        axis.set_xticks(unique_years)
-        axis.set_xticklabels(unique_years, rotation=45)
-        axis.yaxis.grid(True)
-        axis.grid(linestyle='-', linewidth='0.5', color='gray')
+    fig.update_xaxes(title_text='Year', row=1, col=1)
+    fig.update_yaxes(title_text='Proportion Obese', row=1, col=1)
+    fig.update_xaxes(title_text='Year', row=1, col=2)
+    fig.update_yaxes(title_text='Proportion Overweight (including obesity)', row=1, col=2)
 
-    plt.tight_layout()
+    # rotate x-axis labels
+    fig.update_xaxes(tickangle=45)
+
+    # add grid lines for better readability
+    fig.update_layout(
+        grid={'rows': 1, 'columns': 2},
+        height=600, width=1000,
+        title_text="Obesity and Overweight Trends Over Years"
+    )
+    fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor='LightPink')
+    fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='LightPink')
+
     return fig
 
 
@@ -186,38 +208,40 @@ def background_information_ihme(data, years=None):
 
 def obesity_trends(data, years=None):
     """
-    Returns a line plot which visualizes obesity trends over time using NHANES data.
-    :param years: List of years to plot.
-    :return: Figure object.
+    Returns a line plot which visualizes obesity trends over time using NHANES data with Plotly.
+    :param data: DataFrame containing the data.
+    :param years: Optional; List of years to plot.
+    :return: Plotly Figure object.
     """
     years_default = [1999, 2001, 2003, 2005, 2007, 2009, 2011, 2013, 2015, 2017]
 
-    if years is not None:
+    # If years is None, use the default years
+    if years is None:
         years = years_default
-    else:
-        years = years_default
 
-    if list(set(years).difference(years_default)):
-        raise ValueError("Years contains non-valid years. Valid years start from 1999 and increment by 2 years.")
+    # Check if all provided years are valid
+    if set(years).difference(years_default):
+        raise ValueError(
+            "Years contains non-valid years. Valid years start from 1999 and increment by 2 years."
+        )
 
-
+    # Filter the data for the selected years
     data = data[data['Year'].isin(years)]
 
-    # Create Figure of Prop Obese
-    fig = plt.figure(figsize=(10, 6))
+    # Create the Plotly figure
+    fig = px.line(data, x='Year', y='BMI', color='RIAGENDR',
+                  title='Comparison of Proportion of Individuals Obese by Year',
+                  labels={'BMI': 'Proportion Obese', 'RIAGENDR': 'Gender'})
 
-    sns.lineplot(data=data, x='Year', y='BMI', hue='RIAGENDR', palette='viridis')
-    plt.xlabel('Year')
-    plt.ylabel('Proportion Obese')
-    plt.title('Comparison of Proportion of Individuals Obese by Year')
+    # Customize the layout
+    fig.update_layout(xaxis_title='Year',
+                      yaxis_title='Proportion Obese',
+                      legend_title='Gender')
 
-    # Adjust x-axis to show only discrete years
-    # Get unique sorted years from the dataframe
-    unique_years = sorted(data['Year'].unique())
-    # Set x ticks and labels to the unique years
-    plt.xticks(unique_years, rotation=45)
+    # Rotate x-axis labels for better readability
+    fig.update_xaxes(tickangle=45)
 
-    # Add horizontal grid lines and customize grid lines (optional)
-    plt.grid(axis='y', linestyle='-', linewidth='0.5', color='gray')
+    # Add horizontal grid lines for better readability
+    fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='LightGray')
 
     return fig
