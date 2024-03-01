@@ -42,14 +42,14 @@ if view_recommendations:
         ## TO BE MODIFIED
         st.markdown("""<div style="text-align: center;"><h3 style='color:gold;'>Diet Recommendation</h3></div>""", unsafe_allow_html=True)
         project_integration.add_blank_lines()
-        st.markdown("""<div style ="text-align: center;"><p style='color:#99fadc;'>Ensure you meet the recommended daily intake levels for these macro nutrients for optimal health and performance!</p></div>""", unsafe_allow_html=True)
+        st.markdown("""<div style ="text-align: center;"><p style='color:#99fadc;'>Ensure you meet the recommended daily intake levels for these macro-nutrients for optimal health and performance!</p></div>""", unsafe_allow_html=True)
         diet_recommendation = project_integration.controller("diet_recommender")
         _, col112, _ = st.columns([1,25,1])
         with col112:
             project_integration.add_blank_lines()
             st.dataframe(diet_recommendation[0], hide_index=True)
             project_integration.add_blank_lines(2)
-        st.markdown("""<div style ="text-align: center;"><p style='color:#99fadc;'>Ensure adequate intake of these micro nutrients to support overall health and vitality!</p></div>""", unsafe_allow_html=True)
+        st.markdown("""<div style ="text-align: center;"><p style='color:#99fadc;'>Include these food groups into your diet to nourish your body with necessary micronutrients to support metabolic processes!</p></div>""", unsafe_allow_html=True)
         _, col122, _ = st.columns([1,2,1])
         with col122:
             project_integration.add_blank_lines()
