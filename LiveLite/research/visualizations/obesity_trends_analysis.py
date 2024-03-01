@@ -30,9 +30,12 @@ def plot_obesity_trends(data, years=None):
 
     # Filter the data for the selected years
     data = data[data['Year'].isin(years)]
+    proportion_data = data.groupby(['Year', 'RIAGENDR'])['BMI'].mean().reset_index()
+    proportion_data = proportion_data.rename(columns={'BMI': 'Proportion Obese'})
+
 
     # Create the Plotly figure
-    fig = px.line(data, x='Year', y='BMI', color='RIAGENDR',
+    fig = px.line(proportion_data, x='Year', y='Proportion Obese', color='RIAGENDR',
                   title='Comparison of Proportion of Individuals Obese by Year',
                   labels={'BMI': 'Proportion Obese', 'RIAGENDR': 'Gender'})
 

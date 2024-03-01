@@ -37,6 +37,13 @@ def plot_obesity_overweight_trends(data, years=None):
         raise ValueError("Valid years start from 1999 and increment by 2 years.")
 
     data = data[data['Year'].isin(years)]
+    prop_data = data.groupby('Year').agg({'Obese': 'mean', 'Overweight (including obesity)': 'mean'}).reset_index()
+
+    max_proportion = prop_data[['Obese', 'Overweight (including obesity)']].max().max()
+    min_proportion = prop_data[['Obese', 'Overweight (including obesity)']].min().min()
+
+    # Optionally, you can add a small margin to the max limit for visual aesthetics
+    max_proportion += max_proportion * 0.05
 
     # Create subplots with two plots side by side
     fig = make_subplots(
@@ -50,7 +57,7 @@ def plot_obesity_overweight_trends(data, years=None):
     # Plot proportion of individuals who are obese
     fig.add_trace(
         go.Scatter(
-            x=data['Year'], y=data['Obese'], mode='lines', name='Obese'
+            x=prop_data['Year'], y=prop_data['Obese'], mode='lines', name='Obese'
         ),
         row=1,
         col=1
@@ -59,7 +66,7 @@ def plot_obesity_overweight_trends(data, years=None):
     # Plot proportion of individuals who are overweight (including obesity)
     fig.add_trace(
         go.Scatter(
-            x=data['Year'], y=data['Overweight (including obesity)'],
+            x=prop_data['Year'], y=prop_data['Overweight (including obesity)'],
             mode='lines',
             name='Overweight (including obesity)'
         ),
@@ -67,10 +74,16 @@ def plot_obesity_overweight_trends(data, years=None):
         col=2
     )
 
+    # Customize axes and layout with the same y-axis range for both plots
+    fig.update_yaxes(title_text='Proportion', range=[min_proportion, max_proportion], row=1, col=1)
+    fig.update_yaxes(title_text='Proportion', range=[min_proportion, max_proportion], row=1, col=2)
+
+
+
     fig.update_xaxes(title_text='Year', row=1, col=1)
-    fig.update_yaxes(title_text='Proportion Obese', row=1, col=1)
+    #fig.update_yaxes(title_text='Proportion Obese', row=1, col=1)
     fig.update_xaxes(title_text='Year', row=1, col=2)
-    fig.update_yaxes(title_text='Proportion Overweight (including obesity)', row=1, col=2)
+    #fig.update_yaxes(title_text='Proportion Overweight (including obesity)', row=1, col=2)
 
     # rotate x-axis labels
     fig.update_xaxes(tickangle=45)
