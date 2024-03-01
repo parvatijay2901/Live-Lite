@@ -29,7 +29,7 @@ project_integration.add_blank_lines(2)
 
 _, col2, _ = st.columns([1, 1, 1])
 with col2: 
-    intensity = st.selectbox("Choose preferred exercise intensity level", ["Low", "Moderate", "High"])
+    intensity = st.selectbox("Choose preferred exercise intensity level", ["Moderate", "Low", "High"])
     st.session_state['preferred_exercise_intensity_level'] = intensity.lower()   
     view_recommendations = st.button("View Personalized Recommendations 🌿🏃🏼", use_container_width=True)
     project_integration.add_blank_lines(2)

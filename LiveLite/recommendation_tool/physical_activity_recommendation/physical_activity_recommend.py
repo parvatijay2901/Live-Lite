@@ -31,7 +31,7 @@ def calculate_calorie_burn(filename, weight_kg, intensity="moderate", preferred_
 
         # Calculate estimated calorie burn for the given weight input
         estimated_burn = chosen_calorie['cal_per_kg_avg'] * weight_kg
-        #print(estimated_burn)
+        # print(estimated_burn)
 
         # Create list of tuples with activity type, activity, duration, and estimated burn calories
         for idx, row in chosen_calorie.iterrows():
