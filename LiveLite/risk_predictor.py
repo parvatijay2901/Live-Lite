@@ -1,34 +1,53 @@
-""" This module 
+"""
+This module provides a function for predicting the risk of obesity 
+based on input features and saved model.
 
-    Returns:
-        _type_: _description_
+Functions:
+- risk_predict(): Predicts the risk of obesity.
+
 """
 import pandas as pd
 import joblib
+
 def risk_predict(input_list):
-    """_summary_
+    """
+    Predicts the risk of obesity based on the input factors.
 
     Args:
-        Inputlist (_type_): _description_
-
+        input_list (list): List of factors
+    Raises:
+        ValueError: If the input list is empty or if the input features
+                    are not in the expected format.
+        FileNotFoundError: If the model file is not found.
     Returns:
-        _type_: _description_
+        tuple: A tuple containing the obesity risk percentage
+               and corresponding risk color.
     """
+    if not input_list:
+        raise ValueError("Input list is empty")
+
+    # Check if input features are in the expected format
+    if not all(isinstance(feature, (int, float)) for feature in input_list):
+        raise ValueError("Input features must be numeric")
+
     # Load the trained model
-    loaded_model = joblib.load('obesity_risk_model.joblib')
+    try:
+        loaded_model = joblib.load('obesity_risk_model.joblib')
+    except FileNotFoundError as fnf:
+        raise FileNotFoundError("Model file not found") from fnf
 
     # Probability of class 1 (obese)
     new_prediction = loaded_model.predict_proba(pd.DataFrame(input_list))[:, 1]
 
-    obesityrisk = round(new_prediction[0] * 100, 1)
+    obesity_risk = round(new_prediction[0] * 100, 1)
 
-    if 0 <= obesityrisk <= 25:
+    if 0 <= obesity_risk <= 25:
         color = 'Blue'  # Low risk
-    elif 25 < obesityrisk <= 50:
+    elif 25 < obesity_risk <= 50:
         color = 'Green'  # Moderate risk
-    elif 50 < obesityrisk <= 75:
+    elif 50 < obesity_risk <= 75:
         color = 'Yellow'  # High risk
     else:
         color = 'Red'  # Very high risk
 
-    return obesityrisk, color
+    return obesity_risk, color
