@@ -92,12 +92,13 @@ def plot_ihme_data(data, years, highlighted_risk_factor="high body-mass index"):
     fig = make_subplots(
         rows=1, cols=len(years),
         subplot_titles=[f'Deaths by Risk Factor in {year}' for year in years],
-        shared_yaxes=True
+        shared_yaxes=False
     )
 
+    data_summary = data_summary.sort_values(by=['Year', 'Deaths'], ascending=True)
+
     for i, year in enumerate(years, 1):
-        data_year = data_summary[data_summary['Year'] == year
-            ].sort_values(by='Deaths', ascending=True)
+        data_year = data_summary[data_summary['Year'] == year]
 
         colors = [
             '#ff6347' if risk == highlighted_risk_factor else '#95a5a6'
@@ -115,10 +116,10 @@ def plot_ihme_data(data, years, highlighted_risk_factor="high body-mass index"):
         ), row=1, col=i)
 
         fig.update_xaxes(title_text='Number of Deaths', row=1, col=i)
-    y_axis = list(data_year['Risk Factor'])
-    temp_vals = list(range(len(y_axis) + 1))
-    fig.update_yaxes(title_text='Risk Factor', tickmode='array', tickvals=temp_vals, ticktext=y_axis, row=1, col=1)
-    fig.update_xaxes(range=[0,20000000], row=1, col=1)
+
+        y_axis = list(data_year['Risk Factor'])
+        temp_vals = list(range(len(y_axis)))
+        fig.update_yaxes(title_text='Risk Factor', tickmode='array', tickvals=temp_vals, ticktext=y_axis, row=1, col=i)
 
     fig.update_layout(
         title='Deaths by Risk Factor',
