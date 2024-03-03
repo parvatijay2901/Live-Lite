@@ -3,18 +3,19 @@ This module provides a function for predicting the risk of obesity
 based on input features and saved model.
 
 Functions:
-- risk_predict(): Predicts the risk of obesity.
+- risk_predict()
 
 """
 import pandas as pd
 import joblib
 
-def risk_predict(input_list):
+def risk_predict(input_dict, model):
     """
     Predicts the risk of obesity based on the input factors.
 
     Args:
         input_list (list): List of factors
+        model (str): saved model full path name
     Raises:
         ValueError: If the input list is empty or if the input features
                     are not in the expected format.
@@ -23,21 +24,21 @@ def risk_predict(input_list):
         tuple: A tuple containing the obesity risk percentage
                and corresponding risk color.
     """
-    if not input_list:
+    if not input_dict:
         raise ValueError("Input list is empty")
 
     # Check if input features are in the expected format
-    if not all(isinstance(feature, (int, float)) for feature in input_list):
-        raise ValueError("Input features must be numeric")
+    if not all(isinstance(value[0], int) for value in input_dict.values()):
+        raise TypeError("Input features must be numeric")
 
     # Load the trained model
     try:
-        loaded_model = joblib.load('obesity_risk_model.joblib')
+        loaded_model = joblib.load(model)
     except FileNotFoundError as fnf:
         raise FileNotFoundError("Model file not found") from fnf
 
     # Probability of class 1 (obese)
-    new_prediction = loaded_model.predict_proba(pd.DataFrame(input_list))[:, 1]
+    new_prediction = loaded_model.predict_proba(pd.DataFrame(input_dict))[:, 1]
 
     obesity_risk = round(new_prediction[0] * 100, 1)
 
