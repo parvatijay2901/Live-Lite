@@ -9,7 +9,7 @@ import pandas as pd
 import plotly.express as px
 
 
-def generate_violin_plot(data, plot_type='Weight', years=None):
+def generate_violin_plot(data, plot_type='BMI', years=None):
     """
     Creates a violin plot which plots the distribution of the variable
     specified by plot_type of specified years.
