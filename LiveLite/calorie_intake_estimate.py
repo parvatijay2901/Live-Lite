@@ -43,13 +43,13 @@ def calculate_calorie_intake(weight_kg, height_cm, age, sex, activity_level):
     Returns:
         float: calorie intake in kcal
     """
-    if not isinstance(age, int) or age < 0:
+    if not isinstance(age, int) or age <= 0:
         raise TypeError("Age must be a positive whole number")
 
-    if not isinstance(height_cm, (int,float)) or height_cm < 0 :
+    if not isinstance(height_cm, (int,float)) or height_cm <= 0 :
         raise TypeError("Height must be a positive number")
 
-    if not isinstance(weight_kg, (int, float)) or weight_kg < 0:
+    if not isinstance(weight_kg, (int, float)) or weight_kg <= 0:
         raise TypeError("Weight must be a positive number")
 
     try:
