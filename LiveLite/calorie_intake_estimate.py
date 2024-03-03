@@ -36,12 +36,22 @@ def calculate_calorie_intake(weight_kg, height_cm, age, sex, activity_level):
         sex (boolean): Gender of the person. Either '0 - female' or '1 - male'
         activity_level (int): Activity level ranging from 1 - 5
     Raises:
-        ValueError: Inavlid bmr
-        ValueError: Invalid activity level 
+        TypeError: If weight, height, or age are not positive numbers.
+        ValueError: Invalid activity level.
+        ValueError: Invalid BMR.
 
     Returns:
         float: calorie intake in kcal
     """
+    if not isinstance(age, int) or age < 0:
+        raise TypeError("Age must be a positive whole number")
+
+    if not isinstance(height_cm, (int,float)) or height_cm < 0 :
+        raise TypeError("Height must be a positive number")
+
+    if not isinstance(weight_kg, (int, float)) or weight_kg < 0:
+        raise TypeError("Weight must be a positive number")
+
     try:
         bmr = calculate_bmr(weight_kg, height_cm, age, sex)
     except ValueError as ve:
