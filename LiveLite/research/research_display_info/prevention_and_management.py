@@ -2,28 +2,10 @@ import streamlit as st
 import pandas as pd
 import LiveLite
 
-# TO BE MODIFIED
 def display_weight_trends_over_time(data, years=None):
-    fig = LiveLite.generate_violin_plot(data, plot_type="BMI", years=years)
-    st.markdown("""The chart below displays the overall distribution of Weight change in the NHANES data set between 1999 and 2017. 
-                The mean BMI in 1999 was 24.89. The mean BMI in 2017 was 26.58. From 1999 to 2017, there was a 6.76% increase in 
-                overall BMI in the United States. In addition, in 1999, the average BMI was still under the category of 
-                'Healthy Weight'. However, in 2017 with the increase in BMI to 26.58, the average BMI is no longer considered 
-                'Healthy' and is now firmly in the 'Overweight' category.""")
-    LiveLite.add_blank_lines()
-    _, col12, _ = st.columns([0.5, 2, 0.5])
-    with col12:
-        st.plotly_chart(fig, use_container_width=True) 
-
-# TO BE MODIFIED        
-def display_activity_trends_over_time(data, years=None):
-    LiveLite.add_blank_lines()
-    fig = LiveLite.generate_violin_plot(data, plot_type="BMI", years=years)
-    st.markdown("""The chart below displays the overall distribution of Weight change in the NHANES data set between 1999 and 2017. 
-                The mean BMI in 1999 was 24.89. The mean BMI in 2017 was 26.58. From 1999 to 2017, there was a 6.76% increase in 
-                overall BMI in the United States. In addition, in 1999, the average BMI was still under the category of 
-                'Healthy Weight'. However, in 2017 with the increase in BMI to 26.58, the average BMI is no longer considered 
-                'Healthy' and is now firmly in the 'Overweight' category.""")
+    fig = LiveLite.generate_violin_plot(data, plot_type="Weight", years=years)
+    st.markdown("""In the chart below, BMI and weight are plotted along with their general distributions in 
+                the form of a violin plot. We can observe that over time BMI and weight have increased over time.""")
     LiveLite.add_blank_lines()
     _, col12, _ = st.columns([0.5, 2, 0.5])
     with col12:
@@ -70,8 +52,6 @@ def display_prevention_and_management():
     with col2:
         st.image("LiveLite/streamlit_app/images/initial_treatment.png", use_column_width=True)
         
-    display_activity_trends_over_time(data_NHANES, years=[1997, 2017])
-    
     st.markdown("<h4 style='color:gold;'>Subsequent Treatments</h4>", unsafe_allow_html=True)
     
     col1, col2 = st.columns([1,0.4])

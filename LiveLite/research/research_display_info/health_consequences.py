@@ -4,13 +4,18 @@ import pandas as pd
 
 def display_nhanes_obesity_overweight_analysis(data):
     fig = LiveLite.plot_obesity_overweight_trends(data) 
-    st.markdown("""In the charts plotted below, we can observe that, in the United States alone, the proportion of 
-                overweight (including obese) and obese individuals has rapidly increased since 1999.""")
+    st.markdown("""In the charts plotted below, the proportion of obese (BMI >= 30) is plotted on top and the proportion 
+                of overweight (BMI >= 25) is plotted below. We can observe that over the years the proportion of 
+                individuals the BMI of individuals in the United States seems to be steadily increasing with the 
+                proportion of obese being around 0.2 at the start of the 21st century to around 0.3 in the present 
+                and with 0.45 to around 0.55 increase in overweight proportion.""")
     st.plotly_chart(fig, use_container_width=True)
     
 def display_obesity_trends(data):
     LiveLite.add_blank_lines(2)
-    st.markdown("From the chart below, we can also observe that for both males and females, obesity has only increased since 1999.") 
+    st.markdown("""In the chart below, we plot obesity trends over the years stratified by male and female, with 1.0 equating 
+                to Male and 2.0 equating Female. In the plot we continue to observe the same trends seen in other plots that, 
+                regardless of gender, the proportion of obese individuals in the United States has been increasing over time.""") 
     fig = LiveLite.plot_obesity_trends(data)
     st.plotly_chart(fig, use_container_width=True)
 

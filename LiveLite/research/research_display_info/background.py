@@ -19,8 +19,12 @@ def display_ihme_data_analysis(data, years):
     LiveLite.add_blank_lines(2)
     st.markdown("""Also, according to a data published by the Institute for Health Metrics and Evaluation (IHME), 
                 obesity is a major risk factor for mortality in not just the United States but globally as well.
-                The chart below shows that the deaths attributed to high body-mass index (BMI) 
-                has rapidly increased since 1990 - going from around 4.3 million to around 10 million.""")
+                The chart below shows that the deaths in the United States in 1990 compared with 2019 grouped by 
+                the associated Risk Factor. In 1990, we can see that deaths attributed to high body-mass index was around 
+                10th in primary causes, sitting at around 4.4 million people. In 2019, we see that deaths attributed to high 
+                body-mass index increased to 5th in primary causes, jumping to a staggering 10 million. From these plots we 
+                can confidently say that obesity is becoming an ever-increasing issue in the United States.
+                """)
     fig = LiveLite.plot_ihme_data(data, years=years) 
     st.plotly_chart(fig, use_container_width=True, width=1200, height=600)
     

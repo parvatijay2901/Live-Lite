@@ -62,7 +62,7 @@ def generate_violin_plot(data, plot_type='BMI', years=None):
         fig.update_xaxes(title='Year', tickvals=years)
         fig.update_yaxes(title='BMI (kg/m^2)')
         fig.update_layout(title='Comparison of BMI by Year', title_x=0.4)
-    elif plot_type == 'Weight':
+    else:
         fig.update_xaxes(title='Year', tickvals=years)
         fig.update_yaxes(title='Weight (kg)')
         fig.update_layout(title='Comparison of Weight by Year', title_x=0.4)
