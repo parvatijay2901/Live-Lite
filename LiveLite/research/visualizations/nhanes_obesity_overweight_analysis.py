@@ -12,7 +12,7 @@ from plotly.subplots import make_subplots
 def plot_obesity_overweight_trends(data, years=None):
     """
     Generates a line plot comparing the proportion of obese
-     and overweight individuals over specified years.
+    and overweight individuals over specified years.
     :param data: Combined processed NHANES dataframe.
     :param years: List of years.
     :return: Figure object.
@@ -39,15 +39,19 @@ def plot_obesity_overweight_trends(data, years=None):
     data = data[data['Year'].isin(years)]
     prop_data = data.groupby('Year').agg({'Obese': 'mean', 'Overweight (including obesity)': 'mean'}).reset_index()
 
-    max_proportion = prop_data[['Obese', 'Overweight (including obesity)']].max().max()
-    min_proportion = prop_data[['Obese', 'Overweight (including obesity)']].min().min()
+    max_proportion_obese = prop_data[['Obese']].max().max()
+    max_proportion_overweight = prop_data[['Overweight (including obesity)']].max().max()
+    
+    min_proportion_obese = prop_data[['Obese']].min().min()
+    min_proportion_overweight = prop_data[['Overweight (including obesity)']].min().min()
 
     # Optionally, you can add a small margin to the max limit for visual aesthetics
-    max_proportion += max_proportion * 0.05
+    max_proportion_obese += max_proportion_obese * 0.05
+    max_proportion_overweight += max_proportion_overweight * 0.05
 
     # Create subplots with two plots side by side
     fig = make_subplots(
-        rows=1, cols=2,
+        rows=2, cols=1,
         subplot_titles=(
             'Proportion of Individuals Obese by Year',
             'Proportion of Individuals Overweight (including obesity) by Year'
@@ -70,31 +74,23 @@ def plot_obesity_overweight_trends(data, years=None):
             mode='lines',
             name='Overweight (including obesity)'
         ),
-        row=1,
-        col=2
+        row=2,
+        col=1
     )
 
     # Customize axes and layout with the same y-axis range for both plots
-    fig.update_yaxes(title_text='Proportion', range=[min_proportion, max_proportion], row=1, col=1)
-    fig.update_yaxes(title_text='Proportion', range=[min_proportion, max_proportion], row=1, col=2)
-
-
-
+    fig.update_yaxes(title_text='Proportion', range=[min_proportion_obese, max_proportion_obese], row=1, col=1)
     fig.update_xaxes(title_text='Year', row=1, col=1)
-    #fig.update_yaxes(title_text='Proportion Obese', row=1, col=1)
-    fig.update_xaxes(title_text='Year', row=1, col=2)
-    #fig.update_yaxes(title_text='Proportion Overweight (including obesity)', row=1, col=2)
+    
+    fig.update_yaxes(title_text='Proportion', range=[min_proportion_overweight, max_proportion_overweight], row=2, col=1)
+    fig.update_xaxes(title_text='Year', row=2, col=1)
 
-    # rotate x-axis labels
-    fig.update_xaxes(tickangle=45)
-
-    # add grid lines for better readability
     fig.update_layout(
-        grid={'rows': 1, 'columns': 2},
-        height=600, width=1000,
-        title_text="Obesity and Overweight Trends Over Years"
+        grid={'rows': 2, 'columns': 1},
+        height=800, width=800,
+        title_text="Obesity and Overweight Trends Over Years",
+        title_x=0.4,
+        showlegend=False
     )
-    fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor='LightPink')
-    fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='LightPink')
 
     return fig

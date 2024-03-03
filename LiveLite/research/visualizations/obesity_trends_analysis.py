@@ -32,22 +32,20 @@ def plot_obesity_trends(data, years=None):
     data = data[data['Year'].isin(years)]
     proportion_data = data.groupby(['Year', 'RIAGENDR'])['BMI'].mean().reset_index()
     proportion_data = proportion_data.rename(columns={'BMI': 'Proportion Obese'})
-
-
-    # Create the Plotly figure
+    
+    category_order = ['Male', 'Female']
+    color_sequence = ['#1f77b4', '#f19cbb']
     fig = px.line(proportion_data, x='Year', y='Proportion Obese', color='RIAGENDR',
-                  title='Comparison of Proportion of Individuals Obese by Year',
-                  labels={'BMI': 'Proportion Obese', 'RIAGENDR': 'Gender'})
+                title='Comparison of Proportion of Individuals Obese by Year',
+                labels={'Proportion Obese': 'Proportion Obese', 'RIAGENDR': 'Gender'},
+                category_orders={'RIAGENDR': category_order},
+                color_discrete_sequence=color_sequence)
 
     # Customize the layout
+    fig.for_each_trace(lambda t: t.update(name='Male' if t.name == '1.0' else 'Female'))
     fig.update_layout(xaxis_title='Year',
-                      yaxis_title='Proportion Obese',
-                      legend_title='Gender')
-
-    # Rotate x-axis labels for better readability
-    fig.update_xaxes(tickangle=45)
-
-    # Add horizontal grid lines for better readability
-    fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='LightGray')
+                    yaxis_title='Proportion Obese',
+                    legend_title='Gender',
+                    title_x=0.4)
 
     return fig

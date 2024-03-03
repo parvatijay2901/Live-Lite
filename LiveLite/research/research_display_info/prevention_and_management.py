@@ -1,4 +1,33 @@
 import streamlit as st
+import pandas as pd
+import LiveLite
+
+# TO BE MODIFIED
+def display_weight_trends_over_time(data, years=None):
+    fig = LiveLite.generate_violin_plot(data, plot_type="BMI", years=years)
+    st.markdown("""The chart below displays the overall distribution of Weight change in the NHANES data set between 1999 and 2017. 
+                The mean BMI in 1999 was 24.89. The mean BMI in 2017 was 26.58. From 1999 to 2017, there was a 6.76% increase in 
+                overall BMI in the United States. In addition, in 1999, the average BMI was still under the category of 
+                'Healthy Weight'. However, in 2017 with the increase in BMI to 26.58, the average BMI is no longer considered 
+                'Healthy' and is now firmly in the 'Overweight' category.""")
+    LiveLite.add_blank_lines()
+    _, col12, _ = st.columns([0.5, 2, 0.5])
+    with col12:
+        st.plotly_chart(fig, use_container_width=True) 
+
+# TO BE MODIFIED        
+def display_activity_trends_over_time(data, years=None):
+    LiveLite.add_blank_lines()
+    fig = LiveLite.generate_violin_plot(data, plot_type="BMI", years=years)
+    st.markdown("""The chart below displays the overall distribution of Weight change in the NHANES data set between 1999 and 2017. 
+                The mean BMI in 1999 was 24.89. The mean BMI in 2017 was 26.58. From 1999 to 2017, there was a 6.76% increase in 
+                overall BMI in the United States. In addition, in 1999, the average BMI was still under the category of 
+                'Healthy Weight'. However, in 2017 with the increase in BMI to 26.58, the average BMI is no longer considered 
+                'Healthy' and is now firmly in the 'Overweight' category.""")
+    LiveLite.add_blank_lines()
+    _, col12, _ = st.columns([0.5, 2, 0.5])
+    with col12:
+        st.plotly_chart(fig, use_container_width=True) 
 
 def display_prevention_and_management():
     st.markdown("<h4 style='color:gold;'>Treatment</h4>", unsafe_allow_html=True)
@@ -9,52 +38,67 @@ def display_prevention_and_management():
         we can lay out the general process of common weight-loss therapies.
         """
     )
-
+    data_NHANES = pd.read_csv("LiveLite/data/input_files/NHANES_Background.csv", low_memory=False)
+    display_weight_trends_over_time(data_NHANES, years=[1997, 2017])
+    
     st.markdown("<h4 style='color:gold;'>Initial Treatments</h4>", unsafe_allow_html=True)
-    st.markdown(
-        """
-        Initial treatments of obesity fall under comprehensive lifestyle changes. These changes involve a combination
-        of diet, physical activity (exercise), and modification of the individuals behavior (behavior therapy).
-        Modification of behavior refers to facilitating adherence to diet and exercise programs. Examples of 
-        behavior therapy are modifying and monitering food intake, modifying physical activity, and to address
-        causes and stimuli that may trigger eating / overeating.
+    
+    col1, col2 = st.columns([1,0.5])
+    with col1:
+        st.markdown(
+            """
+            Initial treatments of obesity fall under comprehensive lifestyle changes. These changes involve a combination
+            of diet, physical activity (exercise), and modification of the individuals behavior (behavior therapy).
+            Modification of behavior refers to facilitating adherence to diet and exercise programs. Examples of 
+            behavior therapy are modifying and monitoring food intake, modifying physical activity, and to address
+            causes and stimuli that may trigger eating / overeating.
+            
+            Usually these treatments involve discussing with a medical professional and setting weight-loss goals and
+            behavior goals. An example of dietary weight-loss goals would be reducing energy intake by a certain amount of kcal/day 
+            which may done through portion control, food provisions, or even diet instruction.
+            
+            Exercise is perhaps the most well-known aspect of weight-loss. It is generally recommended that an individual
+            perform some form of exercise for at least half an hour, for at least five days a week to simply prevent weight
+            gain (Piercy et al., 2018). Behavior goals are equally important. These goals should within the individuals control 
+            and also be SMART (Specific, Measurable, Achievable, Reasonable, and Time-bound). A simple example of a behavior 
+            goal would be to eat junk / fast food less than once per week.
+            
+            Those who could benefit from weight loss would benefit from counseling on diet, exercise, and goals for
+            weight loss.    
+            """
+        )
+    with col2:
+        st.image("LiveLite/streamlit_app/images/initial_treatment.png", use_column_width=True)
         
-        Usually these treatments involve discussing with a medical professional and setting weight-loss goals and
-        behavior goals. An example of dietary weight-loss goals would be reducing energy intake by a certain amount of kcal/day 
-        which may done through portion control, food provisions, or even diet instruction.
-        
-        Exercise is perhaps the most well-known aspect of weight-loss. It is generally recommended that an individual
-        perform some form of exercise for at least half an hour, for at least five days a week to simply prevent weight
-        gain (Piercy et al., 2018). Behavior goals are equally important. These goals should within the indivuals control 
-        and also be SMART (Specific, Measurable, Achievable, Reasonable, and Time-bound). A simple example of a behavior 
-        goal would be to eat junk / fast food less than once per week.
-        
-        Those who could benefit from weight loss would benefit from counseling on diet, exercise, and goals for
-        weight loss.    
-        """
-    )
+    display_activity_trends_over_time(data_NHANES, years=[1997, 2017])
+    
     st.markdown("<h4 style='color:gold;'>Subsequent Treatments</h4>", unsafe_allow_html=True)
-    st.markdown(
-        """
-        If the individual cannot reach their weight-loss goals from their comprehensive lifestyle changes in the 
-        initial treatment, other options such as pharmacologic, medical devices, and surgical options exist.
-        Most common drug therapy options are GLP-1 agonists which result in a complex downstream effect on various organ
-        functions. One of these effects is that these drugs decrease appetite and increase satiety, which ideally leads
-        to less consumption of food. 
-        
-        Medical devices is a broad term for the various treatment options for those unwilling to undergo
-        bariatric surgeries. Some examples of some medical devices that may be prescribed are the intragastric balloon
-        and hydrogels.
-        The intragastric balloon are balloons filled with saline that are placed into the stomach - which then produces 
-        the feeling of being satiated. 
-        Hydrogels are products taken orally which then expand in the stomach to produce a feeling of satiety.
-        
-        Lastly, there is bariatric surgery. Bariatric surgery refers to a group of techniques used to treat obesity.
-        Perhaps the most commonly known is gastric bypass which essentially involves the creation of smaller stomach 
-        and reconnecting the small intestine (and the rest of the GI tract) to the new, smaller, stomach pouch, 
-        bypassing the stomach - hence the name.
-        """
-    )
+    
+    col1, col2 = st.columns([1,0.4])
+    with col1:
+        st.markdown(
+            """
+            If the individual cannot reach their weight-loss goals from their comprehensive lifestyle changes in the 
+            initial treatment, other options such as pharmacologic, medical devices, and surgical options exist.
+            Most common drug therapy options are GLP-1 agonists which result in a complex downstream effect on various organ
+            functions. One of these effects is that these drugs decrease appetite and increase satiety, which ideally leads
+            to less consumption of food. 
+            
+            Medical devices is a broad term for the various treatment options for those unwilling to undergo
+            bariatric surgeries. Some examples of some medical devices that may be prescribed are the intragastric balloon
+            and hydrogels.
+            The intragastric balloon are balloons filled with saline that are placed into the stomach - which then produces 
+            the feeling of being satiated. 
+            Hydrogels are products taken orally which then expand in the stomach to produce a feeling of satiety.
+            
+            Lastly, there is bariatric surgery. Bariatric surgery refers to a group of techniques used to treat obesity.
+            Perhaps the most commonly known is gastric bypass which essentially involves the creation of smaller stomach 
+            and reconnecting the small intestine (and the rest of the GI tract) to the new, smaller, stomach pouch, 
+            bypassing the stomach - hence the name.
+            """
+        )
+    with col2:
+        st.image("LiveLite/streamlit_app/images/medications_obesity.png", use_column_width=True)
 
     st.markdown("<h4 style='color:gold;'>Not Recommended Treatments</h4>", unsafe_allow_html=True)
     st.markdown(
@@ -75,5 +119,9 @@ def display_prevention_and_management():
         Preventing obesity generally aligns with the initial treatments of obesity, but in a less extreme form.
         Maintaining a well-balanced diet, accompanied with healthy eating habits, and regular physical activity is the
         best method for ensuring a healthy body and preventing obesity.
+        
+        Understanding your current health status and potential risk for obesity can provide valuable insights for 
+        personalized prevention strategies. Click the button below to assess your current risk and gain personalized 
+        insights into maintaining a healthy weight.
         """
     )

@@ -12,20 +12,19 @@ import plotly.express as px
 def generate_violin_plot(data, plot_type='BMI', years=None):
     """
     Creates a violin plot which plots the distribution of the variable
-     specified by plot_type of specified years.
+    specified by plot_type of specified years.
     Raises Value Error if:
     - Years are not valid in NHANES.
     Raises Type Error if:
-     - data is not a dataframe.
-     - plot_type is not a str.
-     - years is not None or not a list.
+    - data is not a dataframe.
+    - plot_type is not a str.
+    - years is not None or not a list.
     :param data: Combined processed NHANES data.
     :param plot_type: String specifying the variable to plot.
     :param years: List of years to plot.
     :return: Figure object.
     """
-
-    years_default = [1999, 2001, 2003, 2005, 2007, 2009, 2011, 2013, 2015, 2017]
+    years_default = [1999, 2005, 2011, 2017]
 
     if years is not None:
         years = years_default
@@ -40,7 +39,7 @@ def generate_violin_plot(data, plot_type='BMI', years=None):
         raise ValueError("Not valid plot type.")
 
     if list(set(years).difference(years_default)):
-        raise ValueError("Valid years start from 1999 and increment by 2 years.")
+        raise ValueError("Valid years start from 1999 and increment by 6 years.")
 
     if not isinstance(data, pd.DataFrame):
         raise TypeError(
@@ -57,17 +56,17 @@ def generate_violin_plot(data, plot_type='BMI', years=None):
 
     # Customize axis labels and titles based on plot type
     if plot_type == 'BMI':
-        fig.update_xaxes(title='Year')
+        fig.update_xaxes(title='Year', tickvals=years)
         fig.update_yaxes(title='BMI (kg/m^2)')
         fig.update_layout(title='Comparison of BMI by Year', title_x=0.4)
     elif plot_type == 'Weight':
-        fig.update_xaxes(title='Year')
+        fig.update_xaxes(title='Year', tickvals=years)
         fig.update_yaxes(title='Weight (kg)')
         fig.update_layout(title='Comparison of Weight by Year', title_x=0.4)
     elif plot_type == 'Activity':
-        fig.update_xaxes(title='Year')
+        fig.update_xaxes(title='Year', tickvals=years)
         fig.update_yaxes(title='Days of Moderate Recreational Activity')
         fig.update_layout(title='Comparison of Days of Moderate Recreational Activity by Year',
-                          title_x=0.4)
+                        title_x=0.4)
 
     return fig

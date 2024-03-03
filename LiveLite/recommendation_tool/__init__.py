@@ -1,5 +1,0 @@
-from recommendation_tool.risk_assessment.risk_predictor import risk_predict
-from recommendation_tool.risk_assessment.is_obese import is_obese
-from recommendation_tool.nutrition_estimation.calorie_intake.calorie_intake_estimate import calculate_calorie_intake
-from recommendation_tool.diet_recommendation.food import micro_nutrients, macro_nutrients_data
-from recommendation_tool.physical_activity_recommendation.physical_activity_recommend import calculate_calorie_burn

@@ -96,8 +96,7 @@ def plot_ihme_data(data, years, highlighted_risk_factor="high body-mass index"):
     )
 
     for i, year in enumerate(years, 1):
-        data_year = data_summary[
-            data_summary['Year'] == year
+        data_year = data_summary[data_summary['Year'] == year
             ].sort_values(by='Deaths', ascending=True)
 
         colors = [
@@ -112,12 +111,14 @@ def plot_ihme_data(data, years, highlighted_risk_factor="high body-mass index"):
             marker={'color': colors},
             name=f'{year}',
             text=data_year['Deaths'].apply(lambda x: f'{x:,.0f}'),
-            textposition='auto'
+            textposition='outside'
         ), row=1, col=i)
 
         fig.update_xaxes(title_text='Number of Deaths', row=1, col=i)
-
-    fig.update_yaxes(title_text='Risk Factor', row=1, col=1)
+    y_axis = list(data_year['Risk Factor'])
+    temp_vals = list(range(len(y_axis) + 1))
+    fig.update_yaxes(title_text='Risk Factor', tickmode='array', tickvals=temp_vals, ticktext=y_axis, row=1, col=1)
+    fig.update_xaxes(range=[0,20000000], row=1, col=1)
 
     fig.update_layout(
         title='Deaths by Risk Factor',
