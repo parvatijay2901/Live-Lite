@@ -112,7 +112,7 @@ def plot_ihme_data(data, years, highlighted_risk_factor="high body-mass index"):
             marker={'color': colors},
             name=f'{year}',
             text=data_year['Deaths'].apply(lambda x: f'{x:,.0f}'),
-            textposition='auto'
+            textposition='outside'
         ), row=1, col=i)
 
         fig.update_xaxes(title_text='Number of Deaths', row=1, col=i)
