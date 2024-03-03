@@ -2,7 +2,7 @@ import unittest
 import numpy as np
 from calorie_intake_estimate import calculate_calorie_intake
 
-class TestKnn(unittest.TestCase):
+class TestCalorieEstimate(unittest.TestCase):
 
     # Smoke test
     def test_calorie_intake_smoke(self):
