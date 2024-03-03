@@ -13,13 +13,14 @@ def is_obese(height_cm, weight_kg):
     Returns:
         bool: True if the person is obese, False otherwise.
     """
-    try:
-        height_m = height_cm / 100
-        # Calculate BMI (Body Mass Index)
-        bmi = weight_kg / (height_m ** 2)
-        # Person is obese if BMI is >= 30
-        return bmi >= 30
+    if not isinstance(height_cm, (int,float)) or height_cm <= 0 :
+        raise ValueError("Height must be a positive number")
 
-    except (ZeroDivisionError, ValueError) as e:
-        print("An error occurred:", e)
-        return False
+    if not isinstance(weight_kg, (int, float)) or weight_kg <= 0:
+        raise ValueError("Weight must be a positive number")
+
+    height_m = height_cm / 100
+    # Calculate BMI (Body Mass Index)
+    bmi = weight_kg / (height_m ** 2)
+    # Person is obese if BMI is >= 30
+    return bmi >= 30
