@@ -92,7 +92,7 @@ def plot_ihme_data(data, years, highlighted_risk_factor="high body-mass index"):
     fig = make_subplots(
         rows=1, cols=len(years),
         subplot_titles=[f'Deaths by Risk Factor in {year}' for year in years],
-        shared_yaxes=False
+        shared_yaxes=True
     )
 
     data_summary = data_summary.sort_values(by=['Year', 'Deaths'], ascending=True)
@@ -115,11 +115,11 @@ def plot_ihme_data(data, years, highlighted_risk_factor="high body-mass index"):
             textposition='outside'
         ), row=1, col=i)
 
-        fig.update_xaxes(title_text='Number of Deaths', row=1, col=i)
+        fig.update_xaxes(title_text='Number of Deaths', range = [0, 20000000], row=1, col=i)
 
         y_axis = list(data_year['Risk Factor'])
         temp_vals = list(range(len(y_axis)))
-        fig.update_yaxes(title_text='Risk Factor', tickmode='array', tickvals=temp_vals, ticktext=y_axis, row=1, col=i)
+        fig.update_yaxes(tickmode='array', tickvals=temp_vals, ticktext=y_axis, row=1, col=i)
 
     fig.update_layout(
         title='Deaths by Risk Factor',

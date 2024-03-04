@@ -43,7 +43,5 @@ def display_background():
     with col3:
         st.image("LiveLite/streamlit_app/images/background_on_obesity.png", width=200)
         
-    data_NHANES = pd.read_csv("LiveLite/data/input_files/NHANES_Background.csv", low_memory=False)
-    display_trends_over_time(data_NHANES, years=[1997, 2017])
-    data_IHME = pd.read_csv("LiveLite/data/input_files/IHME/number-of-deaths-by-risk-factor.csv")
-    display_ihme_data_analysis(data_IHME, years = [1990, 2019])
+    display_trends_over_time(st.session_state['data_NHANES'], years=[1997, 2017])
+    display_ihme_data_analysis(st.session_state['data_IHME'], years = [1990, 2019])

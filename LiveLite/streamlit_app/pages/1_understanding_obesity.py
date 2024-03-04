@@ -3,6 +3,8 @@ from streamlit_extras.stylable_container import stylable_container
 import LiveLite
 
 st.set_page_config(layout="wide", initial_sidebar_state="collapsed")
+if 'data_NHANES' not in st.session_state or 'data_IHME' not in st.session_state:
+        st.switch_page("Home.py")
 
 _, col1 = st.columns([10, 1.5])
 with col1:

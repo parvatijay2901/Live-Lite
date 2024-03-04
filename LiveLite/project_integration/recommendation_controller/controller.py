@@ -4,8 +4,8 @@ import LiveLite
     
 def controller(choice):
     
-    if 'user_inputs' not in st.session_state:
-        st.switch_page("pages/2_obesity_assessment.py")
+    if 'user_inputs' not in st.session_state or 'food_nutrition_data' not in st.session_state:
+        st.switch_page("Home.py")
         
     user_inputs = st.session_state['user_inputs']
     mapped_user_inputs = LiveLite.user_input_mapping(user_inputs)
@@ -28,10 +28,23 @@ def controller(choice):
             risk_score = LiveLite.risk_predict(risk_predict_input, model)
         return risk_score
     
-    if choice == "diet_recommender":
+    if choice == "diet_recommender_basic":
         macro_nutrients_df = LiveLite.macro_nutrients_data(mapped_user_inputs['internal_age'], mapped_user_inputs['internal_sex'], st.session_state['calorie_intake'])
         micro_nutrients_df = LiveLite.micro_nutrients(mapped_user_inputs['internal_age'], mapped_user_inputs['internal_sex'])
         return [macro_nutrients_df, micro_nutrients_df]
+
+    if choice == "diet_recommender_advanced_based_on_food_preference":
+        food_nutrition_data = st.session_state['food_nutrition_data']
+        risk_score = st.session_state['risk_score']
+        food_preference = st.session_state['food_preference']
+        recommended_foods_df = LiveLite.recommended_food(food_nutrition_data, risk_score, food_preference)
+        return recommended_foods_df
+    
+    if choice == "diet_recommender_advanced_search_food_items":
+        food_nutrition_data = st.session_state['food_nutrition_data']
+        search_food_items = st.session_state['search_food_items']
+        searched_foods_df = LiveLite.search_food(food_nutrition_data, search_food_items)
+        return searched_foods_df
     
     if choice == "physical_activity_recommender":
         filename = "LiveLite/data/input_files/calories_burned_30_minutes.csv"

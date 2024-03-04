@@ -23,7 +23,7 @@ LiveLite.add_blank_lines(3)
 
 _, col2, _ = st.columns([1, 1, 1])
 with col2:
-    with stylable_container("button", css_styles="""button {background-color: #f2f2f2; color: black;}"""):
+    with stylable_container("button", css_styles="""button {background-color: #f2f2f2; color: black;font-size: 50px;}"""):
         if st.button("Assess your Obesity Risk 🔎", use_container_width=True):
             LiveLite.write_user_inputs_to_csv(user_inputs, filename='LiveLite/data/output_files/user_inputs.csv')
             st.switch_page("pages/3_risk_insights.py")

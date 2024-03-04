@@ -26,9 +26,8 @@ def display_health_consequences():
                 30 percent for each 5kg/m<sup>2</sup> increase in BMI (Prospective Studies Collaboration, 2009)""", 
                 unsafe_allow_html=True)
     
-    data_NHANES = pd.read_csv("LiveLite/data/input_files/NHANES_Background.csv", low_memory=False)
-    display_nhanes_obesity_overweight_analysis(data_NHANES)
-    display_obesity_trends(data_NHANES)
+    display_nhanes_obesity_overweight_analysis(st.session_state['data_NHANES'])
+    display_obesity_trends(st.session_state['data_NHANES'])
     
     st.markdown("""Obesity has drastic implications on morbidity for obese individuals. The risks we will discuss can be categorized 
                 into the following categories:""")
