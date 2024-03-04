@@ -1,34 +1,54 @@
+"""
+This module provides a function for predicting the risk of obesity 
+based on input features and saved model.
+
+Functions:
+- risk_predict()
+
+"""
 import pandas as pd
-import joblib  
+import joblib
 
-# # ### TO BE DELETED AFTER TETSING ##
-# test_data = {
-#     'DPQ020': [3], 
-#     'DPQ050': [3], 
-#     'PAQ670': [1], 
-#     'DBQ700': [5], 
-#     'HUQ010': [5], 
-#     'RIAGENDR': [0], 
-#     'RIDAGEYR': [60],
-#     'RIDRETH3': [3], 
-#     'SMQ040': [1],
-#     'SLD012': [2]
-# }
+def risk_predict(input_dict, model):
+    """
+    Predicts the risk of obesity based on the input factors.
 
-# Call this function with dictionary of user input to preidct risk
-def risk_predict(Inputlist, model):
-    
+    Args:
+        input_list (list): List of factors
+        model (str): saved model full path name
+    Raises:
+        ValueError: If the input list is empty or if the input features
+                    are not in the expected format.
+        FileNotFoundError: If the model file is not found.
+    Returns:
+        tuple: A tuple containing the obesity risk percentage
+               and corresponding risk color.
+    """
+    if not input_dict:
+        raise ValueError("Input list is empty")
+
+    # Check if input features are in the expected format
+    if not all(isinstance(value[0], int) for value in input_dict.values()):
+        raise TypeError("Input features must be numeric")
+
     # Load the trained model
-    loaded_model = joblib.load(model)
+    try:
+        loaded_model = joblib.load(model)
+    except FileNotFoundError as fnf:
+        raise FileNotFoundError("Model file not found") from fnf
 
-    # Predict risk using the test data
-    new_prediction = loaded_model.predict_proba(pd.DataFrame(Inputlist))[:, 1]  # Probability of class 1 (obese)
-    
-    obesityrisk = round(new_prediction[0] * 100, 1)
-    
-    return obesityrisk
+    # Probability of class 1 (obese)
+    new_prediction = loaded_model.predict_proba(pd.DataFrame(input_dict))[:, 1]
 
-# result = risk_predict(test_data)
-# print(f'Predicted Obesity Risk: {result[0]} %, {result[1]}')
+    obesity_risk = round(new_prediction[0] * 100, 1)
 
+    if 0 <= obesity_risk <= 25:
+        color = '#add8e6'  # Low risk
+    elif 25 < obesity_risk <= 50:
+        color = '#66915c'  # Moderate risk
+    elif 50 < obesity_risk <= 75:
+        color = '#ffff99'  # High risk
+    else:
+        color = '#ffa07a'  # Very high risk
 
+    return obesity_risk, color

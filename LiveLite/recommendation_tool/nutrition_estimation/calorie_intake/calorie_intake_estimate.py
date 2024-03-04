@@ -1,41 +1,63 @@
+""" 
+This module computes estimation of daily calorie intake for the user.
+
+Functions:
+- calculate_bmr()
+- calculate_calorie_intake()
+"""
 
 def calculate_bmr(weight_kg, height_cm, age, sex):
-    # Calculate Basal Metabolic Rate (BMR) based on weight, height, age, and sex.
-    # Args:
-    # weight (float): Weight in kilograms.
-    # height (float): Height in centimeters.
-    # age (int): Age in years.
-    # sex (boolean) : Gender of the person. Either '0 - female' or '1 - male'.
-    # Returns:
-    # float: BMR value.
-    
+    """ Calculate BMR based on weight, height, age, and sex.
+    Args:
+        weight_kg (float): Weight in kilograms
+        height_cm (float): Height in centimeters
+        age (int): Age in years.
+        sex (boolean): Gender of the person.'0 - female' or '1 - male'
+    Raises:
+        ValueError: Invalid gender value
+    Returns:
+        float: BMR value
+    """
     if sex == 1:
         bmr = 66 + (6.3 * weight_kg) + (12.9 * height_cm) - (6.8 * age)
-    
     elif sex == 0:
         bmr = 655 + (4.3 * weight_kg) + (4.7 * height_cm) - (4.7 * age)
-    
     else:
         raise ValueError("Invalid value for sex")
-    
     return bmr
 
 def calculate_calorie_intake(weight_kg, height_cm, age, sex, activity_level):
-    # Calculate total calorie intake based on BMR and activity level.
-    # Args:
-    # weight (float): Weight in kilograms.
-    # height (float): Height in centimeters.
-    # age (int): Age in years.
-    # sex (boolean): Gender of the person. Either '0 - female' or '1 - male'.
-    # activity_level (int): Level of physical activity. One of: '1-sedentary', '2-minimally active', '3-moderately active', '4-very active', '5-extra active'.
-    # Returns:
-    # float: Total calorie intake.
+    """ This function calculates the estimated calorie intake based on
+        the user input data and bmr calculated.
+    Args:
+        weight_kg (float): Weight in kilograms
+        height_cm (float): Height in centimeters
+        age (int): Age in years.
+        sex (boolean): Gender of the person. Either '0 - female' or '1 - male'
+        activity_level (int): Activity level ranging from 1 - 5
+    Raises:
+        TypeError: If weight, height, or age are not positive numbers.
+        ValueError: Invalid activity level.
+        ValueError: Invalid BMR.
+
+    Returns:
+        float: calorie intake in kcal
+    """
+    if not isinstance(age, int) or age <= 0:
+        raise TypeError("Age must be a positive whole number")
+
+    if not isinstance(height_cm, (int,float)) or height_cm <= 0 :
+        raise TypeError("Height must be a positive number")
+
+    if not isinstance(weight_kg, (int, float)) or weight_kg <= 0:
+        raise TypeError("Weight must be a positive number")
+
     try:
         bmr = calculate_bmr(weight_kg, height_cm, age, sex)
-    
     except ValueError as ve:
-        raise ValueError(ve)
+        raise ValueError(ve) from ve
 
+    # Different multiplier for each activity level.
     activity_multiplier = {
         1 : 1.2,
         2 : 1.375,
@@ -43,17 +65,8 @@ def calculate_calorie_intake(weight_kg, height_cm, age, sex, activity_level):
         4 : 1.725,
         5 : 1.9
     }
-    
     if activity_level not in activity_multiplier:
         raise ValueError("Invalid value for activity level")
-    
+
     calorie_intake = bmr * activity_multiplier[activity_level]
     return calorie_intake
-
-'''
-# Example usage : To be removed in final version of the code. Uncomment for test run    
-# This call must be made from streamlit & output has to be rendered appropriately. 
-calorie_intake = calculate_calorie_intake (float(56), float(150), int(30), 0, int(2))
-print("Estimated calorie intake:", calorie_intake, "kcal")
-'''
-

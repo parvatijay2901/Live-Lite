@@ -1,30 +1,62 @@
+"""
+This module provides a function for mapping user input data to internal representations
+and Ml model usage.
+
+Functions:
+- user_input_mapping():
+"""
+
 def user_input_mapping(user_data_dict):
-    converted_data = {}
+    """
+    Maps user input data to internal representations.
+    Args:
+        user_data_dict (dict): A dictionary containing user input data.
+    Raises:
+        ValueError: If any input value is invalid.
+    Returns:
+        dict: A dictionary containing mapped internal
+              representations of user input data.
+    """
+    internal_data = {}
 
     def convert_age(age):
-        if age >= 80:
+        """
+        Convert age as per NHANES standards, restrciting values to 80
+        Args:
+            Age (int): The gender to be converted.
+        Returns:
+            int: number representing age
+        """
+        if age > 80:
             return 80
-        else:
-            return age
+        return int(age)
 
     def convert_sex(sex):
+        """
+        Convert the gender to a numerical representation.
+        Args:
+            sex (str): The gender to be converted.
+        Returns:
+            int: Numerical representation of gender (1 for male, 0 for female).
+        Raises:
+            ValueError: If the provided sex value is not 'male' or 'female'.
+        """
         if sex.lower() == 'male':
             return 1
-        elif sex.lower() == 'female':
+        if sex.lower() == 'female':
             return 0
-        else:
-            raise ValueError("Invalid value for sex")
-    
-    def convert_smoke_cig(smoke_cig):
-        if smoke_cig.lower() == 'yes':
-            return 1
-        elif smoke_cig.lower() == 'no':
-            return 0
-        else:
-            raise ValueError("Invalid value for smoke cig")
-
+        raise ValueError("Invalid value for sex")
 
     def convert_ethnicity(ethnicity):
+        """
+        Convert the ethnicity to a numerical representation.
+        Args:
+            ethnicity (str): The ethnicity value to be converted.
+        Returns:
+            int: Numerical representation of ethnicity as defined by NHANES.
+        Raises:
+            ValueError: If the provided value is not in dictionary.
+        """
         ethnicity_map = {
             'mexican american': 1,
             'hispanic': 2,
@@ -36,45 +68,76 @@ def user_input_mapping(user_data_dict):
         }
         ethnicity_lower = ethnicity.lower()
         if ethnicity_lower in ethnicity_map:
-            return ethnicity_map[ethnicity_lower]
-        else:
-            raise ValueError("Invalid value for ethnicity")
+            return int(ethnicity_map[ethnicity_lower])
+        raise ValueError("Invalid value for ethnicity")
 
     def convert_activity_level(activity_level):
+        """
+        Convert the activity level to a numerical representation.
+        Args:
+            activity_level (str): The actvity level to be converted.
+        Returns:
+            int: Numerical representation of activity level as defined by NHANES.
+        Raises:
+            ValueError: If the provided value is not in dictionary.
+        """
         activity_map = {
             'sedentary': 1,
             'minimally active': 2,
             'moderately active': 3,
-            'active': 4,
+            'very active': 4,
             'extra active': 5
         }
         activity_lower = activity_level.lower()
         if activity_lower in activity_map:
             return int(activity_map[activity_lower])
-        else:
-            raise ValueError("Invalid value for activity level")
+        raise ValueError("Invalid value for activity level")
 
     def convert_dietary_preference(dietary_preference):
+        """
+        Convert the diet preference to a numerical representation
+        as per tool definition.
+        Args:
+            dietary_preference (str): The dietary preferencer to be converted.
+        Returns:
+            int: Numerical representation of dietary preference.
+        Raises:
+            ValueError: If the provided value is not in dictionary.
+        """
         dietary_map = {
             'vegan': 1,
-            'vegetarian': 2,
+            'vegeterian': 2,
             'non vegetarian': 3
         }
         dietary_lower = dietary_preference.lower()
         if dietary_lower in dietary_map:
             return int(dietary_map[dietary_lower])
-        else:
-            raise ValueError("Invalid value for dietary preference")
+        raise ValueError("Invalid value for dietary preference")
 
     def convert_sleep_hours(sleep_hours):
+        """
+        Restrict the sleep hours to valid values between 2 to 14
+        Args:
+            sleep_hours (int): The sleep hours factor to be processed.
+        Returns:
+            int: Numerical representation of sleep hours.
+        """
         if sleep_hours < 2:
             return 2
-        elif sleep_hours > 14:
+        if sleep_hours > 14:
             return 14
-        else:
-            return int(sleep_hours)
+        return int(sleep_hours)
 
     def convert_health_condition(health_condition):
+        """
+        Convert the general health to a numerical representation.
+        Args:
+            mental_health (str): The health factor to be converted.
+        Returns:
+            int: Numerical representation of health factor.
+        Raises:
+            ValueError: If the provided value is not in dictionary.
+        """
         health_map = {
             'excellent': 1,
             'very good': 2,
@@ -85,55 +148,49 @@ def user_input_mapping(user_data_dict):
         health_lower = health_condition.lower()
         if health_lower in health_map:
             return int(health_map[health_lower])
-        else:
-            raise ValueError("Invalid value for health condition")
+        raise ValueError("Invalid value for health condition")
 
     def convert_mental_health(mental_health):
+        """
+        Convert the depression factor to a numerical representation.
+        Args:
+            mental_health (str): The depression factor to be converted.
+        Returns:
+            int: Numerical representation of depression factor.
+        Raises:
+            ValueError: If the provided value is not in dictionary.
+        """
         mental_map = {
             'not at all': 0,
-            'occasionally these days': 1,
-            'frequently these days': 2,
-            'nearly every day these days': 3
+            'several days': 1,
+            'more than half the days': 2,
+            'nearly every day': 3
         }
         mental_lower = mental_health.lower()
         if mental_lower in mental_map:
             return int(mental_map[mental_lower])
-        else:
-            raise ValueError("Invalid value for mental health")
+        raise ValueError("Invalid value for mental health")
 
-    converted_data['internal_age'] = convert_age(user_data_dict['age'])
-    converted_data['internal_sex'] = convert_sex(user_data_dict['sex'])
-    converted_data['internal_height'] = user_data_dict['height']
-    converted_data['internal_weight'] = user_data_dict['weight']
-    converted_data['internal_ethnicity'] = convert_ethnicity(user_data_dict['ethnicity'])
-    converted_data['internal_activity_level'] = convert_activity_level(user_data_dict['activity_level'])
-    converted_data['internal_dietary_preference'] = convert_dietary_preference(user_data_dict['dietary_preference'])
-    converted_data['internal_smoke_cig'] = convert_smoke_cig(user_data_dict['smoke_cig'])
-    converted_data['internal_mental_health'] = convert_mental_health(user_data_dict['mental_health'])
-    converted_data['internal_sleep_hrs'] = convert_sleep_hours(float(user_data_dict['sleep_hrs']))
-    converted_data['internal_health_condition'] = convert_health_condition(user_data_dict['health_condition'])
-    converted_data['internal_diet_condition'] = convert_health_condition(user_data_dict['diet_condition'])
-    converted_data['internal_poor_appetite_overeating'] = convert_mental_health(user_data_dict['poor_appetite_overeating'])
-
-    return converted_data
-
-
-# # Example usage
-# data = {
-#         'age': 25,
-#         'sex': 'Male',
-#         'height': 70.5,
-#         'weight': 100,
-#         'ethnicity': 'Hispanic',
-#         'activity_level': 'Moderately Active',
-#         'dietary_preference': 'Non Vegetarian',
-#         'smoke_cig': 'No',
-#         'mental_health': 'Several days',
-#         'sleep_hrs': 7,
-#         'health_condition': 'Good',
-#         'diet_condition': 'Good',
-#         'poor_appetite_overeating': 'Not at all'
-#     }
-
-# converted_data = user_input_mapping(data)
-# print(converted_data)
+    internal_data['internal_age'] = convert_age(user_data_dict['age'])
+    internal_data['internal_sex'] = convert_sex(user_data_dict['sex'])
+    # Convert height to cm.
+    internal_data['internal_height'] = float(user_data_dict['height'] * 2.54)
+    # Convert weight to kg.
+    internal_data['internal_weight'] = float(user_data_dict['weight'] * 0.45359237)
+    internal_data['internal_ethnicity'] = convert_ethnicity(user_data_dict['ethnicity'])
+    internal_data['internal_activity_level'] = convert_activity_level(
+                                               user_data_dict['activity_level'])
+    internal_data['internal_dietary_preference'] = convert_dietary_preference(
+                                                   user_data_dict['dietary_preference'])
+    internal_data['internal_smoke_cig'] = int(user_data_dict['smoke_cig'].lower() == 'yes')
+    internal_data['internal_mental_health'] = convert_mental_health(
+                                              user_data_dict['mental_health'])
+    internal_data['internal_sleep_hrs'] = convert_sleep_hours(
+                                          float(user_data_dict['sleep_hrs']))
+    internal_data['internal_health_condition'] = convert_health_condition(
+                                                 user_data_dict['health_condition'])
+    internal_data['internal_diet_condition'] = convert_health_condition(
+                                               user_data_dict['diet_condition'])
+    internal_data['internal_Poor_apetitte_overeating'] = convert_mental_health(
+                                                         user_data_dict['Poor_apetitte_overeating'])
+    return internal_data
