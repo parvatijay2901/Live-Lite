@@ -2,7 +2,7 @@ import unittest
 import numpy as np
 from recommendation_tool.physical_activity_recommendation.physical_activity_recommend import calculate_calorie_burn
 
-class TestIsObese(unittest.TestCase):
+class TestActivity(unittest.TestCase):
 
     # Smoke test
     def test_activity_smoke(self):
