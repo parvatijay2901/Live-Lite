@@ -10,7 +10,6 @@ Functions:
 
 import pandas as pd
 
-
 def custom_median(series):
     """
     Calculate the median of a given series.
@@ -31,7 +30,6 @@ def custom_median(series):
     return sorted_values.iloc[length // 2]
 
 def calculate_calorie_burn(filename, weight_kg, intensity="moderate", preferred_activity=None):
-    df = pd.read_csv(filename)
     """
     Calculate estimated calorie burn based on weight and activity intensity.
     Args:
@@ -46,6 +44,8 @@ def calculate_calorie_burn(filename, weight_kg, intensity="moderate", preferred_
                         activity, duration, and estimated burn calories.
     """
     result = []
+
+    df = pd.read_csv(filename)
 
     if preferred_activity is None:
         # Choose the calorie based on the type of measure of intensity.
