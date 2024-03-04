@@ -1,6 +1,6 @@
 import unittest
 import numpy as np
-from LiveLite.recommendation_tool.risk_assessment.risk_predictor import risk_predict
+from recommendation_tool.risk_assessment.risk_predictor import risk_predict
 
 class TestRiskPredict(unittest.TestCase):
 
@@ -16,7 +16,7 @@ class TestRiskPredict(unittest.TestCase):
                     'RIDRETH3': [4], 
                     'SMQ040': [0],
                     'SLD012': [5],}
-        risk_predict(inputdict, 'obesity_risk_model.joblib')
+        risk_predict(inputdict, 'recommendation_tool/risk_assessment/trained_models/obesity_risk_model.joblib')
         self.assertTrue(True)
     
     def test_risk_Predict_1(self):
@@ -30,8 +30,8 @@ class TestRiskPredict(unittest.TestCase):
                     'RIDRETH3': [4], 
                     'SMQ040': [0],
                     'SLD012': [5],}
-        expect_result = (32.2, "Green")
-        self.assertEqual(expect_result,risk_predict(inputdict, 'obesity_risk_model.joblib'))
+        expect_result = (32.2, "#66915c")
+        self.assertEqual(expect_result,risk_predict(inputdict, 'recommendation_tool/risk_assessment/trained_models/obesity_risk_model.joblib'))
     
     def test_risk_Predict_2(self):
         inputdict = {'DPQ020': [0], 
@@ -44,8 +44,8 @@ class TestRiskPredict(unittest.TestCase):
                     'RIDRETH3': [4], 
                     'SMQ040': [0],
                     'SLD012': [9],}
-        expect_result = (20.0, "Blue")
-        self.assertEqual(expect_result,risk_predict(inputdict, 'obesity_risk_model.joblib'))
+        expect_result = (20.0, "#add8e6")
+        self.assertEqual(expect_result,risk_predict(inputdict, 'recommendation_tool/risk_assessment/trained_models/obesity_risk_model.joblib'))
 
     def test_risk_Predict_3(self):
         inputdict = {'DPQ020': [1], 
@@ -58,8 +58,8 @@ class TestRiskPredict(unittest.TestCase):
                     'RIDRETH3': [2], 
                     'SMQ040': [1],
                     'SLD012': [2],}
-        expect_result = (58.9, "Yellow")
-        self.assertEqual(expect_result,risk_predict(inputdict, 'obesity_risk_model.joblib'))
+        expect_result = (58.9, "#ffff99")
+        self.assertEqual(expect_result,risk_predict(inputdict, 'recommendation_tool/risk_assessment/trained_models/obesity_risk_model.joblib'))
     
     def test_risk_Predict_4(self):
         inputdict = {'DPQ020': [2], 
@@ -72,8 +72,8 @@ class TestRiskPredict(unittest.TestCase):
                     'RIDRETH3': [1], 
                     'SMQ040': [1],
                     'SLD012': [2],}
-        expect_result = (76.2, "Red")
-        self.assertEqual(expect_result,risk_predict(inputdict, 'obesity_risk_model.joblib'))
+        expect_result = (76.2, "#ffa07a")
+        self.assertEqual(expect_result,risk_predict(inputdict, 'recommendation_tool/risk_assessment/trained_models/obesity_risk_model.joblib'))
     
     def test_risk_predict_invalid_type(self):
         inputdict = {'DPQ020': [1.8], 
@@ -87,12 +87,12 @@ class TestRiskPredict(unittest.TestCase):
                     'SMQ040': [1],
                     'SLD012': [2],}
         with self.assertRaises(TypeError):
-            risk_predict(inputdict, 'obesity_risk_model.joblib')
+            risk_predict(inputdict, 'recommendation_tool/risk_assessment/trained_models/obesity_risk_model.joblib')
     
     def test_risk_predict_is_input_empty(self):
         inputdict = {}
         with self.assertRaises(ValueError):
-            risk_predict(inputdict, 'obesity_risk_model.joblib')
+            risk_predict(inputdict, 'recommendation_tool/risk_assessment/trained_models/obesity_risk_model.joblib')
     
     def test_risk_predict_invalid_data(self):
         inputdict = {'DPQ020': [1.8], 
@@ -106,7 +106,7 @@ class TestRiskPredict(unittest.TestCase):
                     'SMQ040': [1],
                     'SLD012': [2],}
         with self.assertRaises(TypeError):
-            risk_predict(inputdict, 'obesity_risk_model.joblib')
+            risk_predict(inputdict, 'recommendation_tool/risk_assessment/trained_models/obesity_risk_model.joblib')
     
     def test_risk_predict_is_model_path_valid(self):
         inputdict = {'DPQ020': [1], 

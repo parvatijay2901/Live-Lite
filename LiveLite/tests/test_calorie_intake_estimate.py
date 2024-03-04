@@ -1,6 +1,6 @@
 import unittest
 import numpy as np
-from LiveLite.recommendation_tool.nutrition_estimation.calorie_intake.calorie_intake_estimate import calculate_calorie_intake
+from recommendation_tool.nutrition_estimation.calorie_intake.calorie_intake_estimate import calculate_calorie_intake
 
 class TestCalorieEstimate(unittest.TestCase):
 

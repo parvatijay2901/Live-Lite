@@ -1,6 +1,6 @@
 import unittest
 import numpy as np
-from LiveLite.recommendation_tool.risk_assessment.is_obese import is_obese
+from recommendation_tool.risk_assessment.is_obese import is_obese
 
 class TestIsObese(unittest.TestCase):
 
