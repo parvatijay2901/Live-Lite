@@ -68,7 +68,8 @@ for data in all_data:
     
     # Calculate calories per pound using average weight
     cal_per_lb_avg = ((data[2]/125) + (data[3]/155) + (data[4]/185)) / 3 
-    all_data_processed.append((activity_type, activity, cal_125lbs, cal_155lbs, cal_185lbs, cal_per_lb_avg))
+    cal_per_kg_avg = cal_per_lb_avg/0.453592
+    all_data_processed.append((activity_type, activity, cal_125lbs, cal_155lbs, cal_185lbs, cal_per_lb_avg, cal_per_kg_avg))
 
 
 for data in all_data_processed:
@@ -78,6 +79,6 @@ for data in all_data_processed:
 # Write the data into a CSV file
 with open("calories_burned_30_minutes.csv", "w", newline="") as csvfile:
     writer = csv.writer(csvfile)
-    writer.writerow(["Activity Type", "Activity", "Calories (125 lbs)", "Calories (155 lbs)", "Calories (185 lbs)", "cal_per_lb_avg"])
+    writer.writerow(["Activity Type", "Activity", "Calories (125 lbs)", "Calories (155 lbs)", "Calories (185 lbs)", "cal_per_lb_avg", "cal_per_kg_avg"])
     for data in all_data_processed:
         writer.writerow(data)
