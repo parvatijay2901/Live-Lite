@@ -1,25 +1,24 @@
-# SEQN sequence num
-# BMXHT	Standing Height (cm)	
-# BMXWT	Weight (kg)	
-# DPQ020	Feeling down, depressed, or hopeless	0-3, good - poor
-# DPQ050	Poor appetite or overeating	0-3, good - poor
-# SLD012	Sleep hours	number from 2 to 14.5
-# PAQ670	Days moderate recreational activities	1 to 5 , sedentary - extra active
-# DBQ700	How healthy is the diet	1-5 , good - poor
-# HUQ010	General health condition	1-5 , good - poor
-# RIAGENDR	Gender	0 - female, 1 - male
-# RIDRETH3	Race/Ethnicity - Recode	1, 2, 3 ,4 , 6, 7 
-# SMQ040	Do you now smoke cigarettes	0 no, 1 yes
+"""
+   This module is to clean teh NHANES combined raw data
+   and preprocess data for Machine Leanring Model.
 
+   Functions:
+    - process_smoking()
+    - process_sleeping()
+    - process_general_1_5()
+    - process_general_0_3()
+    - process_activity()
+    - process_ethnicity()
+    - process_gender()
+    """
 import pandas as pd
 import numpy as np
 
-
-# File path of your CSV file
-file_path = 'NHANES_dataset_2024-02-09.csv'
+FILE_PATH = 'nhanes_obesity_factors.csv'
 
 # Columns for model training
-columns_to_read = ['SEQN',
+columns_to_read = [
+    'SEQN',
     'BMXHT',
     'BMXWT',
     'RIDAGEYR',
@@ -35,129 +34,157 @@ columns_to_read = ['SEQN',
     'INDFMPIR'
 ]
 
-
-df = pd.read_csv(file_path, usecols=columns_to_read)
+df = pd.read_csv(FILE_PATH, usecols=columns_to_read)
 
 # Drop rows with blank height or weight
 df.dropna(subset=['BMXHT', 'BMXWT'], inplace=True)
 
 # BMI = weight (kg) / (height (m) ^ 2)
-df['BMI'] = df['BMXWT'] / ((df['BMXHT'] / 100) ** 2)  
+df['BMI'] = df['BMXWT'] / ((df['BMXHT'] / 100) ** 2)
 
 # Add a new binary column 'Is_obese' based on BMI
 df['IsObese'] = (df['BMI'] >= 30).astype(int)
 
-# Drop the 'BMI' column
 df.drop(columns=['BMI'], inplace=True)
 
-# Handle invalid values in Smoking feature
-def process_SMQ040(row):
+def process_smoking(row):
+    """
+    This function handles invalid values in the Smoking factor.
+    Args:
+        row (pandas.series): A row from a dataframe.
+    Returns:
+        int: Processed value for the Smoking factor.
+    """
     if row['SMQ040'] == 3:
         return 0
-    elif row['SMQ040'] in [1, 2]:
+    if row['SMQ040'] in [1, 2]:
         return 1
     # Column applicable only for age above 18
-    elif row['RIDAGEYR'] > 18:
+    if row['RIDAGEYR'] > 18:
         return np.random.choice([0, 1])
-    else:
-        return 0
+    return 0
+
 
 # Handle invalid values in Sleeping hours feature
-def process_SLD012(row):
+def process_sleeping(row):
+    """
+    This function handles invalid values in the sleeping hours factor.
+    Args:
+        row (pandas.series): A row from a dataframe.
+    Returns:
+        int: Processed value for sleeping hours factor.
+    """
     if pd.isnull(row['SLD012']):
         # Column applicable only for age above 10
         if row['RIDAGEYR'] < 10:
             return np.random.choice(np.arange(8, 14.6, 0.5))
-        else:
-            return np.random.choice(np.arange(2, 10.1, 0.5))
-    else:
-        return row['SLD012']
+        return np.random.choice(np.arange(2, 10.1, 0.5))
+    return row['SLD012']
 
-# Handle invalid values in features that range values from 1-5, 7 & 9 are considered unknown or missing that needs to be handled.  
 def process_general_1_5(row, column_name):
-    if row[column_name] in [7, 9] or pd.isnull(row[column_name]):  # If field is 7, 9, or blank
-        return np.random.choice([1, 2, 3, 4, 5])  # Random value between 1 to 5
-    else:
-        return row[column_name]
-    
-# Handle invalid values in features that range values from 0-3, 7 & 9 are considered unknown or missing that needs to be handled. 
+    """
+    This function handles invalid values in any factor
+    that ranges from category 1 to 5.
+    Args:
+        row (pandas.series): A row from a dataframe.
+        column_name (str): The name of the column to process.
+    Returns:
+        int: Processed value the specified column.
+    """
+    # 7 & 9 are considered unknown or missing that needs to be handled.
+    if row[column_name] in [7, 9] or pd.isnull(row[column_name]):
+        return np.random.choice([1, 2, 3, 4, 5])
+    return row[column_name]
+
 def process_general_0_3(row, column_name):
-    if row[column_name] in [7, 9] or pd.isnull(row[column_name]) or row[column_name] not in [0, 1, 2, 3] :  
+    """
+    This function handles invalid values in any factor
+    that ranges from category 0 to 3.
+    Args:
+        row (pandas.series): A row from a dataframe.
+        column_name (str): The name of the column to process.
+    Returns:
+        int: Processed value the specified column.
+    """
+    # 7 & 9 are considered unknown or missing that needs to be handled.
+    if row[column_name] in [7, 9] or pd.isnull(row[column_name])\
+    or row[column_name] not in [0, 1, 2, 3]:
         # Column applicable only for age above 16
-        if row['RIDAGEYR'] <= 16: 
+        if row['RIDAGEYR'] <= 16:
             return 0
-        return np.random.choice([0, 1, 2, 3])  # Random value between 0 to 3
-    else:
-        return row[column_name]
+        return np.random.choice([0, 1, 2, 3])
+    return row[column_name]
 
- # Handle invalid values in Physical activity level feature
-def process_PAQ670(row):
-    if row['PAQ670'] in [77, 99] or pd.isnull(row['PAQ670']) or row['PAQ670'] not in [1, 2, 3, 4, 5, 6, 7] :  
-         # Column applicable only for age above 12
+# Handle invalid values in Physical activity level feature
+def process_activity(row):
+    """
+    This function handles invalid values in the sleeping hours factor.
+    Args:
+        row (pandas.series): A row from a dataframe.
+    Returns:
+        int: Processed value for sleeping hours factor.
+    """
+    if row['PAQ670'] in [77, 99] or pd.isnull(row['PAQ670'])\
+    or row['PAQ670'] not in [1, 2, 3, 4, 5, 6, 7]:
+        # Column applicable only for age above 12
         if row['RIDAGEYR'] <= 12:
-            processed_value =  7
-        processed_value = np.random.choice([1, 2, 3, 4, 5, 6, 7])  # Random value between 1 to 7
-    else:
-        processed_value =  row['PAQ670']
+            processed_value = 7
+        processed_value = np.random.choice([1, 2, 3, 4, 5, 6, 7])
+    processed_value = row['PAQ670']
 
-    # Manually encode the values to match the tool activity level dictionary, sedentry to extremely active.
+    # Manually encode the values to match the tool activity dictionary,
+    # sedentary to extremely active.
     if processed_value == 1:
         return 1
-    elif processed_value in [2, 3]:
+    if processed_value in [2, 3]:
         return 2
-    elif processed_value == 4:
+    if processed_value == 4:
         return 3
-    elif processed_value in [5, 6]:
+    if processed_value in [5, 6]:
         return 4
-    elif processed_value == 7:
-        return 5
+    return 5
 
 # Handle invalid values ethnicity feature
-def process_RIDRETH3(row):
-    if pd.isnull(row['RIDRETH3']) or row['RIDRETH3'] not in [1, 2, 3, 4, 6, 7] :  
-        return np.random.choice([1, 2, 3, 4, 6, 7])  # Random value between 1 to 7
-    else:
-        return row['RIDRETH3']
+def process_ethnicity(row):
+    """
+    This function handles invalid values in the ethnicity factor.
+    Args:
+        row (pandas.series): A row from a dataframe.
+    Returns:
+        int: Processed value for ethnicity factor.
+    """
+    if pd.isnull(row['RIDRETH3']) or row['RIDRETH3']\
+    not in [1, 2, 3, 4, 6, 7]:
+        return np.random.choice([1, 2, 3, 4, 6, 7])
+    return row['RIDRETH3']
+
 
 # Convert Gender column into binary.
-def process_RIAGENDR(row):
-    if row['RIAGENDR'] == 2 :  
+def process_gender(row):
+    """
+    This function handles invalid values in the gender factor.
+    Args:
+        row (pandas.series): A row from a dataframe.
+    Returns:
+        int: Processed value for gender factor.
+    """
+    if row['RIAGENDR'] == 2:
         return 0
-    else:
-        return row['RIAGENDR']
-
-# For each feature, apply the specific function to process null or invalid values.   
-df['RIAGENDR'] = df.apply(lambda row: process_RIAGENDR(row), axis=1)
-
-df['SMQ040'] = df.apply(lambda row: process_SMQ040(row), axis=1)
-
-df['SLD012'] = df.apply(lambda row: process_SLD012(row), axis=1)
-
-df['HUQ010'] = df.apply(lambda row: process_general_1_5(row,'HUQ010'), axis=1)
-
-df['DBQ700'] = df.apply(lambda row: process_general_1_5(row,'DBQ700'), axis=1)
-
-df['DPQ050'] = df.apply(lambda row: process_general_0_3(row,'DPQ050'), axis=1)
-
-df['DPQ020'] = df.apply(lambda row: process_general_0_3(row,'DPQ020'), axis=1)
-
-df['PAQ670'] = df.apply(lambda row: process_PAQ670(row), axis=1)
-
-df['RIDRETH3'] = df.apply(lambda row: process_RIDRETH3(row), axis=1)
+    return row['RIAGENDR']
 
 
-# Retain only records with no missing values in any column
-# df.dropna(inplace=True)
-
-# df = df[df['RIDAGEYR'] >= 18]
+# For each feature, apply the specific function to process null or invalid values.
+df['RIAGENDR'] = df.apply(process_gender, axis=1)
+df['SMQ040'] = df.apply(process_smoking, axis=1)
+df['SLD012'] = df.apply(process_sleeping, axis=1)
+df['HUQ010'] = df.apply(lambda row: process_general_1_5(row, 'HUQ010'), axis=1)
+df['DBQ700'] = df.apply(lambda row: process_general_1_5(row, 'DBQ700'), axis=1)
+df['DPQ050'] = df.apply(lambda row: process_general_0_3(row, 'DPQ050'), axis=1)
+df['DPQ020'] = df.apply(lambda row: process_general_0_3(row, 'DPQ020'), axis=1)
+df['PAQ670'] = df.apply(process_activity, axis=1)
+df['RIDRETH3'] = df.apply(process_ethnicity, axis=1)
 
 # Write the DataFrame to a new CSV file
-output_file_path = 'ML_input.csv'
-df.to_csv(output_file_path, index=False)
-
-print(f"DF has been saved to '{output_file_path}'.")
-
-
-
-
-
+OUTPUT_FILE_PATH = 'ml_input.csv'
+df.to_csv(OUTPUT_FILE_PATH, index=False)
+print(f"DF has been saved to '{OUTPUT_FILE_PATH}'.")

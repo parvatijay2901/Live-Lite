@@ -1,37 +1,68 @@
+"""
+This module provides functions to calculate estimated calorie burn
+based on weight and activity intensity.
+
+Functions:
+- custom_median(): Calculates the median of a given series.
+- calculate_calorie_burn(): Calculates estimated calorie burn
+                            based on weight and activity intensity.
+"""
+
 import pandas as pd
 
-# Custom function to choose a moderate calorie burn va;oe
+
 def custom_median(series):
+    """
+    Calculate the median of a given series.
+    Args:
+        series (pandas.Series): The input series for which median is to be calculated.
+    Returns:
+        float: The median of the series.
+    Raises:
+        ValueError: If the series is empty.
+    """
+    if series.empty:
+        raise ValueError("Input series is empty")
+
     sorted_values = series.sort_values()
     length = len(sorted_values)
     if length % 2 == 0:
-        return sorted_values.iloc[length // 2 - 1]  # Return the first of the two center values
-    else:
-        return sorted_values.iloc[length // 2]
+        return sorted_values.iloc[length // 2 - 1]
+    return sorted_values.iloc[length // 2]
 
 def calculate_calorie_burn(filename, weight_kg, intensity="moderate", preferred_activity=None):
-    result = []
-    
-    # Read data from the CSV file into a dataframe
     df = pd.read_csv(filename)
+    """
+    Calculate estimated calorie burn based on weight and activity intensity.
+    Args:
+        filename (str): Input csv file.
+        weight_kg (float): Weight in kilograms.
+        intensity (str, optional): Intensity level of the activity. Defaults to "moderate".
+        preferred_activity (str, optional): Preferred activity. Defaults to None.
+    Raises:
+        ValueError: If the intensity level is invalid.
+    Returns:
+        list of tuples: List containing tuples of activity type, 
+                        activity, duration, and estimated burn calories.
+    """
+    result = []
 
     if preferred_activity is None:
         # Choose the calorie based on the type of measure of intensity.
         if intensity == "moderate":
-            chosen_calorie = df.groupby('Activity Type')['cal_per_kg_avg'].agg(custom_median).reset_index()
+            chosen_calorie = (df.groupby('Activity Type')['cal_per_kg_avg']
+                              .agg(custom_median).reset_index())
         elif intensity == "low":
-            chosen_calorie = df.groupby('Activity Type')['cal_per_kg_avg'].min().reset_index()
+            chosen_calorie = (df.groupby('Activity Type')['cal_per_kg_avg']
+                              .min().reset_index())
         elif intensity == "high":
-            chosen_calorie = df.groupby('Activity Type')['cal_per_kg_avg'].max().reset_index()
+            chosen_calorie = (df.groupby('Activity Type')['cal_per_kg_avg']
+                              .max().reset_index())
         else:
             raise ValueError("Invalid intensity level")
 
-        # print("Chosen calorie:")
-        #print(chosen_calorie)
-
         # Calculate estimated calorie burn for the given weight input
         estimated_burn = chosen_calorie['cal_per_kg_avg'] * weight_kg
-        #print(estimated_burn)
 
         # Create list of tuples with activity type, activity, duration, and estimated burn calories
         for idx, row in chosen_calorie.iterrows():
@@ -39,9 +70,10 @@ def calculate_calorie_burn(filename, weight_kg, intensity="moderate", preferred_
             cal_per_kg_avg = row['cal_per_kg_avg']
 
             # Get the records that match the chosen calorie value and activities
-            activity = df.loc[(df['Activity Type'] == activity_type) & (df['cal_per_kg_avg'] == cal_per_kg_avg), 'Activity'].iloc[0]
+            activity = (df.loc[(df['Activity Type'] == activity_type)
+                        & (df['cal_per_kg_avg'] == cal_per_kg_avg)
+                        ,'Activity'].iloc[0])
 
-            # Set default duration period
             duration = "30 min"
 
             # Fetch the corresponding calculated calorie value
@@ -50,8 +82,6 @@ def calculate_calorie_burn(filename, weight_kg, intensity="moderate", preferred_
 
     else:
         chosen_record = df[df['Activity'].str.lower().str.contains(preferred_activity.lower())]
-        #print("Chosen record:")
-        #print(chosen_record)
         for idx, row in chosen_record.iterrows():
             activity_type = row['Activity Type']
             activity = row['Activity']
@@ -60,7 +90,3 @@ def calculate_calorie_burn(filename, weight_kg, intensity="moderate", preferred_
             result.append((activity_type, activity, duration, f"{calories:.0f} kcal"))
 
     return result
-
-# Example usage:
-# output_list = calculate_calorie_burn(150)
-# print(output_list)
