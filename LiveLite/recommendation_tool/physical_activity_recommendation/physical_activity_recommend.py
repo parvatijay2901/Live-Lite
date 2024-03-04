@@ -82,6 +82,10 @@ def calculate_calorie_burn(filename, weight_kg, intensity="moderate", preferred_
 
     else:
         chosen_record = df[df['Activity'].str.lower().str.contains(preferred_activity.lower())]
+        
+        if chosen_record.empty:
+            raise ValueError(f"No records found for preferred activity: {preferred_activity}")
+        
         for idx, row in chosen_record.iterrows():
             activity_type = row['Activity Type']
             activity = row['Activity']
