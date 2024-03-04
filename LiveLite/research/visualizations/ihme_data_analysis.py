@@ -115,17 +115,20 @@ def plot_ihme_data(data, years, highlighted_risk_factor="high body-mass index"):
             textposition='outside'
         ), row=1, col=i)
 
-        fig.update_xaxes(title_text='Number of Deaths', range = [0, 20000000], row=1, col=i)
+        fig.update_xaxes(title_text='Number of Deaths', range=[0, 20000000], row=1, col=i)
 
-        y_axis = list(data_year['Risk Factor'])
-        temp_vals = list(range(len(y_axis)))
-        fig.update_yaxes(tickmode='array', tickvals=temp_vals, ticktext=y_axis, row=1, col=i)
+        if i == 0:
+            y_axis = list(data_year['Risk Factor'])
+            temp_vals = list(range(len(y_axis)))
+
+            fig.update_yaxes(tickmode='array', tickvals=temp_vals, ticktext=y_axis, row=1, col=1)
 
     fig.update_layout(
         title='Deaths by Risk Factor',
         title_x=0.5,
         height=500,
         showlegend=False,
+        autosize=True,
         margin={'l': 50, 'r': 50, 't': 100, 'b': 50}
     )
     fig.update_yaxes(title_text="Risk Factor", row=1, col=1)
