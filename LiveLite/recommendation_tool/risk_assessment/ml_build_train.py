@@ -30,7 +30,7 @@ def build_and_evaluate_model():
     """
     try:
         # Load data
-        data = pd.read_csv('ml_input.csv')
+        data = pd.read_csv('./data/input_files/ml_input.csv')
         x = data.drop(['SEQN', 'BMXHT', 'BMXWT','IsObese'], axis=1)
         y = data['IsObese']
 
@@ -149,7 +149,7 @@ def find_most_influential_factors(model, num_features, cat_features):
         print(coefficients_df.head(3))
 
     except Exception as e:
-        raise type(e)(f"Error occurred while building and evaluating the model: {e}") from e
+        raise Exception(f"Error occurred while building and evaluating the model: {str(e)}")
 
 if __name__ == "__main__":
     build_and_evaluate_model()
