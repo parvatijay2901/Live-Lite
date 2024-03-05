@@ -1,34 +1,96 @@
-import matplotlib.pyplot as plt
-import seaborn as sns
+"""
+NHANES Obesity Overweight Analysis
+
+Provides:
+    1. Function that plots NHANES proportion of obese and overweight over time.
+"""
+import pandas as pd
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+
 
 def plot_obesity_overweight_trends(data, years=None):
-    if years is None:
-        years = [1999, 2001, 2003, 2005, 2007, 2009, 2011, 2013, 2015, 2017]
+    """
+    Generates a line plot comparing the proportion of obese
+    and overweight individuals over specified years.
+    :param data: Combined processed NHANES dataframe.
+    :param years: List of years.
+    :return: Figure object.
+    """
+    years_default = [1999, 2001, 2003, 2005, 2007, 2009, 2011, 2013, 2015, 2017]
+
+    if years is not None:
+        years = years_default
+    elif isinstance(years, list):
+        raise TypeError(
+            "Years must be a list."
+        )
+    else:
+        years = years_default
+
+    if not isinstance(data, pd.DataFrame):
+        raise TypeError(
+            "Data must be a dataframe."
+        )
+
+    if list(set(years).difference(years_default)):
+        raise ValueError("Valid years start from 1999 and increment by 2 years.")
 
     data = data[data['Year'].isin(years)]
+    prop_data = data.groupby('Year').agg({'Obese': 'mean', 'Overweight (including obesity)': 'mean'}).reset_index()
+
+    max_proportion_obese = prop_data[['Obese']].max().max()
+    max_proportion_overweight = prop_data[['Overweight (including obesity)']].max().max()
     
+    min_proportion_obese = prop_data[['Obese']].min().min()
+    min_proportion_overweight = prop_data[['Overweight (including obesity)']].min().min()
+
+    # Optionally, you can add a small margin to the max limit for visual aesthetics
+    max_proportion_obese += max_proportion_obese * 0.05
+    max_proportion_overweight += max_proportion_overweight * 0.05
+
     # Create subplots with two plots side by side
-    fig, ax = plt.subplots(1, 2, figsize=(15, 6))
+    fig = make_subplots(
+        rows=2, cols=1,
+        subplot_titles=(
+            'Proportion of Individuals Obese by Year',
+            'Proportion of Individuals Overweight (including obesity) by Year'
+        )
+    )
 
     # Plot proportion of individuals who are obese
-    sns.lineplot(data=data, x='Year', y='Obese', ax=ax[0])
-    ax[0].set_title('Proportion of Individuals Obese by Year')
-    ax[0].set_xlabel('Year')
-    ax[0].set_ylabel('Proportion Obese')
+    fig.add_trace(
+        go.Scatter(
+            x=prop_data['Year'], y=prop_data['Obese'], mode='lines', name='Obese'
+        ),
+        row=1,
+        col=1
+    )
 
     # Plot proportion of individuals who are overweight (including obesity)
-    sns.lineplot(data=data, x='Year', y='Overweight (including obesity)', ax=ax[1])
-    ax[1].set_title('Proportion of Individuals Overweight (including obesity) by Year')
-    ax[1].set_xlabel('Year')
-    ax[1].set_ylabel('Proportion Overweight (including obesity)')
+    fig.add_trace(
+        go.Scatter(
+            x=prop_data['Year'], y=prop_data['Overweight (including obesity)'],
+            mode='lines',
+            name='Overweight (including obesity)'
+        ),
+        row=2,
+        col=1
+    )
 
-    # Customize x-axis 
-    unique_years = sorted(data['Year'].unique())
-    for axis in ax:
-        axis.set_xticks(unique_years)
-        axis.set_xticklabels(unique_years, rotation=45)
-        axis.yaxis.grid(True)
-        axis.grid(linestyle='-', linewidth='0.5', color='gray')
+    # Customize axes and layout with the same y-axis range for both plots
+    fig.update_yaxes(title_text='Proportion', range=[min_proportion_obese, max_proportion_obese], row=1, col=1)
+    fig.update_xaxes(title_text='Year', row=1, col=1)
+    
+    fig.update_yaxes(title_text='Proportion', range=[min_proportion_overweight, max_proportion_overweight], row=2, col=1)
+    fig.update_xaxes(title_text='Year', row=2, col=1)
 
-    plt.tight_layout()
+    fig.update_layout(
+        grid={'rows': 2, 'columns': 1},
+        height=800, width=800,
+        title_text="Obesity and Overweight Trends Over Years",
+        title_x=0.4,
+        showlegend=False
+    )
+
     return fig

@@ -1,17 +1,17 @@
 import unittest
 import numpy as np
-from recommendation_tool.physical_activity_recommendation.physical_activity_recommend import calculate_calorie_burn
+from LiveLite import calculate_calorie_burn
 
 class TestActivity(unittest.TestCase):
 
     # Smoke test
     def test_activity_smoke(self):
-        file = "data/input_files/calories_burned_30_minutes.csv"
+        file = "LiveLite/data/input_files/calories_burned_30_minutes.csv"
         calculate_calorie_burn(file,60,"high")
         self.assertTrue(True)
 
     def test_activity_1(self):
-        file = "data/input_files/calories_burned_30_minutes.csv"
+        file = "LiveLite/data/input_files/calories_burned_30_minutes.csv"
         result = [('Gym Activities',
                     'Stretching, Hatha Yoga',
                     '30 min', '123 kcal')]
@@ -19,7 +19,7 @@ class TestActivity(unittest.TestCase):
         self.assertEqual(result,test)
     
     def test_activity_2(self):
-        file = "data/input_files/calories_burned_30_minutes.csv"
+        file = "LiveLite/data/input_files/calories_burned_30_minutes.csv"
         result = [('Gym Activities',
                    'Aerobics, Step: low impact',
                    '30 min',
@@ -38,7 +38,7 @@ class TestActivity(unittest.TestCase):
         self.assertEqual(result,test)
     
     def test_activity_3(self):
-        file = "data/input_files/calories_burned_30_minutes.csv"
+        file = "LiveLite/data/input_files/calories_burned_30_minutes.csv"
         result = [('Gym Activities',
                    'Weight Lifting: general',
                    '30 min',
@@ -59,12 +59,12 @@ class TestActivity(unittest.TestCase):
         self.assertEqual(result,test)
     
     def test_activity_invalid_intentisy(self):
-        file = "data/input_files/calories_burned_30_minutes.csv"
+        file = "LiveLite/data/input_files/calories_burned_30_minutes.csv"
         with self.assertRaises(ValueError):
             calculate_calorie_burn(file,92,"bleebluhblah")
     
     def test_activity_invalid_activity(self):
-        file = "data/input_files/calories_burned_30_minutes.csv"
+        file = "LiveLite/data/input_files/calories_burned_30_minutes.csv"
         with self.assertRaises(ValueError):
             calculate_calorie_burn(file,92,preferred_activity="bleebluhblah")
 

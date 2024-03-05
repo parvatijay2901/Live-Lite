@@ -14,22 +14,11 @@ def get_input_for_risk_score(mapped_user_inputs):
                         }
     return risk_predict_input
 
-def display_risk_score(risk_score):
-    if risk_score < 100:
-        if risk_score <= 25:
-            color = '#add8e6'
-        elif risk_score > 25 and risk_score <= 50:
-            color = '#add8e6'
-        elif risk_score > 50 and risk_score <= 75:
-            color = '#ffff99'  
-        else:
-            color = '#ffa07a' 
-        
+def display_risk_score(risk_score, color):
+    if risk_score < 100:        
         risk_score = str(risk_score) + "%"
-        
     else:
         risk_score = "Obese"
-        color = '#ff6242'
         
     donut_plot = f"""<div style="width: 250px; height: 250px;">
     <svg width="250" height="250" viewBox="0 0 250 250">

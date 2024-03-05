@@ -45,7 +45,7 @@ def risk_predict(input_dict, model):
     if 0 <= obesity_risk <= 25:
         color = '#add8e6'  # Low risk
     elif 25 < obesity_risk <= 50:
-        color = '#66915c'  # Moderate risk
+        color = '#81a977'  # Moderate risk
     elif 50 < obesity_risk <= 75:
         color = '#ffff99'  # High risk
     else:

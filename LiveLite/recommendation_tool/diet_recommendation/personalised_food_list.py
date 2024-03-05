@@ -5,14 +5,13 @@
 # a variety of food groups will be appended to a dataframe 
 # food groups : Beef, pork, poultry, dairy, eggs, grains, legumes, fruits, vegetables, Nuts and seeds
 import pandas as pd
-import numpy as np
+import string
 
-def recommended_food(is_obesed, risk_score, food_preference):
-    data = pd.read_csv("../../data/input_files/food_nutrition_data.csv")
+def recommended_food(data, risk_score, food_preference):
     food_data = data[["FoodGroup","Descrip","Energy_kcal","Protein_g","Fat_g","Carb_g","Sugar_g","Fiber_g"]]
 
     #logic to determine risk level
-    if is_obesed == 1 or risk_score > 75:
+    if risk_score > 75:
         risk_level = "high"
     elif 35 < risk_score <= 75:
         risk_level = "medium"
@@ -179,17 +178,17 @@ def recommended_food(is_obesed, risk_score, food_preference):
     #print(dairy_low_risk)
 
     food_groups = {
-        1: {
+        'vegan': {
             "high": [sample_legumes_high_risk, sample_vegan_grains, fruits, veggies],
             "medium": [sample_legumes_med_risk, sample_vegan_grains, fruits, veggies],
             "low": [sample_legumes_low_risk, sample_vegan_grains, fruits, veggies],
         },
-        2: {
+        'vegetarian': {
             "high": [sample_legumes_high_risk, sample_vegan_grains, fruits, veggies, dairy_high_med_risk],
             "medium": [legumes_med_risk, sample_vegan_grains, fruits, veggies, dairy_high_med_risk],
             "low": [legumes_low_risk, sample_vegan_grains, fruits, veggies, dairy_low_risk],
         },
-        3: {
+        'non vegetarian': {
             "high": [sample_beef_high_risk, sample_pork_high_risk, sample_fish_high_risk, sample_poultry_high_risk, sample_grains_high_risk, fruits, veggies_non_vegetarian, dairy_high_med_risk],
             "medium": [sample_beef_med_risk, sample_pork_med_risk, sample_fish_med_risk, sample_poultry_med_risk, sample_grains_med_risk, fruits, veggies_non_vegetarian, dairy_high_med_risk],
             "low": [sample_beef_low_risk, sample_pork_low_risk, sample_fish_low_risk, sample_poultry_low_risk, grains_low_risk, fruits, veggies_non_vegetarian, dairy_low_risk],
@@ -209,18 +208,36 @@ def recommended_food(is_obesed, risk_score, food_preference):
     "Dairy and Egg Products": 'Dairy'
     }
     food_groups_df['FoodGroup'] = food_groups_df['FoodGroup'].map(new_group_values).fillna(food_groups_df['FoodGroup'])
+    food_groups_df.rename(columns={"FoodGroup": "Food Category",
+                                "Descrip": "Description",
+                                "Energy_kcal": "Calories (kcal)",
+                                "Protein_g": "Protein (gm)",
+                                "Fat_g": "Fat (gm)",
+                                "Carb_g": "Carbohydrates (gm)",
+                                "Sugar_g": "Sugar (gm)",
+                                "Fiber_g": "Fiber (gm)"}, inplace=True)
     #food_groups_df.to_csv("out.csv")
     #print(food_groups_df)
     return food_groups_df
 
-def search_food(food_item):
-    data = pd.read_csv("../../data/input_files/food_nutrition_data.csv")
+def search_food(data, food_item):
     if food_item == "":
         return None
-    out = data[(data["Descrip"].str.contains(food_item))]
+    else:
+        food_item = food_item.translate(str.maketrans('', '', string.punctuation))
+        food_item = food_item.lower()
+        
+    food_data = data[["FoodGroup","Descrip","Energy_kcal","Protein_g","Fat_g","Carb_g","Sugar_g","Fiber_g"]]
+    out = food_data[(food_data["Descrip"].str.contains(food_item))]
     out = out[["Descrip","Energy_kcal","Protein_g","Carb_g","Sugar_g","Fiber_g"]]
+    out.rename(columns={"Descrip": "Description",
+                        "Energy_kcal": "Calories (kcal)",
+                        "Protein_g": "Protein (gm)",
+                        "Carb_g": "Carbohydrates (gm)",
+                        "Sugar_g": "Sugar (gm)",
+                        "Fiber_g": "Fiber (gm)"}, inplace=True)
 
     return(out)
 
 #print(search_food("milk",filter_data))
-#print(recommended_food(is_obesed = 1, risk_score = 55, food_preference = 3))
+#print(recommended_food(risk_score = 55, food_preference = 3))

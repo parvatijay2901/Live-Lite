@@ -1,10 +1,6 @@
 import unittest
 import numpy as np
-<<<<<<< HEAD:tests/ml and actvity/test_is_obese.py
-from LiveLite.recommendation_tool.risk_assessment.is_obese import is_obese
-=======
-from recommendation_tool.risk_assessment.is_obese import is_obese
->>>>>>> c1ce701f8935890f08f262fb76dcd553454784fb:LiveLite/tests/test_is_obese.py
+from LiveLite import is_obese
 
 class TestIsObese(unittest.TestCase):
 

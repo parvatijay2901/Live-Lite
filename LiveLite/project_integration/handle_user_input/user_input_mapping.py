@@ -93,27 +93,6 @@ def user_input_mapping(user_data_dict):
             return int(activity_map[activity_lower])
         raise ValueError("Invalid value for activity level")
 
-    def convert_dietary_preference(dietary_preference):
-        """
-        Convert the diet preference to a numerical representation
-        as per tool definition.
-        Args:
-            dietary_preference (str): The dietary preferencer to be converted.
-        Returns:
-            int: Numerical representation of dietary preference.
-        Raises:
-            ValueError: If the provided value is not in dictionary.
-        """
-        dietary_map = {
-            'vegan': 1,
-            'vegeterian': 2,
-            'non vegetarian': 3
-        }
-        dietary_lower = dietary_preference.lower()
-        if dietary_lower in dietary_map:
-            return int(dietary_map[dietary_lower])
-        raise ValueError("Invalid value for dietary preference")
-
     def convert_sleep_hours(sleep_hours):
         """
         Restrict the sleep hours to valid values between 2 to 14
@@ -174,14 +153,12 @@ def user_input_mapping(user_data_dict):
     internal_data['internal_age'] = convert_age(user_data_dict['age'])
     internal_data['internal_sex'] = convert_sex(user_data_dict['sex'])
     # Convert height to cm.
-    internal_data['internal_height'] = float(user_data_dict['height'] * 2.54)
+    internal_data['internal_height'] = float(user_data_dict['height'])
     # Convert weight to kg.
-    internal_data['internal_weight'] = float(user_data_dict['weight'] * 0.45359237)
+    internal_data['internal_weight'] = float(user_data_dict['weight'])
     internal_data['internal_ethnicity'] = convert_ethnicity(user_data_dict['ethnicity'])
     internal_data['internal_activity_level'] = convert_activity_level(
                                                user_data_dict['activity_level'])
-    internal_data['internal_dietary_preference'] = convert_dietary_preference(
-                                                   user_data_dict['dietary_preference'])
     internal_data['internal_smoke_cig'] = int(user_data_dict['smoke_cig'].lower() == 'yes')
     internal_data['internal_mental_health'] = convert_mental_health(
                                               user_data_dict['mental_health'])
@@ -191,6 +168,6 @@ def user_input_mapping(user_data_dict):
                                                  user_data_dict['health_condition'])
     internal_data['internal_diet_condition'] = convert_health_condition(
                                                user_data_dict['diet_condition'])
-    internal_data['internal_Poor_apetitte_overeating'] = convert_mental_health(
-                                                         user_data_dict['Poor_apetitte_overeating'])
+    internal_data['internal_poor_appetite_overeating'] = convert_mental_health(
+                                                         user_data_dict['poor_appetite_overeating'])
     return internal_data
