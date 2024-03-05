@@ -31,7 +31,9 @@ def custom_median(series):
     return sorted_values.iloc[length // 2]
 
 def calculate_calorie_burn(filename, weight_kg, intensity="moderate", preferred_activity=None):
+    print(filename, weight_kg, intensity)
     df = pd.read_csv(filename)
+    print(df)
     """
     Calculate estimated calorie burn based on weight and activity intensity.
     Args:

@@ -27,9 +27,6 @@ def get_general_inputs(user_inputs):
                                                                                 "Moderately Active", 
                                                                                 "Active", 
                                                                                 "Extra Active"])
-    user_inputs['dietary_preference'] = st.selectbox("Mention your Dietary Preference", ["Vegan",
-                                                                                        "Vegetarian",
-                                                                                        "Non Vegetarian"])
     user_inputs['smoke_cig'] = st.selectbox("Do you Smoke Cigarettes?", ["No", "Yes"])
     user_inputs['mental_health'] = st.selectbox("Have you experienced any feelings of sadness, low mood, or hopelessness lately?", ["Not at all", 
                                                                                                                                     "Occasionally these days", 

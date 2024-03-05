@@ -17,9 +17,9 @@ st.markdown("""<div style="text-align:center;"><h2 style='color:gold;'>
 _, col2, _ = st.columns([4.3, 1, 5])
 with col2:
     LiveLite.add_blank_lines()
-    risk_score = LiveLite.controller("risk_score")
+    risk_score, color = LiveLite.controller("risk_score")
     st.session_state['risk_score'] = risk_score
-    LiveLite.display_risk_score(risk_score)
+    LiveLite.display_risk_score(risk_score, color)
     
 LiveLite.add_blank_lines(2)
 
