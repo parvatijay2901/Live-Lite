@@ -129,6 +129,7 @@ def plot_ihme_data(data, years, highlighted_risk_factor="high body-mass index"):
         height=500,
         showlegend=False,
         autosize=True,
+        yaxis={'dtick': 1},
         margin={'l': 50, 'r': 50, 't': 100, 'b': 50}
     )
     fig.update_yaxes(title_text="Risk Factor", row=1, col=1)
