@@ -40,9 +40,10 @@ LiveLite.add_blank_lines(num_lines=9)
 st.markdown("""<p style='text-align:center; font-weight:bold;'>Parvati Jayakumar, Ted Liu, Saikripa Mohan, Manasa Shivappa Ronur</p>""", 
             unsafe_allow_html=True)
 
-food_nutrition_data = pd.read_csv("LiveLite/data/input_files/food_nutrition_data.csv")
-data_NHANES = pd.read_csv("LiveLite/data/input_files/NHANES_Background.csv", low_memory=False)
-data_IHME = pd.read_csv("LiveLite/data/input_files/IHME/number-of-deaths-by-risk-factor.csv")
-st.session_state['food_nutrition_data'] = food_nutrition_data
-st.session_state['data_NHANES'] = data_NHANES
-st.session_state['data_IHME'] = data_IHME
+if 'food_nutrition_data' not in st.session_state or 'data_NHANES' not in st.session_state or 'data_IHME' not in st.session_state:
+   food_nutrition_data = pd.read_csv("LiveLite/data/input_files/food_nutrition_data.csv")
+   data_NHANES = pd.read_csv("LiveLite/data/input_files/NHANES_Background.csv", low_memory=False)
+   data_IHME = pd.read_csv("LiveLite/data/input_files/IHME/number-of-deaths-by-risk-factor.csv")
+   st.session_state['food_nutrition_data'] = food_nutrition_data
+   st.session_state['data_NHANES'] = data_NHANES
+   st.session_state['data_IHME'] = data_IHME

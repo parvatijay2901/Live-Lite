@@ -50,8 +50,6 @@ def controller(choice):
     if choice == "physical_activity_recommender":
         filename = "LiveLite/data/input_files/calories_burned_30_minutes.csv"
         intensity = st.session_state['preferred_exercise_intensity_level']
-        print(intensity)
         physical_activity_recommendendation_list = LiveLite.calculate_calorie_burn(filename, mapped_user_inputs['internal_weight'], intensity=intensity)
-        print(physical_activity_recommendendation_list)
         physical_activity_recommendendation_df = pd.DataFrame(physical_activity_recommendendation_list, columns=["Activity Type", "Activity Name", "Duration", "Calories Expended"])
         return physical_activity_recommendendation_df
