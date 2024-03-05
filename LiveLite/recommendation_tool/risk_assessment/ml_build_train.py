@@ -20,17 +20,20 @@ from sklearn.metrics import accuracy_score, classification_report
 from sklearn.utils import class_weight
 import joblib
 
-def build_and_evaluate_model():
+def build_and_evaluate_model(inputfile, outputfile):
     """
     Builds and evaluates a logistic regression model for predicting obesity risk.
+    Args:
+        inputfile (str): Full path for input csv file.
+        outputfile (str): Full path for output model.
     Raises:
-        Exception: If an error occurs while fitting a regression model.
+        Exception: If an invalid input file path is passed.
     Returns:
         None
     """
     try:
         # Load data
-        data = pd.read_csv('./data/input_files/ml_input.csv')
+        data = pd.read_csv(inputfile)
         x = data.drop(['SEQN', 'BMXHT', 'BMXWT','IsObese'], axis=1)
         y = data['IsObese']
 
@@ -43,7 +46,8 @@ def build_and_evaluate_model():
                                 'RIAGENDR',
                                 'RIDRETH3',
                                 'SMQ040']
-        numerical_features = ['SLD012', 'RIDAGEYR']
+        numerical_features = ['SLD012',
+                              'RIDAGEYR']
 
         # Define preprocessing steps for numerical and categorical features
         numerical_transformer = StandardScaler()
@@ -95,10 +99,10 @@ def build_and_evaluate_model():
         print(f'Best Accuracy: {accuracy}')
         print('Classification Report:')
         print(classification_report(y_test, y_pred))
-        save_model(best_model, 'obesity_risk_model.joblib')
+        save_model(best_model, outputfile)
 
-    except Exception as e:
-        raise type(e)(f"Error occurred while building and evaluating the model: {e}") from e
+    except FileNotFoundError as e:
+        raise FileNotFoundError(f"Invalid input filepath: {e}") from e
 
 def save_model(model, filepath):
     """
@@ -149,7 +153,4 @@ def find_most_influential_factors(model, num_features, cat_features):
         print(coefficients_df.head(3))
 
     except Exception as e:
-        raise Exception(f"Error occurred while building and evaluating the model: {str(e)}")
-
-if __name__ == "__main__":
-    build_and_evaluate_model()
+        raise type(e)(f"Error occurred while saving the model: {e}") from e
