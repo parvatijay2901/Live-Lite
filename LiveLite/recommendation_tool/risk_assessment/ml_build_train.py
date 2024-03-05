@@ -20,17 +20,20 @@ from sklearn.metrics import accuracy_score, classification_report
 from sklearn.utils import class_weight
 import joblib
 
-def build_and_evaluate_model():
+def build_and_evaluate_model(inputfile, outputfile):
     """
     Builds and evaluates a logistic regression model for predicting obesity risk.
+    Args:
+        inputfile (str): Full path for input csv file.
+        outputfile (str): Full path for output model.
     Raises:
-        Exception: If an error occurs while fitting a regression model.
+        Exception: If an invalid input file path is passed.
     Returns:
         None
     """
     try:
         # Load data
-        data = pd.read_csv('./data/input_files/ml_input.csv')
+        data = pd.read_csv(inputfile)
         x = data.drop(['SEQN', 'BMXHT', 'BMXWT','IsObese'], axis=1)
         y = data['IsObese']
 
@@ -43,7 +46,8 @@ def build_and_evaluate_model():
                                 'RIAGENDR',
                                 'RIDRETH3',
                                 'SMQ040']
-        numerical_features = ['SLD012', 'RIDAGEYR']
+        numerical_features = ['SLD012',
+                              'RIDAGEYR']
 
         # Define preprocessing steps for numerical and categorical features
         numerical_transformer = StandardScaler()
@@ -95,10 +99,15 @@ def build_and_evaluate_model():
         print(f'Best Accuracy: {accuracy}')
         print('Classification Report:')
         print(classification_report(y_test, y_pred))
-        save_model(best_model, 'obesity_risk_model.joblib')
 
-    except Exception as e:
-        raise type(e)(f"Error occurred while building and evaluating the model: {e}") from e
+        # Save the model to be used by risk predictor
+        save_model(best_model, outputfile)
+
+        # Find the best parameters that influence obesity risk.
+        find_most_influential_factors(best_model, numerical_features, categorical_features)
+
+    except FileNotFoundError as e:
+        raise FileNotFoundError(f"Invalid input filepath: {e}") from e
 
 def save_model(model, filepath):
     """
@@ -123,6 +132,10 @@ def save_model(model, filepath):
 def find_most_influential_factors(model, num_features, cat_features):
     """
     Finds the most influential factors in the trained logistic regression model.
+    Args:
+        model (str): Full path of the saved model.
+        num_features (list): Numerical factors of the model.
+        cat_features (list): Categorical factors of the model.
     Raises:
         Exception: If an error occurs during the search of coefficients.
     Returns:
@@ -131,25 +144,27 @@ def find_most_influential_factors(model, num_features, cat_features):
     try:
         # Extracting the coefficients from the logistic regression model
         coefficients = model.named_steps['classifier'].coef_[0]
-        encoded_features = (
-            model.named_steps['preprocessor']
-            .named_transformers_['cat']
-            .get_feature_names_out(input_features=cat_features)
+        encoded_features = (model.named_steps['preprocessor']
+                            .named_transformers_['cat']
+                            .get_feature_names_out(input_features=cat_features)
         )
         # Combining numerical features and encoded categorical features
         all_features = num_features + list(encoded_features)
 
-        coefficients_df = pd.DataFrame({'Feature': all_features, 'Coefficient': coefficients})
+        coeff_df = pd.DataFrame({'Feature': all_features,
+                                'Coefficient': coefficients})
 
-        # Sorting by absolute coefficient values to identify the most influential features
-        coefficients_df['Abs_Coefficient'] = abs(coefficients_df['Coefficient'])
-        coefficients_df = coefficients_df.sort_values(by='Abs_Coefficient', ascending=False)
+        # Sorting by absolute coefficient values
+        coeff_df['Abs_Coefficient'] = abs(coeff_df['Coefficient'])
+        coeff_df = coeff_df.sort_values(by='Abs_Coefficient',ascending=False)
 
         print("Top Features Predicting Obesity:")
-        print(coefficients_df.head(3))
+        print(coeff_df.head(3))
 
     except Exception as e:
-        raise Exception(f"Error occurred while building and evaluating the model: {str(e)}")
+        raise type(e)(f"Error occurred while saving the model: {e}") from e
 
 if __name__ == "__main__":
-    build_and_evaluate_model()
+    IP = "./data/input_files/ml_input.csv"
+    OP = "./recommendation_tool/risk_assessment/trained_models/obesity_risk_model.joblib"
+    build_and_evaluate_model(IP,OP)
