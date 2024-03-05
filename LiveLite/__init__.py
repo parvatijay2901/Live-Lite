@@ -1,3 +1,5 @@
+from LiveLite.data.scripts_to_generate.harvard_health_scraped_data import scrape_calories_data
+
 from LiveLite.project_integration.generate_blank_lines import add_blank_lines
 from LiveLite.project_integration.handle_user_input.get_user_inputs import get_user_inputs
 from LiveLite.project_integration.handle_user_input.get_user_inputs import write_user_inputs_to_csv
@@ -16,6 +18,7 @@ from LiveLite.research.visualizations.compare_trends_over_time import generate_v
 
 from LiveLite.recommendation_tool.risk_assessment.risk_predictor import risk_predict
 from LiveLite.recommendation_tool.risk_assessment.is_obese import is_obese
+from LiveLite.recommendation_tool.risk_assessment.ml_build_train import build_and_evaluate_model
 from LiveLite.recommendation_tool.nutrition_estimation.calorie_intake.calorie_intake_estimate import calculate_calorie_intake
 from LiveLite.recommendation_tool.diet_recommendation.food import micro_nutrients, macro_nutrients_data
 from LiveLite.recommendation_tool.diet_recommendation.personalised_food_list import search_food, recommended_food
