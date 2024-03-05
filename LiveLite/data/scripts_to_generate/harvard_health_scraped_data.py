@@ -23,7 +23,7 @@ def scrape_calories_data():
     """
     try:
         url = ("https://www.health.harvard.edu/diet-and-weight-loss/"
-       "calories-burned-in-30-minutes-for-people-of-three-different-weights")
+               "calories-burned-in-30-minutes-for-people-of-three-different-weights")
         response = requests.get(url, timeout=10)
         response.raise_for_status()
 
