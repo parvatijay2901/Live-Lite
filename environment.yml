@@ -1,4 +1,4 @@
-name: data515-project
+name: livelite
 channels:
   - defaults
 dependencies:
