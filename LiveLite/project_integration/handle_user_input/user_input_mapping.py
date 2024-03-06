@@ -106,7 +106,7 @@ def user_input_mapping(user_data_dict):
         """
         dietary_map = {
             'vegan': 1,
-            'vegeterian': 2,
+            'vegetarian': 2,
             'non vegetarian': 3
         }
         dietary_lower = dietary_preference.lower()
