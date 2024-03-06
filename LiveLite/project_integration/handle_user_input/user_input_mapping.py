@@ -191,6 +191,6 @@ def user_input_mapping(user_data_dict):
                                                  user_data_dict['health_condition'])
     internal_data['internal_diet_condition'] = convert_health_condition(
                                                user_data_dict['diet_condition'])
-    internal_data['internal_Poor_apetitte_overeating'] = convert_mental_health(
-                                                         user_data_dict['Poor_apetitte_overeating'])
+    internal_data['internal_Poor_appetite_overeating'] = convert_mental_health(
+                                                         user_data_dict['poor_appetite_overeating'])
     return internal_data

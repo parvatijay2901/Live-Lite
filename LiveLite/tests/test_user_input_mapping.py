@@ -16,7 +16,7 @@ class TestUserInputMapping(unittest.TestCase):
                 "sleep_hrs": 16.0,
                 "health_condition": "Excellent",
                 "diet_condition": "Excellent",
-                "Poor_apetitte_overeating": "Not at all"}
+                "Poor_appetite_overeating": "Not at all"}
         user_input_mapping(data)
         self.assertTrue(True)
 
@@ -33,7 +33,7 @@ class TestUserInputMapping(unittest.TestCase):
                 "sleep_hrs": 2.0,
                 "health_condition": "Excellent",
                 "diet_condition": "Excellent",
-                "Poor_apetitte_overeating": "Not at all"}
+                "Poor_appetite_overeating": "Not at all"}
         res = {'internal_age': 18,
                 'internal_sex': 1,
                 'internal_height': 154.8384,
@@ -62,7 +62,7 @@ class TestUserInputMapping(unittest.TestCase):
                 "sleep_hrs": 1.0,
                 "health_condition": "Very Good",
                 "diet_condition": "Good",
-                "Poor_apetitte_overeating": "more than half the days"}
+                "Poor_appetite_overeating": "more than half the days"}
         res = {'internal_age': 37,
                 'internal_sex': 1,
                 'internal_height': 154.8384,
@@ -91,7 +91,7 @@ class TestUserInputMapping(unittest.TestCase):
                 "sleep_hrs": 1.0,
                 "health_condition": "Fair",
                 "diet_condition": "Poor",
-                "Poor_apetitte_overeating": "nearly every day"}
+                "Poor_appetite_overeating": "nearly every day"}
         res = {'internal_age': 37,
                 'internal_sex': 1,
                 'internal_height': 254.0,
@@ -120,7 +120,7 @@ class TestUserInputMapping(unittest.TestCase):
                 "sleep_hrs": 1.0,
                 "health_condition": "Fair",
                 "diet_condition": "Poor",
-                "Poor_apetitte_overeating": "nearly every day"}
+                "Poor_appetite_overeating": "nearly every day"}
         with self.assertRaises(ValueError):
             user_input_mapping(data)
 
@@ -137,7 +137,7 @@ class TestUserInputMapping(unittest.TestCase):
                 "sleep_hrs": 1.0,
                 "health_condition": "Fair",
                 "diet_condition": "Poor",
-                "Poor_apetitte_overeating": "nearly every day"}
+                "Poor_appetite_overeating": "nearly every day"}
         with self.assertRaises(ValueError):
             user_input_mapping(data)
 
@@ -154,7 +154,7 @@ class TestUserInputMapping(unittest.TestCase):
                 "sleep_hrs": 1.0,
                 "health_condition": "Fair",
                 "diet_condition": "Poor",
-                "Poor_apetitte_overeating": "nearly every day"}
+                "Poor_appetite_overeating": "nearly every day"}
         with self.assertRaises(ValueError):
             user_input_mapping(data)
 
@@ -171,7 +171,7 @@ class TestUserInputMapping(unittest.TestCase):
                 "sleep_hrs": 1.0,
                 "health_condition": "Fair",
                 "diet_condition": "Poor",
-                "Poor_apetitte_overeating": "nearly every day"}
+                "Poor_appetite_overeating": "nearly every day"}
         with self.assertRaises(ValueError):
             user_input_mapping(data)
 
@@ -188,7 +188,7 @@ class TestUserInputMapping(unittest.TestCase):
                 "sleep_hrs": 1.0,
                 "health_condition": "Fair",
                 "diet_condition": "Poor",
-                "Poor_apetitte_overeating": "nearly every day"}
+                "Poor_appetite_overeating": "nearly every day"}
         with self.assertRaises(ValueError):
             user_input_mapping(data)
 
@@ -205,7 +205,7 @@ class TestUserInputMapping(unittest.TestCase):
                 "sleep_hrs": 1.0,
                 "health_condition": "Unhealthy",
                 "diet_condition": "Poor",
-                "Poor_apetitte_overeating": "nearly every day"}
+                "Poor_appetite_overeating": "nearly every day"}
         with self.assertRaises(ValueError):
             user_input_mapping(data)
 
@@ -222,7 +222,7 @@ class TestUserInputMapping(unittest.TestCase):
                 "sleep_hrs": 1.0,
                 "health_condition": "Fair",
                 "diet_condition": "Poor",
-                "Poor_apetitte_overeating": "nearly every day"}
+                "Poor_appetite_overeating": "nearly every day"}
         with self.assertRaises(ValueError):
             user_input_mapping(data)
 
