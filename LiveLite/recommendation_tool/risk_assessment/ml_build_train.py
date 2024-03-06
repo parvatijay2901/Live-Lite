@@ -165,6 +165,6 @@ def find_most_influential_factors(model, num_features, cat_features):
         raise type(e)(f"Error occurred while saving the model: {e}") from e
 
 if __name__ == "__main__":
-    IP = "./data/input_files/ml_input.csv"
-    OP = "./recommendation_tool/risk_assessment/trained_models/obesity_risk_model.joblib"
+    IP = "./LiveLite/data/input_files/ml_input.csv"
+    OP = "./LiveLite/recommendation_tool/risk_assessment/trained_models/obesity_risk_model.joblib"
     build_and_evaluate_model(IP,OP)

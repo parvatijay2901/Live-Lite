@@ -1,5 +1,5 @@
 import unittest
-from project_integration.handle_user_input.user_input_mapping import user_input_mapping
+from LiveLite.project_integration.handle_user_input.user_input_mapping import user_input_mapping
 
 class TestUserInputMapping(unittest.TestCase):
     # Smoke test

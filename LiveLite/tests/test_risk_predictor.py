@@ -1,6 +1,6 @@
 import unittest
 import numpy as np
-from recommendation_tool.risk_assessment.risk_predictor import risk_predict
+from LiveLite.recommendation_tool.risk_assessment.risk_predictor import risk_predict
 
 class TestRiskPredict(unittest.TestCase):
 
