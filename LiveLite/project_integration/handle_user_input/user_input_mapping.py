@@ -85,7 +85,7 @@ def user_input_mapping(user_data_dict):
             'sedentary': 1,
             'minimally active': 2,
             'moderately active': 3,
-            'very active': 4,
+            'active': 4,
             'extra active': 5
         }
         activity_lower = activity_level.lower()
@@ -162,9 +162,9 @@ def user_input_mapping(user_data_dict):
         """
         mental_map = {
             'not at all': 0,
-            'several days': 1,
-            'more than half the days': 2,
-            'nearly every day': 3
+            'occasionally these days': 1,
+            'frequently these days': 2,
+            'nearly every day these days': 3
         }
         mental_lower = mental_health.lower()
         if mental_lower in mental_map:
