@@ -10,42 +10,10 @@
     - process_activity()
     - process_ethnicity()
     - process_gender()
+    - data_process()
     """
 import pandas as pd
 import numpy as np
-
-FILE_PATH = 'nhanes_obesity_factors.csv'
-
-# Columns for model training
-columns_to_read = [
-    'SEQN',
-    'BMXHT',
-    'BMXWT',
-    'RIDAGEYR',
-    'DPQ020',
-    'DPQ050',
-    'SLD012',
-    'PAQ670',
-    'DBQ700',
-    'HUQ010',
-    'RIAGENDR',
-    'RIDRETH3',
-    'SMQ040',
-    'INDFMPIR'
-]
-
-df = pd.read_csv(FILE_PATH, usecols=columns_to_read)
-
-# Drop rows with blank height or weight
-df.dropna(subset=['BMXHT', 'BMXWT'], inplace=True)
-
-# BMI = weight (kg) / (height (m) ^ 2)
-df['BMI'] = df['BMXWT'] / ((df['BMXHT'] / 100) ** 2)
-
-# Add a new binary column 'Is_obese' based on BMI
-df['IsObese'] = (df['BMI'] >= 30).astype(int)
-
-df.drop(columns=['BMI'], inplace=True)
 
 def process_smoking(row):
     """
@@ -172,19 +140,61 @@ def process_gender(row):
         return 0
     return row['RIAGENDR']
 
+def data_process(inputfile, outputfile):
+    """
+    This function reads and processes every record for selected columns.
+    Args:
+        inputfile (str): full path to the raw input file.
+        outputfile (str): full path to the output file.
+    Returns:
+       None
+    """
+    # Columns for model training
+    columns_to_read = [
+        'SEQN',
+        'BMXHT',
+        'BMXWT',
+        'RIDAGEYR',
+        'DPQ020',
+        'DPQ050',
+        'SLD012',
+        'PAQ670',
+        'DBQ700',
+        'HUQ010',
+        'RIAGENDR',
+        'RIDRETH3',
+        'SMQ040',
+        'INDFMPIR'
+    ]
 
-# For each feature, apply the specific function to process null or invalid values.
-df['RIAGENDR'] = df.apply(process_gender, axis=1)
-df['SMQ040'] = df.apply(process_smoking, axis=1)
-df['SLD012'] = df.apply(process_sleeping, axis=1)
-df['HUQ010'] = df.apply(lambda row: process_general_1_5(row, 'HUQ010'), axis=1)
-df['DBQ700'] = df.apply(lambda row: process_general_1_5(row, 'DBQ700'), axis=1)
-df['DPQ050'] = df.apply(lambda row: process_general_0_3(row, 'DPQ050'), axis=1)
-df['DPQ020'] = df.apply(lambda row: process_general_0_3(row, 'DPQ020'), axis=1)
-df['PAQ670'] = df.apply(process_activity, axis=1)
-df['RIDRETH3'] = df.apply(process_ethnicity, axis=1)
+    df = pd.read_csv(inputfile, usecols=columns_to_read)
 
-# Write the DataFrame to a new CSV file
-OUTPUT_FILE_PATH = 'ml_input.csv'
-df.to_csv(OUTPUT_FILE_PATH, index=False)
-print(f"DF has been saved to '{OUTPUT_FILE_PATH}'.")
+    # Drop rows with blank height or weight
+    df.dropna(subset=['BMXHT', 'BMXWT'], inplace=True)
+
+    # BMI = weight (kg) / (height (m) ^ 2)
+    df['BMI'] = df['BMXWT'] / ((df['BMXHT'] / 100) ** 2)
+
+    # Add a new binary column 'Is_obese' based on BMI
+    df['IsObese'] = (df['BMI'] >= 30).astype(int)
+
+    df.drop(columns=['BMI'], inplace=True)
+
+    # For each feature, apply the specific function to process null or invalid values.
+    df['RIAGENDR'] = df.apply(process_gender, axis=1)
+    df['SMQ040'] = df.apply(process_smoking, axis=1)
+    df['SLD012'] = df.apply(process_sleeping, axis=1)
+    df['HUQ010'] = df.apply(lambda row: process_general_1_5(row, 'HUQ010'), axis=1)
+    df['DBQ700'] = df.apply(lambda row: process_general_1_5(row, 'DBQ700'), axis=1)
+    df['DPQ050'] = df.apply(lambda row: process_general_0_3(row, 'DPQ050'), axis=1)
+    df['DPQ020'] = df.apply(lambda row: process_general_0_3(row, 'DPQ020'), axis=1)
+    df['PAQ670'] = df.apply(process_activity, axis=1)
+    df['RIDRETH3'] = df.apply(process_ethnicity, axis=1)
+
+    df.to_csv(outputfile, index=False)
+    print(f"DF has been saved to '{outputfile}'.")
+
+if __name__ == '__main__':
+    IP = 'nhanes_obesity_factors.csv'
+    OP = 'ml_input.csv'
+    data_process(IP, OP)
