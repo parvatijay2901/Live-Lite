@@ -16,7 +16,7 @@ class TestUserInputMapping(unittest.TestCase):
                 "sleep_hrs": 16.0,
                 "health_condition": "Excellent",
                 "diet_condition": "Excellent",
-                "Poor_appetite_overeating": "Not at all"}
+                "poor_appetite_overeating": "Not at all"}
         user_input_mapping(data)
         self.assertTrue(True)
 
@@ -33,7 +33,7 @@ class TestUserInputMapping(unittest.TestCase):
                 "sleep_hrs": 2.0,
                 "health_condition": "Excellent",
                 "diet_condition": "Excellent",
-                "Poor_appetite_overeating": "Not at all"}
+                "poor_appetite_overeating": "Not at all"}
         res = {'internal_age': 18,
                 'internal_sex': 1,
                 'internal_height': 154.8384,
@@ -46,7 +46,7 @@ class TestUserInputMapping(unittest.TestCase):
                 'internal_sleep_hrs': 2,
                 'internal_health_condition': 1,
                 'internal_diet_condition': 1,
-                'internal_Poor_apetitte_overeating': 0}
+                'internal_poor_appetite_overeating': 0}
         self.assertEqual(res, user_input_mapping(data))
     
     def test_user_input_map_2(self):   
@@ -58,11 +58,11 @@ class TestUserInputMapping(unittest.TestCase):
                 "activity_level": "Minimally Active",
                 "dietary_preference": "Vegetarian",
                 "smoke_cig": "No",
-                "mental_health": "Several Days",
+                "mental_health": "Occasionally these days",
                 "sleep_hrs": 1.0,
                 "health_condition": "Very Good",
                 "diet_condition": "Good",
-                "Poor_appetite_overeating": "more than half the days"}
+                "poor_appetite_overeating": "Frequently these days"}
         res = {'internal_age': 37,
                 'internal_sex': 1,
                 'internal_height': 154.8384,
@@ -75,7 +75,7 @@ class TestUserInputMapping(unittest.TestCase):
                 'internal_sleep_hrs': 2,
                 'internal_health_condition': 2,
                 'internal_diet_condition': 3,
-                'internal_Poor_apetitte_overeating': 2}
+                'internal_poor_appetite_overeating': 2}
         self.assertEqual(res, user_input_mapping(data))
 
     def test_user_input_map_3(self):   
@@ -87,11 +87,11 @@ class TestUserInputMapping(unittest.TestCase):
                 "activity_level": "Moderately Active",
                 "dietary_preference": "Non Vegetarian",
                 "smoke_cig": "No",
-                "mental_health": "Several Days",
+                "mental_health": "Occasionally these days",
                 "sleep_hrs": 1.0,
                 "health_condition": "Fair",
                 "diet_condition": "Poor",
-                "Poor_appetite_overeating": "nearly every day"}
+                "poor_appetite_overeating": "Nearly every day these days"}
         res = {'internal_age': 37,
                 'internal_sex': 1,
                 'internal_height': 254.0,
@@ -104,7 +104,7 @@ class TestUserInputMapping(unittest.TestCase):
                 'internal_sleep_hrs': 2,
                 'internal_health_condition': 4,
                 'internal_diet_condition': 5,
-                'internal_Poor_apetitte_overeating': 3}
+                'internal_poor_appetite_overeating': 3}
         self.assertEqual(res, user_input_mapping(data))
 
     def test_user_input_invalid_gender(self):   
@@ -116,11 +116,11 @@ class TestUserInputMapping(unittest.TestCase):
                 "activity_level": "Moderately Active",
                 "dietary_preference": "Non Vegetarian",
                 "smoke_cig": "No",
-                "mental_health": "Several Days",
+                "mental_health": "Occasionally these days",
                 "sleep_hrs": 1.0,
                 "health_condition": "Fair",
                 "diet_condition": "Poor",
-                "Poor_appetite_overeating": "nearly every day"}
+                "poor_appetite_overeating": "Nearly every day these days"}
         with self.assertRaises(ValueError):
             user_input_mapping(data)
 
@@ -133,11 +133,11 @@ class TestUserInputMapping(unittest.TestCase):
                 "activity_level": "Moderately Active",
                 "dietary_preference": "Non Vegetarian",
                 "smoke_cig": "No",
-                "mental_health": "Several Days",
+                "mental_health": "Occasionally these days",
                 "sleep_hrs": 1.0,
                 "health_condition": "Fair",
                 "diet_condition": "Poor",
-                "Poor_appetite_overeating": "nearly every day"}
+                "poor_appetite_overeating": "Nearly every day these days"}
         with self.assertRaises(ValueError):
             user_input_mapping(data)
 
@@ -150,11 +150,11 @@ class TestUserInputMapping(unittest.TestCase):
                 "activity_level": "Gym",
                 "dietary_preference": "Non Vegetarian",
                 "smoke_cig": "No",
-                "mental_health": "Several Days",
+                "mental_health": "Occasionally these days",
                 "sleep_hrs": 1.0,
                 "health_condition": "Fair",
                 "diet_condition": "Poor",
-                "Poor_appetite_overeating": "nearly every day"}
+                "poor_appetite_overeating": "Nearly every day these days"}
         with self.assertRaises(ValueError):
             user_input_mapping(data)
 
@@ -167,11 +167,11 @@ class TestUserInputMapping(unittest.TestCase):
                 "activity_level": "Sedentary",
                 "dietary_preference": "Biriyani",
                 "smoke_cig": "No",
-                "mental_health": "Several Days",
+                "mental_health": "Frequently these days",
                 "sleep_hrs": 1.0,
                 "health_condition": "Fair",
                 "diet_condition": "Poor",
-                "Poor_appetite_overeating": "nearly every day"}
+                "poor_appetite_overeating": "Nearly every day these days"}
         with self.assertRaises(ValueError):
             user_input_mapping(data)
 
@@ -181,14 +181,14 @@ class TestUserInputMapping(unittest.TestCase):
                 "height": 100,
                 "weight": 100,
                 "ethnicity": "Hispanic",
-                "activity_level": "Sedentary",
+                "activity_level": "Active",
                 "dietary_preference": "Biriyani",
                 "smoke_cig": "No",
-                "mental_health": "Several Days",
+                "mental_health": "Frequently these days",
                 "sleep_hrs": 1.0,
                 "health_condition": "Fair",
                 "diet_condition": "Poor",
-                "Poor_appetite_overeating": "nearly every day"}
+                "poor_appetite_overeating": "Nearly every day"}
         with self.assertRaises(ValueError):
             user_input_mapping(data)
 
@@ -201,11 +201,11 @@ class TestUserInputMapping(unittest.TestCase):
                 "activity_level": "Sedentary",
                 "dietary_preference": "Vegan",
                 "smoke_cig": "No",
-                "mental_health": "Several Days",
+                "mental_health": "Frequently these days",
                 "sleep_hrs": 1.0,
                 "health_condition": "Unhealthy",
                 "diet_condition": "Poor",
-                "Poor_appetite_overeating": "nearly every day"}
+                "poor_appetite_overeating": "Nearly every day these days"}
         with self.assertRaises(ValueError):
             user_input_mapping(data)
 
@@ -222,7 +222,7 @@ class TestUserInputMapping(unittest.TestCase):
                 "sleep_hrs": 1.0,
                 "health_condition": "Fair",
                 "diet_condition": "Poor",
-                "Poor_appetite_overeating": "nearly every day"}
+                "poor_appetite_overeating": "Nearly every day these days"}
         with self.assertRaises(ValueError):
             user_input_mapping(data)
 
