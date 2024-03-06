@@ -1,10 +1,6 @@
 import unittest
 import numpy as np
-<<<<<<< HEAD:tests/ml and actvity/test_calorie_intake_estimate.py
 from LiveLite.recommendation_tool.nutrition_estimation.calorie_intake.calorie_intake_estimate import calculate_calorie_intake
-=======
-from recommendation_tool.nutrition_estimation.calorie_intake.calorie_intake_estimate import calculate_calorie_intake
->>>>>>> c1ce701f8935890f08f262fb76dcd553454784fb:LiveLite/tests/test_calorie_intake_estimate.py
 
 class TestCalorieEstimate(unittest.TestCase):
 

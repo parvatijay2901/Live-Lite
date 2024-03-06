@@ -1,10 +1,6 @@
 import unittest
 from unittest.mock import patch, MagicMock
-<<<<<<< HEAD:tests/ml and actvity/test_harvard_health_scraped_data.py
 from LiveLite.data.scripts_to_generate.harvard_health_scraped_data import scrape_calories_data
-=======
-from data.scripts_to_generate.harvard_health_scraped_data import scrape_calories_data
->>>>>>> c1ce701f8935890f08f262fb76dcd553454784fb:LiveLite/tests/test_harvard_health_scraped_data.py
 
 class TestScrapeCaloriesData(unittest.TestCase):
 
