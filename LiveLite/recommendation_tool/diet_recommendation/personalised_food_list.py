@@ -1,14 +1,29 @@
-# This script uses user input details such as:
-# - Obesity risk score 
-# - Diet preference (vegan, vegetarian, non-vegetarian)
-# - If the user is obesed. 
-# a variety of food groups will be appended to a dataframe 
-# food groups : Beef, pork, poultry, dairy, eggs, grains, legumes, fruits, vegetables, Nuts and seeds
-import pandas as pd
+""" This script uses user input details such as:
+Obesity risk score
+Diet preference (vegan, vegetarian, non-vegetarian)
+a variety of food groups will be appended to a dataframe.
+food groups : Beef, pork, poultry, dairy, eggs, grains, legumes, fruits, vegetables, Nuts and seeds
+"""
 import string
-
+import pandas as pd
+# pylint: disable=R0914
+# pylint: disable=R0915
 def recommended_food(data, risk_score, food_preference):
-    food_data = data[["FoodGroup","Descrip","Energy_kcal","Protein_g","Fat_g","Carb_g","Sugar_g","Fiber_g"]]
+    """This function creates a dataframe for each of the food groups
+    to be included in a person's diet based on the rsik score and 
+    food preference.
+
+    Args:
+        data (dataframe): Food data
+        risk_score (int): risk score of obesity of the user
+        food_preference (string): vegan, vegetraian or non vegetarian
+
+    Returns:
+        Dataframe: concatenated dataframe containing nutritional 
+        and calorific information of each of the food groups.
+    """
+    food_data = data[["FoodGroup","Descrip","Energy_kcal","Protein_g","Fat_g","Carb_g",
+                      "Sugar_g","Fiber_g"]]
 
     #logic to determine risk level
     if risk_score > 75:
@@ -36,7 +51,8 @@ def recommended_food(data, risk_score, food_preference):
     #print(sample_beef_low_risk)
 
     # Fish and shellfish
-    fish = food_data[(food_data["FoodGroup"]=="Finfish and Shellfish Products") & (food_data["Protein_g"]>0)]
+    fish = food_data[(food_data["FoodGroup"]=="Finfish and Shellfish Products")
+                     & (food_data["Protein_g"]>0)]
     fish_high_risk = fish.sort_values("Fat_g")
     fish_high_risk = fish_high_risk.head(40)
     sample_fish_high_risk = fish_high_risk.sample(n=5, replace=False)
@@ -53,7 +69,8 @@ def recommended_food(data, risk_score, food_preference):
     #print(sample_fish_low_risk)
 
     # poultry
-    poultry = food_data[(food_data["FoodGroup"]=="Poultry Products") & (food_data["Protein_g"]>0)]
+    poultry = food_data[(food_data["FoodGroup"]=="Poultry Products")
+                        & (food_data["Protein_g"]>0)]
     poultry_high_risk = poultry.sort_values("Fat_g")
     poultry_high_risk = poultry_high_risk.head(40)
     sample_poultry_high_risk = poultry_high_risk.sample(n=5, replace=False)
@@ -70,7 +87,8 @@ def recommended_food(data, risk_score, food_preference):
     #print(sample_poultry_low_risk)
 
     # Pork
-    pork = food_data[(food_data["FoodGroup"]=="Pork Products") & (food_data["Protein_g"]>0)]
+    pork = food_data[(food_data["FoodGroup"]=="Pork Products")
+                     & (food_data["Protein_g"]>0)]
     pork_high_risk = pork.sort_values("Fat_g")
     pork_high_risk = pork_high_risk.head(40)
     sample_pork_high_risk = pork_high_risk.sample(n=5, replace=False)
@@ -87,8 +105,9 @@ def recommended_food(data, risk_score, food_preference):
     #print(sample_pork_low_risk)
 
     # legumes
-    legumes = food_data[(food_data["FoodGroup"]=="Legumes and Legume Products") & (food_data["Protein_g"]>0)]
-    legumes = legumes[legumes["Descrip"].str.contains("milk|sauce")== False]
+    legumes = food_data[(food_data["FoodGroup"]=="Legumes and Legume Products")
+                        & (food_data["Protein_g"]>0)]
+    legumes = legumes[~legumes["Descrip"].str.contains("milk|sauce")]
     legumes_high_risk = legumes.sort_values("Energy_kcal")
     legumes_high_risk = legumes_high_risk.head(40)
     legumes_high_risk = legumes_high_risk.sort_values("Protein_g")
@@ -109,8 +128,6 @@ def recommended_food(data, risk_score, food_preference):
     #print(sample_legumes_low_risk)
 
     # cereal, grains and pasta
-    # to -do do calc based on avergae, kcal, protein, carb and fiber content.
-    # give grains with protein for vegan No egg.
     grains = food_data[(food_data["FoodGroup"]=="Cereal Grains and Pasta")]
     grains_vegan = grains
     grains_high_risk = grains.sort_values("Fiber_g")
@@ -128,27 +145,26 @@ def recommended_food(data, risk_score, food_preference):
     sample_grains_low_risk = grains_low_risk.sample(n=5, replace = False)
     #print(sample_grains_low_risk)
 
-    # grains for vegan 
-    grains_vegan = grains_vegan[grains_vegan["Descrip"].str.contains("egg")== False]
+    # grains for vegan
+    grains_vegan = grains_vegan[~grains_vegan["Descrip"].str.contains("egg")]
     grains_vegan = grains_vegan.sort_values("Protein_g")
     grains_vegan = grains_vegan.tail(60)
     sample_vegan_grains = grains_vegan.sample(n=5, replace =False)
     #print(sample_vegan_grains)
 
     # Fruits
-    # filter juices as they are low in fibre and higher in kcal/ added sugar., removing alcoholic beverages
-    fruits = food_data[(food_data["FoodGroup"]=="Fruits and Fruit Juices") & (food_data["Sugar_g"] <= 20)]
-    #df = df[df[“column_name”].str.contains(“string1|string2”)==False]
-    fruits = fruits[fruits["Descrip"].str.contains("Alcoholic|juice|USDA")== False]
+    fruits = food_data[(food_data["FoodGroup"]=="Fruits and Fruit Juices")
+                       & (food_data["Sugar_g"] <= 20)]
+    fruits = fruits[~fruits["Descrip"].str.contains("Alcoholic|juice|USDA")]
     fruits = fruits.sort_values("Fiber_g")
     fruits = fruits.tail(100)
     fruits = fruits.sample(n=5, replace = False)
     #print(fruits)
 
     #veggies
-    # Since vegans vegetarians need more protein from plants, below logic tries to fetch high protein veggies
+    #vegans vegetarians need more protein from plants, logic tries to fetch high protein veggies
     veggies = food_data[(food_data["FoodGroup"]=="Vegetables and Vegetable Products")]
-    veggies = veggies[veggies["Descrip"].str.contains("juice")==False]
+    veggies = veggies[~veggies["Descrip"].str.contains("juice")]
     veggies_non_vegetarian = veggies
     veggies = veggies.sort_values("Protein_g")
     veggies = veggies.tail(100)
@@ -161,9 +177,9 @@ def recommended_food(data, risk_score, food_preference):
     veggies_non_vegetarian = veggies_non_vegetarian.sample(n=5, replace = False)
     #print(veggies_non_vegetarian)
 
-    # dairy 
+    # dairy
     dairy = food_data[(food_data["FoodGroup"]=="Dairy and Egg Products")]
-    dairy = dairy[dairy["Descrip"].str.contains("egg|Egg")== False]
+    dairy = dairy[~dairy["Descrip"].str.contains("egg|Egg")]
     dairy_low_risk = dairy
 
     dairy_high_med_risk = dairy.sort_values("Fat_g")
@@ -171,7 +187,7 @@ def recommended_food(data, risk_score, food_preference):
     dairy_high_med_risk = dairy_high_med_risk.sample(n=5, replace = False)
     #print(dairy_high_med_risk)
 
-    #include this for vegan and vegetarian. 
+    #include this for vegan and vegetarian.
     dairy_low_risk = dairy_low_risk.sort_values("Protein_g")
     dairy_low_risk = dairy_low_risk.tail(50)
     dairy_low_risk = dairy_low_risk.sample(n=5, replace = False)
@@ -184,14 +200,23 @@ def recommended_food(data, risk_score, food_preference):
             "low": [sample_legumes_low_risk, sample_vegan_grains, fruits, veggies],
         },
         'vegetarian': {
-            "high": [sample_legumes_high_risk, sample_vegan_grains, fruits, veggies, dairy_high_med_risk],
-            "medium": [legumes_med_risk, sample_vegan_grains, fruits, veggies, dairy_high_med_risk],
-            "low": [legumes_low_risk, sample_vegan_grains, fruits, veggies, dairy_low_risk],
+            "high": [sample_legumes_high_risk, sample_vegan_grains, fruits, 
+                     veggies, dairy_high_med_risk],
+            "medium": [sample_legumes_med_risk, sample_vegan_grains, fruits, 
+                       veggies, dairy_high_med_risk],
+            "low": [sample_legumes_low_risk, sample_vegan_grains, fruits, 
+                    veggies, dairy_low_risk],
         },
         'non vegetarian': {
-            "high": [sample_beef_high_risk, sample_pork_high_risk, sample_fish_high_risk, sample_poultry_high_risk, sample_grains_high_risk, fruits, veggies_non_vegetarian, dairy_high_med_risk],
-            "medium": [sample_beef_med_risk, sample_pork_med_risk, sample_fish_med_risk, sample_poultry_med_risk, sample_grains_med_risk, fruits, veggies_non_vegetarian, dairy_high_med_risk],
-            "low": [sample_beef_low_risk, sample_pork_low_risk, sample_fish_low_risk, sample_poultry_low_risk, grains_low_risk, fruits, veggies_non_vegetarian, dairy_low_risk],
+            "high": [sample_beef_high_risk, sample_pork_high_risk, sample_fish_high_risk,
+                     sample_poultry_high_risk, sample_grains_high_risk, fruits,
+                     veggies_non_vegetarian, dairy_high_med_risk],
+            "medium": [sample_beef_med_risk, sample_pork_med_risk, sample_fish_med_risk,
+                       sample_poultry_med_risk, sample_grains_med_risk, fruits,
+                       veggies_non_vegetarian, dairy_high_med_risk],
+            "low": [sample_beef_low_risk, sample_pork_low_risk, sample_fish_low_risk,
+                    sample_poultry_low_risk, sample_grains_low_risk, fruits,
+                    veggies_non_vegetarian, dairy_low_risk],
         }
 
     }
@@ -207,7 +232,8 @@ def recommended_food(data, risk_score, food_preference):
     'Vegetables and Vegetable Products': 'Vegetables',
     "Dairy and Egg Products": 'Dairy'
     }
-    food_groups_df['FoodGroup'] = food_groups_df['FoodGroup'].map(new_group_values).fillna(food_groups_df['FoodGroup'])
+    food_groups_df['FoodGroup'] = food_groups_df['FoodGroup'].map(
+        new_group_values).fillna(food_groups_df['FoodGroup'])
     food_groups_df.rename(columns={"FoodGroup": "Food Category",
                                 "Descrip": "Description",
                                 "Energy_kcal": "Calories (kcal)",
@@ -216,18 +242,20 @@ def recommended_food(data, risk_score, food_preference):
                                 "Carb_g": "Carbohydrates (gm)",
                                 "Sugar_g": "Sugar (gm)",
                                 "Fiber_g": "Fiber (gm)"}, inplace=True)
-    #food_groups_df.to_csv("out.csv")
-    #print(food_groups_df)
     return food_groups_df
 
 def search_food(data, food_item):
+    """This function searches the input food from the dataset to provide 
+    nutritional and calorific information. The output is a filtered dataframe
+    containing the search food.
+    """
     if food_item == "":
         return None
-    else:
-        food_item = food_item.translate(str.maketrans('', '', string.punctuation))
-        food_item = food_item.lower()
-        
-    food_data = data[["FoodGroup","Descrip","Energy_kcal","Protein_g","Fat_g","Carb_g","Sugar_g","Fiber_g"]]
+
+    food_item = food_item.translate(str.maketrans('', '', string.punctuation))
+    food_item = food_item.lower()
+    food_data = data[["FoodGroup","Descrip","Energy_kcal","Protein_g",
+                      "Fat_g","Carb_g","Sugar_g","Fiber_g"]]
     out = food_data[(food_data["Descrip"].str.contains(food_item))]
     out = out[["Descrip","Energy_kcal","Protein_g","Carb_g","Sugar_g","Fiber_g"]]
     out.rename(columns={"Descrip": "Description",
@@ -237,7 +265,8 @@ def search_food(data, food_item):
                         "Sugar_g": "Sugar (gm)",
                         "Fiber_g": "Fiber (gm)"}, inplace=True)
 
-    return(out)
+    return out
 
-#print(search_food("milk",filter_data))
-#print(recommended_food(risk_score = 55, food_preference = 3))
+#data = pd.read_csv("../../data/input_files/food_nutrition_data.csv")
+#print(search_food(data,"milk"))
+#print(recommended_food(data, risk_score = 55, food_preference = "vegetarian"))
