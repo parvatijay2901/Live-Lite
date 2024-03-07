@@ -85,13 +85,34 @@ def user_input_mapping(user_data_dict):
             'sedentary': 1,
             'minimally active': 2,
             'moderately active': 3,
-            'very active': 4,
+            'active': 4,
             'extra active': 5
         }
         activity_lower = activity_level.lower()
         if activity_lower in activity_map:
             return int(activity_map[activity_lower])
         raise ValueError("Invalid value for activity level")
+
+    def convert_dietary_preference(dietary_preference):
+        """
+        Convert the diet preference to a numerical representation
+        as per tool definition.
+        Args:
+            dietary_preference (str): The dietary preferencer to be converted.
+        Returns:
+            int: Numerical representation of dietary preference.
+        Raises:
+            ValueError: If the provided value is not in dictionary.
+        """
+        dietary_map = {
+            'vegan': 1,
+            'vegetarian': 2,
+            'non vegetarian': 3
+        }
+        dietary_lower = dietary_preference.lower()
+        if dietary_lower in dietary_map:
+            return int(dietary_map[dietary_lower])
+        raise ValueError("Invalid value for dietary preference")
 
     def convert_sleep_hours(sleep_hours):
         """
@@ -141,9 +162,9 @@ def user_input_mapping(user_data_dict):
         """
         mental_map = {
             'not at all': 0,
-            'several days': 1,
-            'more than half the days': 2,
-            'nearly every day': 3
+            'occasionally these days': 1,
+            'frequently these days': 2,
+            'nearly every day these days': 3
         }
         mental_lower = mental_health.lower()
         if mental_lower in mental_map:
