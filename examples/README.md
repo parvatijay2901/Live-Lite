@@ -38,8 +38,8 @@ conda deactivate
 ### 3. Run the App
 A local application can be generated with the code:
 ```bash
-conda activate livlite
-streamlit run 
+conda activate livelite
+python -m streamlit run LiveLite/streamlit_app/Home.py 
 ```
 
 See An Analysis of Nothing in your local browser!
