@@ -62,8 +62,8 @@ def generate_violin_plot(data, plot_type='BMI', years=None):
         plot_type = 'BMXWT'
 
     # Create Figure
-    fig = px.violin(data, x='Year', y=plot_type, box=True, points=False)
-
+    fig = px.box(data, x='Year', y=plot_type)
+    fig.update_layout(yaxis_range=[18, 35])
     # Customize axis labels and titles based on plot type
     if plot_type == 'BMI':
         fig.update_xaxes(title='Year', tickvals=years)
