@@ -47,7 +47,16 @@ def risk_predict(input_dict, model):
     return obesity_risk, color
 
 def interpolate_color(value):
-    """Interpolate between two RGB colors based on a value."""
+    """
+    Interpolate between two RGB colors, pastel red and pastel green
+    with pastel yellow as intermediate color.
+    
+    Args:
+        value (int): Value used to determine the color
+    Returns:
+        hex_color (str): Hex code for a color corresponding
+                         to the value.
+    """
     if value <= 50:
         red = int(119 + (251 - 119) * value / 50)
         green = int(221 + (251 - 221) * value / 50)
