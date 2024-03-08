@@ -14,14 +14,10 @@ import unittest
 
 import numpy as np
 import pandas as pd
-import LiveLite.research.visualizations.ihme_data_analysis as ihme
-import LiveLite.research.visualizations.obesity_trends_analysis as obesity
-import LiveLite.research.visualizations.compare_trends_over_time as trends
-import LiveLite.research.visualizations.nhanes_obesity_overweight_analysis as nhanes
-# from LiveLite.research.visualizations import compare_trends_over_time as trends
-# from LiveLite.research.visualizations import ihme_data_analysis as ihme
-# from LiveLite.research.visualizations import nhanes_obesity_overweight_analysis as nhanes
-# from LiveLite.research.visualizations import obesity_trends_analysis as obesity
+from LiveLite import plot_ihme_data
+from LiveLite import plot_obesity_trends
+from LiveLite import plot_obesity_overweight_trends
+from LiveLite import generate_violin_plot
 
 
 class TestResearchAnalysis(unittest.TestCase):
@@ -44,14 +40,14 @@ class TestResearchAnalysis(unittest.TestCase):
         """
         Tests if background_information_nhanes runs and returns an object.
         """
-        plt = nhanes.plot_obesity_overweight_trends(data=self.nhanes_data, years=None)
+        plt = plot_obesity_overweight_trends(data=self.nhanes_data, years=None)
         self.assertIsInstance(plt, object)
 
     def test_background_information_ihme(self):
         """
         Tests if background_information_ihme runs and returns an object.
         """
-        plt = ihme.plot_ihme_data(data=self.ihme_data)
+        plt = plot_ihme_data(data=self.ihme_data)
         self.assertIsInstance(plt, object)
 
     def test_violin_plot(self):
@@ -59,18 +55,18 @@ class TestResearchAnalysis(unittest.TestCase):
         Tests if violin_plot_manager runs and returns an object.
         """
 
-        plt = trends.generate_violin_plot(data=self.nhanes_data)
+        plt = generate_violin_plot(data=self.nhanes_data)
         self.assertIsInstance(plt, object)
 
     def test_violin_plot_weight(self):
-        plt = trends.generate_violin_plot(data=self.nhanes_data, plot_type='Weight')
+        plt = generate_violin_plot(data=self.nhanes_data, plot_type='Weight')
         self.assertIsInstance(plt, object)
 
     def test_obesity_trends(self):
         """
         Tests if obesity_trends runs and returns an object.
         """
-        plt = obesity.plot_obesity_trends(data=self.nhanes_data)
+        plt = plot_obesity_trends(data=self.nhanes_data)
         self.assertIsInstance(plt, object)
 
     def test_invalid_data_type_background_information_nhanes(self):
@@ -79,7 +75,7 @@ class TestResearchAnalysis(unittest.TestCase):
         """
 
         with self.assertRaises(TypeError):
-            nhanes.plot_obesity_overweight_trends(
+            plot_obesity_overweight_trends(
                 data=np.array([]), years=[1999, 2017]
             )
 
@@ -89,10 +85,8 @@ class TestResearchAnalysis(unittest.TestCase):
         year of invalid type.
         """
         with self.assertRaises(TypeError):
-            nhanes.plot_obesity_overweight_trends(
-                data=nhanes.plot_obesity_overweight_trends(
-                    data=self.nhanes_data, years=1999
-                )
+            plot_obesity_overweight_trends(
+                data=self.nhanes_data, years=1999
             )
 
     def test_invalid_year_value_background_information_nhanes(self):
@@ -101,7 +95,7 @@ class TestResearchAnalysis(unittest.TestCase):
         error when passed invalid year(s)
         """
         with self.assertRaises(ValueError):
-            nhanes.plot_obesity_overweight_trends(
+            plot_obesity_overweight_trends(
                 data=self.nhanes_data, years=[2000, 2003]
             )
 
@@ -110,63 +104,63 @@ class TestResearchAnalysis(unittest.TestCase):
         Tests if ihme raises type error when passed invalid data.
         """
         with self.assertRaises(TypeError):
-            ihme.plot_ihme_data(np.array([]), years=[2000, 2001])
+            plot_ihme_data(np.array([]), years=[2000, 2001])
 
     def test_invalid_year_type_ihme(self):
         """
         Tests if ihme raises type error when passed invalid year type.
         """
         with self.assertRaises(TypeError):
-            ihme.plot_ihme_data(data=self.ihme_data, years=2000)
+            plot_ihme_data(data=self.ihme_data, years=2000)
 
     def test_invalid_year_value_ihme(self):
         """
         Tests if ihme raises value error when passed invalid year.
         """
         with self.assertRaises(ValueError):
-            ihme.plot_ihme_data(data=self.ihme_data, years=1800)
+            plot_ihme_data(data=self.ihme_data, years=1800)
 
     def test_invalid_data_type_obesity_trends(self):
         """
         Tests if obesity trends raises type error when passed invalid data type.
         """
         with self.assertRaises(TypeError):
-            obesity.plot_obesity_trends(np.array([]))
+            plot_obesity_trends(np.array([]))
 
     def test_invalid_year_type_obesity_trends(self):
         """
         Tests if obesity trends raises type error when passed invalid year type.
         """
         with self.assertRaises(TypeError):
-            obesity.plot_obesity_trends(self.nhanes_data, years=2000)
+            plot_obesity_trends(self.nhanes_data, years=2000)
 
     def test_invalid_year_value_obesity_trends(self):
         """
         Tests if obesity trends raises type error when passed invalid year.
         """
         with self.assertRaises(ValueError):
-            obesity.plot_obesity_trends(self.nhanes_data, years=1800)
+            plot_obesity_trends(self.nhanes_data, years=1800)
 
     def test_invalid_data_trends(self):
         """
         Tests if trend over time raises type error when passed invalid data type.
         """
         with self.assertRaises(TypeError):
-            trends.generate_violin_plot(np.array([]))
+            generate_violin_plot(np.array([]))
 
     def test_invalid_year_type_trends(self):
         """
         Tests if trend over time raises type error when passed invalid year type.
         """
         with self.assertRaises(TypeError):
-            trends.generate_violin_plot(self.nhanes_data, years=2000)
+            generate_violin_plot(self.nhanes_data, years=2000)
 
     def test_invalid_year_value_trends(self):
         """
         Tests if trend over time raises type error when passed invalid year.
         """
         with self.assertRaises(ValueError):
-            trends.generate_violin_plot(self.nhanes_data, years=1800)
+            generate_violin_plot(self.nhanes_data, years=1800)
 
     def test_invalid_type_plottype_trends(self):
         """
@@ -174,11 +168,11 @@ class TestResearchAnalysis(unittest.TestCase):
         """
 
         with self.assertRaises(TypeError):
-            trends.generate_violin_plot(self.nhanes_data, plot_type=2)
+            generate_violin_plot(self.nhanes_data, plot_type=2)
 
     def test_invalid_value_plot_trend(self):
         """
         Tests if trend over time raises value error when passed invalid plottype value.
         """
         with self.assertRaises(ValueError):
-            trends.generate_violin_plot(self.nhanes_data, plot_type='Height')
+            generate_violin_plot(self.nhanes_data, plot_type='Height')
