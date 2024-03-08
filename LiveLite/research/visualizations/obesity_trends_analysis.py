@@ -2,6 +2,7 @@
 Obesity Trends Analysis
 
 Provides:
+    - plot_obesity_trends: Plots obesity trends over time with NHANES data.
     1. Function to plot the obesity trends over time.
 """
 import plotly.express as px

@@ -2,8 +2,9 @@
 Compare Trends Over Time
 
 Provides:
-    1. Function that generates violin plots to observe trends of BMI, physical activity,
+    - generate_violin_plot: Function that generates violin plots to observe trends of BMI, physical activity,
     or weight over time.
+
 """
 import pandas as pd
 import plotly.express as px

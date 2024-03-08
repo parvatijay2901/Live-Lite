@@ -2,6 +2,11 @@
 IHME Data Analysis
 
 Provides:
+    - rename_column_ihme: renames ihme dataframe columns so labels in plots are readable.
+    - process_ihme_data: pre-processes ihme data for plotting. Returns a processed dataframe, year list, and label
+    to highlight in the plot.
+    - plot_ihme_data: Plots the processed ihme data.
+
     1. Functions to process IHME data for plotting.
     2. Plot the processed IHME data to visualize obesity.
 """
@@ -60,7 +65,7 @@ def process_ihme_data(ihme, years=None, highlighted_risk_factor="high body-mass 
     return data_summary, years, highlighted_risk_factor
 
 
-def plot_ihme_data(data, years, highlighted_risk_factor="high body-mass index"):
+def plot_ihme_data(data, years=None, highlighted_risk_factor="high body-mass index"):
     """
     Plots the ihme data for the given years and highlights the designated risk factor.
     Raises Type errors if:
@@ -86,6 +91,9 @@ def plot_ihme_data(data, years, highlighted_risk_factor="high body-mass index"):
         raise TypeError(
             "Highlighted risk factor should be str."
         )
+
+    if years is None:
+        years = [1990, 2017]
 
     data_summary, years, highlighted_risk_factor = process_ihme_data(data, years)
 

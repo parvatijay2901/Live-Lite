@@ -2,6 +2,7 @@
 NHANES Obesity Overweight Analysis
 
 Provides:
+    - plot_obesity_overweight_trends: plots NHANES proportion of obesity data.
     1. Function that plots NHANES proportion of obese and overweight over time.
 """
 import pandas as pd
