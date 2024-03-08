@@ -119,7 +119,7 @@ class TestResearchAnalysis(unittest.TestCase):
         Tests if ihme raises value error when passed invalid year.
         """
         with self.assertRaises(ValueError):
-            plot_ihme_data(data=self.ihme_data, years=1800)
+            plot_ihme_data(data=self.ihme_data, years=[1800, 1810])
 
     def test_invalid_data_type_obesity_trends(self):
         """
@@ -140,7 +140,7 @@ class TestResearchAnalysis(unittest.TestCase):
         Tests if obesity trends raises type error when passed invalid year.
         """
         with self.assertRaises(ValueError):
-            plot_obesity_trends(self.nhanes_data, years=1800)
+            plot_obesity_trends(self.nhanes_data, years=[1800, 1810])
 
     def test_invalid_data_trends(self):
         """
@@ -161,7 +161,7 @@ class TestResearchAnalysis(unittest.TestCase):
         Tests if trend over time raises type error when passed invalid year.
         """
         with self.assertRaises(ValueError):
-            generate_violin_plot(self.nhanes_data, years=1800)
+            generate_violin_plot(self.nhanes_data, years=[1800, 1810])
 
     def test_invalid_type_plottype_trends(self):
         """

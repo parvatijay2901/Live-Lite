@@ -81,8 +81,24 @@ def plot_ihme_data(data, years=None, highlighted_risk_factor="high body-mass ind
 
     if not isinstance(data, pd.DataFrame):
         raise TypeError(
-            "Data should be a dataframe."
+            'Data should be a Pandas dataframe.'
         )
+
+    possible_years = range(1990, 2020, 1)
+    if years is not None:
+        if set(years).difference(possible_years):
+            raise ValueError(
+                "Years contains non-valid years. Valid years start from 1999 and increment by 2 years."
+            )
+
+    if years is None:
+        years = [1990, 2017]
+
+        if not isinstance(data, pd.DataFrame):
+            raise TypeError(
+                "Data should be a dataframe."
+            )
+
     if not isinstance(years, list):
         raise TypeError(
             "Years should be a list."
@@ -91,9 +107,6 @@ def plot_ihme_data(data, years=None, highlighted_risk_factor="high body-mass ind
         raise TypeError(
             "Highlighted risk factor should be str."
         )
-
-    if years is None:
-        years = [1990, 2017]
 
     data_summary, years, highlighted_risk_factor = process_ihme_data(data, years)
 
