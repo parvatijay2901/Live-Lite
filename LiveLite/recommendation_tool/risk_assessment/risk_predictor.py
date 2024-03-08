@@ -42,7 +42,7 @@ def risk_predict(input_dict, model):
 
     obesity_risk = round(new_prediction[0] * 100, 1)
 
-    color = interpolate_color(30)
+    color = interpolate_color(obesity_risk)
 
     return obesity_risk, color
 
