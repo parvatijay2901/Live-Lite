@@ -42,13 +42,21 @@ def risk_predict(input_dict, model):
 
     obesity_risk = round(new_prediction[0] * 100, 1)
 
-    if 0 <= obesity_risk <= 25:
-        color = '#add8e6'  # Low risk
-    elif 25 < obesity_risk <= 50:
-        color = '#81a977'  # Moderate risk
-    elif 50 < obesity_risk <= 75:
-        color = '#ffff99'  # High risk
-    else:
-        color = '#ffa07a'  # Very high risk
+    color = interpolate_color(30)
 
     return obesity_risk, color
+
+def interpolate_color(value):
+    """Interpolate between two RGB colors based on a value."""
+    if value <= 50:
+        red = int(119 + (251 - 119) * value / 50)
+        green = int(221 + (251 - 221) * value / 50)
+        blue = int(119 + (99 - 119) * value / 50)
+    else:
+        red = int(251 + (255 - 251) * (value - 50) / 50)
+        green = int(251 + (105 - 251) * (value - 50) / 50)
+        blue = int(99 + (97 - 99) * (value - 50) / 50)
+
+    hex_color = f'#{red:02x}{green:02x}{blue:02x}'
+
+    return hex_color
