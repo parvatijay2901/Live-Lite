@@ -11,6 +11,7 @@ Provides:
     - test_obesity_trends: smoke test to see if NHANES obesity trends plot properly runs.
 """
 import unittest
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -18,6 +19,8 @@ from LiveLite import plot_ihme_data
 from LiveLite import plot_obesity_trends
 from LiveLite import plot_obesity_overweight_trends
 from LiveLite import generate_violin_plot
+
+THIS_DIR = Path(__file__).parent
 
 
 class TestResearchAnalysis(unittest.TestCase):
@@ -29,12 +32,10 @@ class TestResearchAnalysis(unittest.TestCase):
         """
         Sets up the test by loading in the data.
         """
-        self.nhanes_data = pd.read_parquet(
-            '../../LiveLite/data/files/NHANES_Background.parquet'
-        )
-        self.ihme_data = pd.read_csv(
-            '../../LiveLite/data/files/IHME/number-of-deaths-by-risk-factor.csv'
-        )
+        nhanes_path = THIS_DIR.parent / 'data/input_files/NHANES_Background.csv'
+        ihme_path = THIS_DIR.parent / 'data/input_files/IHME/number-of-deaths-by-risk-factor.csv'
+        self.nhanes_data = pd.read_csv(nhanes_path)
+        self.ihme_data = pd.read_csv(ihme_path)
 
     def test_background_information_nhanes(self):
         """
