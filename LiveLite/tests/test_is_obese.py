@@ -36,7 +36,6 @@ class TestIsObese(unittest.TestCase):
         Smoke test to test if the function runs without errors.
         """
         is_obese(150, 80)
-        self.assertTrue(True)
 
     def test_is_obese_1(self):
         """

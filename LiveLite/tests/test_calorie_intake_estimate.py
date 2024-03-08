@@ -25,8 +25,7 @@ class TestCalorieEstimate(unittest.TestCase):
         Smoke test to test if the function runs without errors.
         """
         calculate_calorie_intake(50, 170, 20, 1, 2)
-        self.assertTrue(True)
-    
+
     def test_calorie_intake_1(self):
         """
         One shot test to test if the function correctly estimates calories.
@@ -49,14 +48,14 @@ class TestCalorieEstimate(unittest.TestCase):
         """
         with self.assertRaises(ValueError):
             calculate_calorie_intake(50, 170, 20, 4, 2)
-    
+
     def test_invalid_activity_level(self):
         """
         Test the function with invalid activity level input and check if it raises a ValueError.
         """
         with self.assertRaises(ValueError):
             calculate_calorie_intake(50, 170, 20, 0, -8)
-    
+
     def test_invalid_weight_type(self):
         """
         Test the function with invalid weight type input and check if it raises a TypeError.
@@ -70,14 +69,13 @@ class TestCalorieEstimate(unittest.TestCase):
         """
         with self.assertRaises(TypeError):
             calculate_calorie_intake(60, -85, 20, 0, 3)
-    
+
     def test_invalid_age_type(self):
         """
         Test the function with invalid age type input and check if it raises a TypeError.
         """
         with self.assertRaises(TypeError):
             calculate_calorie_intake(55.6, 170, 20.57, 0, 3)
-
 
 if __name__ == '__main__':
     unittest.main()
