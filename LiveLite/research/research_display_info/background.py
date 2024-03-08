@@ -11,10 +11,20 @@ Provides:
 """
 
 import streamlit as st
-import LiveLite
-import pandas as pd
+import LiveLite  # pylint: disable=import-error
+
 
 def display_trends_over_time(data, years=None):
+    """
+    Displays the distribution of BMI from the NHANES data.
+    Raises Type Error and Value Errors from the plotting function.
+    Args:
+        data: NHANES data.
+        years: List of years to plot.
+
+    Returns: None
+
+    """
     fig = LiveLite.generate_violin_plot(data, years=years)
     LiveLite.add_blank_lines()
     st.markdown("""
@@ -27,9 +37,20 @@ def display_trends_over_time(data, years=None):
     LiveLite.add_blank_lines()
     _, col12, _ = st.columns([0.5, 2, 0.5])
     with col12:
-        st.plotly_chart(fig, use_container_width=True) 
-        
+        st.plotly_chart(fig, use_container_width=True)
+
+
 def display_ihme_data_analysis(data, years):
+    """
+    Displays the death by risk factor for given years using IHME data.
+    Raises Type Error and Value Errors from the plotting function.
+    Args:
+        data: IHME data.
+        years: List of years.
+
+    Returns: None.
+
+    """
     LiveLite.add_blank_lines(2)
     st.markdown("""
         Also, according to a data published by the Institute for Health Metrics and Evaluation (IHME), 
@@ -40,10 +61,17 @@ def display_ihme_data_analysis(data, years):
         body-mass index increased to 5th in primary causes, jumping to a staggering 10 million. From these plots we 
         can confidently say that obesity is becoming an ever-increasing issue in the United States.
     """)
-    fig = LiveLite.plot_ihme_data(data, years=years) 
+    fig = LiveLite.plot_ihme_data(data, years=years)
     st.plotly_chart(fig, use_container_width=True, width=1200, height=600)
-    
+
+
 def display_background():
+    """
+    Function that provides text commentary on plots.
+    Raises no exceptions
+    Returns: None
+
+    """
     col1, _, col3 = st.columns([2, 0.2, 0.7])
     with col1:
         st.markdown("""
@@ -60,6 +88,6 @@ def display_background():
             30.5 to 42.4 %.""", unsafe_allow_html=True)
     with col3:
         st.image("LiveLite/streamlit_app/images/background_on_obesity.png", width=200)
-        
+
     display_trends_over_time(st.session_state['data_NHANES'], years=[1997, 2017])
     display_ihme_data_analysis(st.session_state['data_IHME'], years=[1990, 2019])
