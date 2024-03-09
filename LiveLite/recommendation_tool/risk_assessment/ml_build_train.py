@@ -20,6 +20,9 @@ from sklearn.metrics import accuracy_score, classification_report
 from sklearn.utils import class_weight
 import joblib
 
+# pylint: disable=too-many-locals
+# Disbaling the pylint too many locals check, as the code is fully readable
+# and need local variables for data processing.
 def build_and_evaluate_model(inputfile, outputfile):
     """
     Builds and evaluates a logistic regression model for predicting obesity risk.
@@ -162,7 +165,7 @@ def find_most_influential_factors(model, num_features, cat_features):
         print(coeff_df.head(3))
 
     except Exception as e:
-        raise type(e)(f"Error occurred while saving the model: {e}") from e
+        raise type(e)(f"Error occurred while searching for parameters: {e}") from e
 
 if __name__ == "__main__":
     IP = "./LiveLite/data/input_files/ml_input.csv"
