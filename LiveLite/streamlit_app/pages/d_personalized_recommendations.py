@@ -1,21 +1,31 @@
-"""_summary_
 """
+This page displays personalized recommendations for
+diet and physical activity based on user inputs.
+"""
+
 import streamlit as st
 from streamlit_extras.stylable_container import stylable_container
 import LiveLite # pylint: disable=import-error
 
 st.set_page_config(layout="wide", initial_sidebar_state="collapsed")
-LiveLite.swap_pages_back()
+
+# Go back to the home page if the variables are not loaded
+LiveLite.check_session_state_variable("recommendations")
+
+# Provide an option to the user to navigate to other pages
+LiveLite.swap_pages_back(choice="basic_risk_insights")
 
 st.markdown("""<div style="text-align:center;"><h2 style='color:gold;'>
         Personalized Recommendations</h2></div>""", unsafe_allow_html=True)
 
+# Calculate estimated daily calorie intake
 calorie_intake = LiveLite.controller("estimate_calorie_intake")
 st.markdown(f"""<div style="text-align: center;"><h3>Estimated Daily Calorie Intake:
             {calorie_intake:.1f}Kcal</h3></div>""", unsafe_allow_html=True)
 st.session_state['calorie_intake'] = calorie_intake
-recommendation = LiveLite.controller("recommender_basic")
 
+# Get personalized recommendations
+recommendation = LiveLite.controller("recommender_basic")
 col1, _, col3 = st.columns([1,0.2,1])
 with col1:
     st.markdown("""<div style="text-align: center;"><h3 style='color:gold;'>
@@ -24,10 +34,10 @@ with col1:
     st.markdown("""<div style ="text-align: center;"><p style='color:#99fadc;'>Ensure you
                 meet the recommended daily intake levels for these macro-nutrients for optimal
                 health and performance!</p></div>""", unsafe_allow_html=True)
-
     _, col112, _ = st.columns([1,25,1])
     with col112:
         LiveLite.add_blank_lines()
+        # Display macronutrients diet df
         st.dataframe(recommendation[0], hide_index=True)
         LiveLite.add_blank_lines(2)
     st.markdown("""<div style ="text-align: center;"><p style='color:#99fadc;'>Include these
@@ -36,6 +46,7 @@ with col1:
     _, col122, _ = st.columns([0.9,2,0.9])
     with col122:
         LiveLite.add_blank_lines()
+        # Display micronutrients diet df
         st.dataframe(recommendation[1], hide_index=True)
         LiveLite.add_blank_lines()
         with stylable_container("button",
@@ -52,4 +63,5 @@ with col3:
     _, col32, _ = st.columns([1,25,1])
     with col32:
         LiveLite.add_blank_lines()
+        # Display physical_activity_recommendation df
         st.dataframe(recommendation[2], hide_index=True)

@@ -70,8 +70,8 @@ def display_health_consequences():
         5kg/m<sup>2</sup> increase in BMI (Prospective Studies Collaboration, 2009)
     """, unsafe_allow_html=True)
 
-    display_nhanes_obesity_overweight_analysis(st.session_state['data_NHANES'])
-    display_obesity_trends(st.session_state['data_NHANES'])
+    display_nhanes_obesity_overweight_analysis(st.session_state['data_nhanes'])
+    display_obesity_trends(st.session_state['data_nhanes'])
 
     st.markdown("""
         Obesity has drastic implications on morbidity for obese individuals.

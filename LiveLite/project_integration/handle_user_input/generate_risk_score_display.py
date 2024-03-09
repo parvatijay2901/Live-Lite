@@ -1,47 +1,86 @@
-"""_summary_
-
-Returns:
-    _type_: _description_
 """
+This module contains functions that are designed to be used together
+to predict and display risk scores for obesity based on user inputs.
+
+Functions:
+- get_input_for_risk_score (mapped_user_inputs: Prepares inputs for risk
+                                                score prediction based on user inputs.
+- display_risk_score (risk_score, color): Displays the risk score using an SVG donut plot.
+- display_risk_suggestion (risk_score): Displays suggestions based on the risk score.
+"""
+
 import streamlit as st
 
 def get_input_for_risk_score(mapped_user_inputs):
-    """_summary_
+    """Function to prepare inputs for risk score prediction.
 
     Args:
-        mapped_user_inputs (_type_): _description_
+        mapped_user_inputs (dict): A dictionary containing user inputs.
 
     Returns:
-        _type_: _description_
+        dict: A dictionary containing risk prediction inputs.
+
+    Raises:
+        TypeError: If the input mapped_user_inputs is not a dictionary.
+        ValueError: If any required keys are missing in the
+                    mapped_user_inputs dictionary.
     """
-    risk_predict_input = {'DPQ020': [mapped_user_inputs['internal_mental_health']],
-                        'DPQ050': [mapped_user_inputs['internal_poor_appetite_overeating']],
-                        'PAQ670': [mapped_user_inputs['internal_activity_level']],
-                        'DBQ700': [mapped_user_inputs['internal_diet_condition']],
-                        'HUQ010': [mapped_user_inputs['internal_health_condition']],
-                        'RIAGENDR': [mapped_user_inputs['internal_sex']],
-                        'RIDAGEYR': [mapped_user_inputs['internal_age']],
-                        'RIDRETH3': [mapped_user_inputs['internal_ethnicity']],
-                        'SMQ040': [mapped_user_inputs['internal_smoke_cig']],
-                        'SLD012': [mapped_user_inputs['internal_sleep_hrs']]
-                        }
+    if not isinstance(mapped_user_inputs, dict):
+        raise TypeError("Input 'mapped_user_inputs' must be a dictionary.")
+
+    # Make sure that all the required arguments are present in user input
+    required_keys = ['internal_mental_health', 'internal_poor_appetite_overeating',
+                    'internal_activity_level', 'internal_diet_condition',
+                    'internal_health_condition', 'internal_sex', 'internal_age',
+                    'internal_ethnicity', 'internal_smoke_cig', 'internal_sleep_hrs']
+    if not all(key in mapped_user_inputs for key in required_keys):
+        raise ValueError("Input dictionary 'mapped_user_inputs' is missing required keys.")
+
+    # Generate input dict to predict obesity risk
+    risk_predict_input = {
+        'DPQ020': [mapped_user_inputs['internal_mental_health']],
+        'DPQ050': [mapped_user_inputs['internal_poor_appetite_overeating']],
+        'PAQ670': [mapped_user_inputs['internal_activity_level']],
+        'DBQ700': [mapped_user_inputs['internal_diet_condition']],
+        'HUQ010': [mapped_user_inputs['internal_health_condition']],
+        'RIAGENDR': [mapped_user_inputs['internal_sex']],
+        'RIDAGEYR': [mapped_user_inputs['internal_age']],
+        'RIDRETH3': [mapped_user_inputs['internal_ethnicity']],
+        'SMQ040': [mapped_user_inputs['internal_smoke_cig']],
+        'SLD012': [mapped_user_inputs['internal_sleep_hrs']]
+    }
     return risk_predict_input
 
 def display_risk_score(risk_score, color):
-    """_summary_
+    """Function to display the risk score.
 
     Args:
-        risk_score (_type_): _description_
-        color (_type_): _description_
+        risk_score (float): The risk score.
+        color (str): The color.
 
     Returns:
-        _type_: _description_
+        str: SVG representing the risk score display.
+
+    Raises:
+        TypeError: If risk_score is not a float value or color is not a string.
+        ValueError: If risk_score is negative.
     """
+    if not isinstance(risk_score, float):
+        raise TypeError("Input 'risk_score' must be a float value.")
+
+    if not isinstance(color, str):
+        raise TypeError("Input 'color' must be a string.")
+
+    if risk_score < 0:
+        raise ValueError("Input 'risk_score' cannot be negative.")
+
+    # Modify risk_score text to be displayed
     if risk_score < 100:
         risk_score = str(risk_score) + "%"
     else:
         risk_score = "Obese"
 
+    # Design a donut plot with risk_score displayed in centre
     donut_plot = f"""<div style="width: 250px; height: 250px;">
     <svg width="250" height="250" viewBox="0 0 250 250">
     <!-- Outer circle (ring) -->
@@ -57,11 +96,22 @@ def display_risk_score(risk_score, color):
     return donut_plot
 
 def display_risk_suggestion(risk_score):
-    """_summary_
+    """Function to display risk suggestions based on the risk score.
 
     Args:
-        risk_score (_type_): _description_
+        risk_score (float): The risk score.
+
+    Raises:
+        TypeError: If risk_score is not a float value.
+        ValueError: If risk_score is negative.
     """
+    if not isinstance(risk_score, float):
+        raise TypeError("Input 'risk_score' must be a float value.")
+
+    if risk_score < 0:
+        raise ValueError("Input 'risk_score' cannot be negative.")
+
+    # Based on the risk_score, generate a risk_suggestion
     if risk_score <= 25:
         text = f"""Based on your assessment, your risk of obesity
         is currently low at {risk_score}%. To maintain this healthy level, why not explore
