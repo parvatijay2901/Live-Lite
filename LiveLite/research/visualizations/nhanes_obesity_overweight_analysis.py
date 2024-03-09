@@ -18,20 +18,20 @@ def plot_obesity_overweight_trends(data, years=None):
     :param years: List of years.
     :return: Figure object.
     """
-    years_default = [1999, 2001, 2003, 2005, 2007, 2009, 2011, 2013, 2015, 2017]
+    years_possible = [1999, 2001, 2003, 2005, 2007, 2009, 2011, 2013, 2015, 2017]
 
     if not isinstance(years, list) and years is not None:
         raise TypeError(
             "Years must be a list."
         )
     if years is not None:
-        if set(years).difference(years_default):
+        if not all(item in years_possible for item in years):
             raise ValueError(
                 "Years contains non-valid years. Valid years start from 1999 and increment by 2 years."
             )
 
     if years is None:
-        years = years_default
+        years = years_possible
 
 
     if not isinstance(data, pd.DataFrame):
