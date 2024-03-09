@@ -10,7 +10,7 @@ Dependencies:
 - risk_predict from risk_predictor
 """
 import unittest
-from LiveLite import risk_predict
+from LiveLite import risk_predict # pylint: disable=import-error
 
 class TestRiskPredict(unittest.TestCase):
     """

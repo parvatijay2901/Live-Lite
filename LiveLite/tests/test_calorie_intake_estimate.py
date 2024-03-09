@@ -11,7 +11,7 @@ Dependencies:
 - calculate_calorie_intake from calorie_intake_esstimate
 """
 import unittest
-from LiveLite import calculate_calorie_intake
+from LiveLite import calculate_calorie_intake # pylint: disable=import-error
 
 class TestCalorieEstimate(unittest.TestCase):
     """

@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch, MagicMock
-from LiveLite import scrape_calories_data
+from LiveLite import scrape_calories_data # pylint: disable=import-error
 
 class TestScrapeCaloriesData(unittest.TestCase):
 
