@@ -1,6 +1,6 @@
 import unittest
 import numpy as np
-from LiveLite import calculate_calorie_burn
+from LiveLite import calculate_calorie_burn # pylint: disable=import-error
 
 class TestActivity(unittest.TestCase):
 

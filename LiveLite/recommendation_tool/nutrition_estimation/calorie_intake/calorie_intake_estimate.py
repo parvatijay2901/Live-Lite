@@ -54,8 +54,8 @@ def calculate_calorie_intake(weight_kg, height_cm, age, sex, activity_level):
 
     try:
         bmr = calculate_bmr(weight_kg, height_cm, age, sex)
-    except ValueError as ve:
-        raise ValueError(ve) from ve
+    except ValueError as val_err:
+        raise ValueError(val_err) from val_err
 
     # Different multiplier for each activity level.
     activity_multiplier = {

@@ -11,7 +11,7 @@ Dependencies:
 """
 
 import unittest
-from LiveLite import is_obese
+from LiveLite import is_obese # pylint: disable=import-error
 
 class TestIsObese(unittest.TestCase):
     """
