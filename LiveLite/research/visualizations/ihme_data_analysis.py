@@ -125,7 +125,7 @@ def plot_ihme_data(data, years, highlighted_risk_factor="high body-mass index"):
 
     fig.update_layout(
         title='Deaths by Risk Factor',
-        title_x=0.5,
+        title_x=0.45,
         height=500,
         showlegend=False,
         autosize=True,

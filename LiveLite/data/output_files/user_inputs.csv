@@ -174,3 +174,14 @@ age,sex,height,weight,ethnicity,activity_level,dietary_preference,smoke_cig,ment
 18,Male,60.96,9.072,Hispanic,Sedentary,No,Not at all,2.0,Excellent,Excellent,Not at all
 18,Male,60.96,9.072,Hispanic,Sedentary,No,Not at all,2.0,Excellent,Excellent,Not at all
 24,Female,160.02,52.164,Non-Hispanic Asian,Moderately Active,No,Occasionally these days,7.0,Very good,Very good,Not at all
+18,Male,60.96,9.072,Hispanic,Sedentary,No,Not at all,2.0,Excellent,Excellent,Not at all
+18,Male,24.0,20.0,Hispanic,Sedentary,No,Not at all,2.0,Excellent,Excellent,Not at all
+18,Male,24.0,20.0,Hispanic,Sedentary,No,Not at all,2.0,Excellent,Excellent,Not at all
+18,Male,24.0,20.0,Hispanic,Sedentary,No,Not at all,2.0,Excellent,Excellent,Not at all
+24,Female,63.0,117.0,Non-Hispanic Asian,Moderately Active,No,Occasionally these days,7.0,Very good,Very good,Not at all
+78,Female,63.0,145.0,Non-Hispanic White,Minimally Active,Yes,Frequently these days,5.0,Good,Good,Occasionally these days
+18,Male,24.0,120.0,Hispanic,Sedentary,No,Not at all,2.0,Excellent,Excellent,Not at all
+18,Male,24.0,20.0,Hispanic,Sedentary,No,Not at all,2.0,Excellent,Excellent,Not at all
+18,Male,24.0,140.0,Hispanic,Sedentary,No,Not at all,2.0,Excellent,Excellent,Not at all
+18,Male,24.0,20.0,Hispanic,Sedentary,No,Not at all,2.0,Excellent,Excellent,Not at all
+24,Female,63.0,116.0,Non-Hispanic Asian,Moderately Active,No,Occasionally these days,7.0,Very good,Very good,Not at all

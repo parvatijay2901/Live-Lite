@@ -7,7 +7,7 @@ st.session_state['user_inputs'] = {}
 
 col0, col1 = st.columns([10, 1.5])
 with col1:
-    if st.button("🡆 Home🏠", use_container_width=True):
+    if st.button("→ Home🏠", use_container_width=True):
         st.switch_page("Home.py")
         
 st.markdown("""<div style="text-align:center;"><h2 style='color:gold;'>Obesity Risk Assessment</h2></div>""", unsafe_allow_html=True)

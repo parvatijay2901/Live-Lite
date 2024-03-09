@@ -46,6 +46,6 @@ def plot_obesity_trends(data, years=None):
     fig.update_layout(xaxis_title='Year',
                     yaxis_title='Proportion Obese',
                     legend_title='Gender',
-                    title_x=0.4)
+                    title_x=0.35)
 
     return fig
