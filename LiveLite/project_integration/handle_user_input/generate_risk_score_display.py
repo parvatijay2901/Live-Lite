@@ -53,10 +53,11 @@ def display_risk_suggestion(risk_score):
         here to support you with personalized guidance on healthy eating and physical activity. 
         Let's work together to achieve your health goals."""
     else:
-        text = f"""Based on your assessment, you are Obese. It's important to remember that everyone's journey 
-        towards better health is unique, and taking small steps can make a big difference. We understand this can be daunting, 
-        but we're here to support you with personalized guidance on healthy eating and physical activity. 
-        Let's work together to achieve your health goals."""
+        text = f"""It's essential to recognize that everyone's health journey is unique, and it's okay to 
+        start small. Making positive changes, no matter how small, can have a significant impact on your 
+        overall well-being. We're here to provide personalized support and guidance to help you make 
+        healthier choices in both your eating habits and physical activity. Let's work together to achieve 
+        your health goals at a pace that feels comfortable for you."""
 
     text = f"<center>{text}</center>"
     st.markdown(text, unsafe_allow_html=True)

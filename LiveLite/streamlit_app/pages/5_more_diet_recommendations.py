@@ -6,10 +6,10 @@ st.set_page_config(layout="wide", initial_sidebar_state="collapsed")
 
 col1, _, col3 = st.columns([2.5, 10, 1.5])
 with col1:
-    if st.button("⬅ Basic Risk Insights🌿🏃🏼", use_container_width=True):
+    if st.button("← Basic Risk Insights🌿🏃🏼", use_container_width=True):
         st.switch_page("pages/3_risk_insights.py")
 with col3:
-    if st.button("➞ Home🏠", use_container_width=True):
+    if st.button("→ Home🏠", use_container_width=True):
         st.switch_page("Home.py")
         
 st.markdown("""<div style="text-align:center;"><h2>Food Recommendations</h2></div>""", unsafe_allow_html=True)
@@ -17,7 +17,11 @@ LiveLite.add_blank_lines()
 
 st.markdown("""<div style="text-align:center;"><h3 style='color:gold;'>
             Personalized Suggestions</h3></div>""", unsafe_allow_html=True)
-recommended_foods_df = LiveLite.controller("diet_recommender_advanced_based_on_food_preference")
+if 'recommended_foods_df' not in st.session_state:
+    recommended_foods_df = LiveLite.controller("diet_recommender_advanced_based_on_food_preference")
+    st.session_state['recommended_foods_df'] = recommended_foods_df
+else:
+    recommended_foods_df = st.session_state['recommended_foods_df']
 food_category = recommended_foods_df['Food Category'].unique().tolist()
 
 st.markdown("""<div style ="text-align: center;"><p style='color:#99fadc;'>Below are some food items based on your 
@@ -39,7 +43,8 @@ _, col2, _ = st.columns([1, 1, 1])
 with col2: 
     search_food_items = st.text_input("Enter your Choice")
     st.session_state['search_food_items'] = search_food_items
-    view_search_results = st.button("View Food of Your Choice 🥗", use_container_width=True)
+    with stylable_container("button", css_styles="""button {background-color: #f2f2f2; color: black;font-size: 50px;}"""):
+        view_search_results = st.button("View Food of Your Choice 🥗", use_container_width=True)
     LiveLite.add_blank_lines(2)
 
 if view_search_results:

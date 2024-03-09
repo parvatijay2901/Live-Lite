@@ -63,9 +63,9 @@ def generate_violin_plot(data, plot_type='BMI', years=None):
 
     # Create Figure
     fig = px.box(data, x='Year', y=plot_type)
-    fig.update_layout(yaxis_range=[18, 35])
     # Customize axis labels and titles based on plot type
     if plot_type == 'BMI':
+        fig.update_layout(yaxis_range=[18, 35])
         fig.update_xaxes(title='Year', tickvals=years)
         fig.update_yaxes(title='BMI (kg/m^2)')
         fig.update_layout(title='Comparison of BMI by Year', title_x=0.4)
