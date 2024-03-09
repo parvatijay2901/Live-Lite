@@ -18,7 +18,7 @@ from LiveLite.research.visualizations.compare_trends_over_time import generate_v
 
 from LiveLite.recommendation_tool.risk_assessment.risk_predictor import risk_predict
 from LiveLite.recommendation_tool.risk_assessment.is_obese import is_obese
-from LiveLite.recommendation_tool.risk_assessment.ml_build_train import build_and_evaluate_model
+from LiveLite.recommendation_tool.risk_assessment.ml_build_train import build_and_evaluate_model, save_model, find_most_influential_factors
 from LiveLite.recommendation_tool.nutrition_estimation.calorie_intake.calorie_intake_estimate import calculate_calorie_intake
 from LiveLite.recommendation_tool.diet_recommendation.food import micro_nutrients, macro_nutrients_data
 from LiveLite.recommendation_tool.diet_recommendation.personalised_food_list import search_food, recommended_food, beef_data
