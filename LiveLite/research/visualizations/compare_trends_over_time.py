@@ -2,8 +2,9 @@
 Compare Trends Over Time
 
 Provides:
-    1. Function that generates violin plots to observe trends of BMI, physical activity,
+    - generate_violin_plot: Function that generates violin plots to observe trends of BMI, physical activity,
     or weight over time.
+
 """
 import pandas as pd
 import plotly.express as px
@@ -25,21 +26,27 @@ def generate_violin_plot(data, plot_type='BMI', years=None):
     :return: Figure object.
     """
     years_default = [1999, 2005, 2011, 2017]
+    years_possible = [1999, 2001, 2003, 2005, 2007, 2009, 2011, 2013, 2015, 2017]
 
-    if years is not None:
-        years = years_default
-    elif not isinstance(years, list):
+    if not isinstance(years, list) and years is not None:
         raise TypeError(
             "Years must be a list."
         )
-    else:
+
+    if years is not None:
+        if set(years).difference(years_possible):
+            raise ValueError(
+                "Years contains non-valid years. Valid years start from 1999 and increment by 2 years."
+            )
+
+    if years is None:
         years = years_default
+
+    if not isinstance(plot_type, str):
+        raise TypeError('Plot Type must be str.')
 
     if plot_type not in ['BMI', 'Weight']:
         raise ValueError("Not valid plot type.")
-
-    if list(set(years).difference(years_default)):
-        raise ValueError("Valid years start from 1999 and increment by 6 years.")
 
     if not isinstance(data, pd.DataFrame):
         raise TypeError(
@@ -55,8 +62,8 @@ def generate_violin_plot(data, plot_type='BMI', years=None):
         plot_type = 'BMXWT'
 
     # Create Figure
-    fig = px.violin(data, x='Year', y=plot_type, box=True, points=False)
-
+    fig = px.box(data, x='Year', y=plot_type)
+    fig.update_layout(yaxis_range=[18, 35])
     # Customize axis labels and titles based on plot type
     if plot_type == 'BMI':
         fig.update_xaxes(title='Year', tickvals=years)

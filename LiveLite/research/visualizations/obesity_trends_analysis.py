@@ -2,8 +2,10 @@
 Obesity Trends Analysis
 
 Provides:
+    - plot_obesity_trends: Plots obesity trends over time with NHANES data.
     1. Function to plot the obesity trends over time.
 """
+import pandas as pd
 import plotly.express as px
 
 
@@ -26,6 +28,11 @@ def plot_obesity_trends(data, years=None):
     if set(years).difference(years_default):
         raise ValueError(
             "Years contains non-valid years. Valid years start from 1999 and increment by 2 years."
+        )
+
+    if not isinstance(data, pd.DataFrame):
+        raise TypeError(
+            'Data must be Pandas dataframe.'
         )
 
     # Filter the data for the selected years
