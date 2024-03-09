@@ -17,18 +17,16 @@ def custom_median(series):
         series (pandas.Series): The input series for which median is to be calculated.
     Returns:
         float: The median of the series.
-    Raises:
-        ValueError: If the series is empty.
     """
-    if series.empty:
-        raise ValueError("Input series is empty")
-
     sorted_values = series.sort_values()
     length = len(sorted_values)
     if length % 2 == 0:
         return sorted_values.iloc[length // 2 - 1]
     return sorted_values.iloc[length // 2]
 
+# pylint: disable=too-many-locals
+# Disbaling the pylint too many locals check, as the code is fully readable
+# and needs local variables for data processing.
 def calculate_calorie_burn(filename, weight_kg, intensity="moderate", preferred_activity=None):
     """
     Calculate estimated calorie burn based on weight and activity intensity.
@@ -82,10 +80,10 @@ def calculate_calorie_burn(filename, weight_kg, intensity="moderate", preferred_
 
     else:
         chosen_record = df[df['Activity'].str.lower().str.contains(preferred_activity.lower())]
-        
+
         if chosen_record.empty:
             raise ValueError(f"No records found for preferred activity: {preferred_activity}")
-        
+
         for idx, row in chosen_record.iterrows():
             activity_type = row['Activity Type']
             activity = row['Activity']
