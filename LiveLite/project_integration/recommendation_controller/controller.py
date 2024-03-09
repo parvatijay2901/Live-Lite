@@ -16,7 +16,7 @@ def controller(choice):
         list: A list containing the result(s) based on the choice.
     """
     if 'user_inputs' not in st.session_state or 'food_nutrition_data' not in st.session_state:
-        st.switch_page("Home.py")
+        st.switch_page("app.py")
 
     user_inputs = st.session_state['user_inputs']
     mapped_user_inputs = LiveLite.user_input_mapping(user_inputs)
@@ -37,9 +37,8 @@ def controller(choice):
             color = '#ff6961'
         else:
             risk_predict_input = LiveLite.get_input_for_risk_score(mapped_user_inputs)
-            risk_score, color = LiveLite.risk_predict(
-            risk_predict_input,
-            """LiveLite/recommendation_tool/risk_assessment/trained_models/obesity_risk_model.joblib""")
+            risk_score, color = LiveLite.risk_predict(risk_predict_input,
+            "LiveLite/recommendation_tool/risk_assessment/trained_models/obesity_risk_model.joblib")
         return risk_score, color
 
     if choice == "recommender_basic":
