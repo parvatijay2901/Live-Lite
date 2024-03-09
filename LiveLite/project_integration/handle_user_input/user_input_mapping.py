@@ -93,27 +93,6 @@ def user_input_mapping(user_data_dict):
             return int(activity_map[activity_lower])
         raise ValueError("Invalid value for activity level")
 
-    def convert_dietary_preference(dietary_preference):
-        """
-        Convert the diet preference to a numerical representation
-        as per tool definition.
-        Args:
-            dietary_preference (str): The dietary preferencer to be converted.
-        Returns:
-            int: Numerical representation of dietary preference.
-        Raises:
-            ValueError: If the provided value is not in dictionary.
-        """
-        dietary_map = {
-            'vegan': 1,
-            'vegetarian': 2,
-            'non vegetarian': 3
-        }
-        dietary_lower = dietary_preference.lower()
-        if dietary_lower in dietary_map:
-            return int(dietary_map[dietary_lower])
-        raise ValueError("Invalid value for dietary preference")
-
     def convert_sleep_hours(sleep_hours):
         """
         Restrict the sleep hours to valid values between 2 to 14
