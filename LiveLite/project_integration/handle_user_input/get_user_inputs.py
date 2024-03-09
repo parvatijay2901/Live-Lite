@@ -10,8 +10,8 @@ def get_demographic_inputs(user_inputs):
         feet = st.number_input("Height (feet)", min_value=2.0, step = 1.0, max_value=7.0)
     with col2:
         inches = st.number_input("Height (inches)")
-    user_inputs['height'] = ((feet*12) + inches) * 2.54
-    user_inputs['weight'] = st.number_input("Weight (lb)", min_value=20.0, step = 1.0) * 0.4536
+    user_inputs['height'] = ((feet*12) + inches)
+    user_inputs['weight'] = st.number_input("Weight (lb)", min_value=20.0, step = 1.0)
     user_inputs['ethnicity'] = st.selectbox("Self-identified Race/Ethnicity", ["Hispanic", 
                                                                             "Mexican American", 
                                                                             "Non-Hispanic White", 

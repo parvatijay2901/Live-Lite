@@ -8,7 +8,7 @@ if 'data_NHANES' not in st.session_state or 'data_IHME' not in st.session_state:
 
 _, col1 = st.columns([10, 1.5])
 with col1:
-        if st.button("🡆 Home🏠", use_container_width=True):
+        if st.button("→ Home🏠", use_container_width=True):
                 st.switch_page("Home.py")
         
 st.markdown("""<div style="text-align:center;"><h2><span style='color:gold;'>Comprehensive Guide to Obesity: </span>Understanding, Prevention, and Management</h2></div>""", unsafe_allow_html=True)
