@@ -38,6 +38,7 @@ For example,
 
 ## Data Sources
 - [National Health and Nutrition Examination Survey (NHANES)](https://wwwn.cdc.gov/nchs/nhanes/Default.aspx)
+- [Institute of Health Metrics and Evaluation (IHME)](https://www.healthdata.org/research-analysis/gbd)
 - [Nutrition, Physical Activity, and Obesity - Behavioral Risk Factor Surveillance System](https://data.cdc.gov/Nutrition-Physical-Activity-and-Obesity/Nutrition-Physical-Activity-and-Obesity-Behavioral/hn4x-zwk7/data_preview)
 - [Obesity based on eating habits & physical conditions](https://www.kaggle.com/datasets/ankurbajaj9/obesity-levels)
 - [Nutritional value in Food ingredients_A](https://fdc.nal.usda.gov/download-datasets.html)
