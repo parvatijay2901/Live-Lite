@@ -1,5 +1,5 @@
 import unittest
-from LiveLite import build_and_evaluate_model
+from LiveLite import build_and_evaluate_model # pylint: disable=import-error
 
 class TestMlModel(unittest.TestCase):
     

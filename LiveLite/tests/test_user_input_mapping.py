@@ -1,5 +1,5 @@
 import unittest
-from LiveLite import user_input_mapping
+from LiveLite import user_input_mapping # pylint: disable=import-error
 
 class TestUserInputMapping(unittest.TestCase):
     # Smoke test
