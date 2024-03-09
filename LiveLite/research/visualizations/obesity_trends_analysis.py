@@ -18,14 +18,14 @@ def plot_obesity_trends(data, years=None):
     :param years: Optional; List of years to plot.
     :return: Plotly Figure object.
     """
-    years_default = [1999, 2001, 2003, 2005, 2007, 2009, 2011, 2013, 2015, 2017]
+    years_possible = [1999, 2001, 2003, 2005, 2007, 2009, 2011, 2013, 2015, 2017]
 
     # If years is None, use the default years
     if years is None:
-        years = years_default
+        years = years_possible
 
     # Check if all provided years are valid
-    if set(years).difference(years_default):
+    if not all(item in years_possible for item in years):
         raise ValueError(
             "Years contains non-valid years. Valid years start from 1999 and increment by 2 years."
         )

@@ -86,7 +86,7 @@ def plot_ihme_data(data, years=None, highlighted_risk_factor="high body-mass ind
 
     possible_years = range(1990, 2020, 1)
     if years is not None:
-        if set(years).difference(possible_years):
+        if not all(item in possible_years for item in years):
             raise ValueError(
                 "Years contains non-valid years. Valid years start from 1999 and increment by 2 years."
             )

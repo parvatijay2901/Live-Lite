@@ -34,7 +34,7 @@ def generate_violin_plot(data, plot_type='BMI', years=None):
         )
 
     if years is not None:
-        if set(years).difference(years_possible):
+        if not all(item in years_possible for item in years):
             raise ValueError(
                 "Years contains non-valid years. Valid years start from 1999 and increment by 2 years."
             )
