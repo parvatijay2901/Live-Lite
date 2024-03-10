@@ -24,3 +24,5 @@ from LiveLite.recommendation_tool.nutrition_estimation.calorie_intake.calorie_in
 from LiveLite.recommendation_tool.diet_recommendation.food import micro_nutrients, macro_nutrients_data
 from LiveLite.recommendation_tool.diet_recommendation.personalised_food_list import search_food, recommended_food, beef_data
 from LiveLite.recommendation_tool.physical_activity_recommendation.physical_activity_recommend import calculate_calorie_burn
+
+from LiveLite.streamlit_app.app import app, load_data

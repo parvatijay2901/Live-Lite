@@ -1,37 +1,39 @@
 import unittest
-from unittest.mock import patch
+from unittest import mock
 import LiveLite
-
 class TestModuleFunctions(unittest.TestCase):
 
-    @patch('streamlit.switch_page')
-    def test_invalid_home_page(self, mock_switch_page):
+    @mock.patch('os.path.exists')
+    @mock.patch('streamlit.switch_page')
+    def test_invalid_home_page(self, mock_switch_page, mock_wrong_path):
         """Test home_page function"""
-
-        with self.assertRaises(AssertionError):
+        mock_wrong_path.side_effect = lambda path: False
+        with self.assertRaises(FileNotFoundError):
             LiveLite.home_page()
-            mock_switch_page.assert_called_once_with("invalid.py")
 
-    @patch('streamlit.switch_page')
-    def test_invalid_obesity_assessment_page(self, mock_switch_page):
+    @mock.patch('os.path.exists')
+    @mock.patch('streamlit.switch_page')
+    def test_invalid_obesity_assessment_page(self, mock_switch_page, mock_wrong_path):
         """Test obesity_assessment_page function"""
-        with self.assertRaises(AssertionError):
+        mock_wrong_path.side_effect = lambda path: False
+        with self.assertRaises(FileNotFoundError):
             LiveLite.obesity_assessment_page()
-            mock_switch_page.assert_called_once_with("invalid.py")
 
-    @patch('streamlit.switch_page')
-    def test_invalid_risk_insights_page(self, mock_switch_page):
+    @mock.patch('os.path.exists')
+    @mock.patch('streamlit.switch_page')
+    def test_invalid_risk_insights_page(self, mock_switch_page, mock_wrong_path):
         """Test risk_insights_page function"""
-        with self.assertRaises(AssertionError):
+        mock_wrong_path.side_effect = lambda path: False
+        with self.assertRaises(FileNotFoundError):
             LiveLite.risk_insights_page()
-            mock_switch_page.assert_called_once_with("invalid.py")
 
-    @patch('streamlit.switch_page')
-    def test_invalid_personalized_recommendations_page(self, mock_switch_page):
+    @mock.patch('os.path.exists')
+    @mock.patch('streamlit.switch_page')
+    def test_invalid_personalized_recommendations_page(self, mock_switch_page, mock_wrong_path):
         """Test personalized_recommendations_page function"""
-        with self.assertRaises(AssertionError):
+        mock_wrong_path.side_effect = lambda path: False
+        with self.assertRaises(FileNotFoundError):
             LiveLite.personalized_recommendations_page()
-            mock_switch_page.assert_called_once_with("invalid.py")
 
     def test_add_blank_lines_valid_inputs(self):
         """Test add_blank_lines function with valid inputs"""
@@ -53,8 +55,8 @@ class TestModuleFunctions(unittest.TestCase):
             LiveLite.add_blank_lines(num_lines=-2)
         LiveLite.add_blank_lines()
 
-    @patch('streamlit.button')
-    @patch('streamlit.switch_page')
+    @mock.patch('streamlit.button')
+    @mock.patch('streamlit.switch_page')
     def test_swap_pages_back_valid_inputs(self, mock_switch_page, mock_button):
         """Test swap_pages_back with various valid choices"""
 
@@ -81,9 +83,10 @@ class TestModuleFunctions(unittest.TestCase):
         with self.assertRaises(ValueError):
             LiveLite.swap_pages_back("invalid")
 
-    @patch('streamlit.session_state', {'data_ihme': True})
-    @patch('streamlit.switch_page')
-    def test_check_session_state_variable_research(self, mock_switch_page):
+    @mock.patch('streamlit.session_state', {'data_ihme': True})
+    @mock.patch('os.path.exists')
+    @mock.patch('streamlit.switch_page')
+    def test_check_session_state_variable_research(self, mock_switch_page, mock_wrong_path):
         """Test check_session_state_variable with choice 'research',
         when all session_state variables does not exist."""
 
@@ -93,13 +96,14 @@ class TestModuleFunctions(unittest.TestCase):
             mock_switch_page.assert_not_called()
 
         # Test if app.py doesn't exist
+        mock_wrong_path.side_effect = lambda path: False
         with self.assertRaises(AssertionError):
             LiveLite.check_session_state_variable("research")
-            mock_switch_page.assert_called_once_with("invalid.py")
 
-    @patch('streamlit.session_state', {'user_inputs': True})
-    @patch('streamlit.switch_page')
-    def test_check_session_state_variable_recommendations(self, mock_switch_page):
+    @mock.patch('streamlit.session_state', {'user_inputs': True})
+    @mock.patch('os.path.exists')
+    @mock.patch('streamlit.switch_page')
+    def test_check_session_state_variable_recommendations(self, mock_switch_page, mock_wrong_path):
         """Test check_session_state_variable with choice 'recommendations',
         when all session_state variables does not exist."""
 
@@ -109,9 +113,9 @@ class TestModuleFunctions(unittest.TestCase):
             mock_switch_page.assert_not_called()
 
         # Test if app.py doesn't exist
+        mock_wrong_path.side_effect = lambda path: False
         with self.assertRaises(AssertionError):
             LiveLite.check_session_state_variable("recommendations")
-            mock_switch_page.assert_called_once_with("invalid.py")
 
     def test_check_session_state_variable_invalid_choice(self):
         "Test check_session_state_variable with an invalid choice"

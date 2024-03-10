@@ -17,49 +17,49 @@ def home_page():
     Redirects to the home page.
 
     Raises:
-        AssertionError: Raised when the home page file is not found.
+        FileNotFoundError: Raised when the home page file is not found.
     """
     if os.path.exists(os.path.join(os.getcwd(), "LiveLite/streamlit_app/app.py")):
         st.switch_page("app.py")
     else:
-        raise AssertionError("File app.py not found")
+        raise FileNotFoundError("File app.py not found")
 
 def obesity_assessment_page():
     """
     Redirects to the obesity assessment page.
 
     Raises:
-        AssertionError: Raised when the obesity assessment file is not found.
+        FileNotFoundError: Raised when the obesity assessment file is not found.
     """
     if os.path.exists(os.path.join(os.getcwd(), "LiveLite/streamlit_app/pages/b_obesity_assessment.py")):
         st.switch_page("pages/b_obesity_assessment.py")
     else:
-        raise AssertionError("File b_obesity_assessment.py not found")
+        raise FileNotFoundError("File b_obesity_assessment.py not found")
 
 def risk_insights_page():
     """
     Redirects to the risk insights page.
 
     Raises:
-        AssertionError: Raised when the risk insights file is not found.
+        FileNotFoundError: Raised when the risk insights file is not found.
     """
 
     if os.path.exists(os.path.join(os.getcwd(), "LiveLite/streamlit_app/pages/c_risk_insights.py")):
         st.switch_page("pages/c_risk_insights.py")
     else:
-        raise AssertionError("File c_risk_insights.py not found")
+        raise FileNotFoundError("File c_risk_insights.py not found")
 
 def personalized_recommendations_page():
     """
     Redirects to the personalized recommendations page.
 
     Raises:
-        AssertionError: Raised when the personalized recommendations file is not found.
+        FileNotFoundError: Raised when the personalized recommendations file is not found.
     """
     if os.path.exists(os.path.join(os.getcwd(), "LiveLite/streamlit_app/pages/d_personalized_recommendations.py")):
         st.switch_page("pages/d_personalized_recommendations.py")
     else:
-        raise AssertionError("File d_personalized_recommendations.py not found")
+        raise FileNotFoundError("File d_personalized_recommendations.py not found")
 
 def add_blank_lines(num_lines=1):
     """Function to add blank lines to the Streamlit app.
@@ -131,7 +131,7 @@ def check_session_state_variable(choice):
 
     Raises:
         ValueError: If `choice` is not "research" or "recommendations".
-        AssertionError: If the required files are not found.
+        FileNotFoundError: If the required files are not found.
     """
     if choice == "research":
         if ('data_nhanes' not in st.session_state or
@@ -141,8 +141,6 @@ def check_session_state_variable(choice):
                 st.switch_page("app.py")
             else:
                 raise AssertionError("File app.py not found")
-        else:
-            raise AssertionError("variables are not present in streamlit session")
     elif choice == "recommendations":
         if ('user_inputs' not in st.session_state or
             'food_nutrition_data' not in st.session_state):
@@ -151,7 +149,5 @@ def check_session_state_variable(choice):
                 st.switch_page("app.py")
             else:
                 raise AssertionError("File app.py not found")
-        else:
-            raise AssertionError("variables are not present in streamlit session")
     else:
         raise ValueError("Invalid choice.")
