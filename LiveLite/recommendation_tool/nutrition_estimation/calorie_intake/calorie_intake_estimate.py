@@ -19,9 +19,9 @@ def calculate_bmr(weight_kg, height_cm, age, sex):
         float: BMR value
     """
     if sex == 1:
-        bmr = 66 + (6.3 * weight_kg) + (12.9 * height_cm) - (6.8 * age)
+        bmr = 88.4 + (13.3 * weight_kg) + (4.8 * height_cm) - (5.7 * age)
     elif sex == 0:
-        bmr = 655 + (4.3 * weight_kg) + (4.7 * height_cm) - (4.7 * age)
+        bmr = 447.6 + (9.2 * weight_kg) + (3 * height_cm) - (4.3 * age)
     else:
         raise ValueError("Invalid value for sex")
     return bmr
@@ -54,8 +54,8 @@ def calculate_calorie_intake(weight_kg, height_cm, age, sex, activity_level):
 
     try:
         bmr = calculate_bmr(weight_kg, height_cm, age, sex)
-    except ValueError as ve:
-        raise ValueError(ve) from ve
+    except ValueError as val_err:
+        raise ValueError(val_err) from val_err
 
     # Different multiplier for each activity level.
     activity_multiplier = {

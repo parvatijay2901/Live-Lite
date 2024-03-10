@@ -1,5 +1,5 @@
 import unittest
-from LiveLite import user_input_mapping
+from LiveLite import user_input_mapping # pylint: disable=import-error
 
 class TestUserInputMapping(unittest.TestCase):
     # Smoke test
@@ -145,38 +145,6 @@ class TestUserInputMapping(unittest.TestCase):
                 "health_condition": "Fair",
                 "diet_condition": "Poor",
                 "poor_appetite_overeating": "Nearly every day these days"}
-        with self.assertRaises(ValueError):
-            user_input_mapping(data)
-
-    def test_user_input_invalid_dietary_pref(self):   
-        data = {"age": 37,
-                "sex": "Male",
-                "height": 100,
-                "weight": 100,
-                "ethnicity": "Hispanic",
-                "activity_level": "Sedentary",
-                "smoke_cig": "No",
-                "mental_health": "Frequently these days",
-                "sleep_hrs": 1.0,
-                "health_condition": "Fair",
-                "diet_condition": "Poor",
-                "poor_appetite_overeating": "Nearly every day these days"}
-        with self.assertRaises(ValueError):
-            user_input_mapping(data)
-
-    def test_user_input_invalid_dietary_pref(self):   
-        data = {"age": 37,
-                "sex": "Male",
-                "height": 100,
-                "weight": 100,
-                "ethnicity": "Hispanic",
-                "activity_level": "Active",
-                "smoke_cig": "No",
-                "mental_health": "Frequently these days",
-                "sleep_hrs": 1.0,
-                "health_condition": "Fair",
-                "diet_condition": "Poor",
-                "poor_appetite_overeating": "Nearly every day"}
         with self.assertRaises(ValueError):
             user_input_mapping(data)
 

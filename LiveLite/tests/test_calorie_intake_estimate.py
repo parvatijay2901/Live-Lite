@@ -11,7 +11,7 @@ Dependencies:
 - calculate_calorie_intake from calorie_intake_esstimate
 """
 import unittest
-from LiveLite import calculate_calorie_intake
+from LiveLite import calculate_calorie_intake # pylint: disable=import-error
 
 class TestCalorieEstimate(unittest.TestCase):
     """
@@ -30,17 +30,15 @@ class TestCalorieEstimate(unittest.TestCase):
         """
         One shot test to test if the function correctly estimates calories.
         """
-        self.assertAlmostEqual(2504.04,
-                               calculate_calorie_intake(50.6, 153.2, 30, 0, 4)
-                               ,2)
+        res = round(calculate_calorie_intake(50.6, 153.2, 30, 0, 4),2)
+        self.assertAlmostEqual(2145.42,res,2)
 
     def test_calorie_intake_2(self):
         """
         One shot test to test if the function correctly estimates calories.
         """
-        self.assertAlmostEqual(3488.10,
-                               calculate_calorie_intake(70, 170, 24, 1, 2)
-                               ,2)
+        res = round(calculate_calorie_intake(70, 170, 24, 1, 2),2)
+        self.assertAlmostEqual(2335.58,res,2)
 
     def test_invalid_gender(self):
         """
