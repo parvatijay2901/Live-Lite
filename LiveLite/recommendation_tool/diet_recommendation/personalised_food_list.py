@@ -217,7 +217,7 @@ def fruits_data(food_data):
                        & (food_data["Sugar_g"] <= 20)]
     fruits = fruits[~fruits["Descrip"].str.contains("Alcoholic|juice|Juice|USDA")]
     fruits = fruits.sort_values("Fiber_g")
-    fruits = fruits.tail(100)
+    fruits = fruits.tail(50)
     fruits_sample = fruits.sample(n=5, replace = False)
     return fruits_sample
 
@@ -284,8 +284,10 @@ def recommended_food(data, risk_score, food_preference):
     """
     if data.empty:
         raise ValueError("data is empty")
+    if not isinstance(food_preference, str):
+        raise TypeError("food preference should be a string")
     if food_preference not in ["vegan", "vegetarian", "non vegetarian"]:
-        raise ValueError("Invalid food preference")
+        raise ValueError("Invalid food preference ***")
     try:
         # Validate the input DataFrame
         validate_input_dataframe(data)
@@ -295,8 +297,6 @@ def recommended_food(data, risk_score, food_preference):
         raise TypeError("risk score should be a float value")
     if not 0 <= risk_score <= 100:
         raise ValueError("risk score is not in expected range.")
-    if not isinstance(food_preference, str):
-        raise TypeError("food preference should be a string")
 
     food_data = data[["FoodGroup","Descrip","Energy_kcal","Protein_g","Fat_g","Carb_g",
                       "Sugar_g","Fiber_g"]]
