@@ -125,11 +125,17 @@ def get_user_inputs():
 
     Raises:
         ValueError: If any required inputs are missing.
+        TypeError: If the return value of get_demographic_inputs() or
+                get_general_inputs() is not a dictionary.
     """
     user_inputs = {}
     col1, _, col3 = st.columns([1, 0.1, 1])
     with col1:
         user_inputs = get_demographic_inputs(user_inputs)
+        if not isinstance(user_inputs, dict):
+            raise TypeError("user_inputs is not a dictionary.")
     with col3:
         user_inputs = get_general_inputs(user_inputs)
+        if not isinstance(user_inputs, dict):
+            raise TypeError("user_inputs is not a dictionary.")
     return user_inputs
