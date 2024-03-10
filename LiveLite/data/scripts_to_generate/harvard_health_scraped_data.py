@@ -4,11 +4,18 @@ and store in csv format to be used by recommendation tool.
 
 Functions:
 - scrape_calories_data()
-
+- process_calories_data()
+- write_to_csv()
 """
 import csv
 import requests
 from bs4 import BeautifulSoup
+# pylint: disable=line-too-long
+# Disbaling this to ensute url remians in single line for readability.
+
+# pylint: disable=too-many-locals
+# Code is well structured and readable.
+# Using temp local variable for mulyiple column pprocessing.
 def scrape_calories_data():
     """
     Scrapes data from a webpage and processes it to 
@@ -25,7 +32,7 @@ def scrape_calories_data():
     """
     try:
         # URL of the webpage to scrape
-        url = "https://www.health.harvard.edu/diet-and-weight-loss/calories-burned-in-30-minutes-for-people-of-three-different-weights"
+        url = "https://www.health.harvard.edu/'diet-and-weight-loss/calories-burned-in-30-minutes-for-people-of-three-different-weights"
         response = requests.get(url, timeout=10)
         response.raise_for_status()
 
@@ -70,58 +77,79 @@ def scrape_calories_data():
             # Append data for this table to all_data with activity type
             all_data.extend(zip([table_name]*len(activities), activities,
             calories_125lbs, calories_155lbs, calories_185lbs))
-
-        all_data_processed = []
-        for data in all_data:
-            activity_type, activity, cal_125lbs, cal_155lbs, cal_185lbs = data
-            sum_cal_per_lb = 0
-            count_nonzero = 0
-
-            # Calculate calories per pound using average weight, excluding 0 values
-            if cal_125lbs != 0:
-                sum_cal_per_lb += cal_125lbs / 125
-                count_nonzero += 1
-            if cal_155lbs != 0:
-                sum_cal_per_lb += cal_155lbs / 155
-                count_nonzero += 1
-            if cal_185lbs != 0:
-                sum_cal_per_lb += cal_185lbs / 185
-                count_nonzero += 1
-
-            # Calculate average calories per pound
-            if count_nonzero != 0:
-                cal_per_lb_avg = sum_cal_per_lb / count_nonzero
-                cal_per_kg_avg = cal_per_lb_avg / 0.453592
-            else:
-                # If all values are zero, set averages to 0
-                cal_per_lb_avg = 0
-                cal_per_kg_avg = 0
-
-            all_data_processed.append((activity_type, activity, cal_125lbs, cal_155lbs,
-            cal_185lbs, cal_per_lb_avg, cal_per_kg_avg))
-
-        # Remove unwanted records
-        for data in all_data_processed:
-            if data[-1] != 0 and data[1] != "Sleeping":
-                all_data_processed = data
-
-        # Write the data into a CSV file
-        with open("calories_burned_30_minutes.csv", "w", newline="", encoding="utf-8") as csvfile:
-            writer = csv.writer(csvfile)
-            writer.writerow(["Activity Type",
-                             "Activity",
-                             "Calories (125 lbs)",
-                             "Calories (155 lbs)",
-                             "Calories (185 lbs)",
-                             "cal_per_lb_avg",
-                             "cal_per_kg_avg"])
-            writer.writerows(all_data_processed)
+        write_to_csv(process_calories_data(all_data))
 
     except requests.exceptions.RequestException as e:
         raise ConnectionError(f"Error connecting to URL: {e}") from e
 
     except (ValueError, AttributeError) as e:
         raise ValueError(f"Invalid URL or unexpected webpage structure: {e}") from e
+
+
+def process_calories_data(scraped_data):
+    """
+    Processes the raw scraped data to add calculated fields.
+    Args:
+        Scraped_data (list): Raw data from website.
+    Returns:
+        list: List of processed data.
+    """
+    all_data_processed = []
+    for data in scraped_data:
+        activity_type, activity, cal_125lbs, cal_155lbs, cal_185lbs = data
+        sum_cal_per_lb = 0
+        count_nonzero = 0
+
+        # Calculate calories per pound using average weight, excluding 0 values
+        if cal_125lbs != 0:
+            sum_cal_per_lb += cal_125lbs / 125
+            count_nonzero += 1
+        if cal_155lbs != 0:
+            sum_cal_per_lb += cal_155lbs / 155
+            count_nonzero += 1
+        if cal_185lbs != 0:
+            sum_cal_per_lb += cal_185lbs / 185
+            count_nonzero += 1
+
+        # Calculate average calories per pound
+        if count_nonzero != 0:
+            cal_per_lb_avg = sum_cal_per_lb / count_nonzero
+            cal_per_kg_avg = cal_per_lb_avg / 0.453592
+        else:
+            # If all values are zero, set averages to 0
+            cal_per_lb_avg = 0
+            cal_per_kg_avg = 0
+
+        all_data_processed.append((activity_type, activity, cal_125lbs, cal_155lbs,
+        cal_185lbs, cal_per_lb_avg, cal_per_kg_avg))
+    return all_data_processed
+
+
+def write_to_csv(processed_data):
+    """
+    Writes processed data into a csv file, by removing unwanted records.
+    Args:
+        processes_data (list): list of processed data.
+    Returns:
+        None
+    """
+    # Remove unwanted records
+    filtered_data = []
+    for data in processed_data:
+        if data[-1] != 0 and data[1] != "Sleeping":
+            filtered_data.append(data)
+
+    # Write the data into a CSV file
+    with open("calories_burned_30_minutes.csv", "w", newline="", encoding="utf-8") as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(["Activity Type",
+                            "Activity",
+                            "Calories (125 lbs)",
+                            "Calories (155 lbs)",
+                            "Calories (185 lbs)",
+                            "cal_per_lb_avg",
+                            "cal_per_kg_avg"])
+        writer.writerows(filtered_data)
 
 if __name__ == "__main__":
     scrape_calories_data()

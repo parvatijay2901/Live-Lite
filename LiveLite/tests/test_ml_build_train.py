@@ -1,5 +1,5 @@
 """
-This module contains unit tests for the is_obese module.
+This module contains unit tests for the ml_build_train module.
 Each test case evaluates different aspects of the function's behavior.
 
 Classes:
@@ -7,7 +7,11 @@ Classes:
 
 Dependencies:
 - unittest module for unit testing framework
-- build_and_evaluate_model from is_obese
+- build_and_evaluate_model from ml_build_train
+- save_model from ml_build_train
+- find_most_influential_factors from ml_build_train
+- Pipeline, Logisticregression from sklearn
+- Patch from unittest.
 """
 import os
 import unittest
@@ -15,14 +19,14 @@ from unittest.mock import patch
 import joblib
 from sklearn.pipeline import Pipeline
 from sklearn.linear_model import LogisticRegression
-
 # pylint: disable=import-error
 from LiveLite import build_and_evaluate_model, save_model, find_most_influential_factors
 
 class TestMlModel(unittest.TestCase):
     """
     This class contains various test methods to verify the 
-    correctness of the is_obese function.
+    correctness of the all 3 function.
+    build_and_evaluate_model, save_model, find_most_influential_factors
     
     The TestMlModel class is inheriting from unittest.TestCase
     
