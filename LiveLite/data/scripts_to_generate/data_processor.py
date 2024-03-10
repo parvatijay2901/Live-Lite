@@ -167,31 +167,34 @@ def data_process(inputfile, outputfile):
         'INDFMPIR'
     ]
 
-    df = pd.read_csv(inputfile, usecols=columns_to_read)
+    try:
+        input_df = pd.read_csv(inputfile, usecols=columns_to_read)
+    except Exception as exc:
+        raise type(exc)(f"Column not found: {exc}") from exc
 
     # Drop rows with blank height or weight
-    df.dropna(subset=['BMXHT', 'BMXWT'], inplace=True)
+    input_df.dropna(subset=['BMXHT', 'BMXWT'], inplace=True)
 
-    # BMI = weight (kg) / (height (m) ^ 2)
-    df['BMI'] = df['BMXWT'] / ((df['BMXHT'] / 100) ** 2)
+    # BMI = weight (kg) / (height (m)^2)
+    input_df['BMI'] = input_df['BMXWT'] / ((input_df['BMXHT'] / 100) ** 2)
 
     # Add a new binary column 'Is_obese' based on BMI
-    df['IsObese'] = (df['BMI'] >= 30).astype(int)
+    input_df['IsObese'] = (input_df['BMI'] >= 30).astype(int)
 
-    df.drop(columns=['BMI'], inplace=True)
+    input_df.drop(columns=['BMI'], inplace=True)
 
     # For each feature, apply the specific function to process null or invalid values.
-    df['RIAGENDR'] = df.apply(process_gender, axis=1)
-    df['SMQ040'] = df.apply(process_smoking, axis=1)
-    df['SLD012'] = df.apply(process_sleeping, axis=1)
-    df['HUQ010'] = df.apply(lambda row: process_general_1_5(row, 'HUQ010'), axis=1)
-    df['DBQ700'] = df.apply(lambda row: process_general_1_5(row, 'DBQ700'), axis=1)
-    df['DPQ050'] = df.apply(lambda row: process_general_0_3(row, 'DPQ050'), axis=1)
-    df['DPQ020'] = df.apply(lambda row: process_general_0_3(row, 'DPQ020'), axis=1)
-    df['PAQ670'] = df.apply(process_activity, axis=1)
-    df['RIDRETH3'] = df.apply(process_ethnicity, axis=1)
+    input_df['RIAGENDR'] = input_df.apply(process_gender, axis=1)
+    input_df['SMQ040'] = input_df.apply(process_smoking, axis=1)
+    input_df['SLD012'] = input_df.apply(process_sleeping, axis=1)
+    input_df['HUQ010'] = input_df.apply(lambda row: process_general_1_5(row, 'HUQ010'), axis=1)
+    input_df['DBQ700'] = input_df.apply(lambda row: process_general_1_5(row, 'DBQ700'), axis=1)
+    input_df['DPQ050'] = input_df.apply(lambda row: process_general_0_3(row, 'DPQ050'), axis=1)
+    input_df['DPQ020'] = input_df.apply(lambda row: process_general_0_3(row, 'DPQ020'), axis=1)
+    input_df['PAQ670'] = input_df.apply(process_activity, axis=1)
+    input_df['RIDRETH3'] = input_df.apply(process_ethnicity, axis=1)
 
-    df.to_csv(outputfile, index=False)
+    input_df.to_csv(outputfile, index=False)
     print(f"DF has been saved to '{outputfile}'.")
 
 if __name__ == '__main__':
