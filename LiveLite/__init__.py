@@ -1,4 +1,5 @@
 from LiveLite.data.scripts_to_generate.harvard_health_scraped_data import scrape_calories_data
+from LiveLite.data.scripts_to_generate.data_processor import data_process
 
 from LiveLite.project_integration.common_functions import add_blank_lines, swap_pages_back, check_session_state_variable
 from LiveLite.project_integration.handle_user_input.get_user_inputs import get_user_inputs, get_demographic_inputs, get_general_inputs, write_user_inputs_to_csv
