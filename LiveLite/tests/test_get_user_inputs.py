@@ -1,6 +1,10 @@
 """
-This module contains unit tests for the LiveLite project that
-tests various functionalities related to user inputs.
+This module contains unit tests for the LiveLite project that tests
+various functionalities related to user inputs.
+
+Classes:
+- TestGetUserInputs(unittest.TestCase)
+
 """
 import unittest
 import tempfile
@@ -9,7 +13,7 @@ import LiveLite
 from unittest import mock
 
 class TestGetUserInputs(unittest.TestCase):
-    """Test case for the user inputs functionality."""
+    """Test casees for the user inputs functionality."""
 
     def test_get_demographic_inputs(self):
         """Test getting demographic inputs"""
@@ -70,10 +74,8 @@ class TestGetUserInputs(unittest.TestCase):
         with self.assertRaises(TypeError):
             LiveLite.get_user_inputs()
 
-    @mock.patch('LiveLite.project_integration.handle_user_input.get_user_inputs.get_user_inputs')
-    def test_get_user_inputs_dict(self, mock_get_user_inputs):
+    def test_get_user_inputs_dict(self):
         """Test getting user inputs"""
-        mock_get_user_inputs.return_value = {"sample_key":"sample_value"}
         user_inputs = LiveLite.get_user_inputs()
         self.assertTrue(isinstance(user_inputs, dict))
 

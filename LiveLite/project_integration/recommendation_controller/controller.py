@@ -21,9 +21,10 @@ def controller(choice):
         variable(dtype) or None: A variable containing the result(s)
                                 based on the choice, or None if choice is invalid.
     """
+
     # Raise an error if user_inputs are not filled / 'food_nutrition_data' is not loaded
-    if 'user_inputs' not in st.session_state or 'food_nutrition_data' not in st.session_state:
-        raise ValueError("Required session state variables are missing.")
+    if 'user_inputs' in st.session_state or 'food_nutrition_data' in st.session_state:
+        raise KeyError("Required session state variables are missing.")
 
     user_inputs = st.session_state['user_inputs']
     mapped_user_inputs = LiveLite.user_input_mapping(user_inputs)
@@ -43,7 +44,7 @@ def controller(choice):
         is_obese = LiveLite.is_obese(mapped_user_inputs['internal_height'],
                                     mapped_user_inputs['internal_weight'])
         if is_obese:
-            risk_score = 100
+            risk_score = 100.0
             color = '#ff6961'
         else:
             risk_predict_input = LiveLite.get_input_for_risk_score(mapped_user_inputs)
@@ -53,6 +54,7 @@ def controller(choice):
 
     # Estimate basic physical activity and diet recommendation
     if choice == "recommender_basic":
+        print(st.session_state['calorie_intake'])
         macro_nutrients_df = LiveLite.macro_nutrients_data(mapped_user_inputs['internal_age'],
                                                         mapped_user_inputs['internal_sex'],
                                                         st.session_state['calorie_intake'])

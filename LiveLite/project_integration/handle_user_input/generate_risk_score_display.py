@@ -77,8 +77,10 @@ def display_risk_score(risk_score, color):
     # Modify risk_score text to be displayed
     if risk_score < 100:
         risk_score = str(risk_score) + "%"
-    else:
+    elif risk_score == 100:
         risk_score = "Obese"
+    else:
+        raise ValueError("Input 'risk_score' cannot be more than 100")
 
     # Design a donut plot with risk_score displayed in centre
     donut_plot = f"""<div style="width: 250px; height: 250px;">
