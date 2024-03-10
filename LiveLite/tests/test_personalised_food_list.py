@@ -1,3 +1,7 @@
+"""This script contains unit tests for all the functions 
+used for fetching variety of food from food list
+based on food groups.
+"""
 import unittest
 import pandas as pd
 #from LiveLite import personalised_food_list
@@ -94,12 +98,17 @@ test_dairy_data = pd.DataFrame({
 })
 
 class TestBeefData(unittest.TestCase):
+    """This class contains unit tests to test
+    filtered beef data frame from the dataset
+    """
     def test_smoke(self):
-        # Smoke test to ensure function runs without errors
+        """Smoke test to ensure function runs without errors
+        """
         beef_data(test_beef_data, "high")
 
     def test_one_shot(self):
-        # One-shot test with a single input
+        """One- shot test with possible inputs
+        """
         high_result = beef_data(test_beef_data, "high")
         self.assertEqual(len(high_result), 5)
 
@@ -110,6 +119,8 @@ class TestBeefData(unittest.TestCase):
         self.assertEqual(len(low_result), 5)
 
     def test_edge(self):
+        """Edge test with invalid inputs
+        """
         # Edge test with different risk level
         with self.assertRaises(ValueError):
             beef_data(test_beef_data, "riskaab")
@@ -119,12 +130,17 @@ class TestBeefData(unittest.TestCase):
             beef_data(pd.DataFrame(), "high")
 
 class TestFishData(unittest.TestCase):
+    """This class contains unit tests to test
+    filtered fish data frame from the dataset
+    """
     def test_smoke(self):
-        # Smoke test to ensure function runs without errors
+        """Smoke test to ensure function runs without errors
+        """
         fish_data(test_fish_data, "high")
 
     def test_one_shot(self):
-        # One-shot test with a single input
+        """One- shot test with possible inputs
+        """
         high_result = fish_data(test_fish_data, "high")
         self.assertEqual(len(high_result), 5)
 
@@ -135,6 +151,8 @@ class TestFishData(unittest.TestCase):
         self.assertEqual(len(low_result), 5)
 
     def test_edge(self):
+        """Edge test with invalid inputs
+        """
         # Edge test with different risk level
         with self.assertRaises(ValueError):
             fish_data(test_fish_data, "riskaab")
@@ -144,12 +162,17 @@ class TestFishData(unittest.TestCase):
             fish_data(pd.DataFrame(), "high")
 
 class TestPoultryData(unittest.TestCase):
+    """This class contains unit tests to test
+    filtered poultry data frame from the dataset
+    """
     def test_smoke(self):
-        # Smoke test to ensure function runs without errors
+        """Smoke test to ensure function runs without errors
+        """
         poultry_data(test_poultry_data, "high")
 
     def test_one_shot(self):
-        # One-shot test with a single input
+        """One- shot test with possible inputs
+        """
         high_result = poultry_data(test_poultry_data, "high")
         self.assertEqual(len(high_result), 5)
 
@@ -160,6 +183,8 @@ class TestPoultryData(unittest.TestCase):
         self.assertEqual(len(low_result), 5)
 
     def test_edge(self):
+        """Edge test with invalid inputs
+        """
         # Edge test with different risk level
         with self.assertRaises(ValueError):
             poultry_data(test_poultry_data, "riskaab")
@@ -169,12 +194,17 @@ class TestPoultryData(unittest.TestCase):
             poultry_data(pd.DataFrame(), "high")
 
 class TestPorkData(unittest.TestCase):
+    """This class contains unit tests to test
+    filtered pork data frame from the dataset
+    """
     def test_smoke(self):
-        # Smoke test to ensure function runs without errors
+        """Smoke test to ensure function runs without errors
+        """
         pork_data(test_pork_data, "high")
 
     def test_one_shot(self):
-        # One-shot test with a single input
+        """One- shot test with possible inputs
+        """
         high_result = pork_data(test_pork_data, "high")
         self.assertEqual(len(high_result), 5)
 
@@ -185,6 +215,8 @@ class TestPorkData(unittest.TestCase):
         self.assertEqual(len(low_result), 5)
 
     def test_edge(self):
+        """Edge test with invalid inputs
+        """
         # Edge test with different risk level
         with self.assertRaises(ValueError):
             pork_data(test_pork_data, "riskaab")
@@ -194,12 +226,17 @@ class TestPorkData(unittest.TestCase):
             pork_data(pd.DataFrame(), "high")
 
 class TestLegumesData(unittest.TestCase):
+    """This class contains unit tests to test
+    filtered legumes data frame from the dataset
+    """
     def test_smoke(self):
-        # Smoke test to ensure function runs without errors
+        """Smoke test to ensure function runs without errors
+        """
         legumes_data(test_legumes_data, "high")
 
     def test_one_shot(self):
-        # One-shot test with a single input
+        """One- shot test with possible inputs
+        """
         high_result = legumes_data(test_legumes_data, "high")
         self.assertEqual(len(high_result), 5)
 
@@ -210,6 +247,8 @@ class TestLegumesData(unittest.TestCase):
         self.assertEqual(len(low_result), 5)
 
     def test_edge(self):
+        """Edge test with invalid inputs
+        """
         # Edge test with different risk level
         with self.assertRaises(ValueError):
             legumes_data(test_legumes_data, "riskaab")
@@ -219,12 +258,17 @@ class TestLegumesData(unittest.TestCase):
             legumes_data(pd.DataFrame(), "high")
 
 class TestGrainsData(unittest.TestCase):
+    """This class contains unit tests to test
+    filtered grains data frame from the dataset
+    """
     def test_smoke(self):
-        # Smoke test to ensure function runs without errors
+        """Smoke test to ensure function runs without errors
+        """
         grains_data(test_grains_data, "high")
 
     def test_one_shot(self):
-        # One-shot test with a single input
+        """One- shot test with possible inputs
+        """
         high_result = grains_data(test_grains_data, "high")
         self.assertEqual(len(high_result), 5)
 
@@ -235,6 +279,8 @@ class TestGrainsData(unittest.TestCase):
         self.assertEqual(len(low_result), 5)
 
     def test_edge(self):
+        """Edge test with invalid inputs
+        """
         # Edge test with different risk level
         with self.assertRaises(ValueError):
             grains_data(test_grains_data, "riskaab")
@@ -244,42 +290,61 @@ class TestGrainsData(unittest.TestCase):
             grains_data(pd.DataFrame(), "high")
 
 class TestVeganGrainsData(unittest.TestCase):
+    """This class contains unit tests to test
+    filtered grains data frame from the dataset
+    """
     def test_smoke(self):
-        # Smoke test to ensure function runs without errors
+        """Smoke test to ensure function runs without errors
+        """
         vegan_grains_data(test_grains_data)
 
     def test_one_shot(self):
-        # One-shot test with a single input
+        """One- shot test with possible inputs
+        """
         result = vegan_grains_data(test_grains_data)
         self.assertEqual(len(result), 5)
 
     def test_edge(self):
+        """Edge test with invalid inputs
+        """
         # Testing for empty DataFrame when no matching rows found
         with self.assertRaises(ValueError):
             vegan_grains_data(pd.DataFrame())
 
 class TestFruitsData(unittest.TestCase):
+    """This class contains unit tests to test
+    filtered fruits data frame from the dataset
+    """
     def test_smoke(self):
-        # Smoke test to ensure function runs without errors
+        """Smoke test to ensure function runs without errors
+        """
         fruits_data(test_fruits_data)
 
     def test_one_shot(self):
-        # One-shot test with a single input
+        """One- shot test with possible inputs
+        """
         result = fruits_data(test_fruits_data)
         self.assertEqual(len(result), 5)
 
     def test_edge(self):
+        """Edge test with invalid inputs
+        """
         # Testing for empty DataFrame when no matching rows found
         with self.assertRaises(ValueError):
             fruits_data(pd.DataFrame())
 
 class TestVegetableData(unittest.TestCase):
+    """This class contains unit tests to test
+    filtered vegatable data frame from the dataset
+    """
     def test_smoke(self):
-        # Smoke test to ensure function runs without errors
+        """Smoke test to ensure function runs without errors
+        """
         vegetable_data(test_vegetables_data, "vegan")
 
     def test_one_shot(self):
-        # One-shot test with a single input
+        """One- shot test with possible inputs
+        """
         high_result = vegetable_data(test_vegetables_data, "vegan")
         self.assertEqual(len(high_result), 5)
 
@@ -290,6 +355,8 @@ class TestVegetableData(unittest.TestCase):
         self.assertEqual(len(low_result), 5)
 
     def test_edge(self):
+        """Edge test with invalid inputs
+        """
         # Edge test with different risk level
         with self.assertRaises(ValueError):
             vegetable_data(test_vegetables_data, "riskaab")
@@ -299,12 +366,17 @@ class TestVegetableData(unittest.TestCase):
             vegetable_data(pd.DataFrame(), "vegan")
 
 class TestDairyData(unittest.TestCase):
+    """This class contains unit tests to test
+    filtered dairy data frame from the dataset
+    """
     def test_smoke(self):
-        # Smoke test to ensure function runs without errors
+        """Smoke test to ensure function runs without errors
+        """
         dairy_data(test_dairy_data, "high")
 
     def test_one_shot(self):
-        # One-shot test with a single input
+        """One- shot test with possible inputs
+        """
         high_result = dairy_data(test_dairy_data, "high")
         self.assertEqual(len(high_result), 5)
 
@@ -315,6 +387,8 @@ class TestDairyData(unittest.TestCase):
         self.assertEqual(len(low_result), 5)
 
     def test_edge(self):
+        """Edge test with invalid inputs
+        """
         # Edge test with different risk level
         with self.assertRaises(ValueError):
             dairy_data(test_dairy_data, "riskaab")
@@ -324,66 +398,105 @@ class TestDairyData(unittest.TestCase):
             dairy_data(pd.DataFrame(), "high")
 
 class TestRecommendedFood(unittest.TestCase):
+    """This class contains unit tests to test
+    for displaying the concatenated dataframes of each food group based on 
+    food preference and obesity risk score.
+    """
     def setUp(self):
+        """set up test data
+        """
         self.test_data = pd.read_csv("LiveLite/tests/data/food_nutrition_test_data.csv")
-    
+
+    #smoke test
+    def smoke_test(self):
+        """Smoke test to ensure function runs without errors
+        """
+        recommended_food(self.test_data, 34, "vegetarian")
+
+    # One- shot test
+    def test_one_shot(self):
+        """One- shot test with possible inputs
+        """
+        result = recommended_food(self.test_data, 50, "non vegetarian")
+        self.assertIsInstance(result, pd.DataFrame)
+        expected_columns = ["Food Category", "Description (per 100gms)", "Calories (kcal)",
+                            "Protein (gm)", "Fat (gm)", "Carbohydrates (gm)",
+                            "Sugar (gm)", "Fiber (gm)"]
+        self.assertCountEqual(result.columns, expected_columns)
+        self.assertEqual(len(result), 40)
+
+    # edge tests:
     def test_empty_input(self):
-        # Test case for empty input DataFrame
+        """Test case for empty input DataFrame
+        """
         with self.assertRaises(ValueError):
             recommended_food(pd.DataFrame(), 50, "vegetarian")
 
     def test_invalid_food_preference(self):
-        # Test case for invalid food preference
+        """Test case for invalid food preference
+        """
         with self.assertRaises(ValueError):
             recommended_food(self.test_data, 50, "invalid")
 
     def test_invalid_risk_score(self):
-        # Test case for invalid risk score
+        """Test case for invalid risk score
+        """
         with self.assertRaises(TypeError):
             recommended_food(self.test_data, "high", "vegetarian")
 
     def test_risk_score_out_of_range(self):
-        # Test case for risk score out of range
+        """Test case for risk score out of range
+        """
         with self.assertRaises(ValueError):
             recommended_food(self.test_data, 150, "vegetarian")
 
     def test_invalid_food_preference_type(self):
-        # Test case for invalid food preference type
+        """Test case for invalid food preference type
+        """
         with self.assertRaises(TypeError):
             recommended_food(self.test_data, 50, 123)
 
-    def test_output_structure(self):
-        # Test case for output structure
-        result = recommended_food(self.test_data, 50, "vegetarian")
-        self.assertIsInstance(result, pd.DataFrame)
-        expected_columns = ["Food Category", "Description (per 100gms)", "Calories (kcal)", 
-                            "Protein (gm)", "Fat (gm)", "Carbohydrates (gm)", "Sugar (gm)", "Fiber (gm)"]
-        self.assertCountEqual(result.columns, expected_columns)
-
 class TestSearchFood(unittest.TestCase):
+    """This class contains unit tests to test
+    for displaying relevant food information based on user input string.
+    """
     def setUp(self):
+        """set up test data
+        """
         self.search_data = pd.read_csv("LiveLite/tests/data/food_nutrition_test_data.csv")
 
-    def test_invalid_food_item_type(self):
-        # Test case for invalid food item type
-        with self.assertRaises(TypeError):
-            search_food(self.search_data, 123)
+    #smoke test
+    def smoke_test(self):
+        """Smoke test to ensure function runs without errors
+        """
+        search_food(self.search_data, "milk")
 
-    def test_empty_food_item(self):
-        # Test case for empty food item
-        result = search_food(self.search_data, "")
-        self.assertIsNone(result)
-
+    # One shot test
     def test_search_existing_food(self):
-        # Test case for searching an existing food item
+        """One- shot test with possible inputs
+        """
         result = search_food(self.search_data, "apple")
         self.assertIsInstance(result, pd.DataFrame)
         self.assertGreaterEqual(len(result), 1)
         found = any("apple" in desc.lower() for desc in result["Description (per 100gms)"].values)
         self.assertTrue(found)
 
+    # Edge test
+    def test_invalid_food_item_type(self):
+        """Test case for invalid food item type
+        """
+        with self.assertRaises(TypeError):
+            search_food(self.search_data, 123)
+
+    def test_empty_food_item(self):
+        """Test case for empty food item
+        """
+        result = search_food(self.search_data, "")
+        self.assertIsNone(result)
+
     def test_search_nonexistent_food(self):
-        # Test case for searching a nonexistent food item
+        """Test case for searching a nonexistent food item
+        """
         result = search_food(self.search_data, "Jake")
         self.assertIsInstance(result, pd.DataFrame)
         self.assertEqual(len(result), 0)
