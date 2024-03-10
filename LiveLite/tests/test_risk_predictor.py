@@ -69,7 +69,7 @@ class TestRiskPredict(unittest.TestCase):
         expect_result = (78.3, '#fda861')
         self.assertEqual(expect_result,
                          risk_predict(inputdict,
-                                    'LiveLite/tests'
+                                    'LiveLite/tests/data'
                                     '/sample_input_model.joblib'))
 
     def test_risk_predict_2(self):
@@ -90,7 +90,7 @@ class TestRiskPredict(unittest.TestCase):
         expect_result = (52.6, "#fbf362")
         self.assertEqual(expect_result,
                          risk_predict(inputdict,
-                                      'LiveLite/tests'
+                                      'LiveLite/tests/data'
                                       '/sample_input_model.joblib'))
 
     def test_risk_predict_3(self):
@@ -111,7 +111,7 @@ class TestRiskPredict(unittest.TestCase):
         expect_result = (36.4, "#d7f268")
         self.assertEqual(expect_result,
                          risk_predict(inputdict,
-                                      'LiveLite/tests'
+                                      'LiveLite/tests/data'
                                       '/sample_input_model.joblib'))
 
     def test_risk_predict_4(self):
@@ -132,7 +132,7 @@ class TestRiskPredict(unittest.TestCase):
         expect_result = (20.9, "#aee96e")
         self.assertEqual(expect_result,
                          risk_predict(inputdict,
-                                      'LiveLite/tests'
+                                      'LiveLite/tests/data'
                                       '/sample_input_model.joblib'))
 
     def test_risk_predict_invalid_type(self):

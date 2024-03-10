@@ -45,8 +45,8 @@ class TestMlModel(unittest.TestCase):
         """
         Smoke test to test if the function runs without errors.
         """
-        build_and_evaluate_model('LiveLite/tests/sample_ml_input.csv'
-                                 ,'LiveLite/tests/model_test_output.joblib')
+        build_and_evaluate_model('LiveLite/tests/data/sample_ml_input.csv'
+                                 ,'LiveLite/tests/data/model_test_output.joblib')
 
     def test_ml_model_1(self):
         """
@@ -56,13 +56,13 @@ class TestMlModel(unittest.TestCase):
             - If the model is Logistic Regression model
             - If the model has predict attribute.
         """
-        build_and_evaluate_model('LiveLite/tests/sample_ml_input.csv'
-                                 ,'LiveLite/tests/model_test_output.joblib')
-        assert os.path.exists('LiveLite/tests/model_test_output.joblib')
+        build_and_evaluate_model('LiveLite/tests/data/sample_ml_input.csv'
+                                 ,'LiveLite/tests/data/model_test_output.joblib')
+        assert os.path.exists('LiveLite/tests/data/model_test_output.joblib')
 
         expected_steps = ['preprocessor', 'classifier']
 
-        loaded_model = joblib.load('LiveLite/tests/model_test_output.joblib')
+        loaded_model = joblib.load('LiveLite/tests/data/model_test_output.joblib')
         loaded_steps = [step[0] for step in loaded_model.steps]
 
         assert isinstance(loaded_model, Pipeline)
@@ -76,14 +76,14 @@ class TestMlModel(unittest.TestCase):
         """
         with self.assertRaises(FileNotFoundError):
             build_and_evaluate_model('LiveLite/blee/blublah'
-                                     ,'LiveLite/tests/model_test_output.joblib')
+                                     ,'LiveLite/tests/data/model_test_output.joblib')
 
     def test_ml_model_invalid_modelfile(self):
         """
         Edge Test: Test if the function throws error with output filepath.
         """
         with self.assertRaises(FileNotFoundError):
-            build_and_evaluate_model('LiveLite/tests/sample_ml_input.csv'
+            build_and_evaluate_model('LiveLite/tests/data/sample_ml_input.csv'
                                      ,'LiveLite/blee/bluh.blah')
 
     def test_invalid_parameter_search(self):
@@ -101,7 +101,7 @@ class TestMlModel(unittest.TestCase):
         num_feat = ['SLD012',
                     'DONE']
         with self.assertRaises(Exception):
-            find_most_influential_factors('LiveLite/tests/sample_input_model.joblib'
+            find_most_influential_factors('LiveLite/tests/data/sample_input_model.joblib'
                                             ,num_feat, cat_feat)
 
     @patch('joblib.dump')

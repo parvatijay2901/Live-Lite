@@ -39,8 +39,8 @@ class TestDataProcess(unittest.TestCase):
         """
         Smoke test to test if the function runs without errors.
         """
-        input_file = "./LiveLite/tests/sample_nhanes.csv"
-        output_file = "./LiveLite/tests/process_nhanes.csv"
+        input_file = "./LiveLite/tests/data/sample_nhanes.csv"
+        output_file = "./LiveLite/tests/data/process_nhanes.csv"
         data_process(input_file, output_file)
 
     def test_data_process_1(self):
@@ -50,8 +50,8 @@ class TestDataProcess(unittest.TestCase):
         
         Check if the output file has 15 columns.
         """
-        input_file = "./LiveLite/tests/sample_nhanes.csv"
-        output_file = "./LiveLite/tests/process_nhanes.csv"
+        input_file = "./LiveLite/tests/data/sample_nhanes.csv"
+        output_file = "./LiveLite/tests/data/process_nhanes.csv"
         data_process(input_file, output_file)
         self.assertTrue(os.path.exists(output_file))
 
@@ -60,8 +60,8 @@ class TestDataProcess(unittest.TestCase):
         One shot test check if the number of records are same
         in both input & output files.
         """
-        input_file = "./LiveLite/tests/sample_nhanes.csv"
-        output_file = "./LiveLite/tests/process_nhanes.csv"
+        input_file = "./LiveLite/tests/data/sample_nhanes.csv"
+        output_file = "./LiveLite/tests/data/process_nhanes.csv"
         data_process(input_file, output_file)
         df_input = pd.read_csv(input_file)
         df_output = pd.read_csv(output_file)
@@ -71,8 +71,8 @@ class TestDataProcess(unittest.TestCase):
         """
         One shot test check if the output file has the 'is_obese' column.
         """
-        input_file = "./LiveLite/tests/sample_nhanes.csv"
-        output_file = "./LiveLite/tests/process_nhanes.csv"
+        input_file = "./LiveLite/tests/data/sample_nhanes.csv"
+        output_file = "./LiveLite/tests/data/process_nhanes.csv"
         data_process(input_file, output_file)
         df_output = pd.read_csv(output_file)
         self.assertIn('IsObese', df_output.columns)
@@ -81,8 +81,8 @@ class TestDataProcess(unittest.TestCase):
         """
         One shot test check if the output file has 15 columns.
         """
-        input_file = "./LiveLite/tests/sample_nhanes.csv"
-        output_file = "./LiveLite/tests/process_nhanes.csv"
+        input_file = "./LiveLite/tests/data/sample_nhanes.csv"
+        output_file = "./LiveLite/tests/data/process_nhanes.csv"
         data_process(input_file, output_file)
         df_output = pd.read_csv(output_file)
         self.assertEqual(len(df_output.columns), 15)
@@ -91,8 +91,8 @@ class TestDataProcess(unittest.TestCase):
         """
         Edge case: testing for invalid columns.
         """
-        input_file = "./LiveLite/tests/sample_nhanes_invalid_col.csv"
-        output_file = "./LiveLite/tests/process_nhanes.csv"
+        input_file = "./LiveLite/tests/data/sample_nhanes_invalid_col.csv"
+        output_file = "./LiveLite/tests/data/process_nhanes.csv"
         with self.assertRaises(Exception):
             data_process(input_file, output_file)
 

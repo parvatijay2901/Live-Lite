@@ -21,8 +21,9 @@ from LiveLite.recommendation_tool.risk_assessment.risk_predictor import risk_pre
 from LiveLite.recommendation_tool.risk_assessment.is_obese import is_obese
 from LiveLite.recommendation_tool.risk_assessment.ml_build_train import build_and_evaluate_model, save_model, find_most_influential_factors
 from LiveLite.recommendation_tool.nutrition_estimation.calorie_intake.calorie_intake_estimate import calculate_calorie_intake
-from LiveLite.recommendation_tool.diet_recommendation.food import micro_nutrients, macro_nutrients_data
-from LiveLite.recommendation_tool.diet_recommendation.personalised_food_list import search_food, recommended_food, beef_data
+from LiveLite.recommendation_tool.diet_recommendation.food import recommended_protein, recommended_grains, recommended_fat, recommended_vegetables, recommended_fruits, macro_calorie, macro_nutrients_data, micro_nutrients
+
+from LiveLite.recommendation_tool.diet_recommendation.personalised_food_list import search_food, recommended_food, beef_data, fish_data, poultry_data, pork_data, legumes_data, grains_data, vegan_grains_data, vegetable_data, fruits_data, dairy_data
 from LiveLite.recommendation_tool.physical_activity_recommendation.physical_activity_recommend import calculate_calorie_burn
 
 from LiveLite.streamlit_app.app import app, load_data
