@@ -2,6 +2,7 @@
 NHANES Obesity Overweight Analysis
 
 Provides:
+    - plot_obesity_overweight_trends: plots NHANES proportion of obesity data.
     1. Function that plots NHANES proportion of obese and overweight over time.
 """
 import pandas as pd
@@ -17,24 +18,26 @@ def plot_obesity_overweight_trends(data, years=None):
     :param years: List of years.
     :return: Figure object.
     """
-    years_default = [1999, 2001, 2003, 2005, 2007, 2009, 2011, 2013, 2015, 2017]
+    years_possible = [1999, 2001, 2003, 2005, 2007, 2009, 2011, 2013, 2015, 2017]
 
-    if years is not None:
-        years = years_default
-    elif isinstance(years, list):
+    if not isinstance(years, list) and years is not None:
         raise TypeError(
             "Years must be a list."
         )
-    else:
-        years = years_default
+    if years is not None:
+        if not all(item in years_possible for item in years):
+            raise ValueError(
+                "Years contains non-valid years. Valid years start from 1999 and increment by 2 years."
+            )
+
+    if years is None:
+        years = years_possible
+
 
     if not isinstance(data, pd.DataFrame):
         raise TypeError(
             "Data must be a dataframe."
         )
-
-    if list(set(years).difference(years_default)):
-        raise ValueError("Valid years start from 1999 and increment by 2 years.")
 
     data = data[data['Year'].isin(years)]
     prop_data = data.groupby('Year').agg({'Obese': 'mean', 'Overweight (including obesity)': 'mean'}).reset_index()

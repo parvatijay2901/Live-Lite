@@ -2,6 +2,11 @@
 IHME Data Analysis
 
 Provides:
+    - rename_column_ihme: renames ihme dataframe columns so labels in plots are readable.
+    - process_ihme_data: pre-processes ihme data for plotting. Returns a processed dataframe, year list, and label
+    to highlight in the plot.
+    - plot_ihme_data: Plots the processed ihme data.
+
     1. Functions to process IHME data for plotting.
     2. Plot the processed IHME data to visualize obesity.
 """
@@ -60,7 +65,7 @@ def process_ihme_data(ihme, years=None, highlighted_risk_factor="high body-mass 
     return data_summary, years, highlighted_risk_factor
 
 
-def plot_ihme_data(data, years, highlighted_risk_factor="high body-mass index"):
+def plot_ihme_data(data, years=None, highlighted_risk_factor="high body-mass index"):
     """
     Plots the ihme data for the given years and highlights the designated risk factor.
     Raises Type errors if:
@@ -76,8 +81,19 @@ def plot_ihme_data(data, years, highlighted_risk_factor="high body-mass index"):
 
     if not isinstance(data, pd.DataFrame):
         raise TypeError(
-            "Data should be a dataframe."
+            'Data should be a Pandas dataframe.'
         )
+
+    possible_years = range(1990, 2020, 1)
+    if years is not None:
+        if not all(item in possible_years for item in years):
+            raise ValueError(
+                "Years contains non-valid years. Valid years start from 1999 and increment by 2 years."
+            )
+
+    if years is None:
+        years = [1990, 2017]
+
     if not isinstance(years, list):
         raise TypeError(
             "Years should be a list."
@@ -85,6 +101,12 @@ def plot_ihme_data(data, years, highlighted_risk_factor="high body-mass index"):
     if not isinstance(highlighted_risk_factor, str):
         raise TypeError(
             "Highlighted risk factor should be str."
+        )
+
+    risk_factors = [rename_column_ihme(col) for col in data.columns]
+    if {highlighted_risk_factor}.difference(risk_factors):
+        raise ValueError(
+            'Invalid risk factor.'
         )
 
     data_summary, years, highlighted_risk_factor = process_ihme_data(data, years)
@@ -125,7 +147,7 @@ def plot_ihme_data(data, years, highlighted_risk_factor="high body-mass index"):
 
     fig.update_layout(
         title='Deaths by Risk Factor',
-        title_x=0.5,
+        title_x=0.45,
         height=500,
         showlegend=False,
         autosize=True,

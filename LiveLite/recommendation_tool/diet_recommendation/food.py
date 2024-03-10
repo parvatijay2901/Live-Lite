@@ -1,56 +1,53 @@
+""" This module is created to define various methods related to diet and nutrition
+below are functions to calculate recommended quantity of food groups to consume per day
+the functions will raise appropriate value and type errors for Age, gender and calories.
+"""
 # this module is created to define various methods related to diet and nutrition
-# below are functions to print recommended quantity of food groups to consume per day 
-# the functions will return none when input is not valid 
+# below are functions to print recommended quantity of food groups to consume per day
+# the functions will return none when input is not valid
 import pandas as pd
-import numpy as np
 
-def recommendedProtein(age_in,gender_in):
-    if (age_in<9) & (age_in>100):
-        return None
-    if (gender_in != 1) & (gender_in != 0):
-        return None
-    min = 0
-    max = 0
+def recommended_protein(age_in,gender_in):
+    """This function returns the recommended protein intake based on age and gender
+    """
+    min_protein = 0
+    max_protein = 0
 
     if gender_in ==0:
         if 9 <= age_in <= 13:
-            min =4
-            max =6
-        if 14 <= age_in <= 30:
-            min =5
-            max =6.5
-        if age_in >= 31:
-            min =5
-            max =6
+            min_protein =4
+            max_protein =6
+        if 13 <= age_in <= 30:
+            min_protein =5
+            max_protein =6.5
+        if age_in > 30:
+            min_protein =5
+            max_protein =6
 
     if gender_in ==1:
         if 9 <= age_in <= 13:
-            min = 5
-            max = 6.5
+            min_protein = 5
+            max_protein = 6.5
         if 13 < age_in <= 18:
-            min = 5.5
-            max = 7
+            min_protein = 5.5
+            max_protein = 7
         if 18< age_in <= 30:
-            min = 6.5
-            max = 7
+            min_protein = 6.5
+            max_protein = 7
         if 30 < age_in <=59:
-            min = 6
-            max= 7
+            min_protein = 6
+            max_protein= 7
         if age_in > 59:
-            min = 5.5
-            max = 6.5
+            min_protein = 5.5
+            max_protein = 6.5
 
-    return(round(min*28.34), round(max*28.34), "grams")
+    return(round(min_protein*28.34), round(max_protein*28.34))
 
-#print(recommendedProtein(23,1))
-
-def recommendedGrains(age_in,gender_in):
-    if (age_in<9) & (age_in>100):
-        return None
-    if (gender_in != 1) & (gender_in != 0):
-        return None
+def recommended_grains(age_in,gender_in):
+    """This function calculates the recommended amount of grains per day
+    """
     min_g = 0
-    min_wg =0 
+    min_wg =0
     max_g = 0
     max_wg = 0
 
@@ -103,11 +100,11 @@ def recommendedGrains(age_in,gender_in):
             min_wg = 3
             max_g = 9
             max_wg = 4.5
-   
+    return(round(min_g*28.34), round(max_g*28.34), round(min_wg*28.34), round(max_wg*28.34))
 
-    return(round(min_g*28.34), round(max_g*28.34), round(min_wg*28.34), round(max_wg*28.34), "grams") 
-
-def recommededFat(calorie):
+def recommeded_fat(calorie):
+    """This function returns the amount of fat to be consumed per day in grams.
+    """
     if calorie <= 2000 :
         fat = 50
 
@@ -116,70 +113,88 @@ def recommededFat(calorie):
 
     if calorie > 2500:
         fat = 83
+    return fat
 
-    return(fat, "grams")
+def recommended_dairy():
+    """returns cups of dairy to be consumed in a day
+    """
+    return(2,3)
 
-def recommendedDairy():
-    return(2,3,"cups")  
-
-def recommendedFruits(gender_in):
+def recommended_fruits(gender_in):
+    """This function returns the cups of fruits to be consumed in a day
+    """
     if gender_in == 0:
-        return(1.5,2,"cups")
+        return(1.5,2)
     if gender_in ==1:
-        return(2,2.5,"cups")
-    else:
-        return None
+        return(2,2.5)
+    return None
 
-def recommendedVegetables(age_in,gender_in):
-    if (age_in<9) & (age_in>100):
-        return None
-    if (gender_in != 1) & (gender_in != 0):
-        return None
-    min = 0
-    max = 0
+def recommended_vegetables(age_in,gender_in):
+    """This function returns the cups of vegetables to be consumed in a day
+    """
+    min_veg = 0
+    max_veg = 0
 
     if gender_in ==1:
         if 18<= age_in <= 60:
-            min = 3
-            max = 4
+            min_veg = 3
+            max_veg = 4
 
         if age_in > 60:
-            min = 2.5
-            max = 3.5
+            min_veg = 2.5
+            max_veg = 3.5
     if gender_in == 0:
         if 18<= age_in <= 30:
-            min = 2.5
-            max = 3
+            min_veg = 2.5
+            max_veg = 3
 
         if age_in > 30:
-            min = 2
-            max = 3
+            min_veg = 2
+            max_veg = 3
 
-    return(min, max, "cups")
+    return(min_veg, max_veg)
 
 def macro_calorie(macro,calorie):
-    min = 0 
-    max = 0
+    """This function returns the calorie of each macro nutrients to be consumed in  a day
+    """
+    min_calorie = 0
+    max_calorie = 0
     if macro == "protein":
-        min = 0.1*calorie
-        max = 0.3*calorie
+        min_calorie = 0.1*calorie
+        max_calorie = 0.3*calorie
 
     if macro == "carbohydrate":
-        min = 0.45*calorie
-        max = 0.65*calorie
+        min_calorie = 0.45*calorie
+        max_calorie = 0.65*calorie
 
     if macro == "fat":
-        min = 0.2*calorie
-        max = 0.3*calorie
+        min_calorie = 0.2*calorie
+        max_calorie = 0.3*calorie
 
-    return(round(min), round(max), "calories")
-  
-#functions below returns a dataframe for recommended calrie and macro nutrient portion per day    
+    return(round(min_calorie), round(max_calorie))
+
+#functions below returns a dataframe for recommended calrie and macro nutrient portion per day
 def macro_nutrients_data(age, gender, calorie):
+    """ This function calculate the necessary macro nutrients quantity and reutrns a dataframe
+    based on input parameters age, gender and calories.
+    """
+    if not 9 <= age <= 100:
+        raise ValueError("age not in expected range.")
+    if not isinstance(age, int):
+        raise TypeError("age should be an integer.")
+    if gender not in [0, 1]:
+        raise ValueError("gender not in expected value.")
+    if not isinstance(gender, int):
+        raise TypeError("gender encoding should be an integer.")
 
-    carb_quantity = f'{recommendedGrains(age, gender)[0]} - {recommendedGrains(age, gender)[1]}g of carbs/grains of which {recommendedGrains(age, gender)[2]} - {recommendedGrains(age, gender)[3]} of whole grains '
-    protein_quantity = f'{recommendedProtein(age, gender)[0]} - {recommendedProtein(age, gender)[1]} grams'
-    fat_quantity = f'{recommededFat(calorie)[0]} grams'
+    carb_quantity = (f"{recommended_grains(age, gender)[0]} - {recommended_grains(age, gender)[1]}"
+                     f"g of carbs/grains of which"
+                     f"{recommended_grains(age, gender)[2]} - {recommended_grains(age, gender)[3]}"
+                     f" of whole grains")
+    protein_quantity = (f"{recommended_protein(age, gender)[0]} - "
+                        f"{recommended_protein(age, gender)[1]}"
+                        f" grams")
+    fat_quantity = f'{recommeded_fat(calorie)} grams'
     carbohydrate_calorie = macro_calorie("carbohydrate", calorie)
     protein_calorie = macro_calorie("protein", calorie)
     fat_calorie = macro_calorie("fat", calorie)
@@ -187,16 +202,29 @@ def macro_nutrients_data(age, gender, calorie):
     data = {
         'Macro Nutrient': ['Carbohydrate', 'Protein', 'Fat'],
         'Quantity in Grams': [carb_quantity, protein_quantity, fat_quantity],
-        'Kcal': [f'{carbohydrate_calorie[0]} - {carbohydrate_calorie[1]}', f'{protein_calorie[0]} - {protein_calorie[1]}'
+        'Kcal': [f'{carbohydrate_calorie[0]} - {carbohydrate_calorie[1]}', 
+                 f'{protein_calorie[0]} - {protein_calorie[1]}'
                  , f'{fat_calorie[0]} - {fat_calorie[1]}']
     }
     df = pd.DataFrame(data)
     return df
 
 def micro_nutrients(age, gender):
-    fruits = recommendedFruits(gender)
-    vegetables = recommendedVegetables(age, gender)
-    dairy = recommendedDairy()
+    """This function take in age and gender and returns the dataframe containing the
+    recommended quantity of fruits, vegetables and dairy.
+    """
+    if not 9 <= age <= 100:
+        raise ValueError("age not in expected range.")
+    if not isinstance(age, int):
+        raise TypeError("age should be an integer.")
+    if gender not in [0, 1]:
+        raise ValueError("gender not in expected value.")
+    if not isinstance(gender, int):
+        raise TypeError("gender encoding should be an integer.")
+
+    fruits = recommended_fruits(gender)
+    vegetables = recommended_vegetables(age, gender)
+    dairy = recommended_dairy()
 
     data = {
         'Fruits (cups)' : [f'{fruits[0]} - {fruits[1]}'],
@@ -206,7 +234,6 @@ def micro_nutrients(age, gender):
 
     df = pd.DataFrame(data)
     return df
-
 
 #print(macro_nutrients_data(24,0, 2400))
 #print(micro_nutrients(24, 0))
