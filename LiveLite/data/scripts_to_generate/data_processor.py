@@ -198,6 +198,6 @@ def data_process(inputfile, outputfile):
     print(f"DF has been saved to '{outputfile}'.")
 
 if __name__ == '__main__':
-    IP = 'nhanes_obesity_factors.csv'
-    OP = 'ml_input.csv'
+    IP = './data/NHANES/nhanes_obesity_factors.csv'
+    OP = './data/ml_input.csv'
     data_process(IP, OP)
