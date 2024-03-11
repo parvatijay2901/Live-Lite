@@ -12,8 +12,8 @@ class TestController(unittest.TestCase):
         """Mock the necessary dependencies."""
         self.mock_user_inputs = {"age": 37,
                                 "sex": "Male",
-                                "height": 100,
-                                "weight": 100,
+                                "height": 60,
+                                "weight": 500,
                                 "ethnicity": "Non-Hispanic White",
                                 "activity_level": "Moderately Active",
                                 "smoke_cig": "No",
@@ -27,7 +27,8 @@ class TestController(unittest.TestCase):
         self.food_nutrition_data_path = pd.read_csv(food_nutrition_data_path)
 
         self.mock_session_state = {"user_inputs": self.mock_user_inputs,
-                                "food_nutrition_data":self.food_nutrition_data_path}
+                                "food_nutrition_data":self.food_nutrition_data_path,
+                                "search_food_items":"milk"}
 
     def test_no_streamlit_session_state(self):
         with self.assertRaises(KeyError):
@@ -43,9 +44,35 @@ class TestController(unittest.TestCase):
     def test_invalid_choice(self, mock_health_condition, mock_sleep_hours, mock_mental_health, mock_activity_level, mock_ethnicity, mock_sex, mock_age):
         """Test estimate_calorie_intake choice."""
         with mock.patch('streamlit.session_state', self.mock_session_state):
-        # mock_user_input_mapping.return_value = self.mock_mapped_user_inputs
             with self.assertRaises(ValueError):
                 LiveLite.controller("invalid_choice")
+
+    @mock.patch('LiveLite.project_integration.handle_user_input.user_input_mapping.convert_age', return_value=37)
+    @mock.patch('LiveLite.project_integration.handle_user_input.user_input_mapping.convert_sex', return_value=1)
+    @mock.patch('LiveLite.project_integration.handle_user_input.user_input_mapping.convert_ethnicity', return_value=3)
+    @mock.patch('LiveLite.project_integration.handle_user_input.user_input_mapping.convert_activity_level', return_value=3)
+    @mock.patch('LiveLite.project_integration.handle_user_input.user_input_mapping.convert_mental_health', return_value=1)
+    @mock.patch('LiveLite.project_integration.handle_user_input.user_input_mapping.convert_sleep_hours', return_value=2)
+    @mock.patch('LiveLite.project_integration.handle_user_input.user_input_mapping.convert_health_condition', return_value=4)
+    def test_risk_score_choice(self, mock_health_condition, mock_sleep_hours, mock_mental_health, mock_activity_level, mock_ethnicity, mock_sex, mock_age):
+        """Test estimate_calorie_intake choice."""
+        with mock.patch('streamlit.session_state', self.mock_session_state):
+            LiveLite.controller("risk_score")
+            self.assertTrue(True)
+
+    @mock.patch('LiveLite.project_integration.handle_user_input.user_input_mapping.convert_age', return_value=37)
+    @mock.patch('LiveLite.project_integration.handle_user_input.user_input_mapping.convert_sex', return_value=1)
+    @mock.patch('LiveLite.project_integration.handle_user_input.user_input_mapping.convert_ethnicity', return_value=3)
+    @mock.patch('LiveLite.project_integration.handle_user_input.user_input_mapping.convert_activity_level', return_value=3)
+    @mock.patch('LiveLite.project_integration.handle_user_input.user_input_mapping.convert_mental_health', return_value=1)
+    @mock.patch('LiveLite.project_integration.handle_user_input.user_input_mapping.convert_sleep_hours', return_value=2)
+    @mock.patch('LiveLite.project_integration.handle_user_input.user_input_mapping.convert_health_condition', return_value=4)
+    def test_diet_recommender_advanced_search_food_items_choice(self, mock_health_condition, mock_sleep_hours, mock_mental_health, mock_activity_level, mock_ethnicity, mock_sex, mock_age):
+        """Test estimate_calorie_intake choice."""
+        with mock.patch('streamlit.session_state', self.mock_session_state):
+            LiveLite.controller("diet_recommender_advanced_search_food_items")
+            self.assertTrue(True)
+
 
 if __name__ == '__main__':
     unittest.main()
