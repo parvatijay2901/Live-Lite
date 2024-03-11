@@ -51,7 +51,7 @@ def display_prevention_and_management():
         we can lay out the general process of common weight-loss therapies.
         """
     )
-    display_weight_trends_over_time(st.session_state['data_NHANES'], years=[1999, 2017])
+    display_weight_trends_over_time(st.session_state['data_nhanes'], years=[1999, 2017])
 
     st.markdown("<h4 style='color:gold;'>Initial Treatments</h4>", unsafe_allow_html=True)
 

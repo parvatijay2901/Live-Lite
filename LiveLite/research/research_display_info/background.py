@@ -89,5 +89,5 @@ def display_background():
     with col3:
         st.image("LiveLite/streamlit_app/images/background_on_obesity.png", width=200)
 
-    display_trends_over_time(st.session_state['data_NHANES'], years=[1999, 2017])
-    display_ihme_data_analysis(st.session_state['data_IHME'], years=[1990, 2019])
+    display_trends_over_time(st.session_state['data_nhanes'], years=[1999, 2017])
+    display_ihme_data_analysis(st.session_state['data_ihme'], years=[1990, 2019])
