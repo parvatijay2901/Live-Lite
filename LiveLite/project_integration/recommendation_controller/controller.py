@@ -54,7 +54,6 @@ def controller(choice):
 
     # Estimate basic physical activity and diet recommendation
     if choice == "recommender_basic":
-        print(st.session_state['calorie_intake'])
         macro_nutrients_df = LiveLite.macro_nutrients_data(mapped_user_inputs['internal_age'],
                                                         mapped_user_inputs['internal_sex'],
                                                         st.session_state['calorie_intake'])

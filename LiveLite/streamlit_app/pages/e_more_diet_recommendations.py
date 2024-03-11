@@ -55,7 +55,10 @@ def pagee():
     with col2:
         if 'search_food_items' not in st.session_state:
             search_food_items = st.text_input("Enter your Choice")
-            st.session_state['search_food_items'] = search_food_items
+        else:
+            search_food_items = st.text_input("Enter your Choice", value=st.session_state['search_food_items'])
+        st.session_state['search_food_items'] = search_food_items
+
         with stylable_container("button",
                     css_styles="""button {background-color: #f2f2f2; color: black;font-size: 50px;}"""):
             view_search_results = st.button("View Food of Your Choice 🥗", use_container_width=True)
