@@ -7,7 +7,7 @@ import pandas as pd
 
 THIS_DIR = Path(__file__).parent
 
-class TestComprehensiveGuide(unittest.TestCase):
+class TestUnderstandingObesity(unittest.TestCase):
     def setUp(self):
         """
         Sets up the test by loading in the data.

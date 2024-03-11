@@ -23,7 +23,7 @@ def controller(choice):
     """
 
     # Raise an error if user_inputs are not filled / 'food_nutrition_data' is not loaded
-    if 'user_inputs' in st.session_state or 'food_nutrition_data' in st.session_state:
+    if 'user_inputs' not in st.session_state or 'food_nutrition_data' not in st.session_state:
         raise KeyError("Required session state variables are missing.")
 
     user_inputs = st.session_state['user_inputs']

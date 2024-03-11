@@ -2,7 +2,7 @@ import unittest
 from unittest import mock
 import LiveLite
 
-class TestComprehensiveGuide(unittest.TestCase):
+class TestObesityAssessment(unittest.TestCase):
     @mock.patch("streamlit.button")
     @mock.patch("streamlit.switch_page")
     def test_navigation_not_called(self, mock_switch_page, mock_button):

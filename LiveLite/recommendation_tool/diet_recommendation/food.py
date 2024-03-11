@@ -211,7 +211,7 @@ def macro_nutrients_data(age, gender, calorie):
     data = {
         'Macro Nutrient': ['Carbohydrate', 'Protein', 'Fat'],
         'Quantity in Grams': [carb_quantity, protein_quantity, fat_quantity],
-        'Kcal': [f'{carbohydrate_calorie[0]} - {carbohydrate_calorie[1]}', 
+        'Kcal': [f'{carbohydrate_calorie[0]} - {carbohydrate_calorie[1]}',
                  f'{protein_calorie[0]} - {protein_calorie[1]}'
                  , f'{fat_calorie[0]} - {fat_calorie[1]}']
     }

@@ -30,3 +30,5 @@ from LiveLite.streamlit_app.app import app, load_data
 from LiveLite.streamlit_app.pages.a_understanding_obesity import pagea
 from LiveLite.streamlit_app.pages.b_obesity_assessment import pageb
 from LiveLite.streamlit_app.pages.c_risk_insights import pagec
+from LiveLite.streamlit_app.pages.d_personalized_recommendations import paged
+from LiveLite.streamlit_app.pages.e_more_diet_recommendations import pagee
