@@ -1,1 +1,1 @@
-LiveLite/data/input_files/nhanes_obesity_factors.csv filter=lfs diff=lfs merge=lfs -text
+data/NHANES/nhanes_obesity_factors.csv filter=lfs diff=lfs merge=lfs -text
