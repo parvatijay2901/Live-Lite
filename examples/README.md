@@ -1,13 +1,14 @@
 # Examples
 This folder contains the files for various demonstrations including:
-* [Running Locally](#running-locally)
+* [Running App Locally](#running-locally)
   * [1. Clone the Git Repo](#1-clone-the-git-repo)
   * [2. Local Environment Setup](#2-local-environment-setup)
-  * [3. Loading Data](#3-loading-data)
+  * [3. Run the App](#3-loading-data)
 * [Deployment](#deployment)
 * [Web Application](#web-application)
-
-
+* [Data and Model Preparation](#data-prep)
+  * [1. Download Calories Data](#cal-data)
+  * [2. Build ML Model](#build-model)
 <a id="running-locally"></a>
 ## Running Locally
 
@@ -39,10 +40,28 @@ conda deactivate
 A local application can be generated with the code:
 ```bash
 conda activate livelite
-python -m streamlit run LiveLite/streamlit_app/Home.py 
+python -m streamlit run LiveLite/streamlit_app/app.py 
 ```
 
-See An Analysis of Nothing in your local browser!
+See LiveLite in your local browser!
+
+<a id="data-prep"></a>
+## Data and Model Preparation
+
+<a id="cal-data"></a>
+### Download Calories Data
+Download calories burned with data exercise from Harvard Health with below code:
+```bash
+python LiveLite/data/scripts_to_generate/harvard_health_scraped_data.py
+```
+
+<a id="build-model"></a>
+### Build ML Model
+Raw data must be processed first and then model must be generated on processed data. Below code will build new model:
+```bash
+python LiveLite/data/scripts_to_generate/data_processor.py
+python LiveLite/recommendation_tool/risk_assessment/ml_build_train.py
+```
 
 <a id="deployment"></a>
 ## Deployment
