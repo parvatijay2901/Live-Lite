@@ -37,8 +37,8 @@ def build_and_evaluate_model(inputfile, outputfile):
     try:
         # Load data
         data = pd.read_csv(inputfile)
-        x = data.drop(['SEQN', 'BMXHT', 'BMXWT','IsObese'], axis=1)
-        y = data['IsObese']
+        x_var = data.drop(['SEQN', 'BMXHT', 'BMXWT','IsObese'], axis=1)
+        y_var = data['IsObese']
 
         # Define categorical and numerical features
         categorical_features = ['DPQ020',
@@ -69,7 +69,10 @@ def build_and_evaluate_model(inputfile, outputfile):
         ])
 
         # Split the data into test data & training data
-        x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+        x_train, x_test, y_train, y_test = train_test_split(x_var,
+                                                            y_var,
+                                                            test_size=0.2,
+                                                            random_state=42)
 
         # Calculate class weights to handle class imbalance
         class_weights = (class_weight.compute_class_weight('balanced',
@@ -109,8 +112,8 @@ def build_and_evaluate_model(inputfile, outputfile):
         # Find the best parameters that influence obesity risk.
         find_most_influential_factors(best_model, numerical_features, categorical_features)
 
-    except FileNotFoundError as e:
-        raise FileNotFoundError(f"Invalid input filepath: {e}") from e
+    except FileNotFoundError as excep:
+        raise FileNotFoundError(f"Invalid input filepath: {excep}") from excep
 
 def save_model(model, filepath):
     """
@@ -126,11 +129,11 @@ def save_model(model, filepath):
     """
     try:
         joblib.dump(model, filepath)
-        print('Model built and saved')
-    except FileNotFoundError as e:
-        raise FileNotFoundError(f"Invalid filepath: {e}") from e
-    except Exception as e:
-        raise type(e)(f"Error occurred while saving the model: {e}") from e
+        print(f"Model built and saved to '{filepath}'.")
+    except FileNotFoundError as ex:
+        raise FileNotFoundError(f"Invalid filepath: {ex}") from ex
+    except Exception as exc:
+        raise type(exc)(f"Error occurred while saving the model: {exc}") from exc
 
 def find_most_influential_factors(model, num_features, cat_features):
     """
@@ -164,8 +167,8 @@ def find_most_influential_factors(model, num_features, cat_features):
         print("Top Features Predicting Obesity:")
         print(coeff_df.head(3))
 
-    except Exception as e:
-        raise type(e)(f"Error occurred while searching for parameters: {e}") from e
+    except Exception as exc:
+        raise type(exc)(f"Error occurred while searching for parameters: {exc}") from exc
 
 if __name__ == "__main__":
     IP = "./data/ml_input.csv"
