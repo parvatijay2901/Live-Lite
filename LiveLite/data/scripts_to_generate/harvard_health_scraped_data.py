@@ -79,11 +79,11 @@ def scrape_calories_data():
             calories_125lbs, calories_155lbs, calories_185lbs))
         write_to_csv(process_calories_data(all_data))
 
-    except requests.exceptions.RequestException as e:
-        raise ConnectionError(f"Error connecting to URL: {e}") from e
+    except requests.exceptions.RequestException as ex:
+        raise ConnectionError(f"Error connecting to URL: {ex}") from ex
 
-    except (ValueError, AttributeError) as e:
-        raise ValueError(f"Invalid URL or unexpected webpage structure: {e}") from e
+    except (ValueError, AttributeError) as exc:
+        raise ValueError(f"Invalid URL or unexpected webpage structure: {exc}") from exc
 
 
 def process_calories_data(scraped_data):
@@ -139,8 +139,10 @@ def write_to_csv(processed_data):
         if data[-1] != 0 and data[1] != "Sleeping":
             filtered_data.append(data)
 
+    filepath = "./LiveLite/data/input_files/calories_burned_30_minutes.csv"
+
     # Write the data into a CSV file
-    with open("calories_burned_30_minutes.csv", "w", newline="", encoding="utf-8") as csvfile:
+    with open(filepath, "w", newline="", encoding="utf-8") as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(["Activity Type",
                             "Activity",
@@ -150,6 +152,7 @@ def write_to_csv(processed_data):
                             "cal_per_lb_avg",
                             "cal_per_kg_avg"])
         writer.writerows(filtered_data)
+    print(f"File saved to '{filepath}'.")
 
 if __name__ == "__main__":
     scrape_calories_data()

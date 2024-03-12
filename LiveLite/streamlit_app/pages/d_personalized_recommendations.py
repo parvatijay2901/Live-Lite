@@ -53,7 +53,7 @@ def paged():
         st.markdown("""<div style ="text-align: center;"><p style='color:#99fadc;'>Include these
                     food groups into your diet to nourish your body with necessary micronutrients to
                     support metabolic processes!</p></div>""", unsafe_allow_html=True)
-        _, col122, _ = st.columns([0.9,2,0.9])
+        _, col122, _ = st.columns([1,2,1])
         with col122:
             LiveLite.add_blank_lines()
             # Display micronutrients diet df

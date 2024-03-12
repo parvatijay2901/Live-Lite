@@ -172,6 +172,8 @@ def data_process(inputfile, outputfile):
     except Exception as exc:
         raise type(exc)(f"Column not found: {exc}") from exc
 
+    print(f"Reading data from  '{inputfile}'.")
+
     # Drop rows with blank height or weight
     input_df.dropna(subset=['BMXHT', 'BMXWT'], inplace=True)
 
@@ -195,9 +197,9 @@ def data_process(inputfile, outputfile):
     input_df['RIDRETH3'] = input_df.apply(process_ethnicity, axis=1)
 
     input_df.to_csv(outputfile, index=False)
-    print(f"DF has been saved to '{outputfile}'.")
+    print(f"Processed data has been saved to '{outputfile}'.")
 
 if __name__ == '__main__':
-    IP = 'nhanes_obesity_factors.csv'
-    OP = 'ml_input.csv'
+    IP = './data/NHANES/nhanes_obesity_factors.csv'
+    OP = './data/ml_input.csv'
     data_process(IP, OP)
