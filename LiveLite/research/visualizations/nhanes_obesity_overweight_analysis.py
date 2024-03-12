@@ -44,7 +44,7 @@ def plot_obesity_overweight_trends(data, years=None):
 
     max_proportion_obese = prop_data[['Obese']].max().max()
     max_proportion_overweight = prop_data[['Overweight (including obesity)']].max().max()
-    
+
     min_proportion_obese = prop_data[['Obese']].min().min()
     min_proportion_overweight = prop_data[['Overweight (including obesity)']].min().min()
 
@@ -84,7 +84,7 @@ def plot_obesity_overweight_trends(data, years=None):
     # Customize axes and layout with the same y-axis range for both plots
     fig.update_yaxes(title_text='Proportion', range=[min_proportion_obese, max_proportion_obese], row=1, col=1)
     fig.update_xaxes(title_text='Year', row=1, col=1)
-    
+
     fig.update_yaxes(title_text='Proportion', range=[min_proportion_overweight, max_proportion_overweight], row=2, col=1)
     fig.update_xaxes(title_text='Year', row=2, col=1)
 
@@ -92,7 +92,7 @@ def plot_obesity_overweight_trends(data, years=None):
         grid={'rows': 2, 'columns': 1},
         height=800, width=800,
         title_text="Obesity and Overweight Trends Over Years",
-        title_x=0.4,
+        title_x=0.45,
         showlegend=False
     )
 
