@@ -5,10 +5,11 @@ This folder contains the files for various demonstrations including:
   * [2. Local Environment Setup](#2-local-environment-setup)
   * [3. Run the App](#3-loading-data)
 * [Deployment](#deployment)
-* [Web Application](#web-application)
 * [Data and Model Preparation](#data-prep)
   * [1. Download Calories Data](#cal-data)
   * [2. Build ML Model](#build-model)
+* [Text Guide](Tool_Text_Guide.md)
+* [Video Demonstration](https://drive.google.com/file/d/1hY5_HA7097HUBgR-eCphhheE8aUItCNa/view)
 <a id="running-locally"></a>
 ## Running Locally
 
@@ -69,8 +70,3 @@ Our app was deployed using Streamlit Sharing via https://share.streamlit.io/.
 Learn more about [deploying](https://docs.streamlit.io/streamlit-community-cloud/get-started/deploy-an-app) and [sharing](https://docs.streamlit.io/streamlit-community-cloud/get-started/share-your-app#sharing-public-apps) a public Streamlit web app.
 
 Public Website: **[nothing.streamlit.app](https://nothing.streamlit.app/)**
-
-<a id="web-application"></a>
-## Web Application
-* Click [here](./site_navigation.md) for a website walk-through with text.
-* There is also a visual **[Video Demonstration](https://drive.google.com/file/d/1KPQyFiidUAzbk1oaAdEksbGXqCCfxCCf/view)** for accessibility.
