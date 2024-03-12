@@ -9,8 +9,8 @@ Functions:
                         are loaded, and switch to the previous page if not.
 """
 
-import streamlit as st
 import os
+import streamlit as st
 
 def home_page():
     """
@@ -31,7 +31,8 @@ def obesity_assessment_page():
     Raises:
         FileNotFoundError: Raised when the obesity assessment file is not found.
     """
-    if os.path.exists(os.path.join(os.getcwd(), "LiveLite/streamlit_app/pages/b_obesity_assessment.py")):
+    if os.path.exists(os.path.join(os.getcwd(),
+                                "LiveLite/streamlit_app/pages/b_obesity_assessment.py")):
         st.switch_page("pages/b_obesity_assessment.py")
     else:
         raise FileNotFoundError("File b_obesity_assessment.py not found")
@@ -56,7 +57,8 @@ def personalized_recommendations_page():
     Raises:
         FileNotFoundError: Raised when the personalized recommendations file is not found.
     """
-    if os.path.exists(os.path.join(os.getcwd(), "LiveLite/streamlit_app/pages/d_personalized_recommendations.py")):
+    if os.path.exists(os.path.join(os.getcwd(),
+                                "LiveLite/streamlit_app/pages/d_personalized_recommendations.py")):
         st.switch_page("pages/d_personalized_recommendations.py")
     else:
         raise FileNotFoundError("File d_personalized_recommendations.py not found")
@@ -79,6 +81,31 @@ def add_blank_lines(num_lines=1):
     for _ in range(num_lines):
         st.write('\n')
 
+def swap_page_back(choice):
+    """Create navigation buttons for users to go back
+    to a previous page in the Streamlit app.
+
+    Args:
+        choice (str): The choice of page to navigate back to.
+
+    Raises:
+        ValueError: If `choice` is not 'home'.
+    """
+    # Provide this option to switch back "home"
+    if choice == "home":
+        _, col1 = st.columns([10, 1.5])
+        with col1:
+            if st.button("→ Home🏠", use_container_width=True):
+                home_page()
+    elif choice == "Obesity_assessment":
+        page_path = "LiveLite/streamlit_app/pages/b_obesity_assessment.py"
+        if os.path.exists(os.path.join(os.getcwd(), page_path)):
+            st.switch_page("pages/b_obesity_assessment.py")
+        else:
+            raise FileNotFoundError("File pages/b_obesity_assessment.py not found")
+    else:
+        raise ValueError("Invalid choice.")
+
 def swap_pages_back(choice):
     """Create navigation buttons for users to go back
     to previous pages in the Streamlit app.
@@ -91,9 +118,7 @@ def swap_pages_back(choice):
                                             "basic_risk_insights",
                                             or "basic_recommendations".
     """
-
     col1, _, col3 = st.columns([2.5, 10, 1.5])
-
     # Provide this option in c_risk_insights page
     if choice == "obesity_assessment":
         with col1:

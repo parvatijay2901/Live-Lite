@@ -18,7 +18,11 @@ import pandas as pd
 import LiveLite # pylint: disable=import-error
 
 def load_data():
-    # Load all the data used by sub-functions in the landing page
+    """Load all the data used by sub-functions in the landing page
+
+    Raises:
+        FileNotFoundError: If input files are not found
+    """
     food_nutrition_data_path = "LiveLite/data/input_files/food_nutrition_data.csv"
     data_nhanes_path = "LiveLite/data/input_files/NHANES_Background.csv"
     data_ihme_path = "LiveLite/data/input_files/IHME/number-of-deaths-by-risk-factor.csv"
@@ -42,17 +46,23 @@ def load_data():
         raise FileNotFoundError("File research/recommendation input files not found")
 
 def app():
+    """sets up the landing page for the LiveLite application.
+    Raises:
+        FileNotFoundError: If pages/a_understanding_obesity.py doesn't exist.
+        FileNotFoundError: If pages/b_obesity_assessment.py doesn't exist.
+        FileNotFoundError: If LiveLite/streamlit_app/images/logo.png doesn't exist.
+    """
     st.set_page_config(layout="wide", initial_sidebar_state="collapsed")
 
     st.markdown("""<div style="text-align:center;"><h1><span style='color:gold;'>Live Lite:</span>
-                Empowering you to rewrite your Obesity story..</h1></div>""", unsafe_allow_html=True)
+            Empowering you to rewrite your Obesity story..</h1></div>""", unsafe_allow_html=True)
     LiveLite.add_blank_lines()
 
     col1, col2 = st.columns([2, 0.6])
     with col1:
         LiveLite.add_blank_lines()
-        st.markdown("<h2 style='text-align:center; color:gold;'>We're thrilled to have you here!</h2>",
-                    unsafe_allow_html=True)
+        st.markdown("""<h2 style='text-align:center; color:gold;'>
+                    We're thrilled to have you here!</h2>""", unsafe_allow_html=True)
         st.markdown("""<h4 style='text-align:center;'>Take some time to explore the features
                     and resources available, and embark on your journey towards improved health
                     and wellness with us.</h4>""", unsafe_allow_html=True)
@@ -63,7 +73,8 @@ def app():
             st.markdown("""<p style='text-align:center; color:#00b3b3; font-weight:bold;'>Delve into
                         the multifaceted landscape of obesity, exploring its complexities, causes,
                         and consequences</p>""", unsafe_allow_html=True)
-            button_1 = st.button('Understand Obesity 🤷🏻‍♀️', use_container_width=True, key='button4')
+            button_1 = st.button('Understand Obesity 🤷🏻‍♀️', use_container_width=True,
+                                key='button4')
             if button_1:
                 page_path = "LiveLite/streamlit_app/pages/a_understanding_obesity.py"
                 if os.path.exists(os.path.join(os.getcwd(), page_path)):
@@ -77,11 +88,7 @@ def app():
                         your health and wellness journey</p>""", unsafe_allow_html=True)
             button_2 = st.button('Your Risk Insights🌿🏃🏼', use_container_width=True, key='button5')
             if button_2:
-                page_path = "LiveLite/streamlit_app/pages/b_obesity_assessment.py"
-                if os.path.exists(os.path.join(os.getcwd(), page_path)):
-                    st.switch_page("pages/b_obesity_assessment.py")
-                else:
-                    raise FileNotFoundError("File pages/b_obesity_assessment.py not found")
+                LiveLite.swap_page_back("obesity_assessment")
 
     with col2:
         st.markdown("""<style>.centered-image {display: flex;justify-content: center;height: 100%;}

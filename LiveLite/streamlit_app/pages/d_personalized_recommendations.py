@@ -8,7 +8,15 @@ from streamlit_extras.stylable_container import stylable_container
 import LiveLite # pylint: disable=import-error
 
 def paged():
+    """
+    This function sets up the 'Personalized Recommendations' page,
+    calculating estimated daily calorie intake and providing personalized
+    recommendations for diet and physical activity based on user inputs.
+    Users can also navigate to view more food recommendations.
 
+    Raises:
+        FileNotFoundError: File 'pages/e_more_diet_recommendations.py' doesn't exist.
+    """
     st.set_page_config(layout="wide", initial_sidebar_state="collapsed")
 
     # Go back to the home page if the variables are not loaded
@@ -52,13 +60,14 @@ def paged():
             st.dataframe(recommendation[1], hide_index=True)
             LiveLite.add_blank_lines()
             with stylable_container("button",
-                    css_styles="""button {background-color: #f2f2f2; color: black;font-size: 50px;}"""):
+                    css_styles="""button {background-color: #f2f2f2; color: black;
+                                font-size: 50px;}"""):
                 if st.button("View more Food Recommendations 🥦", use_container_width=True):
                     page_path = "LiveLite/streamlit_app/pages/d_personalized_recommendations.py"
                     if os.path.exists(os.path.join(os.getcwd(), page_path)):
                         st.switch_page("pages/e_more_diet_recommendations.py")
                     else:
-                        raise FileNotFoundError("File pages/e_more_diet_recommendations.py not found")
+                        raise FileNotFoundError("pages/e_more_diet_recommendations.py not found")
 
     with col3:
         st.markdown("""<div style="text-align: center;"><h3 style='color:gold;'>
