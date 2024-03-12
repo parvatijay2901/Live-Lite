@@ -8,6 +8,12 @@ from streamlit_extras.stylable_container import stylable_container
 import LiveLite # pylint: disable=import-error
 
 def pagee():
+    """
+    This function sets up the 'Food Recommendations' page, providing users with
+    personalized food suggestions based on their food preferences. Users can select
+    a food category to view recommendations or search for specific food items.
+    Nutritional content for searched food items is also displayed.
+    """
     st.set_page_config(layout="wide", initial_sidebar_state="collapsed")
 
     # Go back to the home page if the variables are not loaded
@@ -25,7 +31,8 @@ def pagee():
 
     # Retrieve or generate personalized food recommendations
     if 'recommended_foods_df' not in st.session_state:
-        recommended_foods_df = LiveLite.controller("diet_recommender_advanced_based_on_food_preference")
+        recommended_foods_df = LiveLite.controller(
+                                "diet_recommender_advanced_based_on_food_preference")
         st.session_state['recommended_foods_df'] = recommended_foods_df
     else:
         recommended_foods_df = st.session_state['recommended_foods_df']
@@ -56,11 +63,13 @@ def pagee():
         if 'search_food_items' not in st.session_state:
             search_food_items = st.text_input("Enter your Choice")
         else:
-            search_food_items = st.text_input("Enter your Choice", value=st.session_state['search_food_items'])
+            search_food_items = st.text_input("Enter your Choice",
+                                            value=st.session_state['search_food_items'])
         st.session_state['search_food_items'] = search_food_items
 
         with stylable_container("button",
-                    css_styles="""button {background-color: #f2f2f2; color: black;font-size: 50px;}"""):
+                    css_styles="""button {background-color: #f2f2f2; color: black;
+                                font-size: 50px;}"""):
             view_search_results = st.button("View Food of Your Choice 🥗", use_container_width=True)
         LiveLite.add_blank_lines(2)
     if view_search_results:

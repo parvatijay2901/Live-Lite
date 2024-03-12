@@ -1,8 +1,15 @@
+"""
+This module contains unit tests for the functions defined in the LiveLite module.
+
+Class:
+- TestCommonModuleFunctions: contains individual test cases for each function.
+"""
+
 import unittest
 from unittest import mock
 import LiveLite
-class TestModuleFunctions(unittest.TestCase):
-
+class TestCommonModuleFunctions(unittest.TestCase):
+    """Test cases for LiveLite common module functions."""
     @mock.patch('os.path.exists')
     @mock.patch('streamlit.switch_page')
     def test_invalid_home_page(self, mock_switch_page, mock_wrong_path):
@@ -82,6 +89,11 @@ class TestModuleFunctions(unittest.TestCase):
         """Test swap_pages_back with an invalid choice"""
         with self.assertRaises(ValueError):
             LiveLite.swap_pages_back("invalid")
+
+    def test_swap_page_back_invalid_input(self):
+        """Test swap_pages_back with an invalid choice"""
+        with self.assertRaises(ValueError):
+            LiveLite.swap_page_back("invalid")
 
     @mock.patch('streamlit.session_state', {'data_ihme': True})
     @mock.patch('os.path.exists')

@@ -8,6 +8,15 @@ from streamlit_extras.stylable_container import stylable_container
 import LiveLite # pylint: disable=import-error
 
 def pagec():
+    """
+    This function sets up the 'Risk Insights' page, providing users with information about their
+    risk score, risk color, and personalized recommendations based on their exercise intensity level
+    and dietary preference.
+
+    Raises:
+        FileNotFoundError: If the file 'pages/d_personalized_recommendations.py'
+            doesn't exist when navigating to view personalized recommendations.
+    """
     st.set_page_config(layout="wide", initial_sidebar_state="collapsed")
 
     # Go back to the home page if the variables are not loaded
@@ -52,7 +61,7 @@ def pagec():
                 if os.path.exists(os.path.join(os.getcwd(), page_path)):
                     st.switch_page("pages/d_personalized_recommendations.py")
                 else:
-                    raise FileNotFoundError("File pages/d_personalized_recommendations.py not found")
+                    raise FileNotFoundError("pages/d_personalized_recommendations.py not found")
 
 if __name__ == "__main__":
     pagec()

@@ -3,17 +3,17 @@ This module contains unit tests for the LiveLite project that tests
 various functionalities related to user inputs.
 
 Classes:
-- TestGetUserInputs(unittest.TestCase)
-
+- TestGetUserInputs: Contains test cases for the user inputs functionality
+                    in LiveLite module.
 """
 import unittest
 import tempfile
 import os
-import LiveLite
 from unittest import mock
+import LiveLite
 
 class TestGetUserInputs(unittest.TestCase):
-    """Test casees for the user inputs functionality."""
+    """Test cases for the user inputs functionality."""
 
     def test_get_demographic_inputs(self):
         """Test getting demographic inputs"""
@@ -56,7 +56,7 @@ class TestGetUserInputs(unittest.TestCase):
                 LiveLite.write_user_inputs_to_csv(user_inputs, "")
 
             LiveLite.write_user_inputs_to_csv(user_inputs, filename)
-            with open(filename, 'r') as f:
+            with open(filename, 'r', encoding='utf-8') as f:
                 lines = f.readlines()
                 self.assertEqual(len(lines), 3)
 
