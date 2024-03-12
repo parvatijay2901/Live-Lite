@@ -83,6 +83,11 @@ class TestModuleFunctions(unittest.TestCase):
         with self.assertRaises(ValueError):
             LiveLite.swap_pages_back("invalid")
 
+    def test_swap_page_back_invalid_input(self):
+        """Test swap_pages_back with an invalid choice"""
+        with self.assertRaises(ValueError):
+            LiveLite.swap_page_back("invalid")
+
     @mock.patch('streamlit.session_state', {'data_ihme': True})
     @mock.patch('os.path.exists')
     @mock.patch('streamlit.switch_page')

@@ -89,7 +89,7 @@ def swap_page_back(choice):
         choice (str): The choice of page to navigate back to.
 
     Raises:
-        ValueError: If `choice` is not 'home'.
+        ValueError: If `choice` is not 'home' or 'obesity assessment'.
     """
     # Provide this option to switch back "home"
     if choice == "home":
@@ -97,12 +97,8 @@ def swap_page_back(choice):
         with col1:
             if st.button("→ Home🏠", use_container_width=True):
                 home_page()
-    elif choice == "Obesity_assessment":
-        page_path = "LiveLite/streamlit_app/pages/b_obesity_assessment.py"
-        if os.path.exists(os.path.join(os.getcwd(), page_path)):
-            st.switch_page("pages/b_obesity_assessment.py")
-        else:
-            raise FileNotFoundError("File pages/b_obesity_assessment.py not found")
+    elif choice == "obesity_assessment":
+        obesity_assessment_page()
     else:
         raise ValueError("Invalid choice.")
 
