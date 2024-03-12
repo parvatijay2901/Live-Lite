@@ -9,7 +9,7 @@ This folder contains the files for various demonstrations including:
   * [1. Download Calories Data](#cal-data)
   * [2. Build ML Model](#build-model)
 * [Text Guide](Tool_Text_Guide.md)
-* [Video Demonstration]()
+* [Video Demonstration](https://drive.google.com/file/d/1hY5_HA7097HUBgR-eCphhheE8aUItCNa/view)
 <a id="running-locally"></a>
 ## Running Locally
 
