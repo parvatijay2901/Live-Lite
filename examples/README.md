@@ -5,10 +5,11 @@ This folder contains the files for various demonstrations including:
   * [2. Local Environment Setup](#2-local-environment-setup)
   * [3. Run the App](#3-loading-data)
 * [Deployment](#deployment)
-* [Web Application](#web-application)
 * [Data and Model Preparation](#data-prep)
   * [1. Download Calories Data](#cal-data)
   * [2. Build ML Model](#build-model)
+* [Text Guide](Tool_Text_Guide.md)
+* [Video Demonstration]()
 <a id="running-locally"></a>
 ## Running Locally
 

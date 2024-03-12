@@ -1,1 +1,2 @@
 data/NHANES/nhanes_obesity_factors.csv filter=lfs diff=lfs merge=lfs -text
+examples/videos/LiveLite_video_demo.mov filter=lfs diff=lfs merge=lfs -text
