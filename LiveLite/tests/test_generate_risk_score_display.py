@@ -1,6 +1,14 @@
+"""
+This module contains unit tests for functions related to
+displaying risk score in the LiveLite module.
+
+Class:
+- TestRiskScoreDisplay: Contains test cases for the functions in
+                        displaying risk score in LiveLite module.
+"""
+
 import unittest
 import LiveLite
-from unittest import mock
 
 class TestRiskScoreDisplay(unittest.TestCase):
     """Test cases for the functions in displaying risk score"""

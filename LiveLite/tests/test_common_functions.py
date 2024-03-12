@@ -1,8 +1,15 @@
+"""
+This module contains unit tests for the functions defined in the LiveLite module.
+
+Class:
+- TestCommonModuleFunctions: contains individual test cases for each function.
+"""
+
 import unittest
 from unittest import mock
 import LiveLite
-class TestModuleFunctions(unittest.TestCase):
-
+class TestCommonModuleFunctions(unittest.TestCase):
+    """Test cases for LiveLite common module functions."""
     @mock.patch('os.path.exists')
     @mock.patch('streamlit.switch_page')
     def test_invalid_home_page(self, mock_switch_page, mock_wrong_path):
