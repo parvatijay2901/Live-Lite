@@ -1,8 +1,7 @@
 # Live Lite: Empowering You to Rewrite Your Obesity Story
 
 [![Coverage Status](https://coveralls.io/repos/github/parvatijay2901/LiveLite/badge.svg?branch=main)](https://coveralls.io/github/parvatijay2901/LiveLite?branch=main)
-
-![build_test_badge](https://github.com/parvatijay2901/LiveLite/actions/workflows/build_test.yml/badge.svg)
+![Build/Test Workflow](https://github.com/parvatijay2901/LiveLite/actions/workflows/build_test.yml/badge.svg)
 
 ## Project Type
 **Research** and a Recommendation **Tool**
