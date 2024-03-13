@@ -1,9 +1,42 @@
+"""
+This module contains unit tests for the user_input_mapping module.
+Each test case evaluates different aspects of the function's behavior.
+
+Classes:
+- TestUserInputMapping
+
+Dependencies:
+- unittest module for unit testing framework
+- user_input_mapping from user_input_mapping
+"""
 import unittest
 from LiveLite import user_input_mapping # pylint: disable=import-error
 
 class TestUserInputMapping(unittest.TestCase):
-    # Smoke test
+    """
+    This class contains various test methods to verify the 
+    correctness of the user_input_mapping function.
+    
+    The TestUserInputMapping class is inheriting from unittest.TestCase
+    
+    Attributes:
+    - None
+
+    Methods:
+    - test_user_input_map_smoke()
+    - test_user_input_map_1()
+    - test_user_input_map_2()
+    - test_user_input_map_3()
+    - test_user_input_invalid_gender()
+    - test_user_input_invalid_ethnicity()
+    - test_user_input_invalid_activity()
+    - test_user_input_invalid_health_condition()
+    - test_user_input_invalid_health_condition()
+    """
     def test_user_input_map_smoke(self):
+        """
+        Smoke test to test if the function runs without errors.
+        """
         data = {"age": 85,
                 "sex": "Female",
                 "height": 60.96,
@@ -17,9 +50,11 @@ class TestUserInputMapping(unittest.TestCase):
                 "diet_condition": "Excellent",
                 "poor_appetite_overeating": "Not at all"}
         user_input_mapping(data)
-        self.assertTrue(True)
 
-    def test_user_input_map_1(self):   
+    def test_user_input_map_1(self):
+        """
+        One shot test to test if the function correctly maps the data
+        """
         data = {"age": 18,
                 "sex": "Male",
                 "height": 60.96,
@@ -45,8 +80,11 @@ class TestUserInputMapping(unittest.TestCase):
                 'internal_diet_condition': 1,
                 'internal_poor_appetite_overeating': 0}
         self.assertEqual(res, user_input_mapping(data))
-    
-    def test_user_input_map_2(self):   
+
+    def test_user_input_map_2(self):
+        """
+        One shot test to test if the function correctly maps the data
+        """
         data = {"age": 37,
                 "sex": "Male",
                 "height": 60.96,
@@ -73,7 +111,10 @@ class TestUserInputMapping(unittest.TestCase):
                 'internal_poor_appetite_overeating': 2}
         self.assertEqual(res, user_input_mapping(data))
 
-    def test_user_input_map_3(self):   
+    def test_user_input_map_3(self):
+        """
+        One shot test to test if the function correctly maps the data
+        """
         data = {"age": 37,
                 "sex": "Male",
                 "height": 100,
@@ -100,7 +141,10 @@ class TestUserInputMapping(unittest.TestCase):
                 'internal_poor_appetite_overeating': 3}
         self.assertEqual(res, user_input_mapping(data))
 
-    def test_user_input_invalid_gender(self):   
+    def test_user_input_invalid_gender(self):
+        """
+        Edge Case: Test if the function raises ValueError for invalid gender.
+        """
         data = {"age": 37,
                 "sex": "bleeblublah",
                 "height": 100,
@@ -116,7 +160,10 @@ class TestUserInputMapping(unittest.TestCase):
         with self.assertRaises(ValueError):
             user_input_mapping(data)
 
-    def test_user_input_invalid_ethnicity(self):   
+    def test_user_input_invalid_ethnicity(self):
+        """
+        Edge Case: Test if the function raises ValueError for invalid ethnicity.
+        """
         data = {"age": 37,
                 "sex": "Male",
                 "height": 100,
@@ -132,7 +179,10 @@ class TestUserInputMapping(unittest.TestCase):
         with self.assertRaises(ValueError):
             user_input_mapping(data)
 
-    def test_user_input_invalid_activity(self):   
+    def test_user_input_invalid_activity(self):
+        """
+        Edge Case: Test if the function raises ValueError for invalid activity.
+        """
         data = {"age": 37,
                 "sex": "Male",
                 "height": 100,
@@ -148,7 +198,10 @@ class TestUserInputMapping(unittest.TestCase):
         with self.assertRaises(ValueError):
             user_input_mapping(data)
 
-    def test_user_input_invalid_health_condition(self):   
+    def test_user_input_invalid_health_condition(self):
+        """
+        Edge Case: Test if the function raises ValueError for invalid health condition.
+        """
         data = {"age": 37,
                 "sex": "Male",
                 "height": 100,
@@ -164,7 +217,10 @@ class TestUserInputMapping(unittest.TestCase):
         with self.assertRaises(ValueError):
             user_input_mapping(data)
 
-    def test_user_input_invalid_mental_condition(self):   
+    def test_user_input_invalid_mental_condition(self):
+        """
+        Edge Case: Test if the function raises ValueError for invalid mental condition.
+        """
         data = {"age": 37,
                 "sex": "Male",
                 "height": 100,
@@ -182,3 +238,4 @@ class TestUserInputMapping(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+    
