@@ -1,3 +1,0 @@
-[run]
-show_missing = True
-omit = LiveLite/tests/test_physical_activity_recommend.py
