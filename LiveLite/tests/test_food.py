@@ -1,10 +1,12 @@
-"""This script contains unit tests for all the functions 
-used to calculate macro and micro nutrients daily intake and 
+"""This script contains unit tests for all the functions
+used to calculate macro and micro nutrients daily intake and
 recommended quanitities of food groups to be included daily.
 """
 import unittest
 import pandas as pd
-from LiveLite.recommendation_tool.diet_recommendation.food import recommended_protein, recommended_grains, recommended_fat, recommended_vegetables, recommended_fruits, macro_calorie, macro_nutrients_data, micro_nutrients
+from LiveLite import recommended_protein, recommended_grains, recommended_fat
+from LiveLite import recommended_vegetables, recommended_fruits
+from LiveLite import macro_calorie, macro_nutrients_data, micro_nutrients
 
 class TestRecommendedProtein(unittest.TestCase):
     """This class tests the recommended protein intake function

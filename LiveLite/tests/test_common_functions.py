@@ -4,7 +4,7 @@ This module contains unit tests for the functions defined in the LiveLite module
 Class:
 - TestCommonModuleFunctions: contains individual test cases for each function.
 """
-
+# pylint: disable=unused-argument
 import unittest
 from unittest import mock
 import LiveLite
@@ -46,11 +46,9 @@ class TestCommonModuleFunctions(unittest.TestCase):
         """Test add_blank_lines function with valid inputs"""
         # Default argument
         LiveLite.add_blank_lines()
-        self.assertTrue(True)
 
         # By giving an argument
         LiveLite.add_blank_lines(num_lines=2)
-        self.assertTrue(True)
 
     def test_add_blank_lines_invalid_input(self):
         """Test add_blank_lines function"""

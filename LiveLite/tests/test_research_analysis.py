@@ -60,6 +60,8 @@ class TestResearchAnalysis(unittest.TestCase):
         self.assertIsInstance(plt, object)
 
     def test_violin_plot_weight(self):
+        """ Test if box plots are returned
+        """
         plt = generate_violin_plot(data=self.nhanes_data, plot_type='Weight')
         self.assertIsInstance(plt, object)
 

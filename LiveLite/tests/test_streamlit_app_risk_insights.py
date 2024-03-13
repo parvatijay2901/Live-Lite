@@ -6,7 +6,9 @@ Class:
 - TestRiskInsights: Contains test cases for functions related to
                 Risk Insights page in the LiveLite module.
 """
-
+# pylint: disable=line-too-long
+# pylint: disable=too-many-arguments
+# pylint: disable=unused-argument
 import unittest
 from pathlib import Path
 from unittest import mock
@@ -23,17 +25,17 @@ class TestRiskInsights(unittest.TestCase):
     def setUp(self):
         """Mock the necessary dependencies."""
         self.mock_user_inputs = {
-            "age": 37,
+            "age": 24,
             "sex": "Male",
-            "height": 100,
-            "weight": 100,
-            "ethnicity": "Non-Hispanic White",
-            "activity_level": "Moderately Active",
+            "height": 160,
+            "weight": 200,
+            "ethnicity": "Non-Hispanic Black",
+            "activity_level": "Minimally Active",
             "smoke_cig": "No",
-            "mental_health": "Occasionally these days",
+            "mental_health": "Frequently these days",
             "sleep_hrs": 1.0,
-            "health_condition": "Fair",
-            "diet_condition": "Poor",
+            "health_condition": "Excellent",
+            "diet_condition": "Good",
             "poor_appetite_overeating": "Nearly every day these days"
         }
 
