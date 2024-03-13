@@ -16,7 +16,7 @@ from bs4 import BeautifulSoup
 # pylint: disable=too-many-locals
 # Code is well structured and readable.
 # Using temp local variable for mulyiple column pprocessing.
-def scrape_calories_data():
+def scrape_calories_data(filepath):
     """
     Scrapes data from a webpage and processes it to 
     calculate average calories burned per kg and per lbs.
@@ -77,7 +77,7 @@ def scrape_calories_data():
             # Append data for this table to all_data with activity type
             all_data.extend(zip([table_name]*len(activities), activities,
             calories_125lbs, calories_155lbs, calories_185lbs))
-        write_to_csv(process_calories_data(all_data))
+        write_to_csv(process_calories_data(all_data), filepath)
 
     except requests.exceptions.RequestException as ex:
         raise ConnectionError(f"Error connecting to URL: {ex}") from ex
@@ -125,7 +125,7 @@ def process_calories_data(scraped_data):
     return all_data_processed
 
 
-def write_to_csv(processed_data):
+def write_to_csv(processed_data,filepath):
     """
     Writes processed data into a csv file, by removing unwanted records.
     Args:
@@ -138,8 +138,6 @@ def write_to_csv(processed_data):
     for data in processed_data:
         if data[-1] != 0 and data[1] != "Sleeping":
             filtered_data.append(data)
-
-    filepath = "./LiveLite/data/input_files/calories_burned_30_minutes.csv"
 
     # Write the data into a CSV file
     with open(filepath, "w", newline="", encoding="utf-8") as csvfile:
@@ -155,4 +153,5 @@ def write_to_csv(processed_data):
     print(f"File saved to '{filepath}'.")
 
 if __name__ == "__main__":
-    scrape_calories_data()
+    IP = "./LiveLite/data/input_files/calories_burned_30_minutes.csv"
+    scrape_calories_data(IP)
