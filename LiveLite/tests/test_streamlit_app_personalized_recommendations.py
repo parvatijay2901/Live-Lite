@@ -6,7 +6,9 @@ Classes:
 - TestPersonalizedRecommendations: Contains test cases for functions related to
                                 Personalized Recommendations page in the LiveLite module.
 """
-
+# pylint: disable=line-too-long
+# pylint: disable=too-many-arguments
+# pylint: disable=unused-argument
 import unittest
 from unittest import mock
 from pathlib import Path
@@ -24,18 +26,18 @@ class TestPersonalizedRecommendations(unittest.TestCase):
     def setUp(self):
         """Mock the necessary dependencies."""
         self.mock_user_inputs = {
-            "age": 37,
+            "age": 90,
             "sex": "Male",
-            "height": 100,
-            "weight": 100,
-            "ethnicity": "Non-Hispanic White",
-            "activity_level": "Moderately Active",
+            "height": 150,
+            "weight": 80,
+            "ethnicity": "Mexican American",
+            "activity_level": "Sedentary",
             "smoke_cig": "No",
             "mental_health": "Occasionally these days",
             "sleep_hrs": 1.0,
-            "health_condition": "Fair",
-            "diet_condition": "Poor",
-            "poor_appetite_overeating": "Nearly every day these days"
+            "health_condition": "Excellent",
+            "diet_condition": "Good",
+            "poor_appetite_overeating": "Not at all"
         }
 
         food_nutrition_data_path = THIS_DIR.parent / 'data/input_files/food_nutrition_data.csv'
@@ -43,9 +45,9 @@ class TestPersonalizedRecommendations(unittest.TestCase):
 
         self.mock_session_state = {
             "user_inputs": self.mock_user_inputs,
-            "calorie_intake": 2000,
+            "calorie_intake": 2500,
             "food_nutrition_data": self.food_nutrition_data_path,
-            "preferred_exercise_intensity_level": "moderate"
+            "preferred_exercise_intensity_level": "low"
         }
 
     @mock.patch("streamlit.button")

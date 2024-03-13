@@ -6,6 +6,7 @@ Classes:
 - TestGetUserInputs: Contains test cases for the user inputs functionality
                     in LiveLite module.
 """
+# pylint: disable=line-too-long
 import unittest
 import tempfile
 import os

@@ -4,11 +4,14 @@ Class:
 - TestController: This class contains test modules for the controller
                 function in the LiveLite module.
 """
+# pylint: disable=line-too-long
+# pylint: disable=unused-argument
+# pylint: disable=too-many-arguments
 import unittest
 from pathlib import Path
 from unittest import mock
-import LiveLite
 import pandas as pd
+import LiveLite
 
 THIS_DIR = Path(__file__).parent
 class TestController(unittest.TestCase):
@@ -20,17 +23,17 @@ class TestController(unittest.TestCase):
         """
         Set up necessary dependencies and mock data for the tests.
         """
-        self.mock_user_inputs = {"age": 37,
+        self.mock_user_inputs = {"age": 47,
                                 "sex": "Male",
-                                "height": 60,
-                                "weight": 500,
-                                "ethnicity": "Non-Hispanic White",
+                                "height": 70,
+                                "weight": 800,
+                                "ethnicity": "Non-Hispanic Asian",
                                 "activity_level": "Moderately Active",
-                                "smoke_cig": "No",
+                                "smoke_cig": "Yes",
                                 "mental_health": "Occasionally these days",
-                                "sleep_hrs": 1.0,
-                                "health_condition": "Fair",
-                                "diet_condition": "Poor",
+                                "sleep_hrs": 3.0,
+                                "health_condition": "Good",
+                                "diet_condition": "Very Good",
                                 "poor_appetite_overeating": "Nearly every day these days"}
 
         food_nutrition_data_path = THIS_DIR.parent / 'data/input_files/food_nutrition_data.csv'
@@ -77,7 +80,6 @@ class TestController(unittest.TestCase):
         """
         with mock.patch('streamlit.session_state', self.mock_session_state):
             LiveLite.controller("risk_score")
-            self.assertTrue(True)
 
     @mock.patch('LiveLite.project_integration.handle_user_input.user_input_mapping.convert_age', return_value=37)
     @mock.patch('LiveLite.project_integration.handle_user_input.user_input_mapping.convert_sex', return_value=1)
@@ -94,7 +96,6 @@ class TestController(unittest.TestCase):
         """
         with mock.patch('streamlit.session_state', self.mock_session_state):
             LiveLite.controller("diet_recommender_advanced_search_food_items")
-            self.assertTrue(True)
 
 if __name__ == '__main__':
     unittest.main()

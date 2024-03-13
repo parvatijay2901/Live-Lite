@@ -1,9 +1,11 @@
+# pylint: disable=line-too-long
+# pylint: disable=missing-module-docstring
+# pylint: disable=invalid-name
 from LiveLite.data.scripts_to_generate.harvard_health_scraped_data import scrape_calories_data
 from LiveLite.data.scripts_to_generate.data_processor import data_process
 
 from LiveLite.project_integration.common_functions import home_page, obesity_assessment_page, risk_insights_page, personalized_recommendations_page, add_blank_lines, swap_pages_back, swap_page_back, check_session_state_variable
 from LiveLite.project_integration.handle_user_input.get_user_inputs import get_user_inputs, get_demographic_inputs, get_general_inputs, write_user_inputs_to_csv
-from LiveLite.project_integration.handle_user_input.get_user_inputs import write_user_inputs_to_csv
 from LiveLite.project_integration.handle_user_input.user_input_mapping import user_input_mapping
 from LiveLite.project_integration.handle_user_input.generate_risk_score_display import get_input_for_risk_score, display_risk_score, display_risk_suggestion
 from LiveLite.project_integration.recommendation_controller.controller import controller
