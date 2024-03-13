@@ -6,6 +6,7 @@ Class:
 - TestObesityAssessment: Contains test cases for functions related to the
                         Obesity Assessment page in the LiveLite module.
 """
+# pylint: disable=line-too-long
 
 import unittest
 from unittest import mock

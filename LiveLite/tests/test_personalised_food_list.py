@@ -1,11 +1,13 @@
-"""This script contains unit tests for all the functions 
+"""This script contains unit tests for all the functions
 used for fetching variety of food from food list
 based on food groups.
 """
 import unittest
 import pandas as pd
 #from LiveLite import personalised_food_list
-from LiveLite.recommendation_tool.diet_recommendation.personalised_food_list import search_food, recommended_food, beef_data, fish_data, poultry_data, pork_data, legumes_data, grains_data, vegan_grains_data, vegetable_data, fruits_data, dairy_data
+from LiveLite import search_food, recommended_food, beef_data, fish_data
+from LiveLite import poultry_data, pork_data, legumes_data, grains_data
+from LiveLite import vegan_grains_data, vegetable_data, fruits_data, dairy_data
 
 test_beef_data = pd.DataFrame({
     "FoodGroup": ["Beef Products"] * 100,
@@ -399,7 +401,7 @@ class TestDairyData(unittest.TestCase):
 
 class TestRecommendedFood(unittest.TestCase):
     """This class contains unit tests to test
-    for displaying the concatenated dataframes of each food group based on 
+    for displaying the concatenated dataframes of each food group based on
     food preference and obesity risk score.
     """
     def setUp(self):

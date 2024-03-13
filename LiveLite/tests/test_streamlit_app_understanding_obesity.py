@@ -31,7 +31,8 @@ class TestUnderstandingObesity(unittest.TestCase):
     @mock.patch("streamlit.switch_page")
     def test_navigation_not_called(self, mock_switch_page, mock_button):
         """Test that navigation is not called when the button is not clicked."""
-        with mock.patch('streamlit.session_state', {'data_nhanes':self.nhanes_data, 'data_ihme':self.ihme_data}):
+        with mock.patch('streamlit.session_state',
+                    {'data_nhanes':self.nhanes_data, 'data_ihme':self.ihme_data}):
             mock_button.return_value = False
             LiveLite.pagea()
             mock_switch_page.assert_not_called()
@@ -40,7 +41,8 @@ class TestUnderstandingObesity(unittest.TestCase):
     @mock.patch("streamlit.switch_page")
     def test_navigation_to_obesity_assessment(self, mock_switch_page, mock_button):
         """Test navigation to the Obesity Assessment page."""
-        with mock.patch('streamlit.session_state', {'data_nhanes':self.nhanes_data, 'data_ihme':self.ihme_data}):
+        with mock.patch('streamlit.session_state',
+                    {'data_nhanes':self.nhanes_data, 'data_ihme':self.ihme_data}):
             mock_button.return_value = True
             LiveLite.pagea()
             mock_switch_page.assert_called_with("pages/b_obesity_assessment.py")
@@ -49,7 +51,8 @@ class TestUnderstandingObesity(unittest.TestCase):
     @mock.patch('streamlit.button')
     def test_navigation_invalid_path(self, mock_button, mock_path):
         """Test navigation to other pages with invalid path."""
-        with mock.patch('streamlit.session_state', {'data_nhanes':self.nhanes_data, 'data_ihme':self.ihme_data}):
+        with mock.patch('streamlit.session_state',
+                    {'data_nhanes':self.nhanes_data, 'data_ihme':self.ihme_data}):
             mock_button.return_value = True
             mock_path.return_value = False
             with self.assertRaises(FileNotFoundError):

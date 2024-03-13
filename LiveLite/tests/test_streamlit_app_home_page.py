@@ -18,7 +18,9 @@ class TestHomePage(unittest.TestCase):
 
     @mock.patch('streamlit.button')
     @mock.patch('streamlit.switch_page')
-    def test_navigation_button_understanding_obesity_valid_path(self, mock_switch_page, mock_button):
+    def test_navigation_button_understanding_obesity_valid_path(self,
+                                                                mock_switch_page,
+                                                                mock_button):
         """Testing navigation to Understand Obesity page - with valid path"""
         mock_button.side_effect = [True,False]
         LiveLite.app()

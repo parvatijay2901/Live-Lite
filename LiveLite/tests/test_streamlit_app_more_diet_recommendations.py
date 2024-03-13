@@ -6,6 +6,9 @@ Class:
 - TestMoreDietRecommendations: Contains test cases for the functions related to
                             diet recommendations page in the LiveLite module.
 """
+# pylint: disable=line-too-long
+# pylint: disable=too-many-arguments
+# pylint: disable=unused-argument
 import unittest
 from pathlib import Path
 from unittest import mock
@@ -19,18 +22,18 @@ class TestMoreDietRecommendations(unittest.TestCase):
     """
     def setUp(self):
         """Mock the necessary dependencies."""
-        self.mock_user_inputs = {"age": 37,
+        self.mock_user_inputs = {"age": 67,
                                 "sex": "Male",
-                                "height": 100,
-                                "weight": 100,
-                                "ethnicity": "Non-Hispanic White",
+                                "height": 170,
+                                "weight": 70,
+                                "ethnicity": "Non-Hispanic Asian",
                                 "activity_level": "Moderately Active",
-                                "smoke_cig": "No",
+                                "smoke_cig": "Yes",
                                 "mental_health": "Occasionally these days",
-                                "sleep_hrs": 1.0,
-                                "health_condition": "Fair",
+                                "sleep_hrs": 8.0,
+                                "health_condition": "Good",
                                 "diet_condition": "Poor",
-                                "poor_appetite_overeating": "Nearly every day these days"}
+                                "poor_appetite_overeating": "Not at all"}
 
         recommended_food_path = THIS_DIR.parent / 'tests/data/sample_recommended_food_df.csv'
         self.recommended_food = pd.read_csv(recommended_food_path)
