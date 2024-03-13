@@ -42,10 +42,6 @@ For example,
 ## Data Sources
 - [National Health and Nutrition Examination Survey (NHANES)](https://wwwn.cdc.gov/nchs/nhanes/Default.aspx)
 - [Institute of Health Metrics and Evaluation (IHME)](https://www.healthdata.org/research-analysis/gbd)
-- [Nutrition, Physical Activity, and Obesity - Behavioral Risk Factor Surveillance System](https://data.cdc.gov/Nutrition-Physical-Activity-and-Obesity/Nutrition-Physical-Activity-and-Obesity-Behavioral/hn4x-zwk7/data_preview)
-- [Obesity based on eating habits & physical conditions](https://www.kaggle.com/datasets/ankurbajaj9/obesity-levels)
-- [Nutritional value in Food ingredients_A](https://fdc.nal.usda.gov/download-datasets.html)
-- [Nutritional value in Food ingredients_B](https://www.kaggle.com/datasets/shrutisaxena/food-nutrition-dataset)
-- [Ingredients to Recipes mapping](https://www.kaggle.com/datasets/shuyangli94/food-com-recipes-and-user-interactions)
-- [Calories Burned With Exercise](https://www.kaggle.com/datasets/aadhavvignesh/calories-burned-during-exercise-and-activities)
-- [Expected Calorie Intake](https://www.medicalnewstoday.com/articles/calorie-deficit#calculating-calorie-needs)
+- [Estimate Calorie Intake](https://www.medicalnewstoday.com/articles/calorie-deficit#calculating-calorie-needs)
+- [Calorie Burning Exercises](https://www.health.harvard.edu/diet-and-weight-loss/calories-burned-in-30-minutes-for-people-of-three-different-weights)
+- [USDA National Nutrient Database](https://data.world/craigkelly/usda-national-nutrient-db)
