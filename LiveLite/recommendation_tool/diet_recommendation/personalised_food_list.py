@@ -372,10 +372,9 @@ def search_food(data, food_item):
         return None
 
     food_item = food_item.translate(str.maketrans('', '', string.punctuation))
-    food_item = food_item.lower()
     food_data = data[["FoodGroup","Descrip","Energy_kcal","Protein_g",
                       "Fat_g","Carb_g","Sugar_g","Fiber_g"]]
-    out = food_data[(food_data["Descrip"].str.contains(food_item))]
+    out = food_data[(food_data["Descrip"].str.contains(food_item, case =False))]
     out = out[["Descrip","Energy_kcal","Protein_g","Carb_g","Sugar_g","Fiber_g"]]
     out.rename(columns={"Descrip": "Description (per 100gms)",
                         "Energy_kcal": "Calories (kcal)",
