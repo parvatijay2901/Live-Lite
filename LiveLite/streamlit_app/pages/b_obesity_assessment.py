@@ -10,17 +10,20 @@ from streamlit_extras.stylable_container import stylable_container
 import LiveLite # pylint: disable=import-error
 
 def pageb():
+    """
+    This function sets up the 'Obesity Risk Assessment' page, allowing users to answer questions
+    to better understand their risk of obesity. User responses are saved for personalized feedback
+    and recommendations. Users can also navigate back to the home page.
+
+    Raises:
+        FileNotFoundError: If the file 'app.py' doesn't exist when navigating back to the home page.
+        FileNotFoundError: If the file 'pages/c_risk_insights.py' doesn't
+                        exist when navigating to view insights.
+    """
     st.set_page_config(layout="wide", initial_sidebar_state="collapsed")
 
     # Give an option to the user to navigate back
-    _, col1 = st.columns([10, 1.5])
-    with col1:
-        if st.button("→ Home🏠", use_container_width=True):
-            page_path = "LiveLite/streamlit_app/app.py"
-            if os.path.exists(os.path.join(os.getcwd(), page_path)):
-                st.switch_page("app.py")
-            else:
-                raise FileNotFoundError("File app.py not found")
+    LiveLite.swap_page_back("home")
 
     st.markdown("""<div style="text-align:center;"><h2 style='color:gold;'>
                 Obesity Risk Assessment</h2></div>""", unsafe_allow_html=True)
@@ -43,13 +46,14 @@ def pageb():
     _, col2, _ = st.columns([1, 1, 1])
     with col2:
         with stylable_container("button",
-                    css_styles="""button {background-color: #f2f2f2; color: black;font-size: 50px;}"""):
+                    css_styles="""button {background-color: #f2f2f2; color: black;
+                                font-size: 50px;}"""):
             if st.button("Assess your Obesity Risk 🔎", use_container_width=True):
                 page_path = "LiveLite/streamlit_app/pages/c_risk_insights.py"
                 if os.path.exists(os.path.join(os.getcwd(), page_path)):
                     # Log - save the user inputs in a CSV
                     LiveLite.write_user_inputs_to_csv(user_inputs,
-                                                filename='LiveLite/data/output_files/user_inputs.csv')
+                            filename='LiveLite/data/output_files/user_inputs.csv')
                     st.switch_page("pages/c_risk_insights.py")
                 else:
                     raise FileNotFoundError("File pages/c_risk_insights.py not found")

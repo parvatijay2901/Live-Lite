@@ -1,8 +1,20 @@
+"""
+This module contains test cases for the functions related to home page
+navigation and loading data in the LiveLite module.
+
+Class:
+- TestHomepage: Contains test cases related to home page navigation and
+loading data in the LiveLite module.
+"""
 import unittest
 from unittest import mock
 import LiveLite
 
 class TestHomePage(unittest.TestCase):
+    """
+    Class containing test cases for the functions related to
+    home page navigation and loading data in the LiveLite module.
+    """
 
     @mock.patch('streamlit.button')
     @mock.patch('streamlit.switch_page')
@@ -38,12 +50,14 @@ class TestHomePage(unittest.TestCase):
 
     @mock.patch('streamlit.session_state', {})
     def test_load_data_valid_path(self):
+        """Testing if input files are loaded properly"""
         LiveLite.load_data()
-        self.assertTrue(True)
 
     @mock.patch('streamlit.session_state', {})
     @mock.patch('os.path.exists')
     def test_load_data_invalid_path(self, mock_path):
+        """Testing with invalid paths - catch the raised error
+        if input files are not loaded properly"""
         mock_path.return_value = False
         with self.assertRaises(FileNotFoundError):
             LiveLite.load_data()

@@ -1,3 +1,9 @@
+"""
+This module contains unit tests for controller functions in the LiveLite module.
+Class:
+- TestController: This class contains test modules for the controller
+                function in the LiveLite module.
+"""
 import unittest
 from pathlib import Path
 from unittest import mock
@@ -6,10 +12,14 @@ import pandas as pd
 
 THIS_DIR = Path(__file__).parent
 class TestController(unittest.TestCase):
-    """Test suite for the controller function."""
+    """
+    This class contains test cases for various choices passed to the controller function.
+    """
 
     def setUp(self):
-        """Mock the necessary dependencies."""
+        """
+        Set up necessary dependencies and mock data for the tests.
+        """
         self.mock_user_inputs = {"age": 37,
                                 "sex": "Male",
                                 "height": 60,
@@ -27,10 +37,13 @@ class TestController(unittest.TestCase):
         self.food_nutrition_data_path = pd.read_csv(food_nutrition_data_path)
 
         self.mock_session_state = {"user_inputs": self.mock_user_inputs,
-                                "food_nutrition_data":self.food_nutrition_data_path,
-                                "search_food_items":"milk"}
+                                "food_nutrition_data": self.food_nutrition_data_path,
+                                "search_food_items": "milk"}
 
     def test_no_streamlit_session_state(self):
+        """
+        Test behavior when streamlit session state is not available.
+        """
         with self.assertRaises(KeyError):
             LiveLite.controller("estimate_calorie_intake")
 
@@ -41,8 +54,11 @@ class TestController(unittest.TestCase):
     @mock.patch('LiveLite.project_integration.handle_user_input.user_input_mapping.convert_mental_health', return_value=1)
     @mock.patch('LiveLite.project_integration.handle_user_input.user_input_mapping.convert_sleep_hours', return_value=2)
     @mock.patch('LiveLite.project_integration.handle_user_input.user_input_mapping.convert_health_condition', return_value=4)
-    def test_invalid_choice(self, mock_health_condition, mock_sleep_hours, mock_mental_health, mock_activity_level, mock_ethnicity, mock_sex, mock_age):
-        """Test estimate_calorie_intake choice."""
+    def test_invalid_choice(self, mock_health_condition, mock_sleep_hours, mock_mental_health, mock_activity_level,
+                            mock_ethnicity, mock_sex, mock_age):
+        """
+        Test behavior when an invalid choice is passed to the controller function.
+        """
         with mock.patch('streamlit.session_state', self.mock_session_state):
             with self.assertRaises(ValueError):
                 LiveLite.controller("invalid_choice")
@@ -54,8 +70,11 @@ class TestController(unittest.TestCase):
     @mock.patch('LiveLite.project_integration.handle_user_input.user_input_mapping.convert_mental_health', return_value=1)
     @mock.patch('LiveLite.project_integration.handle_user_input.user_input_mapping.convert_sleep_hours', return_value=2)
     @mock.patch('LiveLite.project_integration.handle_user_input.user_input_mapping.convert_health_condition', return_value=4)
-    def test_risk_score_choice(self, mock_health_condition, mock_sleep_hours, mock_mental_health, mock_activity_level, mock_ethnicity, mock_sex, mock_age):
-        """Test estimate_calorie_intake choice."""
+    def test_risk_score_choice(self, mock_health_condition, mock_sleep_hours, mock_mental_health, mock_activity_level,
+                                mock_ethnicity, mock_sex, mock_age):
+        """
+        Test behavior when 'risk_score' choice is passed to the controller function.
+        """
         with mock.patch('streamlit.session_state', self.mock_session_state):
             LiveLite.controller("risk_score")
             self.assertTrue(True)
@@ -67,12 +86,15 @@ class TestController(unittest.TestCase):
     @mock.patch('LiveLite.project_integration.handle_user_input.user_input_mapping.convert_mental_health', return_value=1)
     @mock.patch('LiveLite.project_integration.handle_user_input.user_input_mapping.convert_sleep_hours', return_value=2)
     @mock.patch('LiveLite.project_integration.handle_user_input.user_input_mapping.convert_health_condition', return_value=4)
-    def test_diet_recommender_advanced_search_food_items_choice(self, mock_health_condition, mock_sleep_hours, mock_mental_health, mock_activity_level, mock_ethnicity, mock_sex, mock_age):
-        """Test estimate_calorie_intake choice."""
+    def test_diet_recommender_advanced_search_food_items_choice(self, mock_health_condition, mock_sleep_hours,
+                                                                mock_mental_health, mock_activity_level,
+                                                                mock_ethnicity, mock_sex, mock_age):
+        """
+        Test behavior when 'diet_recommender_advanced_search_food_items' choice is passed to the controller function.
+        """
         with mock.patch('streamlit.session_state', self.mock_session_state):
             LiveLite.controller("diet_recommender_advanced_search_food_items")
             self.assertTrue(True)
-
 
 if __name__ == '__main__':
     unittest.main()

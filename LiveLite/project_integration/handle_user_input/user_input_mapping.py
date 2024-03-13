@@ -145,7 +145,7 @@ def user_input_mapping(user_data_dict):
         ValueError: If any input value is invalid.
     Returns:
         dict: A dictionary containing mapped internal
-              representations of user input data.
+            representations of user input data.
     """
     internal_data = {}
 
@@ -157,16 +157,16 @@ def user_input_mapping(user_data_dict):
     internal_data['internal_weight'] = float(user_data_dict['weight'] * 0.45359237)
     internal_data['internal_ethnicity'] = convert_ethnicity(user_data_dict['ethnicity'])
     internal_data['internal_activity_level'] = convert_activity_level(
-                                               user_data_dict['activity_level'])
+                                            user_data_dict['activity_level'])
     internal_data['internal_smoke_cig'] = int(user_data_dict['smoke_cig'].lower() == 'yes')
     internal_data['internal_mental_health'] = convert_mental_health(
-                                              user_data_dict['mental_health'])
+                                            user_data_dict['mental_health'])
     internal_data['internal_sleep_hrs'] = convert_sleep_hours(
-                                          float(user_data_dict['sleep_hrs']))
+                                        float(user_data_dict['sleep_hrs']))
     internal_data['internal_health_condition'] = convert_health_condition(
-                                                 user_data_dict['health_condition'])
+                                                user_data_dict['health_condition'])
     internal_data['internal_diet_condition'] = convert_health_condition(
-                                               user_data_dict['diet_condition'])
+                                            user_data_dict['diet_condition'])
     internal_data['internal_poor_appetite_overeating'] = convert_mental_health(
-                                                         user_data_dict['poor_appetite_overeating'])
+                                                        user_data_dict['poor_appetite_overeating'])
     return internal_data

@@ -1,11 +1,22 @@
+"""
+This module contains unit tests for functions related to
+diet recommendations page in the LiveLite module.
+
+Class:
+- TestMoreDietRecommendations: Contains test cases for the functions related to
+                            diet recommendations page in the LiveLite module.
+"""
 import unittest
 from pathlib import Path
 from unittest import mock
-import LiveLite
 import pandas as pd
+import LiveLite
 
 THIS_DIR = Path(__file__).parent
 class TestMoreDietRecommendations(unittest.TestCase):
+    """
+    Test cases for the functions related to diet recommendations page in the LiveLite module.
+    """
     def setUp(self):
         """Mock the necessary dependencies."""
         self.mock_user_inputs = {"age": 37,
@@ -62,10 +73,10 @@ class TestMoreDietRecommendations(unittest.TestCase):
     @mock.patch('LiveLite.project_integration.handle_user_input.user_input_mapping.convert_sleep_hours', return_value=2)
     @mock.patch('LiveLite.project_integration.handle_user_input.user_input_mapping.convert_health_condition', return_value=4)
     def test_page_functioning_input1(self, mock_health_condition, mock_sleep_hours, mock_mental_health, mock_activity_level, mock_ethnicity, mock_sex, mock_age, mock_switch_page, mock_button):
+        """Test the functioning of the page with valid input 1"""
         with mock.patch('streamlit.session_state', self.mock_session_state1):
             mock_button.return_value = True
             LiveLite.pagee()
-            self.assertTrue(True)
 
     @mock.patch("streamlit.button")
     @mock.patch("streamlit.switch_page")
@@ -77,10 +88,10 @@ class TestMoreDietRecommendations(unittest.TestCase):
     @mock.patch('LiveLite.project_integration.handle_user_input.user_input_mapping.convert_sleep_hours', return_value=2)
     @mock.patch('LiveLite.project_integration.handle_user_input.user_input_mapping.convert_health_condition', return_value=4)
     def test_page_functioning_input2(self, mock_health_condition, mock_sleep_hours, mock_mental_health, mock_activity_level, mock_ethnicity, mock_sex, mock_age, mock_switch_page, mock_button):
+        """Test the functioning of the page with valid input 2"""
         with mock.patch('streamlit.session_state', self.mock_session_state2):
             mock_button.return_value = True
             LiveLite.pagee()
-            self.assertTrue(True)
 
     @mock.patch("streamlit.button")
     @mock.patch("streamlit.switch_page")
@@ -92,10 +103,10 @@ class TestMoreDietRecommendations(unittest.TestCase):
     @mock.patch('LiveLite.project_integration.handle_user_input.user_input_mapping.convert_sleep_hours', return_value=2)
     @mock.patch('LiveLite.project_integration.handle_user_input.user_input_mapping.convert_health_condition', return_value=4)
     def test_page_functioning_input3(self, mock_health_condition, mock_sleep_hours, mock_mental_health, mock_activity_level, mock_ethnicity, mock_sex, mock_age, mock_switch_page, mock_button):
+        """Test the functioning of the page with valid input 3"""
         with mock.patch('streamlit.session_state', self.mock_session_state3):
             mock_button.return_value = True
             LiveLite.pagee()
-            self.assertTrue(True)
 
 if __name__ == "__main__":
     unittest.main()
