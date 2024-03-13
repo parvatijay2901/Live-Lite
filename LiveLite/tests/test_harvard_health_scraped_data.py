@@ -42,7 +42,7 @@ class TestScrapeCaloriesData(unittest.TestCase):
             mocked_response.content = b"Mocked HTML content"
             mocked_response.ok = True
             mocked_get.return_value = mocked_response
-            scrape_calories_data()
+            scrape_calories_data("LiveLite/tests/data/calories_burned_30_minutes.csv")
 
     @patch('LiveLite.data.scripts_to_generate.harvard_health_scraped_data.requests.get')
     @patch('LiveLite.data.scripts_to_generate.harvard_health_scraped_data.csv.writer')
@@ -83,7 +83,7 @@ class TestScrapeCaloriesData(unittest.TestCase):
         mock_response.content = fake_html_content.encode('utf-8')
         mock_response.raise_for_status.return_value = None
         mock_get.return_value = mock_response
-        scrape_calories_data()
+        scrape_calories_data("LiveLite/tests/data/calories_burned_30_minutes.csv")
         expected_data = [('Outdoor','Running',260,372,444,2.2933333333333334,5.05593867028813)]
         mock_csv_writer.return_value.writerows.assert_called_once_with(expected_data)
 
@@ -126,7 +126,7 @@ class TestScrapeCaloriesData(unittest.TestCase):
         mock_response.content = fake_html_content.encode('utf-8')
         mock_response.raise_for_status.return_value = None
         mock_get.return_value = mock_response
-        scrape_calories_data()
+        scrape_calories_data("LiveLite/tests/data/calories_burned_30_minutes.csv")
         expected_data = []
         mock_csv_writer.return_value.writerows.assert_called_once_with(expected_data)
 
@@ -137,7 +137,7 @@ class TestScrapeCaloriesData(unittest.TestCase):
         """
         mock_get.side_effect = requests.exceptions.RequestException
         with self.assertRaises(ConnectionError):
-            scrape_calories_data()
+            scrape_calories_data("LiveLite/tests/data/calories_burned_30_minutes.csv")
 
     def test_scrape_calories_invalid_url(self):
         """
@@ -146,7 +146,7 @@ class TestScrapeCaloriesData(unittest.TestCase):
         with patch('requests.get') as mocked_get:
             mocked_get.side_effect = ValueError("Invalid URL")
             with self.assertRaises(ValueError):
-                scrape_calories_data()
+                scrape_calories_data("LiveLite/tests/data/calories_burned_30_minutes.csv")
 
     def test_scrape_calories_unexpected_webpage_structure(self):
         """
@@ -158,7 +158,7 @@ class TestScrapeCaloriesData(unittest.TestCase):
             mocked_response.raise_for_status.side_effect=ValueError("Unexpected webpage structure")
             mocked_get.return_value = mocked_response
             with self.assertRaises(ValueError):
-                scrape_calories_data()
+                scrape_calories_data("LiveLite/tests/data/calories_burned_30_minutes.csv")
 
 if __name__ == '__main__':
     unittest.main()
