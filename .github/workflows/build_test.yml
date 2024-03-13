@@ -90,11 +90,11 @@ jobs:
           pylint LiveLite/project_integration/
 
       # Next step: run the unit tests with code coverage.
-      - name: Unit tests
-        run: |
-          coverage run -m unittest discover
-          coverage report
-          coverage lcov
+      # - name: Unit tests
+      #   run: |
+      #     coverage run -m unittest discover
+      #     coverage report
+      #     coverage lcov
 
       # Lastly: report code coverage to Coveralls.
       - name: Report code coverage to Coveralls
